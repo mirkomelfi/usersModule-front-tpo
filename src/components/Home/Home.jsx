@@ -37,19 +37,12 @@ const navigateTo=(url)=>{
       <div className="home">
       {!rolUser?
          <>
-        <button class="button button-home  btnPrimary" onClick={()=>navigateTo(`reclamos`)}><span class="btnText">Reclamos</span></button>
-        <button class="button button-home  btnPrimary" onClick={()=>navigateTo(`edificios`)}><span class="btnText">Edificios</span></button>
-        <button class="button button-home btnPrimary" onClick={()=>navigateTo(`usuarios`)}><span class="btnText">Usuarios</span></button>
-        <button class="button button-home btnPrimary" onClick={()=>navigateTo(`usuario/current`)}><span class="btnText">Mi perfil</span></button>
+        <button class="button button-home  btnPrimary" onClick={()=>navigateTo(`login`)}><span class="btnText">Login</span></button>
 
         </>
         : 
 
         <>
-        <button class="button button-home btnPrimary" onClick={()=>navigateTo(`usuario/reclamos`)}><span class="btnText">Mis Reclamos</span></button>
-        <button class="button button-home btnPrimary" onClick={()=>navigateTo(`usuario/unidades`)}><span class="btnText">Mis unidades</span></button>
-        <button class="button button-home btnPrimary" onClick={()=>navigateTo(`usuario/areas`)}><span class="btnText">Mis areas</span></button>
-        <button class="button button-home btnPrimary" onClick={()=>navigateTo(`usuario/current`)}><span class="btnText">Mi perfil</span></button>
 
         </>
       }
