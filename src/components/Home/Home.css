@@ -1,0 +1,54 @@
+.home {
+    text-align: center;
+    padding: 50px 20px;
+  }
+  
+  .content-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: left;
+  }
+  
+  .text-section {
+    flex: 1;
+    padding-right: 20px;
+  }
+  
+  .text-section h1 {
+    font-size: 3em;
+    margin-bottom: 0.5em;
+  }
+  
+  .text-section p {
+    font-size: 1.5em;
+    margin-bottom: 1em;
+    color: #333; /* Color de texto */
+  }
+  
+  .social-links {
+    margin-top: 1em;
+  }
+  
+  .social-links a {
+    margin-right: 15px;
+    font-size: 1.2em;
+    text-decoration: none;
+    color: #0073b1; /* Color de los enlaces */
+  }
+  
+  .image-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .profile-pic {
+    width: 100%;
+    max-width: 500px; /* Tamaño máximo de la imagen */
+    height: auto;
+    border-radius: 0%; /* Elimina el borde redondeado */
+  }
+  

@@ -18,9 +18,9 @@ export const App = () => {
         <Navbar/>
         <Routes>
           <Route path='/login' element={<Login />} />
-          <Route path='/superAdmin' element={<SuperAdmin />} />
-          <Route path='/olvidoContraseña' element={<OlvidoContraseña />} />
           <Route path='/register' element={<Register />} />
+          <Route path='/olvidoContraseña' element={<OlvidoContraseña />} />
+          <Route path='/superAdmin' element={<SuperAdmin />} />
           <Route path='/logout' element={<Logout />} />
           <Route path='/' element={<Home />} />
           <Route path="/usuarios" element={<UsuarioListContainer greeting="Listado de Usuarios"/>}/>
