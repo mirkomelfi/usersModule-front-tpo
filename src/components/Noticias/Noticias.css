@@ -1,0 +1,40 @@
+/* Estilos generales para el contenedor de noticias */
+.noticias-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+/* Estilos para cada tarjeta de noticia */
+.noticia-card {
+    border: 2px solid black; /* Borde negro */
+    padding: 15px;
+    width: 300px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para darle profundidad */
+    transition: transform 0.2s ease-in-out;
+    background-color: white;
+}
+
+.noticia-card:hover {
+    transform: scale(1.05); /* Efecto de zoom al pasar el mouse */
+}
+
+/* Estilos para las imágenes dentro de las tarjetas */
+.noticia-imagen {
+    width: 100%;        /* Ancho de la imagen igual al ancho del contenedor de la tarjeta */
+    height: 200px;      /* Altura fija para todas las imágenes */
+    object-fit: cover;  /* Mantiene el aspecto de la imagen mientras la recorta para que se ajuste al contenedor */
+    margin-bottom: 10px;
+}
+
+.noticia-titulo {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.noticia-descripcion {
+    font-size: 1rem;
+    color: #333;
+}

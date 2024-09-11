@@ -10,6 +10,7 @@ import { Usuario } from './components/Usuario/Usuario';
 import { UsuarioPut } from './components/Usuario/UsuarioPUT';
 import { Logout } from './components/Logout/Logout';
 import { SuperAdmin } from './components/SuperAdmin/SuperAdmin';
+import { Noticias } from './components/Noticias/Noticias';
 
 export const App = () => {
   return (
@@ -21,6 +22,7 @@ export const App = () => {
           <Route path='/register' element={<Register />} />
           <Route path='/olvidoContraseña' element={<OlvidoContraseña />} />
           <Route path='/superAdmin' element={<SuperAdmin />} />
+          <Route path='/noticias' element={<Noticias />} />
           <Route path='/logout' element={<Logout />} />
           <Route path='/' element={<Home />} />
           <Route path="/usuarios" element={<UsuarioListContainer greeting="Listado de Usuarios"/>}/>

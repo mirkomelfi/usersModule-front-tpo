@@ -12,10 +12,23 @@ const Navbar = () => {
           </Link>
         </div>
         <ul className="navbar-menu">
-            <li><Link to="/login">Login</Link></li>
-            <li><Link to="/register">Registrarse</Link></li>
-            <li><Link to="/olvidoContraseña">Olvido Contraseña</Link></li>
-            <li><Link to="/superAdmin">Super Admin</Link></li>
+          <li><Link to="/noticias">Noticias</Link></li>
+          <li><Link to="/login">Login</Link></li>
+          <li><Link to="/register">Registrarse</Link></li>
+          <li className="dropdown">
+              <Link to="/olvidoContraseña">Olvido Contraseña</Link>
+              <ul className="dropdown-content">
+                <li><Link to="/otro">Otro</Link></li>
+                <li><Link to="/otro2">Otro 2</Link></li>
+            </ul>
+          </li>
+          <li className="dropdown">
+            <Link to="/superAdmin">Super Admin</Link>
+            <ul className="dropdown-content">
+              <li><Link to="/otro">Otro</Link></li>
+              <li><Link to="/otro2">Otro 2</Link></li>
+            </ul>
+          </li>
         </ul>
       </nav>
     </header>
