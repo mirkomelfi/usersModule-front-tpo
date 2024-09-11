@@ -1,31 +1,34 @@
-/* Estilos generales para el contenedor de noticias */
 .noticias-container {
     display: flex;
-    flex-wrap: wrap;
     gap: 20px;
-    justify-content: space-around;
     padding: 20px;
+    overflow: hidden; /* Evitar scroll */
+    scroll-snap-type: none; /* Desactivar el snap automático para deslizamiento */
+    cursor: grab;
 }
 
-/* Estilos para cada tarjeta de noticia */
+.noticias-container:active {
+    cursor: grabbing;
+}
+
 .noticia-card {
-    border: 2px solid black; /* Borde negro */
+    border: 2px solid black;
     padding: 15px;
     width: 300px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para darle profundidad */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease-in-out;
     background-color: white;
+    flex-shrink: 0; /* Evitar que las tarjetas se reduzcan */
 }
 
 .noticia-card:hover {
-    transform: scale(1.05); /* Efecto de zoom al pasar el mouse */
+    transform: scale(1.05);
 }
 
-/* Estilos para las imágenes dentro de las tarjetas */
 .noticia-imagen {
-    width: 100%;        /* Ancho de la imagen igual al ancho del contenedor de la tarjeta */
-    height: 200px;      /* Altura fija para todas las imágenes */
-    object-fit: cover;  /* Mantiene el aspecto de la imagen mientras la recorta para que se ajuste al contenedor */
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
     margin-bottom: 10px;
 }
 
