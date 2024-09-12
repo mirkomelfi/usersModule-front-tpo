@@ -11,6 +11,8 @@ import { UsuarioPut } from './components/Usuario/UsuarioPUT';
 import { Logout } from './components/Logout/Logout';
 import { SuperAdmin } from './components/SuperAdmin/SuperAdmin';
 import { Noticias } from './components/Noticias/Noticias';
+import {Contactos} from './components/Contactos/Contactos';
+import {Productos} from './components/Productos/Productos';
 
 export const App = () => {
   return (
@@ -23,6 +25,8 @@ export const App = () => {
           <Route path='/olvidoContraseña' element={<OlvidoContraseña />} />
           <Route path='/superAdmin' element={<SuperAdmin />} />
           <Route path='/noticias' element={<Noticias />} />
+          <Route path='/contactos' element={<Contactos />} />
+          <Route path='/productos' element={<Productos />} />
           <Route path='/logout' element={<Logout />} />
           <Route path='/' element={<Home />} />
           <Route path="/usuarios" element={<UsuarioListContainer greeting="Listado de Usuarios"/>}/>

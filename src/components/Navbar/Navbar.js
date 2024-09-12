@@ -22,6 +22,8 @@ const Navbar = () => {
         </div>
         <ul className="navbar-menu">
           <li><Link to="/noticias">Noticias</Link></li>
+          <li><Link to="/productos">Productos</Link></li>
+          <li><Link to="/contactos">Contactos</Link></li>
           <li><Link to="/login">Login</Link></li>
           <li><Link to="/register">Registrarse</Link></li>
           <li className="dropdown">

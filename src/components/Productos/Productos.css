@@ -1,0 +1,59 @@
+.productos-container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .search-container {
+    margin-bottom: 20px;
+  }
+  
+  .search-bar {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+  }
+  
+  .tipo-seccion {
+    margin-bottom: 40px;
+  }
+  
+  .tipo-titulo {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .productos-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .producto-card {
+    flex: 1 1 calc(25% - 20px);
+    max-width: calc(25% - 20px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    text-align: center;
+  }
+  
+  .producto-image {
+    width: 100%;
+    height: auto;
+  }
+  
+  .producto-info {
+    padding: 10px;
+  }
+  
+  .producto-name {
+    font-size: 16px;
+    margin: 10px 0;
+  }
+  
+  .producto-price {
+    font-size: 14px;
+    color: red;
+  }
+  
