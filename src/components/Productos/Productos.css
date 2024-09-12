@@ -1,7 +1,8 @@
 .productos-container {
     padding: 20px;
-    max-width: 1200px;
+    max-width: 100%; /* Asegúrate de que el contenedor no exceda el ancho de la pantalla */
     margin: 0 auto;
+    box-sizing: border-box; /* Asegura que el padding se incluya dentro del ancho total */
   }
   
   .search-container {
@@ -12,6 +13,7 @@
     width: 100%;
     padding: 10px;
     font-size: 16px;
+    box-sizing: border-box; /* Para incluir el padding dentro del width */
   }
   
   .tipo-seccion {
@@ -30,8 +32,8 @@
   }
   
   .producto-card {
-    flex: 1 1 calc(25% - 20px);
-    max-width: calc(25% - 20px);
+    flex: 1 1 calc(25% - 20px); /* Ocupa 25% en pantallas grandes */
+    max-width: calc(20% - 20px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     overflow: hidden;
