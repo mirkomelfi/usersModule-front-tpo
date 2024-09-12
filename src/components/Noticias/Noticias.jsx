@@ -4,6 +4,8 @@ import '../Global.css';
 import React, { useRef, useState } from 'react';
 import foto from './CanchaSanLorenzo.jpg';
 import foto2 from './ikerMunian.jpg';
+import { Link } from 'react-router-dom';
+import { ImagenOK } from '../Imagen/ImagenOK';
 
 const noticiasData = [
     {
@@ -84,7 +86,9 @@ export const Noticias = () => {
                     <p className="noticia-descripcion">{noticia.descripcion}</p>
                 </div>
             ))}
+            <Link to="/noticias/add">Agregar Noticia</Link>
         </div>
+        
     );
 };
 
