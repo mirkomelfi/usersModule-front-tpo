@@ -1,6 +1,8 @@
+import './Home.css'; 
+import '../Global.css';
+
 import React from "react";
-import './Home.css'; // Importa tu archivo CSS
-import escudo from './SanLorenzo.png'; // Asegúrate de colocar la ruta correcta
+import escudo from './SanLorenzo.png'; 
 
 export const Home = () => {
   return (

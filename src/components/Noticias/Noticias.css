@@ -1,14 +1,15 @@
 .noticias-container {
     display: flex;
+    flex-wrap: nowrap; /* Mantener las tarjetas en una sola fila */
     gap: 20px;
     padding: 20px;
-    overflow: hidden; /* Evitar scroll */
-    scroll-snap-type: none; /* Desactivar el snap automático para deslizamiento */
-    cursor: grab;
+    overflow-x: auto; /* Mantener el scroll horizontal */
+    scroll-snap-type: x mandatory; /* Activar el "snap" al deslizar */
+    cursor: grab; /* Mostrar icono de mano para arrastrar */
 }
 
 .noticias-container:active {
-    cursor: grabbing;
+    cursor: grabbing; /* Cambiar icono al arrastrar */
 }
 
 .noticia-card {
@@ -19,10 +20,11 @@
     transition: transform 0.2s ease-in-out;
     background-color: white;
     flex-shrink: 0; /* Evitar que las tarjetas se reduzcan */
+    scroll-snap-align: start; /* Alinear las tarjetas al inicio del scroll */
 }
 
 .noticia-card:hover {
-    transform: scale(1.05);
+    transform: scale(1.05); /* Zoom al pasar el mouse */
 }
 
 .noticia-imagen {
@@ -41,3 +43,4 @@
     font-size: 1rem;
     color: #333;
 }
+

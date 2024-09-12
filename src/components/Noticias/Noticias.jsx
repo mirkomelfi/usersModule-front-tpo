@@ -1,5 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
 import './Noticias.css';
+import '../Global.css';
+
+import React, { useRef, useState } from 'react';
 import foto from './CanchaSanLorenzo.jpg';
 import foto2 from './ikerMunian.jpg';
 
@@ -62,47 +64,18 @@ const noticiasData = [
 ];
 
 export const Noticias = () => {
-
-    const [mensaje,setMensaje]=useState(null)
-    const [listaNoticias,setListaNoticias]=useState(null)
-
-    const ejecutarFetch = async() =>{
-
-        const response= await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/noticias`, {
-          method: "GET",
-          headers: {
-              "Content-Type": "application/json",
-          }
-          
-        })
-        
-        const data = await response.json()
-        if (data.msj){
-          setMensaje(data.msj)
-        }else{
-          setListaNoticias(data)
-        }
-        
-      }
-    
-
-      useEffect(() => { 
-        ejecutarFetch()
-      },[])
-
-
     const containerRef = useRef(null);
 
     const handleWheel = (event) => {
         const container = containerRef.current;
-        container.scrollLeft += event.deltaY; // Desplaza en función del movimiento del mouse
+        container.scrollLeft += event.deltaY; 
     };
 
     return (
         <div
             className="noticias-container"
             ref={containerRef}
-            onWheel={handleWheel}  // Añadido desplazamiento con la rueda del mouse
+            onWheel={handleWheel}  
         >
             {noticiasData.map((noticia, index) => (
                 <div key={index} className="noticia-card">
