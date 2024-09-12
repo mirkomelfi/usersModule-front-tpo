@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './Noticias.css';
 import foto from './CanchaSanLorenzo.jpg';
 import foto2 from './ikerMunian.jpg';
@@ -62,6 +62,35 @@ const noticiasData = [
 ];
 
 export const Noticias = () => {
+
+    const [mensaje,setMensaje]=useState(null)
+    const [listaNoticias,setListaNoticias]=useState(null)
+
+    const ejecutarFetch = async() =>{
+
+        const response= await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/noticias`, {
+          method: "GET",
+          headers: {
+              "Content-Type": "application/json",
+          }
+          
+        })
+        
+        const data = await response.json()
+        if (data.msj){
+          setMensaje(data.msj)
+        }else{
+          setListaNoticias(data)
+        }
+        
+      }
+    
+
+      useEffect(() => { 
+        ejecutarFetch()
+      },[])
+
+
     const containerRef = useRef(null);
 
     const handleWheel = (event) => {
