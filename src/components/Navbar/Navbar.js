@@ -1,14 +1,20 @@
-import "./Navbar.css"; 
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import "./Navbar.css";
 import '../Global.css';
 
-import React from "react";
-import { Link } from "react-router-dom";
-
-
 const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false); // Estado para controlar la visibilidad del navbar
+
   return (
     <header>
-      <nav className="navbar">
+      {/* Hamburger icon to toggle the sidebar */}
+      <div className="hamburger" onMouseEnter={() => setIsOpen(true)} onMouseLeave={() => setIsOpen(false)}>
+        &#9776;
+      </div>
+
+      {/* Sidebar navbar */}
+      <nav className={`navbar ${isOpen ? "open" : "closed"}`} onMouseEnter={() => setIsOpen(true)} onMouseLeave={() => setIsOpen(false)}>
         <div className="navbar-logo">
           <Link to="/">
             San Lorenzo
@@ -23,7 +29,7 @@ const Navbar = () => {
               <ul className="dropdown-content">
                 <li><Link to="/otro">Otro</Link></li>
                 <li><Link to="/otro2">Otro 2</Link></li>
-            </ul>
+              </ul>
           </li>
           <li className="dropdown">
             <Link to="/superAdmin">Super Admin</Link>
