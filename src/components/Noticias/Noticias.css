@@ -30,7 +30,7 @@
 
 .noticia-imagen {
     width: 100%;
-    height: 200px;
+    height: auto;
     object-fit: cover;
     margin-bottom: 10px;
 }
@@ -45,3 +45,35 @@
     color: #333;
 }
 
+/* Estilos responsive para computadoras 1280x720 */
+@media (min-width: 1024px) and (max-width: 1280px) {
+    .noticia-card {
+        width: 280px; /* Ajustar ligeramente el tamaño en pantallas HD */
+    }
+}
+
+/* Estilos responsive para dispositivos móviles pequeños (320px - 480px) */
+@media (max-width: 480px) {
+    .noticia-card {
+        width: 200px; /* Ajustar ancho de la tarjeta para móviles */
+    }
+
+    .noticia-titulo {
+        font-size: 1.2rem; /* Ajustar tamaño del título */
+    }
+
+    .noticia-descripcion {
+        font-size: 0.9rem; /* Ajustar tamaño de descripción */
+    }
+}
+
+/* Estilos responsive para dispositivos móviles grandes (481px - 768px) */
+@media (max-width: 768px) {
+    .noticia-card {
+        width: 250px; /* Ajustar el ancho de la tarjeta para tabletas */
+    }
+
+    .noticia-titulo {
+        font-size: 1.4rem; /* Ajustar tamaño del título */
+    }
+}

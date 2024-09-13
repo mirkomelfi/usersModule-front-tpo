@@ -1,61 +1,112 @@
 .productos-container {
-    padding: 20px;
-    max-width: 100%; /* Asegúrate de que el contenedor no exceda el ancho de la pantalla */
-    margin: 0 auto;
-    box-sizing: border-box; /* Asegura que el padding se incluya dentro del ancho total */
-  }
-  
-  .search-container {
-    margin-bottom: 20px;
-  }
-  
+  min-height: 80vh; /* Asegura que siempre ocupe al menos el 80% de la altura de la ventana */
+  max-height: 100vh; /* Limita el contenedor a la altura de la ventana */
+  padding-top: 50px;
+  max-width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+  margin-top: 80px; /* Espacio para el header (barra de búsqueda) */
+}
+
+.search-container {
+  display: flex;
+  justify-content: center;
+  position: fixed; /* Fija la barra de búsqueda en la parte superior */
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: white; /* Fondo blanco para que contraste con el contenido */
+  z-index: 999; /* Asegura que esté encima del resto de contenido */
+  padding: 10px 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para darle efecto de header */
+}
+
+.search-bar {
+  width: 50%;
+  padding: 10px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+/* Ajuste para pantallas pequeñas */
+@media (max-width: 768px) {
   .search-bar {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    box-sizing: border-box; /* Para incluir el padding dentro del width */
+    width: 80%;
   }
-  
-  .tipo-seccion {
-    margin-bottom: 40px;
-  }
-  
-  .tipo-titulo {
-    font-size: 24px;
-    margin-bottom: 20px;
-  }
-  
-  .productos-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-  }
-  
+}
+
+.tipo-seccion {
+  margin-bottom: 40px;
+}
+
+.tipo-titulo {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.productos-grid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap; /* Ajuste para múltiples filas en pantallas pequeñas */
+}
+
+.producto-card {
+  flex-shrink: 0;
+  width: 150px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+  text-align: center;
+}
+
+/* Cambiar el tamaño de la tarjeta en pantallas más pequeñas */
+@media (max-width: 768px) {
   .producto-card {
-    flex: 1 1 calc(25% - 20px); /* Ocupa 25% en pantallas grandes */
-    max-width: calc(20% - 20px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    overflow: hidden;
-    text-align: center;
+    width: 120px;
   }
-  
+}
+
+@media (max-width: 480px) {
+  .producto-card {
+    width: 100px;
+  }
+}
+
+.producto-image {
+  width: 100px;
+  height: auto;
+}
+
+.producto-info {
+  padding: 10px;
+}
+
+.producto-name {
+  font-size: 16px;
+  color: red;
+}
+
+.producto-price {
+  font-size: 14px;
+  color: blue;
+}
+
+.prev-button, .next-button {
+  background-color: transparent;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* Ajustes para pantallas más pequeñas */
+@media (max-width: 768px) {
+  .producto-card {
+    width: 100px;
+  }
   .producto-image {
-    width: 100%;
-    height: auto;
+    width: 80px;
   }
-  
-  .producto-info {
-    padding: 10px;
-  }
-  
-  .producto-name {
-    font-size: 16px;
-    margin: 10px 0;
-  }
-  
-  .producto-price {
-    font-size: 14px;
-    color: red;
-  }
-  
+}

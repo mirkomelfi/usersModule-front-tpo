@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
-import '../Global.css';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false); // Estado para controlar la visibilidad del navbar

@@ -1,5 +1,4 @@
 import "./Register.css"
-import "../Global.css"
 
 import { useRef, useState } from "react";
 import { Mensaje } from "../Mensaje/Mensaje";

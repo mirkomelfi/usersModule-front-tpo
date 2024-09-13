@@ -1,54 +1,97 @@
 .home {
-    text-align: center;
-    padding: 50px 20px;
-  }
-  
+  text-align: center;
+  padding: 50px 20px;
+}
+
+.content-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.text-section {
+  flex: 1;
+  padding-right: 20px;
+}
+
+.text-section h1 {
+  font-size: 3em;
+  margin-bottom: 0.5em;
+}
+
+.text-section p {
+  font-size: 1.5em;
+  margin-bottom: 1em;
+  color: #333;
+}
+
+.social-links {
+  margin-top: 1em;
+}
+
+.social-links a {
+  margin-right: 15px;
+  font-size: 1.2em;
+  text-decoration: none;
+  color: #0073b1;
+}
+
+.image-section {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.profile-pic {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  border-radius: 0%;
+}
+
+/* Media queries para pantallas medianas */
+@media (max-width: 768px) {
   .content-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    max-width: 1200px;
-    margin: 0 auto;
-    text-align: left;
+    flex-direction: column; /* Coloca los elementos en columna en lugar de fila */
+    text-align: center; /* Centra el texto para pantallas pequeñas */
   }
-  
+
   .text-section {
-    flex: 1;
-    padding-right: 20px;
+    padding-right: 0; /* Elimina el padding derecho para pantallas pequeñas */
   }
-  
+
   .text-section h1 {
-    font-size: 3em;
-    margin-bottom: 0.5em;
+    font-size: 2.5em; /* Ajusta el tamaño de la fuente en pantallas más pequeñas */
   }
-  
+
   .text-section p {
-    font-size: 1.5em;
-    margin-bottom: 1em;
-    color: #333; /* Color de texto */
+    font-size: 1.2em; /* Ajusta el tamaño de la fuente */
   }
-  
-  .social-links {
-    margin-top: 1em;
-  }
-  
+
   .social-links a {
-    margin-right: 15px;
-    font-size: 1.2em;
-    text-decoration: none;
-    color: #0073b1; /* Color de los enlaces */
+    font-size: 1em; /* Disminuye el tamaño de los enlaces */
+    margin-right: 10px;
   }
-  
-  .image-section {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-  }
-  
+
   .profile-pic {
-    width: 100%;
-    max-width: 500px; /* Tamaño máximo de la imagen */
-    height: auto;
-    border-radius: 0%; /* Elimina el borde redondeado */
+    max-width: 300px; /* Reduce el tamaño máximo de la imagen */
   }
-  
+}
+
+/* Media queries para pantallas muy pequeñas */
+@media (max-width: 480px) {
+  .text-section h1 {
+    font-size: 2em; /* Disminuye más el tamaño de la fuente */
+  }
+
+  .text-section p {
+    font-size: 1em; /* Ajusta el tamaño del párrafo */
+  }
+
+  .profile-pic {
+    max-width: 200px; /* Reduce aún más el tamaño máximo de la imagen */
+  }
+}

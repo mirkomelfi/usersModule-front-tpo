@@ -1,5 +1,4 @@
 import './Home.css'; 
-import '../Global.css';
 
 import React from "react";
 import { FaInstagram, FaTwitter, FaFacebookF, FaWhatsapp, FaEnvelope } from 'react-icons/fa';

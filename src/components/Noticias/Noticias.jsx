@@ -1,5 +1,4 @@
 import './Noticias.css';
-import '../Global.css';
 
 import React, { useRef, useState } from 'react';
 import foto from './CanchaSanLorenzo.jpg';

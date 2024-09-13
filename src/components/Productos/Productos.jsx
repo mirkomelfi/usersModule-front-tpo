@@ -1,19 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Productos.css';
-import "../Global.css";
-
 import foto from './Ojotas.jpg';
 
 const productos = [
-  { id: 1, name: 'Crocs Crocband Clog', price: '$40.862', image: foto, tipo: 'Botines' },
-  { id: 2, name: 'Crocs Classic Originales', price: '$32.990', image: foto, tipo: 'Calzado' },
-  { id: 3, name: 'Sandalias Mujer Taco Bajo', price: '$24.900', image: foto, tipo: 'Sandalias' },
-  { id: 4, name: 'Ojotas Adidas Shower', price: '$39.999', image: foto, tipo: 'Botines' },
-  { id: 5, name: 'Crocs Azul Unisex', price: '$44.990', image: foto, tipo: 'Calzado' },
+  { id: 1, name: 'Crocs Azul Unisex', price: '$44.990', image: foto, tipo: 'Calzado' },
+  { id: 2, name: 'Crocs Azul Unisex', price: '$44.990', image: foto, tipo: 'Calzado' },
+  { id: 3, name: 'Crocs Azul Unisex', price: '$44.990', image: foto, tipo: 'Calzado' },
+  { id: 4, name: 'Crocs Azul Unisex', price: '$44.990', image: foto, tipo: 'Calzado' },
+  { id: 5, name: 'Probnado1 Crocs Azul Unisex', price: '$3.990', image: foto, tipo: 'Calzado' },
+  { id: 6, name: 'Probnado Crocs Azul Unisex', price: '$2.990', image: foto, tipo: 'Calzado' },
+  { id: 7, name: 'Probnado2 Crocs Azul Unisex', price: '$1.990', image: foto, tipo: 'Calzado' },
+  { id: 8, name: 'Probnado3', price: '$4.990', image: foto, tipo: 'Calzado' },
+  { id: 8, name: 'Crocs Azul Unisex', price: '$44.990', image: foto, tipo: 'Botines' },
+  { id: 8, name: 'Crocs Azul Unisex', price: '$44.990', image: foto, tipo: 'Ojotas' },
+  { id: 8, name: 'Crocs Azul Unisex', price: '$44.990', image: foto, tipo: 'Dados' },
+  { id: 8, name: 'Crocs Azul Unisex', price: '$44.990', image: foto, tipo: 'Otro' },
+  { id: 8, name: 'Crocs Azul Unisex', price: '$44.990', image: foto, tipo: 'Otro1' },
+  { id: 8, name: 'Crocs Azul Unisex', price: '$44.990', image: foto, tipo: 'Otro2' },
   // Agrega más productos según necesites
 ];
 
-// Función para agrupar productos por tipo
 const groupByType = (products) => {
   return products.reduce((group, product) => {
     const { tipo } = product;
@@ -27,28 +33,62 @@ const groupByType = (products) => {
 
 export const Productos = () => {
   const productosPorTipo = groupByType(productos);
+  const [currentIndex, setCurrentIndex] = useState({});
+
+  // Función para manejar el desplazamiento
+  const handleNext = (tipo) => {
+    const current = currentIndex[tipo] || 0;
+    if (current + 5 < productosPorTipo[tipo].length) {
+      setCurrentIndex((prevState) => ({
+        ...prevState,
+        [tipo]: current + 1,
+      }));
+    }
+  };
+
+  const handlePrev = (tipo) => {
+    const current = currentIndex[tipo] || 0;
+    if (current > 0) {
+      setCurrentIndex((prevState) => ({
+        ...prevState,
+        [tipo]: current - 1,
+      }));
+    }
+  };
 
   return (
     <div className="productos-container">
       <div className="search-container">
         <input type="text" placeholder="Buscar productos..." className="search-bar" />
       </div>
-      {Object.keys(productosPorTipo).map(tipo => (
-        <div key={tipo} className="tipo-seccion">
-          <h2 className="tipo-titulo">{tipo}</h2>
-          <div className="productos-grid">
-            {productosPorTipo[tipo].map(producto => (
-              <div key={producto.id} className="producto-card">
-                <img src={producto.image} alt={producto.name} className="producto-image" />
-                <div className="producto-info">
-                  <p className="producto-name">{producto.name}</p>
-                  <p className="producto-price">{producto.price}</p>
+
+      {Object.keys(productosPorTipo).map((tipo) => {
+        const current = currentIndex[tipo] || 0;
+        const productosVisibles = productosPorTipo[tipo].slice(current, current + 5);
+
+        return (
+          <div key={tipo} className="tipo-seccion">
+            <h2 className="tipo-titulo">{tipo}</h2>
+            <div className="productos-grid">
+              <button className="prev-button" onClick={() => handlePrev(tipo)}>
+                &lt;
+              </button>
+              {productosVisibles.map((producto) => (
+                <div key={producto.id} className="producto-card">
+                  <img src={producto.image} alt={producto.name} className="producto-image" />
+                  <div className="producto-info">
+                    <p className="producto-name">{producto.name}</p>
+                    <p className="producto-price">{producto.price}</p>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+              <button className="next-button" onClick={() => handleNext(tipo)}>
+                &gt;
+              </button>
+            </div>
           </div>
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 };

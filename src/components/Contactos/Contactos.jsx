@@ -1,6 +1,5 @@
 import React from 'react';
 import './Contactos.css';
-import "../Global.css"
 import { FaInstagram, FaTwitter, FaFacebookF, FaWhatsapp, FaEnvelope } from 'react-icons/fa';
 
 export const Contactos = () => {
