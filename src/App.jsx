@@ -14,7 +14,7 @@ import { Noticias } from './components/Noticias/Noticias';
 import {Contactos} from './components/Contactos/Contactos';
 import {Productos} from './components/Productos/Productos';
 import { NoticiasPost } from './components/Noticias/NoticiasPOST';
-import EventsCalendar from './components/Prueba/Prueba';
+import EventsCalendar from './components/Agenda/Agenda';
 
 export const App = () => {
   return (
@@ -28,8 +28,8 @@ export const App = () => {
           <Route path='/superAdmin' element={<SuperAdmin />} />
           <Route path='/noticias' element={<Noticias />} />
           
-          <Route path='/prueba' element={<EventsCalendar />} />
-          
+          <Route path='/agenda' element={<EventsCalendar />} />
+
           <Route path='/noticias/add' element={<NoticiasPost />} />
           <Route path='/contactos' element={<Contactos />} />
           <Route path='/productos' element={<Productos />} />

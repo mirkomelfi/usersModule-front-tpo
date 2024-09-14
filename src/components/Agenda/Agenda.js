@@ -41,16 +41,7 @@ const CustomCalendar = styled(Calendar)`
 
 // Lista de eventos de ejemplo
 const defaultEvents = [
-  {
-    title: 'Evento 1',
-    start: new Date('2024-09-15T10:22:00'),
-    end: new Date('2024-09-15T11:22:00') // Duración de 1 hora
-  },
-  {
-    title: 'Evento 2',
-    start: new Date('2024-09-15T12:22:00'),
-    end: new Date('2024-09-15T13:22:00') // Duración de 1 hora
-  }
+
 ];
 
 const EventsCalendar = () => {
@@ -74,9 +65,10 @@ const EventsCalendar = () => {
           },
         });
         const data = await response.json();
+        console.log(data)
         const formattedEvents = data.map(event => ({
-            // en vez de ID, deberia ser con quien me reuno. modificar TURNODTO en el back
-          title: `Turno con ID ${event.id}`,
+            // deberia agregar el rol
+          title: `Reunión con ${event.usuarioReservado.nombre} ${event.usuarioReservado.apellido}`,
           start: new Date(event.fechaHora),
           end: new Date(new Date(event.fechaHora).getTime() + 60 * 60 * 1000)
         }));
@@ -86,8 +78,11 @@ const EventsCalendar = () => {
       }
     };
 
+    // hay que traer el listado de usuarios de X rol (seleccionado en dropdown)
+    // al seleccionar uno de ellos + la hora, recien ahi hago el fetch al back
+
     fetchEvents();
-  }, []);
+  }, []); // podria hacer arraydependencia con newEvent
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -100,15 +95,15 @@ const EventsCalendar = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          title: newEvent.title,
           fechaHora: new Date(newEvent.start).toISOString(),
         }),
       });
 
       if (response.ok) {
         const data = await response.json();
+        console.log("d ",data)
         setEvents([...events, {
-          title: newEvent.title,
+          title: "Reunión cargada... Actualice la página",
           start: new Date(newEvent.start),
           end: new Date(new Date(newEvent.start).getTime() + 60 * 60 * 1000)
         }]);
@@ -207,18 +202,7 @@ const EventsCalendar = () => {
       </button>
       {isFormVisible && (
         <form onSubmit={handleSubmit}>
-          <div>
-            <label>
-              Título:
-              <input
-                type="text"
-                name="title"
-                value={newEvent.title}
-                onChange={handleChange}
-                required
-              />
-            </label>
-          </div>
+          
           <div>
             <label>
               Seleccione fecha y hora:

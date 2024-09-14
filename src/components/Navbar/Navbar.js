@@ -25,6 +25,7 @@ const Navbar = () => {
           <li><Link to="/contactos">Contactos</Link></li>
           <li><Link to="/login">Login</Link></li>
           <li><Link to="/register">Registrarse</Link></li>
+          <li><Link to="/agenda">Mi agenda</Link></li>
           <li className="dropdown">
               <Link to="/olvidoContraseña">Olvido Contraseña</Link>
               <ul className="dropdown-content">
