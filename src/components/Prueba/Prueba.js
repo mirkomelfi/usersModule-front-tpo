@@ -10,9 +10,9 @@ const localizer = momentLocalizer(moment);
 
 // Estilos para el contenedor del calendario
 const CalendarContainer = styled.div`
-  height: 80vh; /* Ajuste de altura para el contenedor */
-  width: 90vw;  /* Ajuste de ancho para el contenedor */
-  margin: 0 auto; /* Centra el contenedor horizontalmente */
+  height: 80vh;
+  width: 90vw;
+  margin: 0 auto;
   border: 1px solid #ddd;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -39,56 +39,46 @@ const CustomCalendar = styled(Calendar)`
   }
 `;
 
-// Función para manejar la selección de un rango de tiempo
-const handleSelectSlot = async (slotInfo) => {
-  const { start } = slotInfo;
-  const end = new Date(start);
-  end.setHours(end.getHours() + 1); // Establecer la duración del turno a 1 hora
-
-  // Aquí puedes hacer la solicitud HTTP a tu backend para reservar el turno
-  try {
-    const response = await fetch('/api/reservar-turno', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        start: start.toISOString(),
-        end: end.toISOString()
-      }),
-    });
-
-    if (response.ok) {
-      alert('Turno reservado con éxito');
-    } else {
-      alert('Error al reservar el turno');
-    }
-  } catch (error) {
-    console.error('Error:', error);
-    alert('Error al reservar el turno');
+// Lista de eventos de ejemplo
+const defaultEvents = [
+  {
+    title: 'Evento 1',
+    start: new Date('2024-09-15T10:22:00'),
+    end: new Date('2024-09-15T11:22:00') // Duración de 1 hora
+  },
+  {
+    title: 'Evento 2',
+    start: new Date('2024-09-15T12:22:00'),
+    end: new Date('2024-09-15T13:22:00') // Duración de 1 hora
   }
-};
+];
 
 const EventsCalendar = () => {
-  const [events, setEvents] = useState([]);
+  const [events, setEvents] = useState(defaultEvents); // Usar eventos de ejemplo
   const [newEvent, setNewEvent] = useState({
     title: '',
-    start: '',
-    end: ''
+    start: ''
   });
   const [isFormVisible, setIsFormVisible] = useState(false);
+  const [selectedSlot, setSelectedSlot] = useState(null); // Guardar el slot seleccionado
 
   useEffect(() => {
-    // Función para obtener los eventos desde la API
+    // Función para obtener los eventos desde la API y mostrarlos en el Calendario
     const fetchEvents = async () => {
       try {
-        const response = await fetch('/api/turnos');
+        const dniSolicitante = 222;
+        const response = await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/turnos/${dniSolicitante}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
         const data = await response.json();
-        // Transformar los datos del backend al formato esperado por react-big-calendar
         const formattedEvents = data.map(event => ({
-          title: `Turno con ${event.conUsuario.nombre}`, // Asumiendo que conUsuario tiene un nombre
-          start: new Date(event.start), // Convertir el Timestamp a objeto Date
-          end: new Date(event.end) // Convertir el Timestamp a objeto Date
+            // en vez de ID, deberia ser con quien me reuno. modificar TURNODTO en el back
+          title: `Turno con ID ${event.id}`,
+          start: new Date(event.fechaHora),
+          end: new Date(new Date(event.fechaHora).getTime() + 60 * 60 * 1000)
         }));
         setEvents(formattedEvents);
       } catch (error) {
@@ -102,31 +92,33 @@ const EventsCalendar = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch('/api/turnos', {
+      const dniSolicitante = 111;
+      const dniSolicitado = 222;
+      const response = await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/turnos/${dniSolicitante}/${dniSolicitado}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           title: newEvent.title,
-          start: new Date(newEvent.start).toISOString(),
-          end: new Date(newEvent.end).toISOString()
+          fechaHora: new Date(newEvent.start).toISOString(),
         }),
       });
 
       if (response.ok) {
         const data = await response.json();
-        // Actualizar la lista de eventos
         setEvents([...events, {
           title: newEvent.title,
           start: new Date(newEvent.start),
-          end: new Date(newEvent.end)
+          end: new Date(new Date(newEvent.start).getTime() + 60 * 60 * 1000)
         }]);
-        setNewEvent({ title: '', start: '', end: '' });
+        setNewEvent({ title: '', start: '' });
         setIsFormVisible(false);
+        setSelectedSlot(null); // Limpiar el slot seleccionado
         alert('Evento creado con éxito');
       } else {
-        alert('Error al crear el evento');
+        const data = await response.json();
+        alert(data.msj || 'Error al crear el evento');
       }
     } catch (error) {
       console.error('Error:', error);
@@ -136,10 +128,60 @@ const EventsCalendar = () => {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setNewEvent({
-      ...newEvent,
-      [name]: value
-    });
+    
+    if (name === 'start') {
+        // Convertir el valor a una fecha
+        const newStart = new Date(value);
+        // Establecer los minutos en 0
+        newStart.setMinutes(0);
+        setNewEvent({
+          ...newEvent,
+          [name]: newStart.toISOString() // Convertir de nuevo a string
+        });
+      } else {
+        setNewEvent({
+          ...newEvent,
+          [name]: value
+        });
+      }
+  };
+
+  const validateDate = (date) => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return date >= today;
+  };
+
+  const validateTimeSlot = (startDate) => {
+    const hour = startDate.getHours();
+    return hour >= 8 && hour < 18;
+  };
+
+  const checkIfTimeSlotIsOccupied = (start, end) => {
+    return events.some(event => 
+      (new Date(event.start) < end && start < new Date(event.end))
+    );
+  };
+
+  const handleSlotSelection = async (slotInfo) => {
+    const { start } = slotInfo;
+    const end = new Date(start);
+    end.setHours(end.getHours() + 1); // Duración de 1 hora
+
+    if (validateDate(start) && validateTimeSlot(start)) {
+      if (!checkIfTimeSlotIsOccupied(start, end)) {
+        setSelectedSlot({ start, end });
+        setNewEvent({
+          title: '',
+          start: start.toISOString()
+        });
+        setIsFormVisible(true);
+      } else {
+        alert('Este horario ya está ocupado.');
+      }
+    } else {
+      alert('Selecciona una fecha válida entre 8:00 y 18:00 y solo en el día de hoy o fechas futuras.');
+    }
   };
 
   return (
@@ -150,7 +192,7 @@ const EventsCalendar = () => {
         startAccessor="start"
         endAccessor="end"
         selectable
-        onSelectSlot={handleSelectSlot} // Manejar selección de horario
+        onSelectSlot={handleSlotSelection} // Manejar selección de horario
         messages={{
           next: 'Siguiente',
           previous: 'Anterior',
@@ -161,7 +203,7 @@ const EventsCalendar = () => {
         }}
       />
       <button onClick={() => setIsFormVisible(!isFormVisible)}>
-        {isFormVisible ? 'Cerrar formulario' : 'Agregar evento'}
+        {isFormVisible ? 'Cerrar formulario' : 'Agregar reunión'}
       </button>
       {isFormVisible && (
         <form onSubmit={handleSubmit}>
@@ -179,29 +221,19 @@ const EventsCalendar = () => {
           </div>
           <div>
             <label>
-              Inicio:
+              Seleccione fecha y hora:
               <input
                 type="datetime-local"
                 name="start"
-                value={newEvent.start}
+                value={moment(newEvent.start).format('YYYY-MM-DDTHH:00')} // Siempre termina en :00
+                
                 onChange={handleChange}
                 required
+                min={moment().format('YYYY-MM-DDTHH:MM')}
               />
             </label>
           </div>
-          <div>
-            <label>
-              Fin:
-              <input
-                type="datetime-local"
-                name="end"
-                value={newEvent.end}
-                onChange={handleChange}
-                required
-              />
-            </label>
-          </div>
-          <button type="submit">Crear Evento</button>
+          <button type="submit">Crear reunión</button>
         </form>
       )}
     </CalendarContainer>
