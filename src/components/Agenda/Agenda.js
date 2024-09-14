@@ -40,9 +40,7 @@ const CustomCalendar = styled(Calendar)`
 `;
 
 // Lista de eventos de ejemplo
-const defaultEvents = [
-
-];
+const defaultEvents = [];
 
 const EventsCalendar = () => {
   const [events, setEvents] = useState(defaultEvents); // Usar eventos de ejemplo
@@ -52,12 +50,23 @@ const EventsCalendar = () => {
   });
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [selectedSlot, setSelectedSlot] = useState(null); // Guardar el slot seleccionado
+  const [selectedOption, setSelectedOption] = useState('');
+
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [users, setUsers] = useState([]);
+
+  const handleSelectedRol = (event) => {
+    setSelectedOption(event.target.value);
+  };
+  const handleSelectedUser = (event) => {
+    setSelectedUser(event.target.value);
+  };
 
   useEffect(() => {
     // Función para obtener los eventos desde la API y mostrarlos en el Calendario
     const fetchEvents = async () => {
       try {
-        const dniSolicitante = 222;
+        const dniSolicitante = 111;
         const response = await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/turnos/${dniSolicitante}`, {
           method: 'GET',
           headers: {
@@ -82,14 +91,41 @@ const EventsCalendar = () => {
     // al seleccionar uno de ellos + la hora, recien ahi hago el fetch al back
 
     fetchEvents();
+    
   }, []); // podria hacer arraydependencia con newEvent
+
+
+  
+  useEffect(() => {
+    // Función para obtener los eventos desde la API y mostrarlos en el Calendario
+    const fetchUsers = async () => {
+      if (selectedOption!=""){
+      try {
+        const response = await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/usuarios/${selectedOption}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        const data = await response.json();
+        setUsers(data)
+      } catch (error) {
+        console.error('Error fetching events:', error);
+      }
+    };}
+
+    // hay que traer el listado de usuarios de X rol (seleccionado en dropdown)
+    // al seleccionar uno de ellos + la hora, recien ahi hago el fetch al back
+
+    fetchUsers();
+    
+  }, [selectedOption]); 
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
       const dniSolicitante = 111;
-      const dniSolicitado = 222;
-      const response = await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/turnos/${dniSolicitante}/${dniSolicitado}`, {
+      const response = await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/turnos/${dniSolicitante}/${selectedUser}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -101,7 +137,6 @@ const EventsCalendar = () => {
 
       if (response.ok) {
         const data = await response.json();
-        console.log("d ",data)
         setEvents([...events, {
           title: "Reunión cargada... Actualice la página",
           start: new Date(newEvent.start),
@@ -202,7 +237,27 @@ const EventsCalendar = () => {
       </button>
       {isFormVisible && (
         <form onSubmit={handleSubmit}>
-          
+              <div>
+                <select value={selectedOption} onChange={handleSelectedRol}>
+                  <option value="">Selecciona el Rol de la persona con la que desea reunirse</option>
+                  <option value="Inversor">Inversor</option>
+                  <option value="Directivo">Directivo</option>
+                </select>
+                <p>Opción seleccionada: {selectedOption}</p>
+              </div>
+
+              <div>
+                <select value={selectedUser} onChange={handleSelectedUser}>
+                <option value="">Selecciona una opción</option>
+                  {users.map((user) => (
+                    <option key={user.dni} value={user.dni}>
+                      {user.nombre +" "+ user.nombre + " - Dni: "+user.dni}
+                    </option>
+                  ))}
+                </select>
+                <p>Opción seleccionada: {selectedOption}</p>
+              </div>
+
           <div>
             <label>
               Seleccione fecha y hora:
@@ -223,5 +278,7 @@ const EventsCalendar = () => {
     </CalendarContainer>
   );
 };
+
+
 
 export default EventsCalendar;
