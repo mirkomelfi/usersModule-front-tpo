@@ -1,0 +1,68 @@
+.carrito-container {
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  h2 {
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .carrito-tabla {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  .carrito-tabla th, .carrito-tabla td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+  }
+  
+  .carrito-tabla th {
+    background-color: #f2f2f2;
+    color: #333;
+  }
+  
+  .carrito-tabla tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .accion-btn {
+    background-color: #dc3545;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .accion-btn:hover {
+    background-color: #c82333;
+  }
+  
+  .carrito-total {
+    margin-top: 20px;
+    font-size: 1.5em;
+  }
+  
+  .checkout-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #28a745;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .checkout-btn:hover {
+    opacity: 0.8;
+  }
+  

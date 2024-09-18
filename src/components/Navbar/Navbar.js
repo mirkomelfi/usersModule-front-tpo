@@ -20,12 +20,15 @@ const Navbar = () => {
           </Link>
         </div>
         <ul className="navbar-menu">
+          <li><Link to="/perfilUsuario">Perfil Usuario</Link></li>
+          <li><Link to="/noticia">Noticia</Link></li>
           <li><Link to="/noticias">Noticias</Link></li>
           <li><Link to="/productos">Productos</Link></li>
-          <li><Link to="/contactos">Contactos</Link></li>
+          <li><Link to="/listaCarrito">Lista Carrito</Link></li>
+          <li><Link to="/contactos">Ayuda</Link></li>
+          <li><Link to="/agenda">Mi agenda</Link></li>
           <li><Link to="/login">Login</Link></li>
           <li><Link to="/register">Registrarse</Link></li>
-          <li><Link to="/agenda">Mi agenda</Link></li>
           <li className="dropdown">
               <Link to="/olvidoContraseña">Olvido Contraseña</Link>
               <ul className="dropdown-content">

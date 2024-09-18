@@ -1,0 +1,76 @@
+/* Contenedor general del perfil */
+.perfil-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Estilo para el header del perfil */
+  .perfil-header {
+    text-align: center;
+    padding: 20px;
+    border-bottom: 2px solid #ddd;
+  }
+  
+  .perfil-avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+  }
+  
+  .perfil-nombre {
+    font-size: 28px;
+    margin: 10px 0;
+    color: #333;
+  }
+  
+  .perfil-rol, .perfil-membresia {
+    font-size: 18px;
+    color: #777;
+    margin: 5px 0;
+  }
+  
+  /* Información detallada del usuario */
+  .perfil-info {
+    margin-top: 30px;
+    font-size: 16px;
+    color: #555;
+  }
+  
+  .perfil-info h3 {
+    font-size: 22px;
+    color: #333;
+    margin-bottom: 15px;
+  }
+  
+  /* Botones de acciones */
+  .perfil-acciones {
+    margin-top: 30px;
+    text-align: center;
+  }
+  
+  .perfil-btn {
+    padding: 10px 20px;
+    margin: 0 10px;
+    font-size: 16px;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .perfil-btn-danger {
+    background-color: #dc3545;
+  }
+  
+  .perfil-btn:hover {
+    opacity: 0.8;
+  }
+  

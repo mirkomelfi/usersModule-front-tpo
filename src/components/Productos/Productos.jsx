@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Productos.css';
+import { FaShoppingCart } from 'react-icons/fa'; // Importa el icono del carrito
 import foto from './Ojotas.jpg';
 
 const productos = [
@@ -32,6 +34,9 @@ const groupByType = (products) => {
 };
 
 export const Productos = () => {
+  const navigate  = useNavigate();
+
+  const [cartCount, setCartCount] = useState(3); // Puedes ajustar el valor inicial del carrito
   const productosPorTipo = groupByType(productos);
   const [currentIndex, setCurrentIndex] = useState({});
 
@@ -56,10 +61,20 @@ export const Productos = () => {
     }
   };
 
+  const handleCartClick = () => {
+    navigate('/listaCarrito');
+  };
+
   return (
     <div className="productos-container">
       <div className="search-container">
         <input type="text" placeholder="Buscar productos..." className="search-bar" />
+        
+        {/* Aquí agregamos el carrito con el contador */}
+        <div className="cart-icon-container" onClick={handleCartClick}>
+          <FaShoppingCart className="cart-icon" />
+          <span className="cart-count">{cartCount}</span>
+        </div>
       </div>
 
       {Object.keys(productosPorTipo).map((tipo) => {

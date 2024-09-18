@@ -6,7 +6,7 @@ import { Mensaje } from "../Mensaje/Mensaje";
 import { validateRol, isRolUser, deleteToken } from "../../utils/auth-utils";
 import "./Usuario.css"; // Import the new CSS file
 
-const Usuario = ({ fromPerfil }) => {
+export const UsuarioViejo = ({ fromPerfil }) => {
   const { dni } = useParams();
 
   const [usuario, setUsuario] = useState([]);
@@ -133,5 +133,3 @@ const Usuario = ({ fromPerfil }) => {
     </>
   );
 };
-
-export { Usuario };
