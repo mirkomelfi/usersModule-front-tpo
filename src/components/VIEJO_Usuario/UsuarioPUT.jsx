@@ -7,7 +7,9 @@ import { validateRol,isRolUser,deleteToken,getToken } from "../../utils/auth-uti
 
 export const UsuarioPut = ({fromPerfil}) => {
 
-    const {dni}= useParams();
+    //const {dni}= useParams();
+
+    var dni=111
 
     const [mensaje,setMensaje]=useState(null)
     const datForm = useRef() //Crear una referencia para consultar los valoresa actuales del form
@@ -27,6 +29,14 @@ export const UsuarioPut = ({fromPerfil}) => {
         if (cliente.apellido==""){cliente.apellido=null;}
         if (cliente.username==""){cliente.username=null;}
         if (cliente.password==""){cliente.password=null;}
+        if (cliente.telefono==""){cliente.nombre=null;}
+        if (cliente.calle==""){cliente.nombre=null;}
+        if (cliente.numero==""){cliente.nombre=null;}
+        if (cliente.ciudad==""){cliente.nombre=null;}
+        if (cliente.codPos==""){cliente.nombre=null;}
+        if (cliente.fecha==""){cliente.nombre=null;}
+
+
         if (!cliente.nombre&&!cliente.apellido&&!cliente.username&&!cliente.password){ setMensaje("No se ingresaron valores para actualizar")}
         else{
             var url=``;
@@ -39,11 +49,12 @@ export const UsuarioPut = ({fromPerfil}) => {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": `Bearer ${getToken()}`
+                   // "Authorization": `Bearer ${getToken()}`
                 },
                 body: JSON.stringify(cliente)
             })
-            const rol=validateRol(response)
+            
+            /*const rol=validateRol(response)
             if (!rol){
               if (isRolUser(getToken())){
              
@@ -65,7 +76,14 @@ export const UsuarioPut = ({fromPerfil}) => {
                     setMensaje(data.msj)
                 }
             }
-                
+              */
+             
+            const data = await response.json()
+            if (data.msj){
+                setMensaje(data.msj)
+            }
+            
+
             e.target.reset() //Reset form
                 
             }
@@ -95,6 +113,30 @@ export const UsuarioPut = ({fromPerfil}) => {
                         <div className="mb-3">
                             <label htmlFor="password" className="form-label">Password</label>
                             <input type="password" className="form-control" name="password" />
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="nombre" className="form-label">Teléfono</label>
+                            <input type="text" className="form-control" name="telefono" />
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="nombre" className="form-label">Calle</label>
+                            <input type="text" className="form-control" name="calle" />
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="nombre" className="form-label">Número</label>
+                            <input type="text" className="form-control" name="numero" />
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="nombre" className="form-label">Ciudad</label>
+                            <input type="text" className="form-control" name="ciudad" />
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="nombre" className="form-label">Código postal</label>
+                            <input type="text" className="form-control" name="codPos" />
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="nombre" className="form-label">Fecha de nacimiento</label>
+                            <input type="text" className="form-control" name="fechaNac" />
                         </div>
 
                         <button type="submit" className="button btnPrimary">Actualizar</button>

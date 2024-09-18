@@ -1,9 +1,46 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './Noticia.css';
 import foto from "./partido.jpg";
 
 export const Noticia = () => {
+  //const {id}= useParams();
+
+  var id=1
+  
+  const [mensaje,setMensaje]=useState(null)
+  const [noticia,setNoticia]=useState(null)
+
+  const ejecutarFetch = async () => {
+    var url = ``;
+    
+    url = `${process.env.REACT_APP_DOMINIO_BACK}/noticias/${id}`;
+    
+
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        //Authorization: `Bearer ${getToken()}`,
+      },
+    });
+
+    const data = await response.json();
+
+    if (data.msj) {
+      setMensaje(data.msj);
+    } else {
+      setNoticia(data);
+    }
+  }
+
+    useEffect(() => {
+      ejecutarFetch().catch((error) => console.error(error));
+    }, []);
+
+
+
   return (
+    
     <div className="noticia-container">
       <header className="noticia-header">
         <h1>Encabezado de la Noticia</h1>
