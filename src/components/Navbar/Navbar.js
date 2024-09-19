@@ -24,6 +24,7 @@ const Navbar = () => {
           <li><Link to="/noticia">Noticia</Link></li>
           <li><Link to="/noticias">Noticias</Link></li>
           <li><Link to="/productos">Productos</Link></li>
+          <li><Link to="/producto">Producto</Link></li>
           <li><Link to="/listaCarrito">Lista Carrito</Link></li>
           <li><Link to="/contactos">Ayuda</Link></li>
           <li><Link to="/agenda">Mi agenda</Link></li>

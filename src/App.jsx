@@ -19,6 +19,7 @@ import { Noticia } from './components/Noticia/Noticia';
 import { PerfilUsuario } from './components/Usuario/PerfilUsuario';
 import { ProductoPost } from './components/Productos/ProductoPOST';
 import EventsCalendar from './components/Agenda/Agenda';
+import { Producto } from './components/Producto/Producto';
 
 export const App = () => {
   return (
@@ -38,6 +39,7 @@ export const App = () => {
           <Route path='/noticia' element={<Noticia />} />
           <Route path='/contactos' element={<Contactos />} />
           <Route path='/productos' element={<Productos />} />
+          <Route path='/producto' element={<Producto />} />
           <Route path='/listaCarrito' element={<ListaCarrito />} />
           
           <Route path='/logout' element={<Logout />} />
