@@ -17,6 +17,7 @@ import { ListaCarrito } from './components/Productos/ListaCarrito';
 import { NoticiasPost } from './components/Noticias/NoticiasPOST';
 import { Noticia } from './components/Noticia/Noticia';
 import { PerfilUsuario } from './components/Usuario/PerfilUsuario';
+import { ProductoPost } from './components/Productos/ProductoPOST';
 import EventsCalendar from './components/Agenda/Agenda';
 
 export const App = () => {
@@ -41,6 +42,7 @@ export const App = () => {
           
           <Route path='/logout' element={<Logout />} />
           <Route path='/noticias/add' element={<NoticiasPost />} />
+          <Route path='/productos/add' element={<ProductoPost />} />
           <Route path="/usuarios" element={<UsuarioListContainer greeting="Listado de Usuarios"/>}/>
           <Route path="/usuarios/:dni" element={<UsuarioViejo />}/> 
           <Route path="/updateUsuario/:dni" element={<UsuarioPut />}/> 

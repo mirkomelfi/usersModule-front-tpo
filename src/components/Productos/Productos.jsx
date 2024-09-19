@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './Productos.css';
 import { FaShoppingCart } from 'react-icons/fa'; // Importa el icono del carrito
 import foto from './Ojotas.jpg';
@@ -77,6 +78,11 @@ export const Productos = () => {
         </div>
       </div>
 
+      <div className="agregarProducto">
+          <Link to="/productos/add" className="btn-agregar-producto">
+                  Agregar Producto
+              </Link>
+      </div>
       {Object.keys(productosPorTipo).map((tipo) => {
         const current = currentIndex[tipo] || 0;
         const productosVisibles = productosPorTipo[tipo].slice(current, current + 5);

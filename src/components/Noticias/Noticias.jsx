@@ -69,25 +69,31 @@ export const Noticias = () => {
 
     const handleWheel = (event) => {
         const container = containerRef.current;
-        container.scrollLeft += event.deltaY; 
+        container.scrollLeft += event.deltaY;
     };
 
     return (
-        <div
-            className="noticias-container"
-            ref={containerRef}
-            onWheel={handleWheel}  
-        >
-            {noticiasData.map((noticia, index) => (
-                <div key={index} className="noticia-card">
-                    <img src={noticia.imagen} alt={noticia.titulo} className="noticia-imagen" />
-                    <h2 className="noticia-titulo">{noticia.titulo}</h2>
-                    <p className="noticia-descripcion">{noticia.descripcion}</p>
-                </div>
-            ))}
-            <Link to="/noticias/add">Agregar Noticia</Link>
-        </div>
-        
+        <>
+            {/* Footer con botón Agregar Noticia */}
+            <div className="agregarNoticia">
+                <Link to="/noticias/add" className="btn-agregar-noticia">
+                    Agregar Noticia
+                </Link>
+            </div>
+            
+            <div
+                className="noticias-container"
+                ref={containerRef}
+                onWheel={handleWheel}
+            >
+                {noticiasData.map((noticia, index) => (
+                    <div key={index} className="noticia-card">
+                        <img src={noticia.imagen} alt={noticia.titulo} className="noticia-imagen" />
+                        <h2 className="noticia-titulo">{noticia.titulo}</h2>
+                        <p className="noticia-descripcion">{noticia.descripcion}</p>
+                    </div>
+                ))}
+            </div>
+        </>
     );
 };
-
