@@ -25,6 +25,7 @@ import { DeportesPost } from './components/Deportes/DeportesPOST';
 import { PropuestasPost } from './components/Propuestas/PropuestasPOST';
 import { Asociarse } from './components/Asociarse/Asociarse';
 import { Feedback } from './components/Feedback/Feedback';
+import { Deporte } from './components/Deporte/Deporte';
 
 export const App = () => {
   return (
@@ -45,6 +46,7 @@ export const App = () => {
           <Route path='/noticias' element={<Noticias />} />
           <Route path='/noticias/:id' element={<Noticia />} />
           <Route path='/deportes' element={<Deportes />} />
+          <Route path='/deportes/:id' element={<Deporte />} />
           {//<Route path='/deportes/:id' element={<Deporte />} />
           }
           <Route path='/contactos' element={<Contactos />} />
