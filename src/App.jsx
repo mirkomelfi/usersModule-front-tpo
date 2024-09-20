@@ -20,6 +20,9 @@ import { PerfilUsuario } from './components/Usuario/PerfilUsuario';
 import { ProductoPost } from './components/Productos/ProductoPOST';
 import EventsCalendar from './components/Agenda/Agenda';
 import { Producto } from './components/Producto/Producto';
+import { Deportes } from './components/Deportes/Deportes';
+import { DeportesPost } from './components/Deportes/DeportesPOST';
+import { PropuestasPost } from './components/Propuestas/PropuestasPOST';
 
 export const App = () => {
   return (
@@ -36,15 +39,22 @@ export const App = () => {
           <Route path='/superAdmin' element={<SuperAdmin />} />
           <Route path='/perfilUsuario' element={<PerfilUsuario />} />
           <Route path='/noticias' element={<Noticias />} />
-          <Route path='/noticia' element={<Noticia />} />
+          <Route path='/noticias/:id' element={<Noticia />} />
+          <Route path='/deportes' element={<Deportes />} />
+          {//<Route path='/deportes/:id' element={<Deporte />} />
+          }
           <Route path='/contactos' element={<Contactos />} />
           <Route path='/productos' element={<Productos />} />
           <Route path='/producto' element={<Producto />} />
           <Route path='/listaCarrito' element={<ListaCarrito />} />
           
           <Route path='/logout' element={<Logout />} />
+          
+          <Route path='/deportes/add' element={<DeportesPost />} />
           <Route path='/noticias/add' element={<NoticiasPost />} />
+          <Route path='/propuestas/add' element={<PropuestasPost />} />
           <Route path='/productos/add' element={<ProductoPost />} />
+
           <Route path="/usuarios" element={<UsuarioListContainer greeting="Listado de Usuarios"/>}/>
           <Route path="/usuarios/:dni" element={<UsuarioViejo />}/> 
           <Route path="/updateUsuario/:dni" element={<UsuarioPut />}/> 

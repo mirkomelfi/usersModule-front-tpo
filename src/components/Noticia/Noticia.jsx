@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import './Noticia.css';
 import foto from "./partido.jpg";
+import { useParams } from 'react-router-dom';
 
 export const Noticia = () => {
-  //const {id}= useParams();
 
-  var id=1
+  const {id}= useParams();
+
   
   const [mensaje,setMensaje]=useState(null)
   const [noticia,setNoticia]=useState(null)
@@ -25,7 +26,7 @@ export const Noticia = () => {
     });
 
     const data = await response.json();
-
+    console.log(data)
     if (data.msj) {
       setMensaje(data.msj);
     } else {

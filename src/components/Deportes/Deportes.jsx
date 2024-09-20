@@ -1,4 +1,4 @@
-import './Noticias.css';
+import './Deportes.css';
 
 import React, { useEffect, useRef, useState } from 'react';
 import foto from './CanchaSanLorenzo.jpg';
@@ -6,7 +6,7 @@ import foto2 from './ikerMunian.jpg';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { ImagenOK } from '../Imagen/ImagenOK';
 
-const noticiasData = [
+const deportesData = [
     {
         id:1,
         titulo: 'Título',
@@ -68,12 +68,12 @@ const noticiasData = [
     },
 ];
 
-export const Noticias = () => {
+export const Deportes = () => {
     const containerRef = useRef(null);
 
     //const {id}= useParams();
 
-    const [listaNoticias,setListaNoticias]= useState([]);
+    const [listaDeportes,setListaDeportes]= useState([]);
     const [mensaje,setMensaje]= useState(null);
 
     const navigate= useNavigate()
@@ -83,7 +83,7 @@ export const Noticias = () => {
 
     const ejecutarFetch = async() =>{
 
-      const response= await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/noticias`, {
+      const response= await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/actividades`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -107,7 +107,7 @@ export const Noticias = () => {
         setMensaje(data.msj)
       }else{
         console.log(data)
-        setListaNoticias(data)
+        setListaDeportes(data)
       }
       }
    // }
@@ -127,25 +127,25 @@ export const Noticias = () => {
 
     return (
         <>
-            {/* Footer con botón Agregar Noticia */}
-            <div className="agregarNoticia">
-                <Link to="/noticias/add" className="btn-agregar-noticia">
-                    Agregar Noticia
+            {/* Footer con botón Agregar Deporte */}
+            <div className="agregarDeporte">
+                <Link to="/deportes/add" className="btn-agregar-deporte">
+                    Agregar Deporte
                 </Link>
             </div>
             
             <div
-                className="noticias-container"
+                className="deportes-container"
                 ref={containerRef}
                 onWheel={handleWheel}
             >
-                {noticiasData.map((noticia, index) => (
-                    <div key={index} className="noticia-card">
-                        <img src={noticia.imagen} alt={noticia.titulo} className="noticia-imagen" />
-                        <h2 className="noticia-titulo">{noticia.titulo}</h2>
-                        <p className="noticia-descripcion">{noticia.descripcion}</p>
-                        <Link to={`/noticias/${noticia.id}`} className="btn-agregar-noticia">
-                            Ir a Noticia
+                {deportesData.map((deporte, index) => (
+                    <div key={index} className="deporte-card">
+                        <img src={deporte.imagen} alt={deporte.titulo} className="deporte-imagen" />
+                        <h2 className="deporte-titulo">{deporte.titulo}</h2>
+                        <p className="deporte-descripcion">{deporte.descripcion}</p>
+                        <Link to={`/deportes/${deporte.id}`} className="btn-agregar-deporte">
+                            Ir a Deporte
                         </Link>
                     </div>
                 ))}

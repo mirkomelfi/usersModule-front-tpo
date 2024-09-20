@@ -21,8 +21,9 @@ const Navbar = () => {
         </div>
         <ul className="navbar-menu">
           <li><Link to="/perfilUsuario">Perfil Usuario</Link></li>
-          <li><Link to="/noticia">Noticia</Link></li>
+          <li><Link to="/deportes">Deportes</Link></li>
           <li><Link to="/noticias">Noticias</Link></li>
+          <li><Link to="/propuestas/add">Propuestas</Link></li>
           <li><Link to="/productos">Productos</Link></li>
           <li><Link to="/producto">Producto</Link></li>
           <li><Link to="/listaCarrito">Lista Carrito</Link></li>

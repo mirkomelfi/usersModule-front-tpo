@@ -7,16 +7,18 @@ import { getToken } from "../../utils/auth-utils";
 import {useNavigate} from "react-router-dom";
 import { validateRol,isRolUser,deleteToken } from "../../utils/auth-utils";
 
-const ImagenPost = ({noticia,actividad,id}) =>{ 
+const ImagenPost = ({noticia,actividad,propuesta,id}) =>{ 
 
     var url=""
     if (noticia){
-        url="noticias"
+        url="admin/noticias"
     }
     if (actividad){
-        url="actividades"
+        url="admin/actividades"
     }
-
+    if (propuesta){
+        url="propuestas"
+    }
 
     const [mensaje,setMensaje]=useState(null)
     const [rol,setRol]=useState(undefined);  
@@ -39,7 +41,7 @@ const ImagenPost = ({noticia,actividad,id}) =>{
         let img=new FormData();
         img.append("archivo",imagen.imagen)
 
-        const response= await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/admin/${url}/${id}/imagenes`, {
+        const response= await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/${url}/${id}/imagenes`, {
             method: "PUT",
             headers: {
                 //"Authorization": `Bearer ${getToken()}`
