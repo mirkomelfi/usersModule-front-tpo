@@ -88,3 +88,88 @@ body {
   display: block;
 }
 
+/* Associating button styles */
+.navbar-button {
+  position: relative;
+  display: inline-block;
+  padding: 10px 75px;
+  background-color: #0d2c81; /* Default background color */
+  color: #ffffff; /* Text color */
+  border: 2px solid #1e2a38; /* Border color */
+  border-radius: 25px; /* Rounded edges */
+  text-align: center;
+  font-size: 1rem;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+  margin-top: 20px;
+  overflow: hidden; /* Hide the gradient overflow */
+  transition: color 0.4s ease; /* Smooth transition for text color */
+  z-index: 1; /* Keep button content above the hover effect */
+}
+
+.navbar-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%; /* Start from the center */
+  width: 100%;
+  height: 100%;
+  background: #c41818; /* Background color on hover */
+  transition: all 0.6s ease-in-out;
+  transform: translateX(-50%) scaleX(0); /* Start from the center with scale 0 */
+  z-index: -1; /* Place the background behind the text */
+}
+
+.navbar-button:hover::before {
+  transform: translateX(-50%) scaleX(1); /* Expand from center on hover */
+}
+
+.navbar-button:hover {
+  color: #ffffff; /* Keep the text color white */
+}
+
+.feedback-button {
+  position: relative;
+  display: inline-block;
+  padding: 10px 75px;
+  background-color: #ffffff15; /* Default background color */
+  color: #ffffff; /* Text color */
+  border: none; /* Remover el borde del botón principal */
+  border-radius: 35px;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+  margin-top: 20px;
+  overflow: hidden; /* Hide the gradient overflow */
+  transition: color 0.4s ease; /* Smooth transition for text color */
+  z-index: 1; /* Keep button content above the hover effect */
+}
+
+.feedback-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%; /* Start from the center */
+  width: 100%;
+  height: 100%;
+  background: #0d2c81; /* Background color on hover */
+  transition: all 0.6s ease-in-out;
+  transform: translateX(-50%) scaleX(0); /* Start from the center with scale 0 */
+  z-index: -1; /* Place the background behind the text */
+}
+
+.feedback-button:hover::before {
+  transform: translateX(-50%) scaleX(1); /* Expand from center on hover */
+}
+
+.feedback-button:hover {
+  color: #ffffff; /* Keep the text color white */
+}
+
+
+
+
+

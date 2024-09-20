@@ -46,6 +46,10 @@ const Navbar = () => {
             </ul>
           </li>
         </ul>
+
+        <a href="/asociarse" className="navbar-button">Asociate</a>
+        <a href="/feedback" className="feedback-button">Feedback</a>
+
       </nav>
     </header>
   );

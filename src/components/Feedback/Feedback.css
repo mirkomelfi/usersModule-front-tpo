@@ -1,0 +1,61 @@
+.feedback-container {
+    width: 80%; /* Establece el ancho en porcentaje para que sea más grande pero centrado */
+    max-width: 800px; /* Limita el ancho máximo para que no crezca demasiado */
+    margin: 0 auto; /* Asegura que esté centrado horizontalmente */
+    padding: 50px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+  .feedback-container h2 {
+    text-align: center;
+    color: #00245d; /* Azul oscuro */
+    margin-bottom: 25px;
+  }
+  
+  label {
+    font-size: 1.2rem; 
+    color: #444444;
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  select, textarea {
+    width: 100%; /* Ocupa todo el ancho del contenedor */
+    padding: 15px;
+    margin-bottom: 25px;
+    border-radius: 8px;
+    border: 1px solid #c1c1c1;
+    font-size: 1.1rem;
+  }
+  
+  select:focus, textarea:focus {
+    border-color: #00245d;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 36, 93, 0.3);
+  }
+  
+  textarea {
+    resize: vertical;
+    height: 400px; /* Aumenta la altura del área de comentarios */
+    max-height: 600px; /* Permite que el usuario agrande hasta cierto límite */
+  }
+  
+  .submit-button {
+    background-color: #00245d;
+    color: white;
+    padding: 15px 35px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: block;
+    margin: 0 auto;
+  }
+  
+  .submit-button:hover {
+    background-color: #e30713;
+  }
+  

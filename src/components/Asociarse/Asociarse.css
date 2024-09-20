@@ -1,0 +1,108 @@
+/* Contenedor principal */
+.asociarse-container {
+    text-align: center;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Título principal */
+  .asociarse-container h1 {
+    font-size: 2rem;
+    color: #00245d; /* Azul oscuro */
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .asociarse-container p {
+    font-size: 1.2rem;
+    color: #666666; /* Gris claro */
+    margin-bottom: 30px;
+  }
+  
+  /* Contenedor de los planes */
+  .plans-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+  }
+  
+  /* Tarjeta de cada plan */
+  .plan-card {
+    background-color: #ffffff;
+    border: 2px solid #c1c1c1;
+    border-radius: 10px;
+    padding: 20px;
+    width: 300px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .plan-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Imagen del plan */
+  .plan-card img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+    border-radius: 10px;
+  }
+  
+  /* Nombre del plan */
+  .plan-card h3 {
+    font-size: 1.4rem;
+    color: #00245d; /* Azul oscuro */
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  
+  /* Precio del plan */
+  .plan-price {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #e30713; /* Rojo solo para el precio */
+    margin-bottom: 5px;
+  }
+  
+  /* Precio de cadete e infantil */
+  .plan-cadet-price {
+    font-size: 1rem;
+    color: #666666; /* Gris claro para menor importancia */
+    margin-bottom: 15px;
+  }
+  
+  /* Descripción del plan */
+  .plan-description {
+    font-size: 0.9rem;
+    color: #444444; /* Gris oscuro */
+    margin-bottom: 20px;
+  }
+  
+  /* Botón de asociarse */
+  .subscribe-button {
+    background-color: #00245d; /* Azul oscuro para el botón */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 10px;
+  }
+  
+  .subscribe-button:hover {
+    background-color: #e30713; /* Rojo al pasar el cursor */
+  }
+  
+  /* Texto extra */
+  .plan-extra {
+    font-size: 0.9rem;
+    color: #666666; /* Gris claro */
+  }
+  

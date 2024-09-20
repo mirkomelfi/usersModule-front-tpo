@@ -23,6 +23,8 @@ import { Producto } from './components/Producto/Producto';
 import { Deportes } from './components/Deportes/Deportes';
 import { DeportesPost } from './components/Deportes/DeportesPOST';
 import { PropuestasPost } from './components/Propuestas/PropuestasPOST';
+import { Asociarse } from './components/Asociarse/Asociarse';
+import { Feedback } from './components/Feedback/Feedback';
 
 export const App = () => {
   return (
@@ -33,6 +35,8 @@ export const App = () => {
           <Route path='/agenda' element={<EventsCalendar />} />
 
           <Route path='/' element={<Home />} />
+          <Route path='/asociarse' element={<Asociarse />} />
+          <Route path='/feedback' element={<Feedback />} />
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
           <Route path='/olvidoContraseña' element={<OlvidoContraseña />} />
