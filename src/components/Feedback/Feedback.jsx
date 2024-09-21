@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import './Feedback.css';
 
 export const Feedback = () => {
 
-const dni=111
+  const admin=null // por ahora hardcodear true o null. dsps se obtiene del usr loggeado
+  const dni=111 // por ahora hardcodear. dsps se obtiene del usr loggeado
 
+  const datForm = useRef();
   const [selectedRubro, setSelectedRubro] = useState('');
   const [comment, setComment] = useState('');
 
@@ -55,30 +57,43 @@ const dni=111
     }
   }
 
+  const addRubro = async(rubro) =>{
+    console.log(rubro)
+
+    const response= await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/admin/rubros`, {
+      method: "POST",
+      headers: {
+          "Content-Type": "application/json",
+          // "Authorization": `Bearer ${getToken()}`
+      },
+      body:JSON.stringify(rubro)
+      
+    })
+
+    const data = await response.json()
+    console.log(data)
+    if (data.msj){
+      setMensaje(data.msj)
+    }
+  }
+
   useEffect(() => { 
-    ejecutarFetch()
+    if (!admin) ejecutarFetch()
     .catch(error => console.error(error))
 
   },[])
-  useEffect(() => { 
-   console.log(selectedRubro)
 
-  },[selectedRubro])
 
-/*
-  const subjects = [
-    'Sugerencias para el club',
-    'Problemas con el pago',
-    'Información sobre membresías',
-    'Reclamo por productos',
-    'Consulta sobre eventos',
-    'Reserva de instalaciones',
-    'Acceso a beneficios',
-    'Consulta sobre actividades deportivas',
-    'Soporte técnico en la web',
-    'Otros temas',
-  ];
-*/
+  const consultarFormRubro = async (e) => {
+    e.preventDefault();
+    console.log(e)
+    const datosFormulario = new FormData(datForm.current);
+    const rubro = Object.fromEntries(datosFormulario);
+    console.log(rubro)
+     addRubro(rubro)
+
+    e.target.reset(); // Resetear el formulario
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -97,6 +112,27 @@ const dni=111
 
   return (
     <div className="feedback-container">
+  {admin?<div>
+    <span>
+            ROL admin
+          </span><br></br>
+    {//<button className="perfil-btn perfil-btn-danger"  onClick={() => addRubro()}>Añadir nuevo rubro</button>
+    }
+    <form onSubmit={consultarFormRubro} ref={datForm}>
+        <div className="mb-3">
+          <label htmlFor="descripcion" className="form-label">
+            Asunto del nuevo rubro
+          </label>
+          <input type="text" className="form-control" name="descripcion" />
+        </div>
+      <button type="submit" className="submit-button">Añadir nuevo rubro</button>
+    </form>
+    </div>
+:
+    <div>
+    <span>
+            ROL user
+          </span><br></br>
       <h2>Dejanos tu comentario</h2>
       <form onSubmit={handleSubmit}>
         <label htmlFor="subject">Selecciona el asunto:</label>
@@ -128,6 +164,7 @@ const dni=111
 
         <button type="submit" className="submit-button">Enviar Comentario</button>
       </form>
+    </div>}
     </div>
   );
 };
