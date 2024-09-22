@@ -1,17 +1,54 @@
 .campañas-container {
-    padding: 20px;
+  width: 90%; /* Más ancho */
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f4f4f4;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.campañas-filter {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.campañas-filter label {
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+#status-filter {
+  padding: 5px;
+  font-size: 14px;
+}
+
+.campañas-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.campaña-card {
+  padding: 20px;
+  background-color: white;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Ajustes para pantallas más pequeñas */
+@media (max-width: 768px) {
+  .campañas-container {
+      width: 100%;
   }
-  
-  .campañas-list {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-  
+
   .campaña-card {
-    padding: 20px;
-    border: 1px solid #eee;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      font-size: 14px;
   }
-  
+
+  .campañas-filter label {
+      font-size: 14px;
+  }
+}

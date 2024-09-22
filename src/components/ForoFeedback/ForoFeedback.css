@@ -1,62 +1,78 @@
 .foro-container {
-    width: 80%;
-    margin: 0 auto;
-    background-color: #f4f4f4;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-height: 500px; /* Limita la altura total */
-  }
-  
-  .foro-title {
-    text-align: center;
-    font-size: 24px;
-    margin-bottom: 20px;
-  }
-  
-  .foro-scroll {
-    max-height: 400px; /* Espacio disponible para el scroll */
-    overflow-y: scroll; /* Scroll vertical */
-    padding-right: 10px;
-  }
-  
-  .foro-item {
-    background-color: white;
-    padding: 15px;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .foro-user {
-    font-weight: bold;
-    font-size: 16px;
-    color: #007bff;
-  }
-  
-  .foro-date {
-    font-size: 12px;
-    color: gray;
-  }
-  
-  .foro-comment {
-    margin-top: 10px;
-    font-size: 14px;
-    color: #333;
-  }
-  
-  /* Ajustes para pantallas más pequeñas */
-  @media (max-width: 768px) {
-    .foro-container {
+  width: 90%; /* Más ancho */
+  margin: 0 auto;
+  background-color: #f4f4f4;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-height: 600px; /* Limita la altura total */
+}
+
+.foro-title {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.foro-filter {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.foro-filter label {
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+#subject-filter {
+  padding: 5px;
+  font-size: 14px;
+}
+
+.foro-scroll {
+  max-height: 500px; /* Espacio disponible para el scroll */
+  overflow-y: scroll; /* Scroll vertical */
+  padding-right: 10px;
+}
+
+.foro-item {
+  background-color: white;
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.foro-user {
+  font-weight: bold;
+  font-size: 16px;
+  color: #007bff;
+}
+
+.foro-date {
+  font-size: 12px;
+  color: gray;
+}
+
+.foro-comment {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #333;
+}
+
+/* Ajustes para pantallas más pequeñas */
+@media (max-width: 768px) {
+  .foro-container {
       width: 100%;
-    }
-  
-    .foro-item {
-      font-size: 14px;
-    }
-  
-    .foro-title {
-      font-size: 20px;
-    }
   }
-  
+
+  .foro-item {
+      font-size: 14px;
+  }
+
+  .foro-title {
+      font-size: 20px;
+  }
+}
