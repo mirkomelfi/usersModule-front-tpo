@@ -27,6 +27,11 @@ import { Asociarse } from './components/Asociarse/Asociarse';
 import { Feedback } from './components/Feedback/Feedback';
 import { Deporte } from './components/Deporte/Deporte';
 
+
+import { Propuestas } from './components/Propuestas/Propuestas';
+import { Campañas } from './components/Campaña/Campañas';
+import { ForoFeedback } from './components/ForoFeedback/ForoFeedback';
+
 export const App = () => {
   return (
     <>
@@ -38,6 +43,7 @@ export const App = () => {
           <Route path='/' element={<Home />} />
           <Route path='/asociarse' element={<Asociarse />} />
           <Route path='/feedback' element={<Feedback />} />
+          <Route path='/foroFeedback' element={<ForoFeedback />} />
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
           <Route path='/olvidoContraseña' element={<OlvidoContraseña />} />
@@ -47,6 +53,8 @@ export const App = () => {
           <Route path='/noticias/:id' element={<Noticia />} />
           <Route path='/deportes' element={<Deportes />} />
           <Route path='/deportes/:id' element={<Deporte />} />
+          <Route path='/propuestas' element={<Propuestas />} />
+          <Route path='/campañas' element={<Campañas />} />
           {//<Route path='/deportes/:id' element={<Deporte />} />
           }
           <Route path='/contactos' element={<Contactos />} />
