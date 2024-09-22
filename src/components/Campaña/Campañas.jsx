@@ -5,7 +5,6 @@ const campañas = [
   { id: 1, name: 'Campaña de donación de sangre', goal: 'Recolección de 500 donaciones.', status: 'Activa' },
   { id: 2, name: 'Reforestación del club', goal: 'Plantación de 100 árboles.', status: 'Completada' },
   { id: 3, name: 'Reciclaje de plástico', goal: 'Reducir uso de plástico en eventos.', status: 'Activa' },
-  // Añade más campañas según sea necesario
 ];
 
 export const Campañas = () => {

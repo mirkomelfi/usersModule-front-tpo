@@ -7,7 +7,6 @@ const feedbacks = [
   { id: 3, user: 'Carlos López', comment: 'Gran experiencia en general, lo recomiendo.', date: '2024-09-03', subject: 'Experiencia' },
   { id: 4, user: 'María Fernández', comment: 'No pude acceder al sistema de compras, hubo un error.', date: '2024-09-04', subject: 'Errores del sistema' },
   { id: 5, user: 'Pedro Sanchez', comment: 'Me gustaría ver más variedad de productos.', date: '2024-09-05', subject: 'Variedad de productos' },
-  // Añade más feedbacks según lo necesites
 ];
 
 export const ForoFeedback = () => {
