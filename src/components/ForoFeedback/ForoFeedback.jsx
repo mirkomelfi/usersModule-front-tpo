@@ -16,6 +16,10 @@ export const ForoFeedback = () => {
     setSelectedSubject(e.target.value);
   };
 
+  const handleAddFeedback = () => {
+    alert('Abrir modal o redirigir para agregar un nuevo feedback');
+  };
+
   const filteredFeedbacks = selectedSubject === 'Todos'
     ? feedbacks
     : feedbacks.filter(feedback => feedback.subject === selectedSubject);
@@ -23,6 +27,12 @@ export const ForoFeedback = () => {
   return (
     <div className="foro-container">
       <h2 className="foro-title">Lista de Feedback</h2>
+      <button className="add-feedback-button" onClick={handleAddFeedback}>
+        Agregar Feedback
+      </button>
+      <button className="add-feedback-button" onClick={handleAddFeedback}>
+        Eliminar Feedback
+      </button>
       <div className="foro-filter">
         <label htmlFor="subject-filter">Filtrar por asunto:</label>
         <select id="subject-filter" value={selectedSubject} onChange={handleSubjectChange}>

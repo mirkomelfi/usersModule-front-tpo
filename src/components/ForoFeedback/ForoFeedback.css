@@ -65,6 +65,24 @@
   color: #333;
 }
 
+.add-feedback-button{
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: block;
+  margin: 20px auto;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.add-feedback-button:hover{
+  background-color: #0056b3;
+}
+
+
 /* Ajustes para pantallas más pequeñas */
 @media (max-width: 768px) {
   .foro-container {

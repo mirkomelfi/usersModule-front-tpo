@@ -35,6 +35,9 @@ export const Propuestas = () => {
       <button className="add-proposal-button" onClick={handleAddProposal}>
         Agregar Propuesta
       </button>
+      <button className="add-campaign-button" onClick={handleAddProposal}>
+        Eliminar Propuesta
+      </button>
       <input
         type="text"
         placeholder="Buscar propuesta..."

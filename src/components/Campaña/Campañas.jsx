@@ -15,6 +15,10 @@ export const Campañas = () => {
     setSelectedStatus(e.target.value);
   };
 
+  const handleAddCampaign = () => {
+    alert('Abrir modal o redirigir para agregar una nueva campaña');
+  };
+
   const filteredCampañas = selectedStatus === 'Todas'
     ? campañas
     : campañas.filter(campaña => campaña.status === selectedStatus);
@@ -22,6 +26,12 @@ export const Campañas = () => {
   return (
     <div className="campañas-container">
       <h2>Campañas</h2>
+      <button className="add-campaign-button" onClick={handleAddCampaign}>
+        Agregar Campaña
+      </button>
+      <button className="add-campaign-button" onClick={handleAddCampaign}>
+        Eliminar Campaña
+      </button>
       <div className="campañas-filter">
         <label htmlFor="status-filter">Filtrar por estado:</label>
         <select id="status-filter" value={selectedStatus} onChange={handleStatusChange}>
