@@ -1,10 +1,16 @@
 .campañas-container {
-  width: 90%; /* Más ancho */
+  width: 90%; /* Similar a foro */
   margin: 0 auto;
-  padding: 20px;
   background-color: #f4f4f4;
+  padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.campañas-title {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
 }
 
 .campañas-filter {
@@ -25,30 +31,41 @@
 }
 
 .campañas-list {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+  max-height: 500px; /* Ajusta la altura máxima similar a foro */
+  overflow-y: scroll; /* Habilita desplazamiento vertical */
+  padding-right: 10px;
 }
 
 .campaña-card {
-  padding: 20px;
   background-color: white;
-  border: 1px solid #eee;
+  padding: 15px;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.campaña-name {
+  font-weight: bold;
+  font-size: 16px;
+  color: #007bff; /* Color similar para destacar */
+}
+
+.campaña-goal, .campaña-status {
+  font-size: 14px;
+  color: #333;
 }
 
 /* Ajustes para pantallas más pequeñas */
 @media (max-width: 768px) {
   .campañas-container {
-      width: 100%;
+    width: 100%;
   }
 
   .campaña-card {
-      font-size: 14px;
+    font-size: 14px;
   }
 
-  .campañas-filter label {
-      font-size: 14px;
+  .campañas-title {
+    font-size: 20px;
   }
 }

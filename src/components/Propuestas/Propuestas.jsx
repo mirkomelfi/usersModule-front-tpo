@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import './Propuestas.css';
 
 const initialPropuestas = [
-  { id: 1, title: 'Nueva cancha de fútbol 5', description: 'Construcción de una cancha de césped sintético.', votes: 124 },
-  { id: 2, title: 'Reforma del gimnasio', description: 'Mejoras en las máquinas y equipamiento.', votes: 98 },
-  { id: 3, title: 'Renovación del vestuario', description: 'Reparaciones y cambios de infraestructura.', votes: 76 },
+  { id: 1, title: 'Nueva cancha de fútbol 5', description: 'Construcción de una cancha de césped sintético para entrenamientos.', votes: 124 },
+  { id: 2, title: 'Reforma del gimnasio', description: 'Renovación del gimnasio del club con nuevo equipamiento.', votes: 98 },
+  { id: 3, title: 'Renovación de vestuarios', description: 'Mejorar las instalaciones del vestuario para el equipo y los socios.', votes: 76 },
+  { id: 4, title: 'Instalación de paneles solares', description: 'Incorporar paneles solares para hacer el club más ecológico.', votes: 85 },
 ];
 
 export const Propuestas = () => {

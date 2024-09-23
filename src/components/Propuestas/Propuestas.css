@@ -1,6 +1,6 @@
 .propuestas-container {
-  margin-top: 80px;
-  padding: 20px;
+  margin-top: -150px;
+  padding: 1px;
   font-family: Arial, sans-serif;
 }
 
@@ -32,6 +32,9 @@ h2 {
   flex-wrap: wrap;
   gap: 20px;
   justify-content: center;
+  max-height: 500px; /* Define una altura máxima para la sección de propuestas */
+  overflow-y: auto; /* Permite el desplazamiento si el contenido sobrepasa la altura */
+  padding-bottom: 20px;
 }
 
 .propuesta-card {

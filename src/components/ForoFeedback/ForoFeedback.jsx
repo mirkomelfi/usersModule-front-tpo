@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import './ForoFeedback.css';
 
 const feedbacks = [
-  { id: 1, user: 'Juan Pérez', comment: 'Muy buen servicio, me encantó la atención.', date: '2024-09-01', subject: 'Atención' },
-  { id: 2, user: 'Ana Gómez', comment: 'Podrían mejorar los tiempos de respuesta.', date: '2024-09-02', subject: 'Tiempo de respuesta' },
-  { id: 3, user: 'Carlos López', comment: 'Gran experiencia en general, lo recomiendo.', date: '2024-09-03', subject: 'Experiencia' },
-  { id: 4, user: 'María Fernández', comment: 'No pude acceder al sistema de compras, hubo un error.', date: '2024-09-04', subject: 'Errores del sistema' },
-  { id: 5, user: 'Pedro Sanchez', comment: 'Me gustaría ver más variedad de productos.', date: '2024-09-05', subject: 'Variedad de productos' },
+  { id: 1, user: 'Juan Pérez', comment: 'Muy buena la atención en boletería. Rápido y eficiente.', date: '2024-09-01', subject: 'Atención' },
+  { id: 2, user: 'Ana Gómez', comment: 'Los tiempos de espera para ingresar al estadio podrían mejorar.', date: '2024-09-02', subject: 'Tiempos de espera' },
+  { id: 3, user: 'Carlos López', comment: 'La nueva tienda del club está increíble, ¡muy buena experiencia de compra!', date: '2024-09-03', subject: 'Tienda del club' },
+  { id: 4, user: 'María Fernández', comment: 'Tuve problemas para acceder a mi cuenta de socio, espero puedan solucionarlo.', date: '2024-09-04', subject: 'Sistema de socios' },
+  { id: 5, user: 'Pedro Sanchez', comment: 'Sería genial que incluyeran más productos de merch del equipo.', date: '2024-09-05', subject: 'Variedad de productos' },
 ];
 
 export const ForoFeedback = () => {

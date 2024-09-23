@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import './Campañas.css';
 
 const campañas = [
-  { id: 1, name: 'Campaña de donación de sangre', goal: 'Recolección de 500 donaciones.', status: 'Activa' },
-  { id: 2, name: 'Reforestación del club', goal: 'Plantación de 100 árboles.', status: 'Completada' },
-  { id: 3, name: 'Reciclaje de plástico', goal: 'Reducir uso de plástico en eventos.', status: 'Activa' },
+  { id: 1, name: 'Campaña de donación de sangre', goal: 'Recolección de 500 donaciones para la comunidad.', status: 'Activa' },
+  { id: 2, name: 'Reforestación del estadio', goal: 'Plantación de 100 árboles alrededor del club.', status: 'Completada' },
+  { id: 3, name: 'Reciclaje en partidos', goal: 'Reducir el uso de plásticos durante los eventos del club.', status: 'Activa' },
+  { id: 4, name: 'Campaña de socios', goal: 'Aumentar la cantidad de socios en 1000.', status: 'Activa' },
 ];
 
 export const Campañas = () => {
