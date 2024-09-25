@@ -72,6 +72,37 @@
   background-color: #0056b3;
 }
 
+.opciones-votacion {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); /* Botones más pequeños */
+  gap: 8px; /* Ajusta el espacio entre botones */
+}
+
+.opciones-votacion button {
+  padding: 6px 10px; /* Tamaño más pequeño */
+  border: 1px solid #007bff;
+  background-color: white;
+  color: #007bff;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s, color 0.3s;
+  text-align: center;
+  font-size: 14px; /* Texto más pequeño */
+}
+
+.opciones-votacion button:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+
+.voted {
+  background-color: #007bff; /* Resalta el botón seleccionado */
+  color: rgb(255, 255, 255);
+}
+
+
 
 /* Ajustes para pantallas más pequeñas */
 @media (max-width: 768px) {
