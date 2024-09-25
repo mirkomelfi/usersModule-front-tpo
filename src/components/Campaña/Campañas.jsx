@@ -33,6 +33,13 @@ export const Campañas = () => {
     });
   };
 
+  const handleNoVote = (campañaId) => {
+    setVotos({
+      ...votos,
+      [campañaId]: 'No votar'
+    });
+  };
+
   const filteredCampañas = selectedStatus === 'Todas'
     ? campañas
     : selectedStatus === 'No votadas'
@@ -50,7 +57,7 @@ export const Campañas = () => {
           <option value="Todas">Todas</option>
           <option value="Abierta">Abierta</option>
           <option value="Cerrada">Cerrada</option>
-          <option value="No votadas">No votadas</option> {/* Nueva opción para filtrar por no votadas */}
+          <option value="No votadas">No votadas</option>
         </select>
       </div>
       <div className="campañas-list">
@@ -64,12 +71,18 @@ export const Campañas = () => {
               {campaña.opciones.map((opcion) => (
                 <button
                   key={opcion}
-                  className={votos[campaña.id] === opcion ? 'voted' : ''}
+                  className={`vote-button ${votos[campaña.id] === opcion ? 'voted' : ''}`}
                   onClick={() => handleVote(campaña.id, opcion)}
                 >
                   {opcion}
                 </button>
               ))}
+              <button
+                className={`vote-button ${votos[campaña.id] === 'No votar' ? 'voted' : ''}`}
+                onClick={() => handleNoVote(campaña.id)}
+              >
+                No votar
+              </button>
             </div>
             {votos[campaña.id] && <p>Has votado por: {votos[campaña.id]}</p>}
           </div>

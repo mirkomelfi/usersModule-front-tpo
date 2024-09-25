@@ -88,6 +88,12 @@
   border-radius: 8px;
   overflow: hidden;
   text-align: center;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.producto-card:hover {
+  transform: scale(1.1); /* Agranda el producto un 10% */
+  background-color: #f0f0f0; /* Le da un toque gris */
 }
 
 /* Estilos para el ícono del carrito */

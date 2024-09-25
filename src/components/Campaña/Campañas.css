@@ -92,17 +92,14 @@
 }
 
 .opciones-votacion button:hover {
-  background-color: #007bff;
+  background-color: #031ae2;
   color: white;
 }
 
-
-.voted {
-  background-color: #007bff; /* Resalta el botón seleccionado */
-  color: rgb(255, 255, 255);
+.vote-button.voted {
+  background-color: #007bff; /* Cambia a verde si es la opción seleccionada */
+  color: white;
 }
-
-
 
 /* Ajustes para pantallas más pequeñas */
 @media (max-width: 768px) {
