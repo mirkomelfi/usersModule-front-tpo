@@ -1,5 +1,7 @@
 .carrito-container {
-    max-width: 1000px;
+    max-width: 1250px;
+    width: 1250px;
+    height: 500px;
     margin: 20px auto;
     padding: 20px;
     background-color: #f9f9f9;

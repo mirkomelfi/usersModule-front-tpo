@@ -47,7 +47,7 @@ export const ListaCarrito = () => {
       <div className="carrito-total">
         <h3>Total: ${calcularTotal()}</h3>
       </div>
-      <button className="checkout-btn">Ir a pagar</button>
+      <button className="checkout-btn">Pagar</button>
     </div>
   );
 };

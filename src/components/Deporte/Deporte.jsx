@@ -1,99 +1,104 @@
 import React, { useEffect, useState } from 'react';
 import './Deporte.css';
-import foto from "./partido.jpg";
+import imagenDeporte from "./partido.jpg";
 import { useParams } from 'react-router-dom';
 
 export const Deporte = () => {
+  const { id } = useParams();
 
-  const {id}= useParams();
-  const dni=111
-  
-  const [mensaje,setMensaje]=useState(null)
-  const [deporte,setDeporte]=useState(null)
-
-  const inscribirse = async () => {
-    const response = await fetch(
-      `${process.env.REACT_APP_DOMINIO_BACK}/actividades/${id}/inscripciones/${dni}`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-         // Authorization: `Bearer ${getToken()}`,
-        },
-      }
-    );
-
-    const data = await response.json();
-    console.log(data)
-      if (data.msj) {
-        setMensaje(data.msj);
-      }
-    return;
-  };
-
-
-  const ejecutarFetch = async () => {
-    var url = ``;
-    
-    url = `${process.env.REACT_APP_DOMINIO_BACK}/actividades/${id}`;
-    
-
-    const response = await fetch(url, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        //Authorization: `Bearer ${getToken()}`,
-      },
-    });
-
-    const data = await response.json();
-    console.log(data)
-    if (data.msj) {
-      setMensaje(data.msj);
-    } else {
-      setDeporte(data);
+  // Datos hardcodeados (JSON simulado)
+  const deportesData = [
+    {
+      id: '1',
+      nombre: 'Fútbol',
+      descripcion: 'Entrenamientos de fútbol para todas las edades.',
+      detalles: 'Entrenamientos semanales de fútbol para todas las categorías, desde niños hasta adultos.',
+      direccion: 'Calle del Deporte, 123',
+      horarios: 'Lunes a Viernes, 18:00 - 20:00',
+      profesores: ['Juan Pérez', 'María García'],
+      calendario: [
+        { dia: 'Lunes', horario: '18:00 - 20:00' },
+        { dia: 'Miércoles', horario: '18:00 - 20:00' },
+        { dia: 'Viernes', horario: '18:00 - 20:00' },
+      ]
+    },
+    {
+      id: '2',
+      nombre: 'Básquetbol',
+      descripcion: 'Academia de básquetbol para jóvenes y adultos.',
+      detalles: 'Clases de básquetbol con entrenadores certificados.',
+      direccion: 'Avenida Deportes, 45',
+      horarios: 'Martes y Jueves, 17:00 - 19:00',
+      profesores: ['Carlos Díaz', 'Lucía López'],
+      calendario: [
+        { dia: 'Martes', horario: '17:00 - 19:00' },
+        { dia: 'Jueves', horario: '17:00 - 19:00' },
+      ]
     }
-  }
+  ];
 
-    useEffect(() => {
-      ejecutarFetch().catch((error) => console.error(error));
-    }, []);
+  const [deporte, setDeporte] = useState(null);
 
-
+  useEffect(() => {
+    // Buscar el deporte por el ID que viene en los parámetros de la URL
+    const deporteSeleccionado = deportesData.find(deporte => deporte.id === id);
+    setDeporte(deporteSeleccionado);
+  }, [id]);
 
   return (
-    
     <div className="deporte-container">
       <header className="deporte-header">
-        <h1>Encabezado del Deporte</h1>
+        <h1>{deporte?.nombre || 'Nombre del Deporte'}</h1>
       </header>
-      <button className="perfil-btn perfil-btn-danger"  onClick={() => inscribirse()}>Inscribirse</button>
 
       <div className="clearfix">
         <div className="main-content">
           <div className="deporte-imagen">
-            <img src={foto} alt="Descripción de la imagen" />
+            <img src={imagenDeporte} alt="Imagen del deporte" />
           </div>
 
           <div className="deporte-introduccion">
             <p>
-              Esta es una breve introducción de la deporte que resume el contenido principal. Puede ser uno o dos párrafos que llamen la atención del lector para continuar leyendo.
+              {deporte?.descripcion || 'Descripción breve del deporte o academia que se ofrece.'}
             </p>
           </div>
 
           <div className="deporte-contenido">
             <p>
-              Aquí va el contenido completo de la deporte. Es posible que quieras separar el contenido en diferentes párrafos o incluir subtítulos, citas, o cualquier otro elemento que consideres relevante.
+              {deporte?.detalles || 'Detalles adicionales sobre la academia, entrenamientos, horarios, y cualquier información importante para los interesados.'}
             </p>
-            <p>
-              Otro párrafo adicional con más detalles o explicaciones de la deporte. Esto puede extenderse lo necesario para cubrir toda la información relevante.
-            </p>
+          </div>
+
+          {/* Sección de Calendario */}
+          <div className="deporte-calendario">
+            <h2>Disponibilidad</h2>
+            <table className="calendario-tabla">
+              <thead>
+                <tr>
+                  <th>Día</th>
+                  <th>Horario</th>
+                </tr>
+              </thead>
+              <tbody>
+                {deporte?.calendario?.map((dia, index) => (
+                  <tr key={index}>
+                    <td>{dia.dia}</td>
+                    <td>{dia.horario}</td>
+                  </tr>
+                )) || (
+                  <tr>
+                    <td colSpan="2">No hay horarios disponibles.</td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
           </div>
         </div>
 
         <div className="sidebar">
-          <h2>Artículos relacionados</h2>
-          <p>Contenido adicional que puedes agregar aquí, como deportes relacionadas, publicidad o enlaces importantes.</p>
+          <h2>Información del Deporte</h2>
+          <p><strong>Dirección:</strong> {deporte?.direccion || 'Dirección del lugar.'}</p>
+          <p><strong>Profesores:</strong> {deporte?.profesores?.join(', ') || 'Lista de profesores o entrenadores.'}</p>
         </div>
       </div>
     </div>

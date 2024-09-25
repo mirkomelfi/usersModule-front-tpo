@@ -1,12 +1,12 @@
 .deporte-container {
-    max-width: 1200px; /* Aumentamos el ancho máximo */
-    margin: 20px auto; /* Añadimos un poco de margen */
+    max-width: 1200px;
+    margin: 20px auto;
     padding: 40px;
     font-family: Arial, sans-serif;
 }
 
 .deporte-header {
-    text-align: left; /* Alineamos el texto a la izquierda */
+    text-align: left;
     background-color: #f5f5f5;
     padding: 20px;
     border-bottom: 3px solid #ddd;
@@ -14,12 +14,12 @@
 
 .deporte-header h1 {
     margin: 0;
-    font-size: 32px; /* Aumentamos el tamaño del encabezado */
+    font-size: 32px;
     font-weight: bold;
 }
 
 .deporte-imagen img {
-    width: 100%;
+    width: 75%;
     height: auto;
     margin-top: 20px;
     border-radius: 8px;
@@ -27,16 +27,16 @@
 
 .deporte-introduccion {
     margin-top: 20px;
-    font-size: 22px; /* Aumentamos el tamaño de la fuente para la introducción */
-    font-weight: bold; /* Hacemos que la introducción esté en negrita */
+    font-size: 22px;
+    font-weight: bold;
     color: #333;
     line-height: 1.8;
 }
 
 .deporte-contenido {
     margin-top: 30px;
-    font-size: 16px; /* Reducimos el tamaño de la fuente para el contenido de la deporte */
-    font-weight: normal; /* Aseguramos que el contenido no esté en negrita */
+    font-size: 16px;
+    font-weight: normal;
     line-height: 1.6;
     color: #555;
 }
@@ -45,10 +45,36 @@
     margin-bottom: 20px;
 }
 
+/* Estilos para la sección del calendario */
+.deporte-calendario {
+    margin-top: 40px;
+}
+
+.deporte-calendario h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.calendario-tabla {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.calendario-tabla th,
+.calendario-tabla td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+.calendario-tabla th {
+    background-color: #f5f5f5;
+    font-weight: bold;
+}
 
 .sidebar {
     float: right;
-    width: 30%; /* Sidebar ocupará el 30% del ancho */
+    width: 30%;
     padding-left: 20px;
     font-size: 16px;
     color: #444;
@@ -59,7 +85,7 @@
 
 .main-content {
     float: left;
-    width: 65%; /* El contenido principal ocupará el 65% del ancho */
+    width: 65%;
 }
 
 .clearfix::after {
