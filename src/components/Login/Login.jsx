@@ -36,8 +36,8 @@ export const Login = () => {
     const datosFormulario = new FormData(datForm.current);
     const cliente = Object.fromEntries(datosFormulario);
   
-    await fetch(
-      `${process.env.REACT_APP_DOMINIO_BACK}/auth/login`,
+    const response=await fetch(
+      `${process.env.REACT_APP_DOMINIO_BACK}/login`,
       {
         method: "POST",
         headers: {
@@ -46,9 +46,17 @@ export const Login = () => {
         body: JSON.stringify(cliente),
       }
     );
+
+    if (response.status==200){
+      const data = await response.json()
+      setToken(data.token)
+    }else{
+      const data = await response.json()
+      setMensaje(data.msj)
+    }
   
     // Navegar a /superAdmin sin importar el resultado de la autenticación
-    navigate("/superAdmin");
+    //navigate("/superAdmin");
   
     e.target.reset(); // Resetear el formulario
   };
@@ -72,23 +80,18 @@ export const Login = () => {
             <input type="password" className="form-control" name="password" />
           </div>
 
-          {!loggeado && (
+         
             <button type="submit" className="button btnPrimary">
               <span className="btnText">Iniciar Sesión</span>
             </button>
-          )}
+
         </form>
 
         <div className="login-options">
           <Link to="/olvidoContraseña" className="link">
             ¿Olvidó su contraseña?
           </Link>
-          <button
-            className="button btnSecondary"
-            onClick={() => navigateTo("/register")}
-          >
-            Crear Usuario
-          </button>
+
         </div>
       </div>
     </div>

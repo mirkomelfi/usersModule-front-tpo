@@ -41,6 +41,8 @@ export const PerfilUsuario = () => {
       setMensaje(data.msj);
     } else {
       setUsuario(data);
+      setLoading(null)
+      console.log(data)
     }
 
     /*const rol = validateRol(response);
@@ -97,25 +99,28 @@ export const PerfilUsuario = () => {
   };
 
   useEffect(() => {
-    ejecutarFetch().catch((error) => console.error(error));
+    ejecutarFetch()
+    .catch((error) => console.error(error));
   }, []);
 
 
   return (
     <div className="perfil-container">
-    {!mensaje ? (
+    {
+    !loading?(
+    !mensaje ? (
     <div>
       <div className="perfil-header">
         <img src={avatar} alt="Avatar del usuario" className="perfil-avatar" />
-        <h2 className="perfil-nombre">Nombre del Usuario</h2>
-        <p className="perfil-rol">Rol: Socio</p>
+        <h2 className="perfil-nombre">{usuario.nombre} {usuario.apellido}</h2>
+        <p className="perfil-rol">Rol: {usuario.rol}</p>
         <p className="perfil-membresia">Membresía: Activa</p>
       </div>
 
       <div className="perfil-info">
         <h3>Detalles del Usuario</h3>
         <p><strong>Email:</strong> usuario@clubdefutbol.com</p>
-        <p><strong>Teléfono:</strong> +123 456 7890</p>
+        <p><strong>Teléfono:</strong>{usuario.telefono}</p>
         <p><strong>Fecha de Membresía:</strong> 01/01/2022</p>
       </div>
 
@@ -127,6 +132,11 @@ export const PerfilUsuario = () => {
       ): 
       (
         <Mensaje msj={mensaje} />
-      )} </div>
+      ))
+      :<p>Cargando...</p>
+      }
+      
+       </div>
+
   );
 }

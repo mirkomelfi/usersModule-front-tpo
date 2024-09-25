@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './ForoFeedback.css';
 
 const feedbacks = [
@@ -11,6 +11,79 @@ const feedbacks = [
 
 export const ForoFeedback = () => {
   const [selectedSubject, setSelectedSubject] = useState('Todos');
+
+
+
+
+  const [listaFeedback,setListaFeedback]= useState([]);
+  const [mensaje,setMensaje]= useState(null);
+
+  const [selectedRubro, setSelectedRubro] = useState('');
+  const [comment, setComment] = useState('');
+
+
+  const [listaRubros,setListaRubros]= useState([]);
+
+  //falta desarrollar filtros en el back
+  const getRubros = async() =>{
+
+    const response= await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/rubros`, {
+      method: "GET",
+      headers: {
+          "Content-Type": "application/json",
+          // "Authorization": `Bearer ${getToken()}`
+      }
+      
+    })
+
+    const data = await response.json()
+    console.log(data)
+    if (data.msj){
+      setMensaje(data.msj)
+    }else{
+      setListaRubros(data)
+    }
+  }
+
+  const ejecutarFetch = async() =>{
+
+    const response= await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/feedbacks`, {
+      method: "GET",
+      headers: {
+          "Content-Type": "application/json",
+         // "Authorization": `Bearer ${getToken()}`
+      }
+      
+    })
+    /*
+    const rol=validateRol(response)
+    if (!rol){
+      if (isRolUser(getToken())){
+       
+          setMensaje("No posee los permisos necesarios")
+      }else{
+        deleteToken()
+        navigate("/login")
+      }
+    }else{*/
+    const data = await response.json()
+    if (data.msj){
+      setMensaje(data.msj)
+    }else{
+      console.log(data)
+      setListaFeedback(data)
+    }
+    }
+ // }
+
+
+  useEffect(() => { 
+    ejecutarFetch()
+    .catch(error => console.error(error))
+
+  },[])
+
+
 
   const handleSubjectChange = (e) => {
     setSelectedSubject(e.target.value);
@@ -45,11 +118,13 @@ export const ForoFeedback = () => {
         </select>
       </div>
       <div className="foro-scroll">
-        {filteredFeedbacks.map(feedback => (
+        {listaFeedback.map(feedback => (
           <div key={feedback.id} className="foro-item">
-            <div className="foro-user">{feedback.user}</div>
-            <div className="foro-date">{feedback.date}</div>
-            <p className="foro-comment">{feedback.comment}</p>
+            
+            <div className="foro-user">{feedback.nombreAutor} {feedback.apellidoAutor}    -    DNI: {feedback.dniAutor}</div>
+            <div className="foro-date">{feedback.fechaPublicacion}</div>
+            <p className="foro-comment">{feedback.descripcion}</p>
+            <p className="foro-comment">{feedback.rubro}</p>
           </div>
         ))}
       </div>
