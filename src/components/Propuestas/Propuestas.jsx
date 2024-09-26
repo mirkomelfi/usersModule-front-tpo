@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Propuestas.css';
 
 const initialPropuestas = [
@@ -13,6 +13,61 @@ export const Propuestas = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedUser, setSelectedUser] = useState('Todos');
   const [votes, setVotes] = useState({}); // Stores user votes
+
+
+
+
+
+  const dni=111
+
+
+  const [listaPropuestas,setListaPropuestas]= useState([]);
+  const [mensaje,setMensaje]= useState(null);
+ 
+
+  const ejecutarFetch = async() =>{
+
+    const response= await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/propuestas/${dni}`, {
+      method: "GET",
+      headers: {
+          "Content-Type": "application/json",
+         // "Authorization": `Bearer ${getToken()}`
+      }
+      
+    })
+    /*
+    const rol=validateRol(response)
+    if (!rol){
+      if (isRolUser(getToken())){
+       
+          setMensaje("No posee los permisos necesarios")
+      }else{
+        deleteToken()
+        navigate("/login")
+      }
+    }else{*/
+    const data = await response.json()
+    if (data.msj){
+      console.log(data.msj)
+
+      setListaPropuestas([])
+      setMensaje(data.msj)
+    //  alert("este usr no tiene campañas. msj temporal")
+    }else{
+      console.log(data)
+      setListaPropuestas(data)
+    }
+    }
+ // }
+
+
+  useEffect(() => { 
+    ejecutarFetch()
+    .catch(error => console.error(error))
+
+  },[])
+
+
 
   const handleVote = (id) => {
     setVotes((prevVotes) => ({
@@ -69,18 +124,18 @@ export const Propuestas = () => {
         </select>
 
       <div className="propuestas-grid">
-        {filteredProposals.length > 0 ? (
-          filteredProposals.map((propuesta) => (
+        {listaPropuestas.length > 0 ? (
+          listaPropuestas.map((propuesta) => (
             <div key={propuesta.id} className="propuesta-card">
-              <h3>{propuesta.title}</h3>
-              <p>{propuesta.description}</p>
-              <p>Votos: {propuesta.votes}</p>
-              <button
+              <h3>{propuesta.titulo}</h3>
+              <p>{propuesta.descripcion}</p>
+ {             <p>{propuesta.fechaPublicacion}</p>
+              /*<button
                 className={`vote-button ${votes[propuesta.id] ? 'voted' : ''}`}
                 onClick={() => handleVote(propuesta.id)}
               >
                 {votes[propuesta.id] ? 'No votar' : 'Votar'}
-              </button>
+              </button>*/}
             </div>
           ))
         ) : (

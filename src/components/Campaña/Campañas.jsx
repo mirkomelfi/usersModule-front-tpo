@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Campañas.css';
 
 const campañas = [
@@ -21,6 +21,64 @@ const campañas = [
 export const Campañas = () => {
   const [selectedStatus, setSelectedStatus] = useState('Todas');
   const [votos, setVotos] = useState({});
+
+  const [url, setUrl] = useState("");
+
+
+  const dni=111
+
+
+  const [listaCampañas,setListaCampañas]= useState([]);
+  const [mensaje,setMensaje]= useState(null);
+ 
+
+  const ejecutarFetch = async() =>{
+
+    const response= await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/campanas${url}`, { 
+      method: "GET",
+      headers: {
+          "Content-Type": "application/json",
+         // "Authorization": `Bearer ${getToken()}`
+      }
+      
+    })
+    /*
+    const rol=validateRol(response)
+    if (!rol){
+      if (isRolUser(getToken())){
+       
+          setMensaje("No posee los permisos necesarios")
+      }else{
+        deleteToken()
+        navigate("/login")
+      }
+    }else{*/
+    const data = await response.json()
+    if (data.msj){
+      console.log(data.msj)
+
+      setListaCampañas([])
+      setMensaje(data.msj)
+    //  alert("este usr no tiene campañas. msj temporal")
+    }else{
+      console.log(data)
+      setListaCampañas(data)
+    }
+    }
+ // }
+
+
+  useEffect(() => { 
+    ejecutarFetch()
+    .catch(error => console.error(error))
+
+  },[url])
+
+  useEffect(() => { 
+    setUrl(selectedStatus)
+
+  },[selectedStatus])
+
 
   const handleStatusChange = (e) => {
     setSelectedStatus(e.target.value);
@@ -54,27 +112,28 @@ export const Campañas = () => {
       <div className="campañas-filter">
         <label htmlFor="status-filter">Filtrar por estado:</label>
         <select id="status-filter" value={selectedStatus} onChange={handleStatusChange}>
-          <option value="Todas">Todas</option>
-          <option value="Abierta">Abierta</option>
-          <option value="Cerrada">Cerrada</option>
-          <option value="No votadas">No votadas</option>
+          <option value="">Todas</option>
+          <option value="Abiertas">Abierta</option>
+          <option value="Cerradas">Cerrada</option>
+         {// <option value="No votadas">No votadas</option>
+         }
         </select>
       </div>
       <div className="campañas-list">
-        {filteredCampañas.map((campaña) => (
+        {listaCampañas.map((campaña) => (
           <div key={campaña.id} className="campaña-card">
-            <h3>{campaña.name}</h3>
-            <p>Objetivo: {campaña.goal}</p>
-            <p>Estado: {campaña.status}</p>
+            <h3>{campaña.titulo}</h3>
+            <p>Objetivo: {campaña.descripcion}</p>
+            <p>Estado: {campaña.estado}</p>
             <p>Opciones de votación:</p>
             <div className="opciones-votacion">
               {campaña.opciones.map((opcion) => (
                 <button
-                  key={opcion}
+                  key={opcion.id}
                   className={`vote-button ${votos[campaña.id] === opcion ? 'voted' : ''}`}
                   onClick={() => handleVote(campaña.id, opcion)}
                 >
-                  {opcion}
+                  {opcion.titulo}
                 </button>
               ))}
               <button

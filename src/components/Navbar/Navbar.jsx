@@ -35,7 +35,6 @@ const Navbar = () => {
           <li><Link to="/perfilUsuario">Perfil Usuario</Link></li>
           <li><Link to="/deportes">Deportes</Link></li>
           <li><Link to="/noticias">Noticias</Link></li>
-          <li><Link to="/propuestas/add">Propuestas</Link></li>
           <li><Link to="/productos">Productos</Link></li>
           <li><Link to="/producto">Producto</Link></li>
           <li><Link to="/listaCarrito">Lista Carrito</Link></li>
@@ -48,15 +47,17 @@ const Navbar = () => {
             </button>
             <ul className={`dropdown-content ${openDropdown === 'Propuesta' ? 'show' : ''}`}>
               <li><Link to="/propuestas">Listado</Link></li>
+              <li><Link to="/propuestas/add">Envía una propuesta</Link></li>
             </ul>
           </li>
 
           <li className="dropdown">
             <button className="dropdown-btn" onClick={() => handleDropdownClick('Camapaña')}>
-              Camapaña  
+              Campañas  
             </button>
             <ul className={`dropdown-content ${openDropdown === 'Camapaña' ? 'show' : ''}`}>
               <li><Link to="/campañas">Listado</Link></li>
+              <li><Link to="/campañas">Lanzar campaña</Link></li>
             </ul>
           </li>
      
