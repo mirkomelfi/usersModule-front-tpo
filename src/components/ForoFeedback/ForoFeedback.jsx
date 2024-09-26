@@ -12,13 +12,13 @@ const feedbacks = [
 export const ForoFeedback = () => {
   const [selectedSubject, setSelectedSubject] = useState('Todos');
 
-
+  const dni=111
 
 
   const [listaFeedback,setListaFeedback]= useState([]);
   const [mensaje,setMensaje]= useState(null);
 
-  const [selectedRubro, setSelectedRubro] = useState('');
+  const [selectedRubro, setSelectedRubro] = useState(0);
   const [comment, setComment] = useState('');
 
 
@@ -47,7 +47,7 @@ export const ForoFeedback = () => {
 
   const ejecutarFetch = async() =>{
 
-    const response= await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/feedbacks`, {
+    const response= await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/misFeedbacks/${dni}?rubro=${selectedRubro}`, { 
       method: "GET",
       headers: {
           "Content-Type": "application/json",
@@ -68,7 +68,10 @@ export const ForoFeedback = () => {
     }else{*/
     const data = await response.json()
     if (data.msj){
+      
+      setListaFeedback([])
       setMensaje(data.msj)
+      alert("este usr no tiene feedbacks. msj temporal")
     }else{
       console.log(data)
       setListaFeedback(data)
@@ -81,8 +84,13 @@ export const ForoFeedback = () => {
     ejecutarFetch()
     .catch(error => console.error(error))
 
-  },[])
+  },[selectedRubro])
 
+  useEffect(() => { 
+    getRubros()
+    .catch(error => console.error(error))
+
+  },[])
 
 
   const handleSubjectChange = (e) => {
@@ -107,14 +115,21 @@ export const ForoFeedback = () => {
         Eliminar Feedback
       </button>
       <div className="foro-filter">
-        <label htmlFor="subject-filter">Filtrar por asunto:</label>
-        <select id="subject-filter" value={selectedSubject} onChange={handleSubjectChange}>
-          <option value="Todos">Todos</option>
-          <option value="Atención">Atención</option>
-          <option value="Tiempo de respuesta">Tiempo de respuesta</option>
-          <option value="Experiencia">Experiencia</option>
-          <option value="Errores del sistema">Errores del sistema</option>
-          <option value="Variedad de productos">Variedad de productos</option>
+      <label htmlFor="subject">Selecciona el asunto:</label>
+        <select
+          id="subject"
+          value={selectedRubro}
+          onChange={(e) => setSelectedRubro(e.target.value)}
+          required
+        >
+          <option value={0}>
+            Mostrar todos
+          </option>
+          {listaRubros.map((subject, index) => (
+            <option key={index} value={subject.id}>
+              {subject.descripcion}
+            </option>
+          ))}
         </select>
       </div>
       <div className="foro-scroll">

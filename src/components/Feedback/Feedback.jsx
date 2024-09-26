@@ -38,6 +38,8 @@ export const Feedback = () => {
 
     const feedbackObject={descripcion:feedback}
 
+    console.log(selectedRubro)
+
     const response= await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/feedbacks/${dni}/rubro/${selectedRubro}`, {
       method: "POST",
       headers: {
@@ -146,7 +148,7 @@ export const Feedback = () => {
             Elige un asunto
           </option>
           {listaRubros.map((subject, index) => (
-            <option key={index} value={subject.idRubro}>
+            <option key={index} value={subject.id}>
               {subject.descripcion}
             </option>
           ))}
