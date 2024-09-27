@@ -1,0 +1,96 @@
+.campaña-detalle .opciones-votacion .opcion-button {
+  padding: 20px 30px;
+  background-color: #031ae2;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.5rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+
+/* Estilo para el contenido de la campaña */
+.campaña-card-detalle {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+/* Botones de votación */
+.opciones-votacion {
+  margin-top: 20px ;
+  display: flex;
+  gap: 10px;
+}
+
+/* Botones de votación más grandes */
+.opcion-button {
+  padding: 20px 30px; /* Aumenta el tamaño del botón */
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px; /* Botones más redondeados */
+  cursor: pointer;
+  font-size: 1.5rem; /* Tamaño del texto proporcional al botón */
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.opcion-button:hover {
+  background-color: #0056b3;
+  transform: scale(1.05); /* Hace que el botón crezca un poco al pasar el ratón */
+}
+
+/* Estilo para el modal de confirmación */
+.confirmacion-alerta {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo translúcido */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Asegura que esté sobre el contenido */
+}
+
+/* Tarjeta de confirmación */
+.alerta-tarjeta {
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  z-index: 1001; /* Asegura que la tarjeta esté en el frente */
+}
+
+/* Botones dentro de la confirmación */
+.alerta-opciones {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.alerta-button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.alerta-button:hover {
+  background-color: #0056b3;
+}
+
+.alerta-button-no {
+  background-color: #dc3545;
+}
+
+.alerta-button-no:hover {
+  background-color: #c82333;
+}

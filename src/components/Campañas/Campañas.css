@@ -101,6 +101,26 @@
   color: white;
 }
 
+.campaña-button {
+  background-color: #0d3879;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.campaña-button:hover {
+  background-color: #0267ff;
+}
+
+.campaña-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(40, 167, 69, 0.5);
+}
+
 /* Ajustes para pantallas más pequeñas */
 @media (max-width: 768px) {
   .campañas-container {

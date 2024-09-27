@@ -6,6 +6,8 @@ import { Link } from "react-router-dom"
 import { validateRol,isRolUser,deleteToken,getToken } from "../../utils/auth-utils";
 import ImagenPost from "../Imagen/ImagenPOST"
 
+import './Post.css'; 
+
 export const ProductoPost = () => {
 
     const [mensaje,setMensaje]=useState(null)
@@ -63,26 +65,27 @@ export const ProductoPost = () => {
 
     return (
 
-        <div>
+        <div className="post-container"> 
             {!mensaje?(
                 
-                <div id="divForm" className="container" >
-                    <h2>Creación de Producto</h2>
-                    <h3>Rellene todos los campos</h3>
-                    <form onSubmit={consultarForm} ref={datForm}>
-                        <div className="mb-3">
-                            <label htmlFor="titulo" className="form-label">Nombre</label>
-                            <input type="text" className="form-control" name="titulo" />
-                        </div>
-                        <div className="mb-3">
-                            <label htmlFor="descripcion" className="form-label">Precio</label>
-                            <input type="text" className="form-control" name="descripcion" />
-                        </div>
-
-                        <button type="submit" className="button btnPrimary">Crear</button>
-                        </form>
-
-                    </div>
+                <div className="post-card"> {/* Reutilizando clase de tarjeta */}
+                <h2 className="post-title">Crear nuevo producto</h2> {/* Reutilizando clase de título */}
+                <form onSubmit={consultarForm} ref={datForm} className="post-form">
+                    <input
+                        type="text"
+                        className="post-input"
+                        placeholder="Nombre"
+                        name="nombre"
+                    />
+                    <input
+                        type="number"
+                        className="post-input"
+                        placeholder="Precio"
+                        name="precio"
+                    />
+                    <button type="submit" className="post-button">Crear Producto</button>
+                </form>
+            </div>
                 ):   
                 <div>  
                 <Mensaje msj={mensaje} />

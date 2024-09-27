@@ -6,10 +6,12 @@ import { Link } from "react-router-dom"
 import { validateRol,isRolUser,deleteToken,getToken } from "../../utils/auth-utils";
 import ImagenPost from "../Imagen/ImagenPOST"
 
-export const NoticiasPost = () => {
+export const PropuestasPost = () => {
+
+    const dni=111;// obtener del usr loggeado
 
     const [mensaje,setMensaje]=useState(null)
-    const [idNoticia,setIdNoticia]=useState(null)
+    const [idPropuesta,setIdPropuesta]=useState(null)
     const datForm = useRef() //Crear una referencia para consultar los valoresa actuales del form
     
     const navigate=useNavigate()
@@ -22,17 +24,17 @@ export const NoticiasPost = () => {
         e.preventDefault()
 
         const datosFormulario = new FormData(datForm.current) //Pasar de HTML a Objeto Iterable
-        const noticia = Object.fromEntries(datosFormulario) //Pasar de objeto iterable a objeto simple
-        if (noticia.titulo==""){noticia.titulo=null;}
-        if (noticia.descripcion==""){noticia.descripcion=null;}
+        const propuesta = Object.fromEntries(datosFormulario) //Pasar de objeto iterable a objeto simple
+        if (propuesta.titulo==""){propuesta.titulo=null;}
+        if (propuesta.descripcion==""){propuesta.descripcion=null;}
         
-        if (!noticia.titulo&&!noticia.descripcion){ setMensaje("No se ingresaron valores")}
+        if (!propuesta.titulo&&!propuesta.descripcion){ setMensaje("No se ingresaron valores")}
         else{
             var url=``;
 
-            console.log(noticia)
+            console.log(propuesta)
  
-            url=`${process.env.REACT_APP_DOMINIO_BACK}/admin/noticias`
+            url=`${process.env.REACT_APP_DOMINIO_BACK}/propuestas/${dni}`
 
             console.log(url)
 
@@ -42,11 +44,11 @@ export const NoticiasPost = () => {
                     "Content-Type": "application/json",
                     //"Authorization": `Bearer ${getToken()}`
                 },
-                body: JSON.stringify(noticia)
+                body: JSON.stringify(propuesta)
             })
             if (response.status==200){
                 const data = await response.json()
-                setIdNoticia(data.id)
+                setIdPropuesta(data.id)
                 setMensaje(data.msj+" Puede agregar imagenes si lo desea")
             }else{
                 
@@ -63,30 +65,31 @@ export const NoticiasPost = () => {
 
     return (
 
-        <div>
+        <div className="post-container"> 
             {!mensaje?(
                 
-                <div id="divForm" className="container" >
-                    <h2>Creación de Noticia</h2>
-                    <h3>Rellene todos los campos</h3>
-                    <form onSubmit={consultarForm} ref={datForm}>
-                        <div className="mb-3">
-                            <label htmlFor="titulo" className="form-label">Título</label>
-                            <input type="text" className="form-control" name="titulo" />
-                        </div>
-                        <div className="mb-3">
-                            <label htmlFor="descripcion" className="form-label">Descripción</label>
-                            <input type="text" className="form-control" name="descripcion" />
-                        </div>
-
-                        <button type="submit" className="button btnPrimary">Crear</button>
-                        </form>
-
-                    </div>
+                <div className="post-card"> {/* Reutilizando clase de tarjeta */}
+                <h2 className="post-title">Crear nueva propuesta</h2> {/* Reutilizando clase de título */}
+                <form onSubmit={consultarForm} ref={datForm} className="post-form">
+                    <input
+                        type="text"
+                        className="post-input"
+                        placeholder="Titulo"
+                        name="titulo"
+                    />
+                    <input
+                        type="text"
+                        className="post-input"
+                        placeholder="Descripcion"
+                        name="descripcion"
+                    />
+                    <button type="submit" className="post-button">Crear Propuesta</button>
+                </form>
+            </div>
                 ):   
                 <div>  
                 <Mensaje msj={mensaje} />
-                <ImagenPost noticia={true} id={idNoticia} />
+                <ImagenPost propuesta={true} id={idPropuesta} />
                
                 </div>  
                     

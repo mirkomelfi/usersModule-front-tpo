@@ -14,22 +14,22 @@ import { Noticias } from './components/Noticias/Noticias';
 import {Contactos} from './components/Contactos/Contactos';
 import {Productos} from './components/Productos/Productos';
 import { ListaCarrito } from './components/Productos/ListaCarrito';
-import { NoticiasPost } from './components/Noticias/NoticiasPOST';
+import { NoticiasPost } from './components/Post/NoticiasPOST';
 import { Noticia } from './components/Noticia/Noticia';
 import { PerfilUsuario } from './components/Usuario/PerfilUsuario';
-import { ProductoPost } from './components/Productos/ProductoPOST';
+import { ProductoPost } from './components/Post/ProductoPOST';
 import EventsCalendar from './components/Agenda/Agenda';
 import { Producto } from './components/Producto/Producto';
 import { Deportes } from './components/Deportes/Deportes';
-import { DeportesPost } from './components/Deportes/DeportesPOST';
-import { PropuestasPost } from './components/Propuestas/PropuestasPOST';
+import { DeportesPost } from './components/Post/DeportesPOST';
+import { PropuestasPost } from './components/Post/PropuestasPOST';
 import { Asociarse } from './components/Asociarse/Asociarse';
 import { Feedback } from './components/Feedback/Feedback';
 import { Deporte } from './components/Deporte/Deporte';
-
-
 import { Propuestas } from './components/Propuestas/Propuestas';
-import { Campañas } from './components/Campaña/Campañas';
+import { Campañas } from './components/Campañas/Campañas';
+import { Campaña } from './components/Campaña/Campaña';
+import { CampañaPost } from './components/Post/CampañaPost';
 import { ForoFeedback } from './components/ForoFeedback/ForoFeedback';
 
 export const App = () => {
@@ -38,34 +38,45 @@ export const App = () => {
       <BrowserRouter>
         <Navbar/>
         <Routes>
-          <Route path='/agenda' element={<EventsCalendar />} />
-
-          <Route path='/' element={<Home />} />
-          <Route path='/asociarse' element={<Asociarse />} />
-          <Route path='/feedback' element={<Feedback />} />
-          <Route path='/foroFeedback' element={<ForoFeedback />} />
+                   
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
           <Route path='/olvidoContraseña' element={<OlvidoContraseña />} />
+          <Route path='/logout' element={<Logout />} />
           <Route path='/superAdmin' element={<SuperAdmin />} />
+          <Route path='/agenda' element={<EventsCalendar />} />
+
           <Route path='/perfilUsuario' element={<PerfilUsuario />} />
+
+          <Route path='/' element={<Home />} />
+          <Route path='/asociarse' element={<Asociarse />} />
+
+          <Route path='/feedback' element={<Feedback />} />
+          <Route path='/foroFeedback' element={<ForoFeedback />} />
+ 
+          
           <Route path='/noticias' element={<Noticias />} />
           <Route path='/noticias/:id' element={<Noticia />} />
+
           <Route path='/deportes' element={<Deportes />} />
           <Route path='/deportes/:id' element={<Deporte />} />
-          <Route path='/propuestas' element={<Propuestas />} />
-          <Route path='/campañas' element={<Campañas />} />
           {//<Route path='/deportes/:id' element={<Deporte />} />
           }
+
+          <Route path='/propuestas' element={<Propuestas />} />
+
+          <Route path='/campañas' element={<Campañas />} />
+          <Route path='/campaña' element={<Campaña />} />
+          
           <Route path='/contactos' element={<Contactos />} />
+
           <Route path='/productos' element={<Productos />} />
           <Route path='/producto' element={<Producto />} />
           <Route path='/listaCarrito' element={<ListaCarrito />} />
           
-          <Route path='/logout' element={<Logout />} />
-          
           <Route path='/deportes/add' element={<DeportesPost />} />
           <Route path='/noticias/add' element={<NoticiasPost />} />
+          <Route path='/campañas/add' element={<CampañaPost />} />
           <Route path='/propuestas/add' element={<PropuestasPost />} />
           <Route path='/productos/add' element={<ProductoPost />} />
 
