@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Propuestas.css';
+import { useSelector } from 'react-redux';
 
 const initialPropuestas = [
   { id: 1, title: 'Nueva cancha de fútbol 5', description: 'Construcción de una cancha de césped sintético para entrenamientos.', votes: 124, createdBy: 'Usuario1' },
@@ -14,7 +15,7 @@ export const Propuestas = () => {
   const [selectedUser, setSelectedUser] = useState('Todos');
   const [votes, setVotes] = useState({}); // Stores user votes
 
-
+  const admin = useSelector((state) => state.usuarios.isAdmin);
 
 
 
@@ -27,7 +28,14 @@ export const Propuestas = () => {
 
   const ejecutarFetch = async() =>{
 
-    const response= await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/propuestas/${dni}`, {
+    let url;
+    if (admin!=true){
+      url=`misPropuestas/${dni}`
+    }else{
+      url=`admin/propuestas`
+    }
+
+    const response= await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/${url}`, {
       method: "GET",
       headers: {
           "Content-Type": "application/json",
@@ -35,17 +43,7 @@ export const Propuestas = () => {
       }
       
     })
-    /*
-    const rol=validateRol(response)
-    if (!rol){
-      if (isRolUser(getToken())){
-       
-          setMensaje("No posee los permisos necesarios")
-      }else{
-        deleteToken()
-        navigate("/login")
-      }
-    }else{*/
+
     const data = await response.json()
     if (data.msj){
       console.log(data.msj)
@@ -108,12 +106,16 @@ export const Propuestas = () => {
       <h2>Propuestas</h2>
       
       <div className='button-container'>
-        <button className="add-campaign-button" onClick={handleAddProposal}>
+        {!admin&&
+          <button className="add-campaign-button" onClick={handleAddProposal}>
           Agregar Propuesta
         </button>
-        <button className="add-campaign-button" onClick={handleDeleteProposal}>
+        }
+        {/*
+          <button className="add-campaign-button" onClick={handleDeleteProposal}>
           Eliminar Propuesta
-        </button>
+        </button>*/
+        }
       </div>
 
         <select id="user-filter" value={selectedUser} onChange={handleUserFilterChange}>

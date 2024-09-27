@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from "react-redux";
 import './ForoFeedback.css';
 
 const feedbacks = [
@@ -14,13 +15,12 @@ export const ForoFeedback = () => {
 
   const dni=111
 
+  const admin = useSelector((state) => state.usuarios.isAdmin);
 
   const [listaFeedback,setListaFeedback]= useState([]);
   const [mensaje,setMensaje]= useState(null);
 
   const [selectedRubro, setSelectedRubro] = useState(0);
-  const [comment, setComment] = useState('');
-
 
   const [listaRubros,setListaRubros]= useState([]);
 
@@ -47,7 +47,14 @@ export const ForoFeedback = () => {
 
   const ejecutarFetch = async() =>{
 
-    const response= await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/misFeedbacks/${dni}?rubro=${selectedRubro}`, { 
+    let url;
+    if (admin!=true){
+      url=`misFeedbacks/${dni}?rubro=${selectedRubro}`
+    }else{
+      url=`admin/feedbacks?rubro=${selectedRubro}`
+    }
+
+    const response= await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/${url}`, { 
       method: "GET",
       headers: {
           "Content-Type": "application/json",
@@ -55,29 +62,18 @@ export const ForoFeedback = () => {
       }
       
     })
-    /*
-    const rol=validateRol(response)
-    if (!rol){
-      if (isRolUser(getToken())){
-       
-          setMensaje("No posee los permisos necesarios")
-      }else{
-        deleteToken()
-        navigate("/login")
-      }
-    }else{*/
+ 
     const data = await response.json()
     if (data.msj){
       
       setListaFeedback([])
       setMensaje(data.msj)
-      alert("este usr no tiene feedbacks. msj temporal")
     }else{
       console.log(data)
       setListaFeedback(data)
     }
     }
- // }
+
 
 
   useEffect(() => { 
@@ -108,12 +104,16 @@ export const ForoFeedback = () => {
   return (
     <div className="foro-container">
       <h2 className="foro-title">Lista de Feedback</h2>
-      <button className="add-feedback-button" onClick={handleAddFeedback}>
+      {!admin&&
+        <button className="add-feedback-button" onClick={handleAddFeedback}>
         Agregar Feedback
       </button>
-      <button className="add-feedback-button" onClick={handleAddFeedback}>
+      }
+      {/*
+        <button className="add-feedback-button" onClick={handleAddFeedback}>
         Eliminar Feedback
-      </button>
+      </button>*/
+      }
       <div className="foro-filter">
       <label htmlFor="subject">Selecciona el asunto:</label>
         <select
@@ -132,7 +132,7 @@ export const ForoFeedback = () => {
           ))}
         </select>
       </div>
-      <div className="foro-scroll">
+      {listaFeedback.length!=0?<div className="foro-scroll">
         {listaFeedback.map(feedback => (
           <div key={feedback.id} className="foro-item">
             
@@ -142,7 +142,16 @@ export const ForoFeedback = () => {
             <p className="foro-comment">{feedback.rubro}</p>
           </div>
         ))}
+      </div>:
+      <div className="foro-scroll">
+      
+        <div className="foro-item">
+          
+          <div className="foro-user">No hay feedbacks para el asunto filtrado</div>
+          <p className="foro-comment">¡Pruebe con otro!</p>
+        </div>
       </div>
+      }
     </div>
   );
 };

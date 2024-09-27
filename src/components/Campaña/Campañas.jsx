@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Campañas.css';
+import { useSelector } from 'react-redux';
 
 const campañas = [
   {
@@ -21,7 +22,7 @@ const campañas = [
 export const Campañas = () => {
   const [selectedStatus, setSelectedStatus] = useState('Todas');
   const [votos, setVotos] = useState({});
-
+  const admin = useSelector((state) => state.usuarios.isAdmin);
   const [url, setUrl] = useState("");
 
 
@@ -107,8 +108,12 @@ export const Campañas = () => {
   return (
     <div className="campañas-container">
       <h2>Campañas</h2>
-      <button className="add-campaign-button">Agregar Campaña</button>
-      <button className="add-campaign-button">Eliminar Campaña</button>
+      {admin&&
+      <div>
+      <button className="add-campaign-button">Lanzar Campaña</button>
+      <button className="add-campaign-button">Cerrar Campaña</button>
+      </div>
+      }
       <div className="campañas-filter">
         <label htmlFor="status-filter">Filtrar por estado:</label>
         <select id="status-filter" value={selectedStatus} onChange={handleStatusChange}>

@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false); // Controla si el navbar está visible
   const [openDropdown, setOpenDropdown] = useState(null); // Controla qué dropdown está abierto
-
+  const admin = useSelector((state) => state.usuarios.isAdmin);
   // Función para manejar la visibilidad del dropdown
   const handleDropdownClick = (dropdownName) => {
     setOpenDropdown(openDropdown === dropdownName ? null : dropdownName);
@@ -35,10 +36,10 @@ const Navbar = () => {
           <li><Link to="/perfilUsuario">Perfil Usuario</Link></li>
           <li><Link to="/deportes">Deportes</Link></li>
           <li><Link to="/noticias">Noticias</Link></li>
-          <li><Link to="/productos">Productos</Link></li>
-          <li><Link to="/producto">Producto</Link></li>
-          <li><Link to="/listaCarrito">Lista Carrito</Link></li>
-          <li><Link to="/agenda">Mi agenda</Link></li>
+          {!admin&&<li><Link to="/productos">Productos</Link></li>}
+          {!admin&&<li><Link to="/producto">Producto</Link></li>}
+          {!admin&&<li><Link to="/listaCarrito">Lista Carrito</Link></li>}
+          {!admin&&<li><Link to="/agenda">Mi agenda</Link></li>}
 
 
           <li className="dropdown">
@@ -47,7 +48,7 @@ const Navbar = () => {
             </button>
             <ul className={`dropdown-content ${openDropdown === 'Propuesta' ? 'show' : ''}`}>
               <li><Link to="/propuestas">Listado</Link></li>
-              <li><Link to="/propuestas/add">Envía una propuesta</Link></li>
+              {!admin&&<li><Link to="/propuestas/add">Envía una propuesta</Link></li>}
             </ul>
           </li>
 
@@ -57,7 +58,7 @@ const Navbar = () => {
             </button>
             <ul className={`dropdown-content ${openDropdown === 'Camapaña' ? 'show' : ''}`}>
               <li><Link to="/campañas">Listado</Link></li>
-              <li><Link to="/campañas">Lanzar campaña</Link></li>
+              {admin&&<li><Link to="/campañas">Lanzar campaña</Link></li>}
             </ul>
           </li>
      
@@ -67,14 +68,14 @@ const Navbar = () => {
             </button>
             <ul className={`dropdown-content ${openDropdown === 'Feedback' ? 'show' : ''}`}>
               <li><Link to="/foroFeedback">Listado</Link></li>
-              <li><Link to="/feedback">Deja tu Comentario</Link></li>
+              {!admin&&<li><Link to="/feedback">Deja tu Comentario</Link></li>}
             </ul>
           </li>
 
           <li className="dropdown">
-            <button className="dropdown-btn" onClick={() => handleDropdownClick('superAdmin')}>
+            {admin&&<button className="dropdown-btn" onClick={() => handleDropdownClick('superAdmin')}>
               Super Admin
-            </button>
+            </button>}
             <ul className={`dropdown-content ${openDropdown === 'superAdmin' ? 'show' : ''}`}>
               <li><Link to="/superAdmin">Registrar Usuarios</Link></li>
             </ul>

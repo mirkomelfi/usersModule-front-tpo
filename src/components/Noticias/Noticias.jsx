@@ -5,6 +5,7 @@ import foto from './CanchaSanLorenzo.jpg';
 import foto2 from './ikerMunian.jpg';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { ImagenOK } from '../Imagen/ImagenOK';
+import { useSelector } from 'react-redux';
 
 const noticiasData = [
     {
@@ -70,7 +71,7 @@ const noticiasData = [
 
 export const Noticias = () => {
     const containerRef = useRef(null);
-
+    const admin = useSelector((state) => state.usuarios.isAdmin);
     //const {id}= useParams();
 
     const [listaNoticias,setListaNoticias]= useState([]);
@@ -128,11 +129,13 @@ export const Noticias = () => {
     return (
         <>
             {/* Footer con botón Agregar Noticia */}
-            <div className="agregarNoticia">
+            {admin&&
+                <div className="agregarNoticia">
                 <Link to="/noticias/add" className="btn-agregar-noticia">
                     Agregar Noticia
                 </Link>
             </div>
+            }
             
             <div
                 className="noticias-container"

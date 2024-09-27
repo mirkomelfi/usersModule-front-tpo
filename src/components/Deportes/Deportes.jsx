@@ -5,6 +5,7 @@ import foto from './CanchaSanLorenzo.jpg';
 import foto2 from './ikerMunian.jpg';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { ImagenOK } from '../Imagen/ImagenOK';
+import { useSelector } from 'react-redux';
 
 const deportesData = [
     {
@@ -70,7 +71,7 @@ const deportesData = [
 
 export const Deportes = () => {
     const containerRef = useRef(null);
-
+    const admin = useSelector((state) => state.usuarios.isAdmin);
     //const {id}= useParams();
 
     const [listaDeportes,setListaDeportes]= useState([]);
@@ -128,11 +129,14 @@ export const Deportes = () => {
     return (
         <>
             {/* Footer con botón Agregar Deporte */}
-            <div className="agregarDeporte">
+            
+            {admin&&
+                <div className="agregarDeporte">
                 <Link to="/deportes/add" className="btn-agregar-deporte">
                     Agregar Deporte
                 </Link>
             </div>
+            }
             
             <div
                 className="deportes-container"

@@ -4,7 +4,7 @@ import './Feedback.css';
 export const Feedback = () => {
 
   const admin=null // por ahora hardcodear true o null. dsps se obtiene del usr loggeado
-  const dni=111 // por ahora hardcodear. dsps se obtiene del usr loggeado
+  const dni=222 // por ahora hardcodear. dsps se obtiene del usr loggeado
 
   const datForm = useRef();
   const [selectedRubro, setSelectedRubro] = useState('');
