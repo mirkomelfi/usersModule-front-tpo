@@ -21,43 +21,66 @@ const campañas = [
 ];
 
 export const Campañas = () => {
-  const [selectedStatus, setSelectedStatus] = useState('Todas');
-  const [votos, setVotos] = useState({});
+  const [selectedStatus, setSelectedStatus] = useState('');
+
   const admin = useSelector((state) => state.usuarios.isAdmin);
   const [url, setUrl] = useState("");
   const navigate = useNavigate(); // Hook para navegar
+
+
+
+  const dni=111
+  const [listaCampañas,setListaCampañas]= useState([]);
+  const [mensaje,setMensaje]= useState(null);
+ 
+
+
+
+  const ejecutarFetch = async() =>{
+    const response= await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/campanas${url}`, { 
+      method: "GET",
+      headers: {
+          "Content-Type": "application/json",
+         // "Authorization": `Bearer ${getToken()}`
+      }
+      
+    })
+
+    const data = await response.json()
+    if (data.msj){
+      console.log(data.msj)
+      setListaCampañas([])
+      setMensaje(data.msj)
+    }else{
+      console.log(data)
+      setListaCampañas(data)
+    }
+    }
+
+  
+  useEffect(() => { 
+    ejecutarFetch()
+    .catch(error => console.error(error))
+  },[url])
+
+  useEffect(() => { 
+    setUrl(selectedStatus)
+  },[selectedStatus])
 
   const handleStatusChange = (e) => {
     setSelectedStatus(e.target.value);
   };
 
-  const handleVote = (campañaId, opcion) => {
-    setVotos({
-      ...votos,
-      [campañaId]: opcion
-    });
+  const handleAdd = () => {
+    navigate("/campañas/add")
   };
-
-  const handleNoVote = (campañaId) => {
-    setVotos({
-      ...votos,
-      [campañaId]: 'No votar'
-    });
-  };
-
-  const filteredCampañas = selectedStatus === 'Todas'
-    ? campañas
-    : selectedStatus === 'No votadas'
-    ? campañas.filter(campaña => !votos[campaña.id])
-    : campañas.filter(campaña => campaña.estado === selectedStatus);
 
   return (
     <div className="campañas-container">
       <h2>Campañas</h2>
       {admin && (
         <div>
-          <button className="add-campaign-button">Lanzar Campaña</button>
-          <button className="add-campaign-button">Cerrar Campaña</button>
+          <button className="add-campaign-button" onClick={handleAdd}>Lanzar Campaña</button>
         </div>
       )}
       <div className="campañas-filter">
@@ -69,15 +92,17 @@ export const Campañas = () => {
         </select>
       </div>
       <div className="campañas-list">
-        {filteredCampañas.map((campaña) => (
+        {listaCampañas.map((campaña) => (
           <div key={campaña.id} className="campaña-card">
             <h3>{campaña.titulo}</h3>
             <p>Objetivo: {campaña.descripcion}</p>
             <p>Estado: {campaña.estado}</p>
             {/*  <button onClick={() => navigate(`/campaña/${campaña.id}`)} className="campaña-button"> */}
-            <button onClick={() => navigate(`/campaña`)} className="campaña-button">
+
+              <button onClick={() => navigate(`/campañas/${campaña.id}`)} className="campaña-button">
               Ir a Campaña
             </button>
+            
           </div>
         ))}
       </div>

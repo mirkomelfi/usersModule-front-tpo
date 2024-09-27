@@ -58,7 +58,7 @@ const Navbar = () => {
             </button>
             <ul className={`dropdown-content ${openDropdown === 'Camapaña' ? 'show' : ''}`}>
               <li><Link to="/campañas">Listado</Link></li>
-              {admin&&<li><Link to="/campañas">Lanzar campaña</Link></li>}
+              {admin&&<li><Link to="/campañas/add">Lanzar campaña</Link></li>}
             </ul>
           </li>
      

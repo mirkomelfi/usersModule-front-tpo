@@ -37,13 +37,39 @@ export const Deporte = () => {
     }
   ];
 
+
+
   const [deporte, setDeporte] = useState(null);
+  
+  const [mensaje,setMensaje]=useState(null)
+
+  const ejecutarFetch = async () => {
+    var url = ``;
+    
+    url = `${process.env.REACT_APP_DOMINIO_BACK}/deportes/${id}`;
+    
+
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        //Authorization: `Bearer ${getToken()}`,
+      },
+    });
+
+    const data = await response.json();
+    console.log(data)
+    if (data.msj) {
+      setMensaje(data.msj);
+    } else {
+      setDeporte(data);
+    }
+  }
 
   useEffect(() => {
-    // Buscar el deporte por el ID que viene en los parámetros de la URL
-    const deporteSeleccionado = deportesData.find(deporte => deporte.id === id);
-    setDeporte(deporteSeleccionado);
-  }, [id]);
+    ejecutarFetch().catch((error) => console.error(error));
+  }, []);
+
 
   return (
     <div className="deporte-container">
