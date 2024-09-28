@@ -137,6 +137,16 @@ body {
   content: none; /* Eliminar el subrayado de los enlaces dentro del dropdown */
 }
 
+.dropdown-content a {
+  display: inline-block; 
+  padding: 10px; 
+}
+
+.dropdown-content a:hover {
+  background-color: #00000021; 
+  color: white
+}
+
 
 /* Associating button styles */
 .navbar-button {
