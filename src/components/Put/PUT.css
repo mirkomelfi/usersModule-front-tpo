@@ -1,0 +1,85 @@
+/* Contenedor principal del post */
+.put-container {
+    padding: 20px;
+    background-color: #f9f9f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  
+  /* Estilo de la tarjeta del post */
+  .put-card {
+    background-color: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    width: 100%;
+  }
+  
+  /* Título del post */
+  .put-title {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  /* Input del formulario */
+  .put-input, .put-textarea, .put-select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+  }
+  
+  .put-textarea {
+    height: 80px;
+    resize: none;
+  }
+  
+  /* Botón */
+  .put-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 5px;
+  }
+
+  /* Botón */
+  .put-agregar-opciones-button {
+    padding: 10px 10px;
+    background-color: #49bb75;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 10px;
+  }
+  
+  .put-button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Lista de opciones */
+  .put-options {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .put-option {
+    background-color: #f4f4f4;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    color: #333;
+  }
+  

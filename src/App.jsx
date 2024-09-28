@@ -33,6 +33,13 @@ import { CampañaPost } from './components/Post/CampañaPost';
 import { ForoFeedback } from './components/ForoFeedback/ForoFeedback';
 import { Usuarios } from './components/Usuarios/Usuarios';
 
+import { NoticiasPut } from './components/Put/NoticiasPUT';
+import { DeportesPut } from './components/Put/DeportesPUT'; 
+import { ProductoPut } from './components/Put/ProductoPUT';
+import { PropuestasPut } from './components/Put/PropuestasPUT';
+import { CampañaPut } from './components/Put/CampañaPUT';
+
+
 export const App = () => {
   return (
     <>
@@ -82,6 +89,12 @@ export const App = () => {
           <Route path='/campañas/add' element={<CampañaPost />} />
           <Route path='/propuestas/add' element={<PropuestasPost />} />
           <Route path='/productos/add' element={<ProductoPost />} />
+
+          <Route path='/deportes/update' element={<DeportesPut />} />
+          <Route path='/noticias/update' element={<NoticiasPut />} />
+          <Route path='/campañas/update' element={<CampañaPut />} />
+          <Route path='/propuestas/update' element={<PropuestasPut />} />
+          <Route path='/productos/update' element={<ProductoPut />} />
 
           <Route path="/usuarios" element={<UsuarioListContainer greeting="Listado de Usuarios"/>}/>
           <Route path="/usuarios/:dni" element={<UsuarioViejo />}/> 

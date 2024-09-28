@@ -6,9 +6,9 @@ import { Link } from "react-router-dom"
 import { validateRol,isRolUser,deleteToken,getToken } from "../../utils/auth-utils";
 import ImagenPost from "../Imagen/ImagenPOST"
 
-import './Post.css'; 
+import './PUT.css'; 
 
-export const PropuestasPost = () => {
+export const PropuestasPut = () => {
 
     const dni=111;// obtener del usr loggeado
 
@@ -67,25 +67,25 @@ export const PropuestasPost = () => {
 
     return (
 
-        <div className="post-container"> 
+        <div className="put-container"> 
             {!mensaje?(
                 
-                <div className="post-card"> {/* Reutilizando clase de tarjeta */}
-                <h2 className="post-title">Crear nueva propuesta</h2> {/* Reutilizando clase de título */}
-                <form onSubmit={consultarForm} ref={datForm} className="post-form">
+                <div className="put-card"> {/* Reutilizando clase de tarjeta */}
+                <h2 className="put-title">Crear nueva propuesta</h2> {/* Reutilizando clase de título */}
+                <form onSubmit={consultarForm} ref={datForm} className="put-form">
                     <input
                         type="text"
-                        className="post-input"
+                        className="put-input"
                         placeholder="Titulo"
                         name="titulo"
                     />
                     <input
                         type="text"
-                        className="post-input"
+                        className="put-input"
                         placeholder="Descripcion"
                         name="descripcion"
                     />
-                    <button type="submit" className="post-button">Crear Propuesta</button>
+                    <button type="submit" className="put-button">Crear Propuesta</button>
                 </form>
             </div>
                 ):   
