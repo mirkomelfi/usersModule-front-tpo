@@ -90,11 +90,10 @@ export const App = () => {
           <Route path='/propuestas/add' element={<PropuestasPost />} />
           <Route path='/productos/add' element={<ProductoPost />} />
 
-          <Route path='/deportes/update' element={<DeportesPut />} />
-          <Route path='/noticias/update' element={<NoticiasPut />} />
-          <Route path='/campañas/update' element={<CampañaPut />} />
-          <Route path='/propuestas/update' element={<PropuestasPut />} />
-          <Route path='/productos/update' element={<ProductoPut />} />
+          <Route path='/deportes/update/:id' element={<DeportesPut />} />
+          <Route path='/noticias/update/:id' element={<NoticiasPut />} />
+          <Route path='/campañas/update/:id' element={<CampañaPut />} />
+          <Route path='/propuestas/update/:id' element={<PropuestasPut />} />
 
           <Route path="/usuarios" element={<UsuarioListContainer greeting="Listado de Usuarios"/>}/>
           <Route path="/usuarios/:dni" element={<UsuarioViejo />}/> 

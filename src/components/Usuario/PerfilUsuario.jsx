@@ -77,20 +77,6 @@ export const PerfilUsuario = () => {
       if (data.msj) {
         setMensaje(data.msj);
       }
-   /* const rol = validateRol(response);
-    if (!rol) {
-      if (isRolUser(getToken())) {
-        setMensaje("No posee los permisos necesarios");
-      } else {
-        deleteToken();
-        navigate("/login");
-      }
-    } else {
-      const data = await response.json();
-      if (data.msj) {
-        setMensaje(data.msj);
-      }
-    }*/
     return;
   };
 

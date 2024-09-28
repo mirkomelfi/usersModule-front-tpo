@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './Deporte.css';
 import imagenDeporte from "./partido.jpg";
 import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 export const Deporte = () => {
   const { id } = useParams();
@@ -38,10 +39,31 @@ export const Deporte = () => {
   ];
 
 
-
+  const admin = useSelector((state) => state.usuarios.isAdmin);
   const [deporte, setDeporte] = useState(null);
   
   const [mensaje,setMensaje]=useState(null)
+
+  const eliminar = async () => {
+    const response = await fetch(
+      `${process.env.REACT_APP_DOMINIO_BACK}/admin/actividades/${id}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+         // Authorization: `Bearer ${getToken()}`,
+        },
+      }
+    );
+
+    const data = await response.json();
+      if (data.msj) {
+        setMensaje(data.msj);
+      }
+    return;
+  };
+
+
 
   const ejecutarFetch = async () => {
     var url = ``;

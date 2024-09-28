@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { Mensaje } from "../Mensaje/Mensaje";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ImagenPost from "../Imagen/ImagenPOST";
 import './PUT.css'; // Reutilizando Post.css
 
@@ -11,6 +11,8 @@ export const NoticiasPut = () => {
     const [idNoticia, setIdNoticia] = useState(null);
     const datForm = useRef(); // Referencia al formulario
 
+    const {id}=useParams()
+
     const navigate = useNavigate();
 
     const consultarForm = async (e) => {
@@ -19,15 +21,20 @@ export const NoticiasPut = () => {
 
         const datosFormulario = new FormData(datForm.current); // Pasar de HTML a Objeto Iterable
         const noticia = Object.fromEntries(datosFormulario); // Pasar de objeto iterable a objeto simple
-        
+        if (noticia.titulo==""){
+            noticia.titulo=null
+        }
+        if (noticia.descripcion==""){
+            noticia.descripcion=null
+        }
         // Validación básica
         if (!noticia.titulo && !noticia.descripcion) {
             setMensaje("No se ingresaron valores");
         } else {
-            const url = `${process.env.REACT_APP_DOMINIO_BACK}/admin/noticias`;
+            const url = `${process.env.REACT_APP_DOMINIO_BACK}/admin/noticias/${id}`;
 
             const response = await fetch(url, {
-                method: "POST",
+                method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
                 },
@@ -52,6 +59,7 @@ export const NoticiasPut = () => {
             {!mensaje ? (
                 <div className="put-card"> {/* Reutilizando clase de tarjeta */}
                     <h2 className="put-title">Crear nueva noticia</h2> {/* Reutilizando clase de título */}
+                    <h3 className="">Lo que no complete, no se actualizara. No se permiten campos vacíos.</h3>
                     <form onSubmit={consultarForm} ref={datForm} className="put-form">
                         <input
                             type="text"

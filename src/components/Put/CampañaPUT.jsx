@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import './PUT.css';
+import { useParams } from 'react-router-dom';
 
 export const CampañaPut = () => {
-  const [titulo, setTitulo] = useState('');
-  const [descripcion, setDescripcion] = useState('');
-  const [estado, setEstado] = useState();
+  const [titulo, setTitulo] = useState(null);
+  const [descripcion, setDescripcion] = useState(null);
+  const [estado, setEstado] = useState(null);
   const [opciones, setOpciones] = useState([]);
   const [nuevaOpcion, setNuevaOpcion] = useState('');
   
+  const {id}=useParams()
+
   const [mensaje, setMensaje] = useState(null);
 
   // Campañas hardcodeadas  
@@ -51,7 +54,6 @@ export const CampañaPut = () => {
     // Actualizamos los valores del formulario con la campaña seleccionada
     setTitulo(campaña.titulo);
     setDescripcion(campaña.descripcion);
-    setEstado(campaña.estado);
     setOpciones(campaña.opciones);
   };
 
@@ -66,11 +68,11 @@ export const CampañaPut = () => {
     };
     console.log(nuevaCampaña)
 
-    const url=`${process.env.REACT_APP_DOMINIO_BACK}/admin/campanas`
+    const url=`${process.env.REACT_APP_DOMINIO_BACK}/admin/campanas/${id}`
 
 
   const response= await fetch(url, {
-      method: "POST",
+      method: "PUT",
       headers: {
           "Content-Type": "application/json",
           //"Authorization": `Bearer ${getToken()}`
@@ -81,8 +83,8 @@ if (response.status==200){
   console.log('Nueva campaña creada:', nuevaCampaña);
   // Aquí puedes enviar la campaña al backend o hacer otras acciones
 
-  setTitulo('');
-  setDescripcion('');
+  setTitulo(null);
+  setDescripcion(null);
   setOpciones([]);
 }
       const data = await response.json()
@@ -113,25 +115,6 @@ if (response.status==200){
       <div className="put-card">
         <h2 className="put-title">Actualizar campaña</h2>
 
-        {/* Dropdown para seleccionar campaña */}
-        <div className="put-select-container">
-          <label htmlFor="campañaId" className="put-label">Seleccionar Campaña:</label>
-          <select
-            id="campañaId"
-            className="put-select"
-            onChange={handleCampañaChange}
-            defaultValue=""
-          >
-            <option value="" disabled>Seleccione una campaña</option>
-            {campañasHardcoded.map(campaña => (
-              <option key={campaña.id} value={campaña.id}>
-                {campaña.titulo}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        {campañaSeleccionada && (
           <div className="put-form">
             <input
               type="text"
@@ -146,7 +129,7 @@ if (response.status==200){
               value={descripcion}
               onChange={(e) => setDescripcion(e.target.value)}
             />
-            {/* Dropdown para seleccionar el estado */}
+            {/* Dropdown para seleccionar el estado 
             <select
               className="put-select"
               value={estado} // Estado actual de la campaña
@@ -155,7 +138,7 @@ if (response.status==200){
               <option value="Abierta">Abierta</option>
               <option value="Cerrada">Cerrada</option>
             </select>
-
+*/}
             <div className="put-opciones">
               <input
                 type="text"
@@ -164,6 +147,7 @@ if (response.status==200){
                 value={nuevaOpcion}
                 onChange={(e) => setNuevaOpcion(e.target.value)}
               />
+              <p>IMPORTANTE: Si agrega opciones se reiniciaran todos los votos.</p>
               <button className="put-agregar-opciones-button" onClick={agregarOpcion}>
                 Agregar opción
               </button>
@@ -181,7 +165,7 @@ if (response.status==200){
               Actualizar campaña
             </button>
           </div>
-        )}
+
       </div>
     </div>
   );

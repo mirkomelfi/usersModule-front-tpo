@@ -32,6 +32,8 @@ export const CampañaPost = () => {
   })
 if (response.status==200){
   console.log('Nueva campaña creada:', nuevaCampaña);
+  
+ alert('Nueva campaña creada');
   // Aquí puedes enviar la campaña al backend o hacer otras acciones
 
   setTitulo('');

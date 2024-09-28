@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect  } from "react";
 import { Mensaje } from "../Mensaje/Mensaje";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ImagenPost from "../Imagen/ImagenPOST";
 import './PUT.css'; 
 
@@ -8,6 +8,8 @@ export const DeportesPut = () => {
     const [mensaje, setMensaje] = useState(null);
     const [error, setError] = useState(null);
     const [idDeporte, setIdDeporte] = useState(null);
+
+    const {id}=useParams()
 
     const datForm = useRef(); // Referencia al formulario
     const navigate = useNavigate();
@@ -40,31 +42,41 @@ export const DeportesPut = () => {
 
         const datosFormulario = new FormData(datForm.current); 
         const deporte = Object.fromEntries(datosFormulario); 
-        
-        // Validación sencilla para campos vacíos
-        if (!deporte.nombre && !deporte.descripcion) {
-            setMensaje("No se ingresaron valores");
-        } else {
-            var url = `${process.env.REACT_APP_DOMINIO_BACK}/admin/actividades`;
-            const response = await fetch(url, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(deporte),
-            });
-
-            if (response.status === 200) {
-                const data = await response.json();
-                setIdDeporte(data.id);
-                setMensaje(data.msj + " Puede agregar imágenes si lo desea");
-            } else {
-                const data = await response.json();
-                setError(true);
-                setMensaje(data.msj);
-            }
-            e.target.reset(); // Limpiar el formulario
+        console.log(deporte)
+        if (deporte.valor==""){
+            deporte.valor=0
         }
+        if (deporte.nombre==""){
+            deporte.nombre=null
+        }
+        if (deporte.descripcion==""){
+            deporte.descripcion=null
+        }
+        if (deporte.profesor==""){
+            deporte.profesor=null
+        }
+        // Validación sencilla para campos vacíos
+
+        var url = `${process.env.REACT_APP_DOMINIO_BACK}/admin/actividades/${id}`;
+        const response = await fetch(url, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(deporte),
+        });
+
+        if (response.status === 200) {
+            const data = await response.json();
+            setIdDeporte(data.id);
+            setMensaje(data.msj + " Puede agregar imágenes si lo desea");
+        } else {
+            const data = await response.json();
+            setError(true);
+            setMensaje(data.msj);
+        }
+        e.target.reset(); // Limpiar el formulario
+        
     };
 
     return (
@@ -72,65 +84,38 @@ export const DeportesPut = () => {
             {!mensaje ? (
                 <div className="put-card">
                     <h2 className="put-title">Actualizar deporte</h2>
+                    <h3 className="">Lo que no complete, no se actualizara. No se permiten campos vacíos.</h3>
                     {/* Dropdown para seleccionar el deporte */}
-                    <div className="put-select-container">
-                        <label htmlFor="deporteId" className="put-label">Seleccionar Deporte:</label>
-                        <select
-                            id="deporteId"
-                            className="put-select"
-                            onChange={handleDeporteChange}
-                            defaultValue="" // Valor por defecto para mostrar el placeholder
-                        >
-                            <option value="" disabled>Seleccione un deporte</option>
-                            {deportes.map(deporte => (
-                                <option key={deporte.id} value={deporte.id}>
-                                    {deporte.nombre}
-                                </option>
-                            ))}
-                        </select>
-                    </div>
 
                     {/* Formulario para actualizar deporte */}
-                    {deporteSeleccionado && (
                         <form onSubmit={consultarForm} ref={datForm} className="put-form">
-                            <input
-                                type="text"
-                                className="put-input"
-                                placeholder="ID del deporte"
-                                name="id"
-                                value={deporteSeleccionado.id}
-                                readOnly
-                            />
+
                             <input
                                 type="text"
                                 className="put-input"
                                 placeholder="Nombre"
                                 name="nombre"
-                                defaultValue={deporteSeleccionado.nombre}
                             />
                             <textarea
                                 className="put-textarea"
                                 placeholder="Descripción"
                                 name="descripcion"
-                                defaultValue={deporteSeleccionado.descripcion}
                             />
                             <input
-                                type="text"
+                                type="number"
                                 className="put-input"
                                 placeholder="Valor mensual"
                                 name="valor"
-                                defaultValue={deporteSeleccionado.valor}
                             />
                             <input
                                 type="text"
                                 className="put-input"
                                 placeholder="Profesor a cargo"
                                 name="profesor"
-                                defaultValue={deporteSeleccionado.profesor}
                             />
                             <button type="submit" className="put-button">Actualizar deporte</button>
                         </form>
-                    )}
+
                 </div>
             ) : (!error ? (
                 <div>
