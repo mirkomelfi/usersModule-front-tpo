@@ -46,7 +46,7 @@ export const Deporte = () => {
   const ejecutarFetch = async () => {
     var url = ``;
     
-    url = `${process.env.REACT_APP_DOMINIO_BACK}/deportes/${id}`;
+    url = `${process.env.REACT_APP_DOMINIO_BACK}/actividades/${id}`;
     
 
     const response = await fetch(url, {

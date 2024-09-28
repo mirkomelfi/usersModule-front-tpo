@@ -33,6 +33,7 @@ const Navbar = () => {
           <Link to="/">San Lorenzo</Link>
         </div>
         <ul className="navbar-menu">
+          {admin&&<li><Link to="/usuarios">Listado Usuarios</Link></li>}
           <li><Link to="/perfilUsuario">Perfil Usuario</Link></li>
           <li><Link to="/deportes">Deportes</Link></li>
           <li><Link to="/noticias">Noticias</Link></li>
@@ -44,7 +45,7 @@ const Navbar = () => {
 
           <li className="dropdown">
             <button className="dropdown-btn" onClick={() => handleDropdownClick('Propuesta')}>
-            Propuesta  
+            Propuestas  
             </button>
             <ul className={`dropdown-content ${openDropdown === 'Propuesta' ? 'show' : ''}`}>
               <li><Link to="/propuestas">Listado</Link></li>

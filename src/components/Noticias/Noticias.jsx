@@ -142,9 +142,10 @@ export const Noticias = () => {
                 ref={containerRef}
                 onWheel={handleWheel}
             >
-                {noticiasData.map((noticia, index) => (
+                {listaNoticias.map((noticia, index) => (
                     <div key={index} className="noticia-card">
-                        <img src={noticia.imagen} alt={noticia.titulo} className="noticia-imagen" />
+                        {//<img src={noticia.imagen} alt={noticia.titulo} className="noticia-imagen" />
+                        }
                         <h2 className="noticia-titulo">{noticia.titulo}</h2>
                         <p className="noticia-descripcion">{noticia.descripcion}</p>
                         <Link to={`/noticias/${noticia.id}`} className="btn-agregar-noticia">

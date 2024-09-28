@@ -7,30 +7,59 @@ export const CampañaPost = () => {
   const [estado, setEstado] = useState('Abierta');
   const [opciones, setOpciones] = useState([]);
   const [nuevaOpcion, setNuevaOpcion] = useState('');
+  
+  const [mensaje, setMensaje] = useState(null);
+
+  const ejecutarFetch = async() =>{
+
+    const nuevaCampaña = {
+      titulo,
+      descripcion,
+      opciones,
+    };
+    console.log(nuevaCampaña)
+
+    const url=`${process.env.REACT_APP_DOMINIO_BACK}/admin/campanas`
+
+
+  const response= await fetch(url, {
+      method: "POST",
+      headers: {
+          "Content-Type": "application/json",
+          //"Authorization": `Bearer ${getToken()}`
+      },
+      body: JSON.stringify(nuevaCampaña)
+  })
+if (response.status==200){
+  console.log('Nueva campaña creada:', nuevaCampaña);
+  // Aquí puedes enviar la campaña al backend o hacer otras acciones
+
+  setTitulo('');
+  setDescripcion('');
+  setOpciones([]);
+}
+      const data = await response.json()
+      console.log(data.msj)
+      setMensaje(data.msj)
+
+}
 
   // Función para agregar una nueva opción a la lista
   const agregarOpcion = () => {
-    if (nuevaOpcion.trim()) {
-      setOpciones([...opciones, nuevaOpcion]);
-      setNuevaOpcion(''); // Limpiar el input después de agregar
+    
+    
+    const opcion={
+      titulo:nuevaOpcion
     }
+    const newArray= opciones
+    newArray.push(opcion)
+    setOpciones(newArray);
+    setNuevaOpcion(''); // Limpiar el input después de agregar
+    
+    console.log(opciones)
   };
 
-  // Función para manejar el envío de la campaña
-  const handlePost = () => {
-    const nuevaCampaña = {
-      id: Math.random(), // Generar un id único
-      titulo,
-      descripcion,
-      estado,
-      opcion: opciones,
-    };
-    console.log('Nueva campaña creada:', nuevaCampaña);
-    // Aquí puedes enviar la campaña al backend o hacer otras acciones
-    setTitulo('');
-    setDescripcion('');
-    setOpciones([]);
-  };
+
 
   return (
     <div className="post-container">
@@ -56,7 +85,6 @@ export const CampañaPost = () => {
             onChange={(e) => setEstado(e.target.value)}
           >
             <option value="Abierta">Abierta</option>
-            <option value="Cerrada">Cerrada</option>
           </select>
           <div className="post-opciones">
             <input
@@ -70,12 +98,12 @@ export const CampañaPost = () => {
               Agregar opción
             </button>
           </div>
-          <ul className="post-options">
+          {opciones.length!=0&&<ul className="post-options">
             {opciones.map((opcion, index) => (
-              <li key={index} className="post-option">{opcion}</li>
+              <li key={index} className="post-option">{opcion.titulo}</li>
             ))}
-          </ul>
-          <button className="post-button" onClick={handlePost}>
+          </ul>}
+          <button className="post-button" onClick={ejecutarFetch}>
             Subir campaña
           </button>
         </div>

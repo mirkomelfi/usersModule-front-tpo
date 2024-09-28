@@ -31,6 +31,7 @@ import { Campañas } from './components/Campañas/Campañas';
 import { Campaña } from './components/Campaña/Campaña';
 import { CampañaPost } from './components/Post/CampañaPost';
 import { ForoFeedback } from './components/ForoFeedback/ForoFeedback';
+import { Usuarios } from './components/Usuarios/Usuarios';
 
 export const App = () => {
   return (
@@ -47,6 +48,8 @@ export const App = () => {
           <Route path='/agenda' element={<EventsCalendar />} />
 
           <Route path='/perfilUsuario' element={<PerfilUsuario />} />
+          
+          <Route path='/usuarios' element={<Usuarios />} />
 
           <Route path='/' element={<Home />} />
           <Route path='/asociarse' element={<Asociarse />} />

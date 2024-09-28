@@ -116,15 +116,16 @@ const handlerVoto = async () => {
   return (
     <div className={`campaña-detalle ${mostrarConfirmacion ? 'blur' : ''}`}>
 
-      {admin && (
+      {admin &&(
         <div>
-          <button className="add-campaign-button" onClick={cerrarCampaña}>Cerrar Campaña</button>
+          {campaña&&campaña.estado=="Abierta"&&<button className="add-campaign-button" onClick={cerrarCampaña}>Cerrar Campaña</button>}
         </div>
       )}
       {campaña&&
         <div className="campaña-card-detalle">
         <h2>{campaña.titulo}</h2>
         <h3>Descripcion: {campaña.descripcion}</h3  >
+        <h3>Estado: {campaña.estado}</h3  >
         {!admin?<div className="opciones-votacion">
           {campaña.opciones.slice(0, 3).map((opcion, index) => (
             <button

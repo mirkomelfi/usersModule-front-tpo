@@ -1,0 +1,104 @@
+.usuario-container {
+  width: 100%; /* Ancho completo de la página */
+  margin: 0 auto;
+  background-color: #f4f4f4;
+  padding: 30px; /* Aumenta el padding para más espacio */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* Elimina max-height y overflow */
+  /* max-height: 800px; */
+  /* overflow-y: auto; */
+}
+
+.usuario-scroll {
+  max-height: 700px; /* Aumenta el espacio disponible para el scroll */
+  overflow-y: scroll; /* Mantén el scroll solo aquí */
+  padding-right: 15px;
+}
+
+.usuario-title {
+  text-align: center;
+  font-size: 28px; /* Aumenta el tamaño de la fuente */
+  margin-bottom: 25px;
+}
+
+.usuario-filter {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 20px; /* Más espacio entre el filtro y la lista */
+}
+
+.usuario-filter label {
+  margin-right: 15px;
+  font-weight: bold;
+  font-size: 16px; /* Aumenta el tamaño del texto del filtro */
+}
+
+#subject-filter {
+  padding: 8px; /* Más espacio para el selector */
+  font-size: 16px; /* Aumenta el tamaño del texto en el selector */
+}
+
+.usuario-item {
+  background-color: white;
+  padding: 20px; /* Más espacio en cada comentario */
+  border-radius: 8px; /* Bordes más suaves */
+  margin-bottom: 15px; /* Más espacio entre comentarios */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.usuario-user {
+  font-weight: bold;
+  font-size: 18px; /* Texto del usuario más grande */
+  color: #007bff;
+}
+
+.usuario-date {
+  font-size: 14px; /* Aumenta ligeramente el tamaño de la fecha */
+  color: gray;
+}
+
+.usuario-comment {
+  margin-top: 12px;
+  font-size: 16px; /* Comentarios más visibles */
+  color: #333;
+}
+
+.add-usuario-button{
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: block;
+  margin: 20px auto;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.add-usuario-button:hover{
+  background-color: #0056b3;
+}
+
+
+/* Ajustes para pantallas más pequeñas */
+@media (max-width: 768px) {
+  .usuario-container {
+    width: 100%;
+  }
+
+  .usuario-item {
+    font-size: 14px;
+  }
+
+  .usuario-title {
+    font-size: 24px;
+  }
+
+  #subject-filter {
+    font-size: 14px;
+    padding: 6px;
+  }
+}

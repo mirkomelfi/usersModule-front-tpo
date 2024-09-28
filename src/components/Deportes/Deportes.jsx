@@ -143,11 +143,18 @@ export const Deportes = () => {
                 ref={containerRef}
                 onWheel={handleWheel}
             >
-                {deportesData.map((deporte, index) => (
+                {listaDeportes.map((deporte, index) => (
                     <div key={index} className="deporte-card">
                         <img src={deporte.imagen} alt={deporte.titulo} className="deporte-imagen" />
-                        <h2 className="deporte-titulo">{deporte.titulo}</h2>
+                        <h2 className="deporte-titulo">{deporte.nombre}</h2>
                         <p className="deporte-descripcion">{deporte.descripcion}</p>
+                        <p className="deporte-descripcion">Profesor a cargo: {deporte.profesor}</p>
+                        <p className="deporte-descripcion">Valor mensual: {deporte.valor}</p>
+                        <div >
+                        <h2 className="deporte-descripcion">Dias</h2>
+                        {deporte.dias.map((dia) => (<p className="deporte-descripcion">{dia}</p>))}
+                        </div>
+                       
                         <Link to={`/deportes/${deporte.id}`} className="btn-agregar-deporte">
                             Ir a Deporte
                         </Link>
