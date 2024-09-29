@@ -103,7 +103,8 @@ export const ForoFeedback = () => {
 
   return (
     <div className="foro-container">
-      <h2 className="foro-title">Lista de Feedback</h2>
+      {admin?<h2>Lista de Feedback</h2>:<h2>Mis Feedbacks</h2>}
+      
       {!admin&&
         <button className="add-feedback-button" onClick={handleAddFeedback}>
         Agregar Feedback

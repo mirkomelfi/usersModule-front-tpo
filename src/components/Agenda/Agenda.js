@@ -101,7 +101,7 @@ const EventsCalendar = () => {
     const fetchUsers = async () => {
       if (selectedOption!=""){
       try {
-        const response = await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/usuarios/${selectedOption}`, {
+        const response = await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/admin/usuarios?rol=${selectedOption}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',

@@ -103,7 +103,7 @@ export const Propuestas = () => {
 
   return (
     <div className="propuestas-container">
-      <h2>Propuestas</h2>
+      {admin?<h2>Propuestas</h2>:<h2>Mis Propuestas</h2>}
       
       <div className='button-container'>
         {!admin&&
