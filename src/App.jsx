@@ -38,6 +38,7 @@ import { DeportesPut } from './components/Put/DeportesPUT';
 import { ProductoPut } from './components/Put/ProductoPUT';
 import { PropuestasPut } from './components/Put/PropuestasPUT';
 import { CampañaPut } from './components/Put/CampañaPUT';
+import { UsuariosPut } from './components/Put/UsuarioPUT';
 
 
 export const App = () => {
@@ -55,7 +56,9 @@ export const App = () => {
           <Route path='/agenda' element={<EventsCalendar />} />
 
           <Route path='/perfilUsuario' element={<PerfilUsuario />} />
-          
+          <Route path='/usuarios/:dni' element={<PerfilUsuario />} />
+
+
           <Route path='/usuarios' element={<Usuarios />} />
 
           <Route path='/' element={<Home />} />
@@ -97,9 +100,9 @@ export const App = () => {
 
           <Route path="/usuarios" element={<UsuarioListContainer greeting="Listado de Usuarios"/>}/>
           <Route path="/usuarios/:dni" element={<UsuarioViejo />}/> 
-          <Route path="/updateUsuario/:dni" element={<UsuarioPut />}/> 
+          <Route path="/updateUsuario/:dni" element={<UsuariosPut />}/> 
           <Route path="/usuario/current" element={<UsuarioViejo />}/> 
-          <Route path="/updateUsuario" element={<UsuarioPut  fromPerfil={true}  />}/>
+          <Route path="/updateUsuario" element={<UsuariosPut  fromPerfil={true}  />}/>
 
           <Route path='*' element={<h1>404 Not Found</h1>} />
         </Routes>

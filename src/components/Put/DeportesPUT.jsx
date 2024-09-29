@@ -16,7 +16,7 @@ export const DeportesPut = () => {
 
     // Simulación de deporte hardcodeado (esto se podría reemplazar con una llamada al backend para obtener el deporte real)
     const [deporteSeleccionado, setDeporteSeleccionado] = useState(null); // Deporte seleccionado para modificar
-    const [desporte, setDeporte] = useState(null); // Estado para el deporte hardcodeado
+    const [deporte, setDeporte] = useState(null); // Estado para el deporte hardcodeado
    // Deportes hardcodeados (puede ser reemplazado por una llamada a la API para obtener los deportes)
    const deportes = [
     { id: 1, nombre: "Fútbol", descripcion: "Deporte de equipo jugado con una pelota en un campo rectangular.", valor: "5000", profesor: "Carlos Pérez" },
@@ -34,7 +34,7 @@ export const DeportesPut = () => {
 
     // Este efecto se ejecuta una vez para cargar los valores hardcodeados al estado.
     useEffect(() => {
-        setDeporte(desporte);
+        setDeporte(deporte);
     }, []);
 
     const consultarForm = async (e) => {

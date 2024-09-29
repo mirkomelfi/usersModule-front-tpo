@@ -10,8 +10,8 @@ import avatar from './Messi.jpeg'; // Imagen de ejemplo para el avatar
 
 export const PerfilUsuario = () => {
 
-  //var { dni } = useParams();
-  var dni=111
+  var { dni } = useParams();
+
   const [usuario, setUsuario] = useState(null);
   const [loading, setLoading] = useState(true);
   const [mensaje, setMensaje] = useState(null);
@@ -74,6 +74,7 @@ export const PerfilUsuario = () => {
     );
 
     const data = await response.json();
+  
       if (data.msj) {
         setMensaje(data.msj);
       }
@@ -105,9 +106,12 @@ export const PerfilUsuario = () => {
 
       <div className="perfil-info">
         <h3>Detalles del Usuario</h3>
+        {usuario.dni&&<p><strong>Documento: </strong>{usuario.dni}</p>}
         <p><strong>Email:</strong> usuario@clubdefutbol.com</p>
-        <p><strong>Teléfono:</strong>{usuario.telefono}</p>
+        {usuario.telefono&&<p><strong>Teléfono: </strong>{usuario.telefono}</p>}
         <p><strong>Fecha de Membresía:</strong> 01/01/2022</p>
+        {usuario.direccion&&<p><strong>Dirección: </strong>{usuario.direccion.calle} {usuario.direccion.numero}</p>}
+        {usuario.direccion&&<p><strong>Ciudad: </strong>{usuario.direccion.ciudad} - <strong>CP: </strong> {usuario.direccion.codPostal}</p>}
       </div>
 
       <div className="perfil-acciones">

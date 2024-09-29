@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from "react-redux";
 import './Usuarios.css';
+import { useNavigate } from 'react-router-dom';
 
 
 export const Usuarios= () => {
   const [selectedSubject, setSelectedSubject] = useState('Todos');
 
   const dni=111
-
+  const navigate = useNavigate();
   const admin = useSelector((state) => state.usuarios.isAdmin);
 
   const [listaUsuarios,setListaUsuarios]= useState([]);
@@ -84,15 +85,11 @@ export const Usuarios= () => {
     setSelectedSubject(e.target.value);
   };
 
-  const handleModificar = () => {
-    alert('Abrir modal o redirigir para modificar un nuevo usuario');
-  };
+
   const handleAgregar= () => {
     alert('Abrir modal o redirigir para Agregar un nuevo usuario');
   };
-  const handleEliminar= () => {
-    alert('Abrir modal o redirigir para eliminar un nuevo usuario');
-  };
+
 
   return (
     <div className="usuario-container">
@@ -125,14 +122,9 @@ export const Usuarios= () => {
           <div key={usuario.dni} className="usuario-item">
             
             <div className="usuario-user">{usuario.nombre} {usuario.apellido}    -    DNI: {usuario.dni}</div>
-            <div className="usuario-date">{usuario.fechaNacimiento}</div>
-            <p className="usuario-comment">{usuario.telefono}</p>
             <p className="usuario-comment">{usuario.rol}</p>
-            <button className="add-usuario-button" onClick={handleEliminar}>
-              Eliminar Usuario
-            </button>
-            <button className="add-usuario-button" onClick={handleModificar}>
-              Modificar Usuario
+            <button onClick={() => navigate(`/usuarios/${usuario.dni}`)} className="add-usuario-button">
+              Ver Usuario
             </button>
           </div>
         ))}
