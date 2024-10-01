@@ -7,10 +7,15 @@ import { getToken } from "../../utils/auth-utils";
 import { Mensaje } from "../Mensaje/Mensaje";
 import { validateRol, isRolUser, deleteToken } from "../../utils/auth-utils";
 import avatar from './Messi.jpeg'; // Imagen de ejemplo para el avatar
+import { useSelector } from 'react-redux';
 
 export const PerfilUsuario = () => {
 
+  var dniLogged = useSelector((state) => state.usuarios.dni);
   var { dni } = useParams();
+  if (dniLogged){
+    var dni= dniLogged
+  }
 
   const [usuario, setUsuario] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -21,11 +26,9 @@ export const PerfilUsuario = () => {
 
   const ejecutarFetch = async () => {
     var url = ``;
-    if (dni) {
-      url = `${process.env.REACT_APP_DOMINIO_BACK}/admin/usuarios/${dni}`;
-    } else {
-      url = `${process.env.REACT_APP_DOMINIO_BACK}/miPerfil`;
-    }
+
+      url = `${process.env.REACT_APP_DOMINIO_BACK}/usuarios/${dni}`;
+ 
 
     const response = await fetch(url, {
       method: "GET",

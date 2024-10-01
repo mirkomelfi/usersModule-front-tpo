@@ -34,7 +34,7 @@ const Navbar = () => {
         </div>
         <ul className="navbar-menu">
           {admin&&<li><Link to="/usuarios">Listado Usuarios</Link></li>}
-          <li><Link to="/perfilUsuario">Perfil Usuario</Link></li>
+          {!admin&&<li><Link to="/perfilUsuario">Perfil Usuario</Link></li>}
           <li><Link to="/deportes">Deportes</Link></li>
           <li><Link to="/noticias">Noticias</Link></li>
           {!admin&&<li><Link to="/productos">Productos</Link></li>}

@@ -3,6 +3,7 @@ import { LOGIN_USUARIO,LOGOUT } from "../actions/usuario.action";
 const initialState = {
   logged:null,
   isAdmin:null,
+  dni:111,
 };
   
 
