@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import './Campaña.css';
 import { useSelector } from 'react-redux';
+import { getToken } from '../../utils/auth-utils';
 
 const campaña = {
   id: 1,
@@ -31,7 +32,7 @@ export const Campaña = () => {
       method: "GET",
       headers: {
           "Content-Type": "application/json",
-         // "Authorization": `Bearer ${getToken()}`
+          "Authorization": `Bearer ${getToken()}`
       }
       
     })
@@ -52,7 +53,7 @@ const handlerVoto = async () => {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
-      //Authorization: `Bearer ${getToken()}`,
+      Authorization: `Bearer ${getToken()}`,
     },
   });
   if (response.status==200){
@@ -78,7 +79,7 @@ const handlerVoto = async () => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        //Authorization: `Bearer ${getToken()}`,
+        Authorization: `Bearer ${getToken()}`,
       },
     });
 

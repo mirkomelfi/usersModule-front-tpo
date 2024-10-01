@@ -9,8 +9,45 @@ export const LOAD_USUARIOS = "LOAD_USUARIOS";
 
 const URL_API=1
 
-export const loginUsuario = (cliente) => {
+export const loginUsuario = (dni,rol) => {
   return async (dispatch) => {
+  dispatch({
+    type:LOGIN_USUARIO,
+    dni,
+    rol 
+  });
+}
+ 
+
+  /*return async (dispatch) => {
+    const response=await fetch(
+      `${process.env.REACT_APP_DOMINIO_BACK}/login`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(cliente),
+      }
+    );
+
+    if (response.status==200){
+      const data = await response.json()
+      console.log(data)
+      setToken(data.token)
+      dispatch({
+        type:LOGIN_USUARIO,
+        usuario:data, 
+      });
+    }else{
+      const data = await response.json()
+      console.log(data)
+      dispatch({
+        type:LOGIN_USUARIO,
+        usuario:null, 
+      });
+    }
+*/
 /*
     try {
       const response = await fetch(`${URL_API}/loginUsuario`, {
@@ -37,7 +74,7 @@ export const loginUsuario = (cliente) => {
     } catch (err) {
       console.log(err);
     }*/
-  };
+
 };
 
 

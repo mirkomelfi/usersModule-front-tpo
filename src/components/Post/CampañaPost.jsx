@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Post.css';
+import { getToken } from '../../utils/auth-utils';
 
 export const CampañaPost = () => {
   const [titulo, setTitulo] = useState('');
@@ -26,7 +27,7 @@ export const CampañaPost = () => {
       method: "POST",
       headers: {
           "Content-Type": "application/json",
-          //"Authorization": `Bearer ${getToken()}`
+          "Authorization": `Bearer ${getToken()}`
       },
       body: JSON.stringify(nuevaCampaña)
   })

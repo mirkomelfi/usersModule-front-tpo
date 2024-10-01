@@ -12,8 +12,14 @@ import { useSelector } from 'react-redux';
 export const PerfilUsuario = () => {
 
   var dniLogged = useSelector((state) => state.usuarios.dni);
+  var roll = useSelector((state) => state.usuarios.rol);
+  var admin = useSelector((state) => state.usuarios.isAdmin);
+  console.log("dniLogged",dniLogged)
+  console.log("rol",roll)
+  console.log("adm",admin)
+
   var { dni } = useParams();
-  if (dniLogged){
+  if (!admin){
     var dni= dniLogged
   }
 
@@ -34,7 +40,7 @@ export const PerfilUsuario = () => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        //Authorization: `Bearer ${getToken()}`,
+        Authorization: `Bearer ${getToken()}`,
       },
     });
 

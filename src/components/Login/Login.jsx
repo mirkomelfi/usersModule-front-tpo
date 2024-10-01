@@ -2,13 +2,18 @@ import { useRef } from "react";
 import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Mensaje } from "../Mensaje/Mensaje";
-import { deleteToken, getToken, setToken } from "../../utils/auth-utils";
+import { deleteToken, extractDni, getToken, setToken,extractRol } from "../../utils/auth-utils";
 import "./Login.css";
+import { loginUsuario } from "../../store/actions/usuario.action";
+import { useDispatch } from "react-redux";
 
 export const Login = () => {
   const [loggeado, setLoggeado] = useState(false);
   const [mensaje, setMensaje] = useState(null);
   const navigate = useNavigate();
+
+  const dispatch=useDispatch()
+
   const navigateTo = (url) => {
     navigate(url);
   };
@@ -49,11 +54,17 @@ export const Login = () => {
 
     if (response.status==200){
       const data = await response.json()
+      console.log(data)
       setToken(data.token)
+   
     }else{
       const data = await response.json()
+      console.log(data)
       setMensaje(data.msj)
     }
+    const dni = extractDni(getToken())
+    const rol = extractRol(getToken())
+    dispatch(loginUsuario(dni,rol))
   
     // Navegar a /superAdmin sin importar el resultado de la autenticación
     //navigate("/superAdmin");

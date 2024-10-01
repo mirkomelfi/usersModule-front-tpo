@@ -25,6 +25,11 @@ export const extractRol=(token)=>{
     return decoded.rol
 }
 
+export const extractDni=(token)=>{
+    const decoded= jwtDecode(token)
+    return decoded.dni
+}
+
 export const extractUrl=(url)=>{
     const url_desarrollo=process.env.REACT_APP_DOMINIO_FRONT
     if (url_desarrollo=="http://localhost:3000"){

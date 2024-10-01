@@ -42,7 +42,7 @@ export const ProductoPost = () => {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    //"Authorization": `Bearer ${getToken()}`
+                    "Authorization": `Bearer ${getToken()}`
                 },
                 body: JSON.stringify(noticia)
             })

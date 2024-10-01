@@ -38,8 +38,6 @@ const Navbar = () => {
           <li><Link to="/deportes">Deportes</Link></li>
           <li><Link to="/noticias">Noticias</Link></li>
           {!admin&&<li><Link to="/productos">Productos</Link></li>}
-          {!admin&&<li><Link to="/producto">Producto</Link></li>}
-          {!admin&&<li><Link to="/listaCarrito">Lista Carrito</Link></li>}
           {!admin&&<li><Link to="/agenda">Mi agenda</Link></li>}
 
 

@@ -3,6 +3,7 @@ import { Mensaje } from "../Mensaje/Mensaje";
 import { useNavigate } from "react-router-dom";
 import ImagenPost from "../Imagen/ImagenPOST";
 import './Post.css'; // Reutilizando Post.css
+import { getToken } from "../../utils/auth-utils";
 
 export const NoticiasPost = () => {
 
@@ -30,6 +31,7 @@ export const NoticiasPost = () => {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
+                    "Authorization": `Bearer ${getToken()}`
                 },
                 body: JSON.stringify(noticia),
             });

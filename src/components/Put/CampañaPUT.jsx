@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './PUT.css';
 import { useParams } from 'react-router-dom';
+import { getToken } from '../../utils/auth-utils';
 
 export const CampañaPut = () => {
   const [titulo, setTitulo] = useState(null);
@@ -75,7 +76,7 @@ export const CampañaPut = () => {
       method: "PUT",
       headers: {
           "Content-Type": "application/json",
-          //"Authorization": `Bearer ${getToken()}`
+          "Authorization": `Bearer ${getToken()}`
       },
       body: JSON.stringify(nuevaCampaña)
   })

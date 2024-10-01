@@ -4,6 +4,8 @@ import moment from 'moment';
 import 'moment/locale/es';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import styled from 'styled-components';
+import { getToken } from '../../utils/auth-utils';
+import { useSelector } from 'react-redux';
 
 // Configurar el localizador para react-big-calendar usando moment
 const localizer = momentLocalizer(moment);
@@ -52,6 +54,12 @@ const EventsCalendar = () => {
   const [selectedSlot, setSelectedSlot] = useState(null); // Guardar el slot seleccionado
   const [selectedOption, setSelectedOption] = useState('');
 
+  const dni = useSelector((state) => state.usuarios.dni);
+
+
+  const admin = useSelector((state) => state.usuarios.isAdmin);
+
+
   const [selectedUser, setSelectedUser] = useState(null);
   const [users, setUsers] = useState([]);
 
@@ -66,11 +74,12 @@ const EventsCalendar = () => {
     // Función para obtener los eventos desde la API y mostrarlos en el Calendario
     const fetchEvents = async () => {
       try {
-        const dniSolicitante = 111;
-        const response = await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/turnos/${dniSolicitante}`, {
+
+        const response = await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/turnos/${dni}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
+            "Authorization": `Bearer ${getToken()}`
           },
         });
         const data = await response.json();
@@ -104,7 +113,8 @@ const EventsCalendar = () => {
         const response = await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/admin/usuarios?rol=${selectedOption}`, {
           method: 'GET',
           headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/json',     
+            "Authorization": `Bearer ${getToken()}`
           },
         });
         const data = await response.json();
@@ -124,11 +134,12 @@ const EventsCalendar = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const dniSolicitante = 111;
-      const response = await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/turnos/${dniSolicitante}/${selectedUser}`, {
+
+      const response = await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/turnos/${dni}/${selectedUser}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          "Authorization": `Bearer ${getToken()}`
         },
         body: JSON.stringify({
           fechaHora: new Date(newEvent.start).toISOString(),

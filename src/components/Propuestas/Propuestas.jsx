@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './Propuestas.css';
 import { useSelector } from 'react-redux';
+import { getToken } from '../../utils/auth-utils';
+import { useNavigate } from 'react-router-dom';
 
 const initialPropuestas = [
   { id: 1, title: 'Nueva cancha de fútbol 5', description: 'Construcción de una cancha de césped sintético para entrenamientos.', votes: 124, createdBy: 'Usuario1' },
@@ -14,12 +16,14 @@ export const Propuestas = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedUser, setSelectedUser] = useState('Todos');
   const [votes, setVotes] = useState({}); // Stores user votes
+  const navigate = useNavigate(); // Hook para navegar
+
 
   const admin = useSelector((state) => state.usuarios.isAdmin);
 
 
 
-  const dni=111
+  const dni = useSelector((state) => state.usuarios.dni);
 
 
   const [listaPropuestas,setListaPropuestas]= useState([]);
@@ -39,7 +43,7 @@ export const Propuestas = () => {
       method: "GET",
       headers: {
           "Content-Type": "application/json",
-         // "Authorization": `Bearer ${getToken()}`
+          "Authorization": `Bearer ${getToken()}`
       }
       
     })
@@ -82,7 +86,7 @@ export const Propuestas = () => {
   };
 
   const handleAddProposal = () => {
-    alert('Abrir modal o redirigir para agregar una propuesta nueva');
+    navigate("/propuestas/add")
   };
 
   const handleDeleteProposal = () => {

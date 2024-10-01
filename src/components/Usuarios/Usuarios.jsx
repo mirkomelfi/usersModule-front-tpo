@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from "react-redux";
 import './Usuarios.css';
 import { useNavigate } from 'react-router-dom';
+import { getToken } from '../../utils/auth-utils';
 
 
 export const Usuarios= () => {
@@ -27,7 +28,7 @@ export const Usuarios= () => {
       method: "GET",
       headers: {
           "Content-Type": "application/json",
-          // "Authorization": `Bearer ${getToken()}`
+          "Authorization": `Bearer ${getToken()}`
       }
       
     })
@@ -51,7 +52,7 @@ export const Usuarios= () => {
       method: "GET",
       headers: {
           "Content-Type": "application/json",
-         // "Authorization": `Bearer ${getToken()}`
+          "Authorization": `Bearer ${getToken()}`
       }
       
     })

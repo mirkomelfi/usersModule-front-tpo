@@ -3,6 +3,7 @@ import { Mensaje } from "../Mensaje/Mensaje";
 import { useNavigate, useParams } from "react-router-dom";
 import ImagenPost from "../Imagen/ImagenPOST";
 import './PUT.css'; 
+import { getToken } from "../../utils/auth-utils";
 
 export const UsuariosPut = () => {
     const [mensaje, setMensaje] = useState(null);
@@ -70,6 +71,7 @@ export const UsuariosPut = () => {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
+                "Authorization": `Bearer ${getToken()}`
             },
             body: JSON.stringify(newUser),
         });

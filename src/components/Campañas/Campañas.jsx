@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './Campañas.css';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom'; // Necesario para la navegación
+import { getToken } from '../../utils/auth-utils';
 
 const campañas = [
   {
@@ -41,7 +42,7 @@ export const Campañas = () => {
       method: "GET",
       headers: {
           "Content-Type": "application/json",
-         // "Authorization": `Bearer ${getToken()}`
+          "Authorization": `Bearer ${getToken()}`
       }
       
     })

@@ -3,6 +3,7 @@ import { Mensaje } from "../Mensaje/Mensaje";
 import { useNavigate } from "react-router-dom";
 import ImagenPost from "../Imagen/ImagenPOST";
 import './Post.css'; 
+import { getToken } from "../../utils/auth-utils";
 
 export const DeportesPost = () => {
     const [mensaje, setMensaje] = useState(null);
@@ -27,6 +28,7 @@ export const DeportesPost = () => {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
+                    "Authorization": `Bearer ${getToken()}`                    
                 },
                 body: JSON.stringify(deporte),
             });

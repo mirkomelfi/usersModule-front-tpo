@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from "react-redux";
 import './ForoFeedback.css';
+import { getToken } from '../../utils/auth-utils';
+import { useNavigate } from 'react-router-dom';
 
 const feedbacks = [
   { id: 1, user: 'Juan Pérez', comment: 'Muy buena la atención en boletería. Rápido y eficiente.', date: '2024-09-01', subject: 'Atención' },
@@ -13,13 +15,13 @@ const feedbacks = [
 export const ForoFeedback = () => {
   const [selectedSubject, setSelectedSubject] = useState('Todos');
 
-  const dni=111
+  const dni = useSelector((state) => state.usuarios.dni);
 
   const admin = useSelector((state) => state.usuarios.isAdmin);
 
   const [listaFeedback,setListaFeedback]= useState([]);
   const [mensaje,setMensaje]= useState(null);
-
+  const navigate = useNavigate(); // Hook para navegar
   const [selectedRubro, setSelectedRubro] = useState(0);
 
   const [listaRubros,setListaRubros]= useState([]);
@@ -31,7 +33,7 @@ export const ForoFeedback = () => {
       method: "GET",
       headers: {
           "Content-Type": "application/json",
-          // "Authorization": `Bearer ${getToken()}`
+          "Authorization": `Bearer ${getToken()}`
       }
       
     })
@@ -48,7 +50,7 @@ export const ForoFeedback = () => {
   const ejecutarFetch = async() =>{
 
     let url;
-    if (admin!=true){
+    if (!admin){
       url=`misFeedbacks/${dni}?rubro=${selectedRubro}`
     }else{
       url=`admin/feedbacks?rubro=${selectedRubro}`
@@ -58,7 +60,7 @@ export const ForoFeedback = () => {
       method: "GET",
       headers: {
           "Content-Type": "application/json",
-         // "Authorization": `Bearer ${getToken()}`
+          "Authorization": `Bearer ${getToken()}`
       }
       
     })
@@ -94,7 +96,7 @@ export const ForoFeedback = () => {
   };
 
   const handleAddFeedback = () => {
-    alert('Abrir modal o redirigir para agregar un nuevo feedback');
+    navigate('/feedback');
   };
 
   const filteredFeedbacks = selectedSubject === 'Todos'

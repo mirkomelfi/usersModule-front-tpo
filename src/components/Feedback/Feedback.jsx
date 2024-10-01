@@ -1,10 +1,11 @@
 import React, { useEffect, useState, useRef } from 'react';
 import './Feedback.css';
+import { getToken } from '../../utils/auth-utils';
+import { useSelector } from 'react-redux';
 
 export const Feedback = () => {
-
-  const admin=null // por ahora hardcodear true o null. dsps se obtiene del usr loggeado
-  const dni=222 // por ahora hardcodear. dsps se obtiene del usr loggeado
+  const dni = useSelector((state) => state.usuarios.dni);
+  const admin = useSelector((state) => state.usuarios.isAdmin);
 
   const datForm = useRef();
   const [selectedRubro, setSelectedRubro] = useState('');
@@ -20,7 +21,7 @@ export const Feedback = () => {
       method: "GET",
       headers: {
           "Content-Type": "application/json",
-          // "Authorization": `Bearer ${getToken()}`
+           "Authorization": `Bearer ${getToken()}`
       }
       
     })
@@ -44,7 +45,7 @@ export const Feedback = () => {
       method: "POST",
       headers: {
           "Content-Type": "application/json",
-          // "Authorization": `Bearer ${getToken()}`
+          "Authorization": `Bearer ${getToken()}`
       },
       body:JSON.stringify(feedbackObject)
       
@@ -66,7 +67,7 @@ export const Feedback = () => {
       method: "POST",
       headers: {
           "Content-Type": "application/json",
-          // "Authorization": `Bearer ${getToken()}`
+          "Authorization": `Bearer ${getToken()}`
       },
       body:JSON.stringify(rubro)
       
@@ -115,9 +116,7 @@ export const Feedback = () => {
   return (
     <div className="feedback-container">
   {admin?<div>
-    <span>
-            ROL admin
-          </span><br></br>
+    
     {//<button className="perfil-btn perfil-btn-danger"  onClick={() => addRubro()}>Añadir nuevo rubro</button>
     }
     <form onSubmit={consultarFormRubro} ref={datForm}>
@@ -132,9 +131,7 @@ export const Feedback = () => {
     </div>
 :
     <div>
-    <span>
-            ROL user
-          </span><br></br>
+    
       <h2>Dejanos tu comentario</h2>
       <form onSubmit={handleSubmit}>
         <label htmlFor="subject">Selecciona el asunto:</label>
