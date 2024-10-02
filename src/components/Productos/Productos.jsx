@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import './Productos.css';
 import { FaShoppingCart } from 'react-icons/fa'; // Importa el icono del carrito
 import foto from './Ojotas.jpg';
+import { useSelector } from 'react-redux';
 
 const productos = [
   { id: 1, name: 'Crocs Azul Unisex', price: '$44.990', image: foto, tipo: 'Calzado',  url: '/producto'},
@@ -35,6 +36,9 @@ const groupByType = (products) => {
 };
 
 export const Productos = () => {
+
+  const isUser = useSelector((state) => state.usuarios.dni);
+
   const navigate = useNavigate();
   const [cartCount, setCartCount] = useState(3);
   const [searchTerm, setSearchTerm] = useState('');
@@ -94,11 +98,19 @@ export const Productos = () => {
         </div>
       </div>
 
-      <div className="agregarProducto">
+       {!isUser&& <Link to="/register" className="btn-agregar-producto">
+        Para poder comprar debe tener iniciar sesión. Si no tiene cuenta presione aquí para registrarse.
+        </Link>}
+
+{// Me parece que pertenece a grupo Ecommerce
+}
+      {/*
+        <div className="agregarProducto">
         <Link to="/productos/add" className="btn-agregar-producto">
           Agregar Producto
         </Link>
-      </div>
+      </div>*/
+      }
 
       {Object.keys(productosFiltradosPorTipo).map((tipo) => {
         const current = currentIndex[tipo] || 0;

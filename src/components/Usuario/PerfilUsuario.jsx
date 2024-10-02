@@ -49,25 +49,11 @@ export const PerfilUsuario = () => {
     if (data.msj) {
       setMensaje(data.msj);
     } else {
+      console.log("data: ", data)
       setUsuario(data);
       setLoading(null)
-      console.log(data)
     }
 
-    /*const rol = validateRol(response);
-    if (!rol) {
-      deleteToken();
-      navigate("/login");
-    } else {
-      const data = await response.json();
-      setRol(isRolUser(getToken()));
-      if (data.msj) {
-        setMensaje(data.msj);
-      } else {
-        setUsuario(data);
-      }
-    }
-      */
   };
 
   const eliminar = async () => {
@@ -117,16 +103,18 @@ export const PerfilUsuario = () => {
         <h3>Detalles del Usuario</h3>
         {usuario.dni&&<p><strong>Documento: </strong>{usuario.dni}</p>}
         <p><strong>Email:</strong> usuario@clubdefutbol.com</p>
-        {usuario.telefono&&<p><strong>Teléfono: </strong>{usuario.telefono}</p>}
+        {usuario.telefono!=0?<p><strong>Teléfono: </strong>{usuario.telefono}</p>:<p><strong>Teléfono: </strong>No asociado</p>}
         <p><strong>Fecha de Membresía:</strong> 01/01/2022</p>
         {usuario.direccion&&<p><strong>Dirección: </strong>{usuario.direccion.calle} {usuario.direccion.numero}</p>}
         {usuario.direccion&&<p><strong>Ciudad: </strong>{usuario.direccion.ciudad} - <strong>CP: </strong> {usuario.direccion.codPostal}</p>}
       </div>
 
-      <div className="perfil-acciones">
+
+        <div className="perfil-acciones">
         <button className="perfil-btn" onClick={() => navigateTo(`/updateUsuario/${dni}`)}>Editar Perfil</button>
         <button className="perfil-btn perfil-btn-danger"  onClick={() => eliminar()}>Eliminar Cuenta</button>
       </div>
+
     </div>
       ): 
       (

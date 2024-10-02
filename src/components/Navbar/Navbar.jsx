@@ -7,6 +7,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false); // Controla si el navbar está visible
   const [openDropdown, setOpenDropdown] = useState(null); // Controla qué dropdown está abierto
   const admin = useSelector((state) => state.usuarios.isAdmin);
+  const isUser = useSelector((state) => state.usuarios.dni);
   // Función para manejar la visibilidad del dropdown
   const handleDropdownClick = (dropdownName) => {
     setOpenDropdown(openDropdown === dropdownName ? null : dropdownName);
@@ -32,7 +33,8 @@ const Navbar = () => {
         <div className="navbar-logo">
           <Link to="/">San Lorenzo</Link>
         </div>
-        <ul className="navbar-menu">
+        {isUser?<ul className="navbar-menu">
+          {<li><Link to="/logout">Logout</Link></li>}
           {admin&&<li><Link to="/usuarios">Listado Usuarios</Link></li>}
           {!admin&&<li><Link to="/perfilUsuario">Perfil Usuario</Link></li>}
           <li><Link to="/deportes">Deportes</Link></li>
@@ -80,6 +82,20 @@ const Navbar = () => {
             </ul>
           </li>
         </ul>
+        
+      :
+
+
+// Not user
+        <ul className="navbar-menu">
+          <li><Link to="/deportes">Deportes</Link></li>
+          <li><Link to="/noticias">Noticias</Link></li>
+          <li><Link to="/productos">Productos</Link></li>
+          <li><Link to="/login">Login</Link></li>
+          <li><Link to="/register">Registrarse</Link></li>
+        </ul>
+
+      }
 
         <a href="/asociarse" className="navbar-button">Asociate</a>
         <a href="/contactos" className="feedback-button">Ayuda</a>

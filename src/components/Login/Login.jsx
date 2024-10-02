@@ -52,18 +52,25 @@ export const Login = () => {
       }
     );
 
+    var dni = null
+    var rol = null
+
     if (response.status==200){
       const data = await response.json()
       console.log(data)
       setToken(data.token)
+      dni = extractDni(getToken())
+      rol = extractRol(getToken())
+      alert(`Fuiste loggeado`)
+      navigate("/")
    
     }else{
       const data = await response.json()
       console.log(data)
+      alert(`${data.msj}`)
       setMensaje(data.msj)
     }
-    const dni = extractDni(getToken())
-    const rol = extractRol(getToken())
+
     dispatch(loginUsuario(dni,rol))
   
     // Navegar a /superAdmin sin importar el resultado de la autenticación

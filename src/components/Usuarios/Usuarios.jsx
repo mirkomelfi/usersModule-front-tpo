@@ -8,7 +8,7 @@ import { getToken } from '../../utils/auth-utils';
 export const Usuarios= () => {
   const [selectedSubject, setSelectedSubject] = useState('Todos');
 
-  const dni=111
+
   const navigate = useNavigate();
   const admin = useSelector((state) => state.usuarios.isAdmin);
 
@@ -22,7 +22,7 @@ export const Usuarios= () => {
   ]);
 
   //falta desarrollar filtros en el back
-  const getRoles = async() =>{
+  /*const getRoles = async() =>{
 
     const response= await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/roles`, {
       method: "GET",
@@ -41,7 +41,7 @@ export const Usuarios= () => {
       setListaRoles(data)
     }
   }
-
+*/
   const ejecutarFetch = async() =>{
 
     let url;
@@ -75,12 +75,12 @@ export const Usuarios= () => {
 
   },[selectedRol])
 
-  useEffect(() => { 
+  /*useEffect(() => { 
     getRoles()
     .catch(error => console.error(error))
 
   },[])
-
+*/
 
   const handleSubjectChange = (e) => {
     setSelectedSubject(e.target.value);

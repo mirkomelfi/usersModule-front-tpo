@@ -22,29 +22,22 @@ export const Register = () => {
         if (!cliente.username || !cliente.password) {
             setMensaje("Faltan datos");
         } else {
-            const response = await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/admin/register`, {
+            const response = await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/register`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": `Bearer ${getToken()}`
+                    //"Authorization": `Bearer ${getToken()}`
                 },
                 body: JSON.stringify(cliente)
             });
 
-            const rol = validateRol(response);
-            if (!rol) {
-                if (isRolUser(getToken())) {
-                    setMensaje("No posee los permisos necesarios");
-                } else {
-                    deleteToken();
-                    navigate("/login");
-                }
-            } else {
-                const data = await response.json();
-                if (data.msj) {
-                    setMensaje(data.msj);
-                }
+           
+            const data = await response.json();
+            console.log(data)
+            if (data.msj) {
+                setMensaje(data.msj);
             }
+            
             e.target.reset();
         }
     };

@@ -78,8 +78,7 @@ export const UsuariosPut = () => {
 
         if (response.status === 200) {
             const data = await response.json();
-            setDni(data.dni);
-            setMensaje(data.msj + " Puede agregar imágenes si lo desea");
+            setMensaje(data.msj);
         } else {
             const data = await response.json();
             setError(true);

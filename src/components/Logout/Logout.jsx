@@ -4,11 +4,16 @@ import { Navigate, useNavigate } from "react-router-dom"
 import { Mensaje } from "../Mensaje/Mensaje"
 import { Link } from "react-router-dom"
 import { deleteToken, getToken, setToken } from "../../utils/auth-utils"
+import { useDispatch } from "react-redux"
+import { loginUsuario } from "../../store/actions/usuario.action"
 export const Logout = () => {
     
 
     const [mensaje,setMensaje]=useState("No se encuentra loggeado")
     const navigate= useNavigate()
+
+    const dispatch=useDispatch()
+
     const desloggear=async()=>{
         const token= getToken()
         if (token!=null){
@@ -22,6 +27,7 @@ export const Logout = () => {
       }
 
     useEffect(() => { 
+        dispatch((loginUsuario(null,null)))
         desloggear()
     },[])
     
