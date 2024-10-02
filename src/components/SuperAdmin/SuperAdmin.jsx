@@ -1,6 +1,7 @@
 import "./SuperAdmin.css";
 import { useState } from "react";
-import { getToken } from "../../utils/auth-utils";
+import { getToken, isTokenExpired } from "../../utils/auth-utils";
+import { useNavigate } from "react-router-dom";
 
 const SuperAdmin = () => {
   const [formData, setFormData] = useState({
@@ -9,7 +10,7 @@ const SuperAdmin = () => {
     role: "Directivo",
   });
   const [mensaje, setMensaje] = useState(null);
-
+  const navigate = useNavigate();
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -25,11 +26,16 @@ const SuperAdmin = () => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${getToken()}`, 
+        "Authorization": `Bearer ${getToken()}`, 
       },
       body: JSON.stringify(formData),
     });
-
+    if (response.status==403){
+      if (isTokenExpired(getToken())) {
+        alert("Venció su sesión. Vuelva a logguearse")
+        navigate("/logout")
+      }
+    }
     const data = await response.json();
 
     if (data.msj) {

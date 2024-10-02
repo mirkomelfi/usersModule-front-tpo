@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './Propuestas.css';
 import { useSelector } from 'react-redux';
-import { getToken } from '../../utils/auth-utils';
+import { getToken, isTokenExpired } from '../../utils/auth-utils';
 import { useNavigate } from 'react-router-dom';
 
 const initialPropuestas = [
@@ -47,7 +47,12 @@ export const Propuestas = () => {
       }
       
     })
-
+    if (response.status==403){
+      if (isTokenExpired(getToken())) {
+        alert("Venció su sesión. Vuelva a logguearse")
+        navigate("/logout")
+      }
+    }
     const data = await response.json()
     if (data.msj){
       console.log(data.msj)

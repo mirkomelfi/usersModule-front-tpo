@@ -3,7 +3,7 @@ import { Mensaje } from "../Mensaje/Mensaje"
 import { useState } from "react"
 import { useBlocker, useNavigate, useParams } from "react-router-dom"
 import { Link } from "react-router-dom"
-import { validateRol,isRolUser,deleteToken,getToken } from "../../utils/auth-utils";
+import { validateRol,isRolUser,deleteToken,getToken, isTokenExpired } from "../../utils/auth-utils";
 import ImagenPost from "../Imagen/ImagenPOST"
 
 import './Post.css'; 
@@ -46,6 +46,14 @@ export const ProductoPost = () => {
                 },
                 body: JSON.stringify(noticia)
             })
+
+            if (response.status==403){
+                if (isTokenExpired(getToken())) {
+                  alert("Venció su sesión. Vuelva a logguearse")
+                  navigate("/logout")
+                }
+              }
+
             if (response.status==200){
                 const data = await response.json()
                 setIdNoticia(data.id)

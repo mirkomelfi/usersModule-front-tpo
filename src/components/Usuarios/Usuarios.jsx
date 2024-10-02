@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from "react-redux";
 import './Usuarios.css';
 import { useNavigate } from 'react-router-dom';
-import { getToken } from '../../utils/auth-utils';
+import { getToken, isTokenExpired } from '../../utils/auth-utils';
 
 
 export const Usuarios= () => {
@@ -56,7 +56,12 @@ export const Usuarios= () => {
       }
       
     })
- 
+    if (response.status==403){
+      if (isTokenExpired(getToken())) {
+        alert("Venció su sesión. Vuelva a logguearse")
+        navigate("/logout")
+      }
+    }
     const data = await response.json()
     if (data.msj){
       setListaUsuarios([])

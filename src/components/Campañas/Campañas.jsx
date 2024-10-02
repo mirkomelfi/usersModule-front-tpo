@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './Campañas.css';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom'; // Necesario para la navegación
-import { getToken } from '../../utils/auth-utils';
+import { deleteToken, getToken, isTokenExpired } from '../../utils/auth-utils';
 
 const campañas = [
   {
@@ -30,7 +30,6 @@ export const Campañas = () => {
 
 
 
-  const dni=111
   const [listaCampañas,setListaCampañas]= useState([]);
   const [mensaje,setMensaje]= useState(null);
  
@@ -47,7 +46,15 @@ export const Campañas = () => {
       
     })
 
+    if (response.status==403){
+      if (isTokenExpired(getToken())) {
+        alert("Venció su sesión. Vuelva a logguearse")
+        navigate("/logout")
+      }
+    }
+
     const data = await response.json()
+
     if (data.msj){
       console.log(data.msj)
       setListaCampañas([])

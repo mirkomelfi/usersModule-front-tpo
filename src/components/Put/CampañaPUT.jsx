@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './PUT.css';
-import { useParams } from 'react-router-dom';
-import { getToken } from '../../utils/auth-utils';
+import { useNavigate, useParams } from 'react-router-dom';
+import { getToken, isTokenExpired } from '../../utils/auth-utils';
 
 export const CampañaPut = () => {
   const [titulo, setTitulo] = useState(null);
@@ -9,7 +9,7 @@ export const CampañaPut = () => {
   const [estado, setEstado] = useState(null);
   const [opciones, setOpciones] = useState([]);
   const [nuevaOpcion, setNuevaOpcion] = useState('');
-  
+  const navigate = useNavigate();
   const {id}=useParams()
 
   const [mensaje, setMensaje] = useState(null);
@@ -80,6 +80,12 @@ export const CampañaPut = () => {
       },
       body: JSON.stringify(nuevaCampaña)
   })
+  if (response.status==403){
+    if (isTokenExpired(getToken())) {
+      alert("Venció su sesión. Vuelva a logguearse")
+      navigate("/logout")
+    }
+  }
 if (response.status==200){
   console.log('Nueva campaña creada:', nuevaCampaña);
   // Aquí puedes enviar la campaña al backend o hacer otras acciones

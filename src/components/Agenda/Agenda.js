@@ -4,8 +4,9 @@ import moment from 'moment';
 import 'moment/locale/es';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import styled from 'styled-components';
-import { getToken } from '../../utils/auth-utils';
+import { getToken, isTokenExpired } from '../../utils/auth-utils';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 // Configurar el localizador para react-big-calendar usando moment
 const localizer = momentLocalizer(moment);
@@ -53,7 +54,7 @@ const EventsCalendar = () => {
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [selectedSlot, setSelectedSlot] = useState(null); // Guardar el slot seleccionado
   const [selectedOption, setSelectedOption] = useState('');
-
+  const navigate = useNavigate(); // Hook para navegar
   const dni = useSelector((state) => state.usuarios.dni);
 
 
@@ -82,6 +83,12 @@ const EventsCalendar = () => {
             "Authorization": `Bearer ${getToken()}`
           },
         });
+        if (response.status==403){
+          if (isTokenExpired(getToken())) {
+            alert("Venció su sesión. Vuelva a logguearse")
+            navigate("/logout")
+          }
+        }
         const data = await response.json();
         console.log(data)
         const formattedEvents = data.map(event => ({
@@ -117,8 +124,25 @@ const EventsCalendar = () => {
             "Authorization": `Bearer ${getToken()}`
           },
         });
+        if (response.status==403){
+          if (isTokenExpired(getToken())) {
+            alert("Venció su sesión. Vuelva a logguearse")
+            navigate("/logout")
+          }
+        }
         const data = await response.json();
-        setUsers(data)
+        console.log("dataArray",data)
+        var usersList=[]
+        data.forEach(user=>{
+
+          if (user.dni!=dni){
+            usersList.push(user)
+          }
+        })
+
+        setUsers(usersList)
+        if (usersList.length==0) alert("Pruebe con otro rol. No hay ninguno del seleccionado disponible")
+
       } catch (error) {
         console.error('Error fetching events:', error);
       }
@@ -145,7 +169,12 @@ const EventsCalendar = () => {
           fechaHora: new Date(newEvent.start).toISOString(),
         }),
       });
-
+      if (response.status==403){
+        if (isTokenExpired(getToken())) {
+          alert("Venció su sesión. Vuelva a logguearse")
+          navigate("/logout")
+        }
+      }
       if (response.ok) {
         const data = await response.json();
         setEvents([...events, {

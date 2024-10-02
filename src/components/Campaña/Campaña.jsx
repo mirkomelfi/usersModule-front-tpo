@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import './Campaña.css';
 import { useSelector } from 'react-redux';
-import { getToken } from '../../utils/auth-utils';
+import { getToken, isTokenExpired } from '../../utils/auth-utils';
 
 const campaña = {
   id: 1,
@@ -19,7 +19,7 @@ export const Campaña = () => {
 
   const [opcionId, setOpcionId] = useState(null);
   const [mostrarConfirmacion, setMostrarConfirmacion] = useState(false);
-  const dni=111
+  const dni = useSelector((state) => state.usuarios.dni);
   const { id } = useParams();
   console.log(id)
   const [campaña, setCampaña] = useState(null);
@@ -36,7 +36,12 @@ export const Campaña = () => {
       }
       
     })
-
+    if (response.status==403){
+      if (isTokenExpired(getToken())) {
+        alert("Venció su sesión. Vuelva a logguearse")
+        navigate("/logout")
+      }
+    }
     const data = await response.json()
     alert(`${data.msj} : "${campaña.titulo}"`);
     navigate('/campañas')
@@ -56,6 +61,14 @@ const handlerVoto = async () => {
       Authorization: `Bearer ${getToken()}`,
     },
   });
+
+  if (response.status==403){
+    if (isTokenExpired(getToken())) {
+      alert("Venció su sesión. Vuelva a logguearse")
+      navigate("/logout")
+    }
+  }
+
   if (response.status==200){
     alert(`Has confirmado tu voto por la opción: ${opcionSeleccionada} en la campaña: ${campaña.titulo}`);
     navigate('/campañas'); // Redirige a la página de campañas
@@ -82,7 +95,12 @@ const handlerVoto = async () => {
         Authorization: `Bearer ${getToken()}`,
       },
     });
-
+    if (response.status==403){
+      if (isTokenExpired(getToken())) {
+        alert("Venció su sesión. Vuelva a logguearse")
+        navigate("/logout")
+      }
+    }
     const data = await response.json();
     console.log(data)
     if (data.msj) {

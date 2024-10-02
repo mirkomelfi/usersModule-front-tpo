@@ -30,6 +30,23 @@ export const extractDni=(token)=>{
     return decoded.dni
 }
 
+
+export const isTokenExpired=(token)=>{
+    const decoded= jwtDecode(token)
+    
+    const exp = decoded.exp; // Ejemplo de valor de exp
+    const fechaExp = new Date(exp * 1000); // Multiplicamos por 1000 para convertir a milisegundos
+
+    const fechaActual= new Date()
+    if (fechaActual>fechaExp){
+      return true  
+
+    }else{
+        return false  
+    }
+
+}
+
 export const extractUrl=(url)=>{
     const url_desarrollo=process.env.REACT_APP_DOMINIO_FRONT
     if (url_desarrollo=="http://localhost:3000"){

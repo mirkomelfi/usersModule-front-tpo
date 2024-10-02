@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from "react-redux";
 import './ForoFeedback.css';
-import { getToken } from '../../utils/auth-utils';
+import { getToken, isTokenExpired } from '../../utils/auth-utils';
 import { useNavigate } from 'react-router-dom';
 
 const feedbacks = [
@@ -37,7 +37,12 @@ export const ForoFeedback = () => {
       }
       
     })
-
+    if (response.status==403){
+      if (isTokenExpired(getToken())) {
+        alert("Venció su sesión. Vuelva a logguearse")
+        navigate("/logout")
+      }
+    }
     const data = await response.json()
     console.log(data)
     if (data.msj){
@@ -64,7 +69,12 @@ export const ForoFeedback = () => {
       }
       
     })
- 
+    if (response.status==403){
+      if (isTokenExpired(getToken())) {
+        alert("Venció su sesión. Vuelva a logguearse")
+        navigate("/logout")
+      }
+    }
     const data = await response.json()
     if (data.msj){
       

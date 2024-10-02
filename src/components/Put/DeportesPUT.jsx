@@ -3,7 +3,7 @@ import { Mensaje } from "../Mensaje/Mensaje";
 import { useNavigate, useParams } from "react-router-dom";
 import ImagenPost from "../Imagen/ImagenPOST";
 import './PUT.css'; 
-import { getToken } from "../../utils/auth-utils";
+import { getToken, isTokenExpired } from "../../utils/auth-utils";
 
 export const DeportesPut = () => {
     const [mensaje, setMensaje] = useState(null);
@@ -67,7 +67,12 @@ export const DeportesPut = () => {
             },
             body: JSON.stringify(deporte),
         });
-
+        if (response.status==403){
+            if (isTokenExpired(getToken())) {
+              alert("Venció su sesión. Vuelva a logguearse")
+              navigate("/logout")
+            }
+          }
         if (response.status === 200) {
             const data = await response.json();
             setIdDeporte(data.id);

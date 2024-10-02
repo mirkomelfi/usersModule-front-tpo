@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
 import './Feedback.css';
-import { getToken } from '../../utils/auth-utils';
+import { getToken, isTokenExpired } from '../../utils/auth-utils';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 export const Feedback = () => {
   const dni = useSelector((state) => state.usuarios.dni);
@@ -11,7 +12,7 @@ export const Feedback = () => {
   const [selectedRubro, setSelectedRubro] = useState('');
   const [comment, setComment] = useState('');
 
-
+  const navigate = useNavigate();
   const [listaRubros,setListaRubros]= useState([]);
   const [mensaje,setMensaje]= useState(null);
 
@@ -25,7 +26,12 @@ export const Feedback = () => {
       }
       
     })
-
+    if (response.status==403){
+      if (isTokenExpired(getToken())) {
+        alert("Venció su sesión. Vuelva a logguearse")
+        navigate("/logout")
+      }
+    }
     const data = await response.json()
     console.log(data)
     if (data.msj){
@@ -50,7 +56,12 @@ export const Feedback = () => {
       body:JSON.stringify(feedbackObject)
       
     })
-
+    if (response.status==403){
+      if (isTokenExpired(getToken())) {
+        alert("Venció su sesión. Vuelva a logguearse")
+        navigate("/logout")
+      }
+    }
     const data = await response.json()
     console.log(data)
     if (data.msj){
@@ -72,7 +83,12 @@ export const Feedback = () => {
       body:JSON.stringify(rubro)
       
     })
-
+    if (response.status==403){
+      if (isTokenExpired(getToken())) {
+        alert("Venció su sesión. Vuelva a logguearse")
+        navigate("/logout")
+      }
+    }
     const data = await response.json()
     console.log(data)
     if (data.msj){

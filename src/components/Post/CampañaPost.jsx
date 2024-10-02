@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './Post.css';
-import { getToken } from '../../utils/auth-utils';
+import { getToken, isTokenExpired } from '../../utils/auth-utils';
+import { useNavigate } from 'react-router-dom';
 
 export const CampañaPost = () => {
   const [titulo, setTitulo] = useState('');
@@ -8,7 +9,7 @@ export const CampañaPost = () => {
   const [estado, setEstado] = useState('Abierta');
   const [opciones, setOpciones] = useState([]);
   const [nuevaOpcion, setNuevaOpcion] = useState('');
-  
+  const navigate = useNavigate();
   const [mensaje, setMensaje] = useState(null);
 
   const ejecutarFetch = async() =>{
@@ -31,6 +32,13 @@ export const CampañaPost = () => {
       },
       body: JSON.stringify(nuevaCampaña)
   })
+
+  if (response.status==403){
+    if (isTokenExpired(getToken())) {
+      alert("Venció su sesión. Vuelva a logguearse")
+      navigate("/logout")
+    }
+  }
 if (response.status==200){
   console.log('Nueva campaña creada:', nuevaCampaña);
   

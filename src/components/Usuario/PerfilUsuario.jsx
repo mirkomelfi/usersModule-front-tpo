@@ -3,7 +3,7 @@ import './PerfilUsuario.css';
 import { Link, useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { getToken } from "../../utils/auth-utils";
+import { getToken, isTokenExpired } from "../../utils/auth-utils";
 import { Mensaje } from "../Mensaje/Mensaje";
 import { validateRol, isRolUser, deleteToken } from "../../utils/auth-utils";
 import avatar from './Messi.jpeg'; // Imagen de ejemplo para el avatar
@@ -43,7 +43,12 @@ export const PerfilUsuario = () => {
         Authorization: `Bearer ${getToken()}`,
       },
     });
-
+    if (response.status==403){
+      if (isTokenExpired(getToken())) {
+        alert("Venció su sesión. Vuelva a logguearse")
+        navigate("/logout")
+      }
+    }
     const data = await response.json();
 
     if (data.msj) {
@@ -67,7 +72,12 @@ export const PerfilUsuario = () => {
         },
       }
     );
-
+    if (response.status==403){
+      if (isTokenExpired(getToken())) {
+        alert("Venció su sesión. Vuelva a logguearse")
+        navigate("/logout")
+      }
+    }
     const data = await response.json();
   
       if (data.msj) {
