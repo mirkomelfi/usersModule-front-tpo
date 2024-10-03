@@ -1,10 +1,23 @@
+import { extractDni, extractRol, getToken } from "../../utils/auth-utils";
 import { LOGIN_USUARIO,LOGOUT } from "../actions/usuario.action";
 
+const token=getToken()
+var dni=null
+var rol=null
+var isAdmin=null
+
+if (token){
+  dni=extractDni(token)
+  rol=extractRol(token)
+  if (rol=="ADMIN"){
+    isAdmin=true
+  }
+}
+
 const initialState = {
-  logged:null,
-  isAdmin:null,
-  dni:null,
-  rol:null
+  isAdmin,
+  dni,
+  rol
 };
   
 

@@ -18,6 +18,7 @@ export const Logout = () => {
         const token= getToken()
         if (token!=null){
             deleteToken()
+            dispatch((loginUsuario(null,null)))
             setMensaje("Sesion cerrada con exito")
         }
     }
@@ -27,7 +28,6 @@ export const Logout = () => {
       }
 
     useEffect(() => { 
-        dispatch((loginUsuario(null,null)))
         desloggear()
     },[])
     

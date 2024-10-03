@@ -12,16 +12,12 @@ import { useSelector } from 'react-redux';
 export const PerfilUsuario = () => {
 
   var dniLogged = useSelector((state) => state.usuarios.dni);
-  var roll = useSelector((state) => state.usuarios.rol);
   var admin = useSelector((state) => state.usuarios.isAdmin);
   console.log("dniLogged",dniLogged)
-  console.log("rol",roll)
   console.log("adm",admin)
 
   var { dni } = useParams();
-  if (!admin){
-    var dni= dniLogged
-  }
+
 
   const [usuario, setUsuario] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -31,9 +27,13 @@ export const PerfilUsuario = () => {
   const navigate = useNavigate();
 
   const ejecutarFetch = async () => {
+
+    if (!admin){
+      dni= dniLogged
+    }
     var url = ``;
 
-      url = `${process.env.REACT_APP_DOMINIO_BACK}/usuarios/${dni}`;
+    url = `${process.env.REACT_APP_DOMINIO_BACK}/usuarios/${dni}`;
  
 
     const response = await fetch(url, {
