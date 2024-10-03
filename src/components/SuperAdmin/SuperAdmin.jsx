@@ -5,9 +5,11 @@ import { useNavigate } from "react-router-dom";
 
 const SuperAdmin = () => {
   const [formData, setFormData] = useState({
-    username: "",
+    dni: null,
     password: "",
-    role: "Directivo",
+    nombre:"",
+    apellido:"",
+    rol: "Directivo",
   });
   const [mensaje, setMensaje] = useState(null);
   const navigate = useNavigate();
@@ -22,13 +24,16 @@ const SuperAdmin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/admin/createUser`, {
+    const username=formData.nombre.substr(0,1)+formData.apellido.substr(0,1)+formData.dni
+    const newObj={...formData,username}
+ 
+    const response = await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/admin/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "Authorization": `Bearer ${getToken()}`, 
       },
-      body: JSON.stringify(formData),
+      body: JSON.stringify(newObj),
     });
     if (response.status==403){
       if (isTokenExpired(getToken())) {
@@ -38,13 +43,12 @@ const SuperAdmin = () => {
     }
     const data = await response.json();
 
-    if (data.msj) {
-      setMensaje(data.msj);
-    } else {
-      setMensaje("Usuario creado exitosamente");
-    }
-
+ 
     e.target.reset();
+    setMensaje(data.msj);
+    alert(`${mensaje}`)
+
+
   };
 
   return (
@@ -53,12 +57,29 @@ const SuperAdmin = () => {
         <h3>Super Admin</h3>
         {mensaje && <p>{mensaje}</p>}
         <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="username">Nombre de Usuario</label>
+        <div className="form-group">
+            <label htmlFor="nombre">Nombre</label>
             <input
               type="text"
-              name="username"
-              value={formData.username}
+              name="nombre"
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="apellido">Apellido</label>
+            <input
+              type="text"
+              name="apellido"
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="dni">DNI</label>
+            <input
+              type="number"
+              name="dni"
               onChange={handleInputChange}
               required
             />
@@ -69,31 +90,29 @@ const SuperAdmin = () => {
             <input
               type="password"
               name="password"
-              value={formData.password}
               onChange={handleInputChange}
               required
             />
           </div>
 
           <div className="form-group">
-            <label htmlFor="role">Rol</label>
+            <label htmlFor="rol">Rol</label>
             <select
-              name="role"
-              value={formData.role}
+              name="rol"
+              value={formData.rol}
               onChange={handleInputChange}
               required
             >
               <option value="Directivo">Directivo</option>
-              <option value="E-Commerce">E-Commerce</option>
               <option value="Inversionista">Inversionista</option>
+              <option value="Cliente">E-Commerce</option>
+              <option value="Activo">Socio Activo</option>
+              <option value="Patrimonial">Socio Patrimonial</option>
             </select>
           </div>
 
           <button type="submit" className="button btnPrimary">
             Crear Usuario
-          </button>
-          <button type="submit" className="button btnSecondary">
-            Eliminar Usuario
           </button>
         </form>
       </div>

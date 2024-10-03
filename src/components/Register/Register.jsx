@@ -22,6 +22,7 @@ export const Register = () => {
         if (!cliente.username || !cliente.password) {
             setMensaje("Faltan datos");
         } else {
+            console.log(cliente)
             const response = await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/register`, {
                 method: "POST",
                 headers: {
@@ -56,10 +57,11 @@ export const Register = () => {
                             <label htmlFor="apellido" className="form-label">Apellido</label>
                             <input type="text" className="form-control" name="apellido" required />
                         </div>
-                        <div className="mb-3">
+                       {/* <div className="mb-3">
                             <label htmlFor="username" className="form-label">Nombre de Usuario</label>
                             <input type="text" className="form-control" name="username" />
                         </div>
+                        */}
                         <div className="mb-3">
                             <label htmlFor="dni" className="form-label">DNI</label>
                             <input type="number" className="form-control" name="dni" />

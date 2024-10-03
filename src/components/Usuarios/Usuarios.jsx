@@ -68,7 +68,17 @@ export const Usuarios= () => {
       setMensaje(data.msj)
     }else{
       console.log(data)
-      setListaUsuarios(data)
+      if (admin){
+        const newArray=[]
+        data.forEach(user=>{
+          if (user.rol!="ADMIN"){
+            newArray.push(user)
+          }
+        })
+        setListaUsuarios(newArray)
+      }else{
+        setListaUsuarios(data)
+      }
     }
     }
 
