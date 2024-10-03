@@ -3,7 +3,7 @@
     flex-wrap: nowrap; /* Mantener las tarjetas en una sola fila */
     gap: 20px;
     padding: 20px;
-    padding-left: 1900px; /* Ajuste según sea necesario */
+    padding-left: 20px; /* Ajuste según sea necesario */
     overflow-x: auto; /* Mantener el scroll horizontal */
     scroll-snap-type: x mandatory; /* Activar el "snap" al deslizar */
     cursor: grab; /* Mostrar icono de mano para arrastrar */

@@ -75,6 +75,7 @@ export const Noticias = () => {
     //const {id}= useParams();
 
     const [listaNoticias,setListaNoticias]= useState([]);
+    const [paddingLeft, setPaddingLeft] = useState(20); // Valor inicial del padding
     const [mensaje,setMensaje]= useState(null);
 
     const navigate= useNavigate()
@@ -118,12 +119,25 @@ export const Noticias = () => {
       ejecutarFetch()
       .catch(error => console.error(error))
 
-    },[])
+      const totalNoticias = listaNoticias.length;
+        if (totalNoticias <= 5) {
+            setPaddingLeft(50);  // Padding para 1-5 noticias
+        } else if (totalNoticias <= 10) {
+            setPaddingLeft(100 * totalNoticias);  // Padding para 6-10 noticias
+        } else if (totalNoticias <= 15) {
+            setPaddingLeft(150 * totalNoticias);  // Padding para 11-15 noticias
+        } else if (totalNoticias <= 20) {
+            setPaddingLeft(200 *totalNoticias);  // Padding para 16-20 noticias
+        } else {
+            setPaddingLeft(250 * totalNoticias); // Padding por defecto si hay más de 20 noticias
+        }
+        
+    },[listaNoticias])
 
 
     const handleWheel = (event) => {
         const container = containerRef.current;
-        container.scrollLeft += event.deltaY;
+        container.scrollLeft += event.deltaY * 2; // Multiplica el deltaY para un desplazamiento más rápido
     };
 
     return (
@@ -136,23 +150,23 @@ export const Noticias = () => {
                 </Link>
             </div>
             }
-            
-            <div
-                className="noticias-container"
-                ref={containerRef}
-                onWheel={handleWheel}
-            >
-                {listaNoticias.map((noticia, index) => (
-                    <div key={index} className="noticia-card">
-                        {//<img src={noticia.imagen} alt={noticia.titulo} className="noticia-imagen" />
-                        }
-                        <h2 className="noticia-titulo">{noticia.titulo}</h2>
-                        <p className="noticia-descripcion">{noticia.descripcion}</p>
-                        <Link to={`/noticias/${noticia.id}`} className="btn-agregar-noticia">
-                            Ir a Noticia
-                        </Link>
-                    </div>
-                ))}
+                <div
+                    className="noticias-container"
+                    ref={containerRef}
+                    onWheel={handleWheel}
+                    style={{ paddingLeft: `${paddingLeft}px` }}  // Aplica padding dinámico
+                >
+                    {listaNoticias.map((noticia, index) => (
+                        <div key={index} className="noticia-card">
+                            {//<img src={noticia.imagen} alt={noticia.titulo} className="noticia-imagen" />
+                            }
+                            <h2 className="noticia-titulo">{noticia.titulo}</h2>
+                            <p className="noticia-descripcion">{noticia.descripcion}</p>
+                            <Link to={`/noticias/${noticia.id}`} className="btn-agregar-noticia">
+                                Ir a Noticia
+                            </Link>
+                        </div>
+                    ))}
             </div>
         </>
     );
