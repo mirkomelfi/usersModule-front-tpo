@@ -18,6 +18,8 @@ export const Campaña = () => {
   const admin = useSelector((state) => state.usuarios.isAdmin);
 
   const [opcionId, setOpcionId] = useState(null);
+  
+  const [ganador, setGanador] = useState(null);
   const [mostrarConfirmacion, setMostrarConfirmacion] = useState(false);
   const dni = useSelector((state) => state.usuarios.dni);
   const { id } = useParams();
@@ -26,6 +28,34 @@ export const Campaña = () => {
   
   const [mensaje,setMensaje]=useState(null)
 
+  const getGanador = async() =>{
+    const response= await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/campanas/${id}/ganador`, { 
+      method: "GET",
+      headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${getToken()}`
+      }
+      
+    })
+    if (response.status==403){
+      if (isTokenExpired(getToken())) {
+        alert("Venció su sesión. Vuelva a logguearse")
+        navigate("/logout")
+      }
+    }
+    const data = await response.json()
+
+    if (response.status==200){
+      if (data.length==1){
+        setGanador(data[0].titulo)
+      }else{//+1 ganador
+        //setGanador(data)
+      }
+
+    }else{
+      setMensaje(data.msj)
+    }
+  }
 
   const cerrarCampaña = async() =>{
     const response= await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/campanas/${id}/cerrar`, { 
@@ -112,7 +142,10 @@ const handlerVoto = async () => {
 
   useEffect(() => {
     ejecutarFetch().catch((error) => console.error(error));
+    getGanador()
   }, []);
+
+
 
   const navigate = useNavigate();
 
@@ -145,8 +178,9 @@ const handlerVoto = async () => {
         <h2>{campaña.titulo}</h2>
         <h3>Descripcion: {campaña.descripcion}</h3  >
         <h3>Estado: {campaña.estado}</h3  >
+        {campaña.estado=="Cerrada"&&<h3>Ganador: {ganador} </h3  >}
         {!admin?<div className="opciones-votacion">
-          {campaña.opciones.slice(0, 3).map((opcion, index) => (
+          {campaña.opciones.map((opcion, index) => (
             <button
               key={index}
               className={`opcion-button ${opcion === opcionSeleccionada ? 'seleccionada' : ''}`}
@@ -158,7 +192,7 @@ const handlerVoto = async () => {
         </div>
         :
         <div className="opciones-votacion">
-          {campaña.opciones.slice(0, 3).map((opcion, index) => (
+          {campaña.opciones.map((opcion, index) => (
             <button
               key={index}
               className={`opcion-button ${opcion === opcionSeleccionada ? 'seleccionada' : ''}`}

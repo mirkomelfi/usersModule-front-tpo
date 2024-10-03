@@ -18,7 +18,7 @@ export const Usuarios= () => {
   const [selectedRol, setSelectedRol] = useState("");
 
   const [listaRoles,setListaRoles]= useState([
-    "Inversor","Activo","Patrimonial","Directivo","Comprador"
+    "Inversor","Activo","Patrimonial","Directivo","Cliente"
   ]);
 
   //falta desarrollar filtros en el back
@@ -103,7 +103,7 @@ export const Usuarios= () => {
 
 
   const handleAgregar= () => {
-    alert('Abrir modal o redirigir para Agregar un nuevo usuario');
+    navigate("/superAdmin")
   };
 
 

@@ -68,7 +68,7 @@ export const PerfilUsuario = () => {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
-         // Authorization: `Bearer ${getToken()}`,
+          "Authorization": `Bearer ${getToken()}`,
         },
       }
     );
