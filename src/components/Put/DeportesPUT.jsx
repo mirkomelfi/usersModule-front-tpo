@@ -5,10 +5,15 @@ import ImagenPost from "../Imagen/ImagenPOST";
 import './PUT.css'; 
 import { getToken, isTokenExpired } from "../../utils/auth-utils";
 
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import { format } from 'date-fns';
+
 export const DeportesPut = () => {
     const [mensaje, setMensaje] = useState(null);
     const [error, setError] = useState(null);
     const [idDeporte, setIdDeporte] = useState(null);
+    const [selectedDate, setSelectedDate] = useState(new Date()); // Estado para la fecha
 
     const {id}=useParams()
 
@@ -32,6 +37,10 @@ export const DeportesPut = () => {
         setDeporteSeleccionado(deporte);
     };
 
+     // Función para manejar el cambio en la fecha
+     const handleDateChange = (date) => {
+        setSelectedDate(date);
+    };
 
     // Este efecto se ejecuta una vez para cargar los valores hardcodeados al estado.
     useEffect(() => {
@@ -41,22 +50,16 @@ export const DeportesPut = () => {
     const consultarForm = async (e) => {
         e.preventDefault();
 
-        const datosFormulario = new FormData(datForm.current); 
-        const deporte = Object.fromEntries(datosFormulario); 
-        console.log(deporte)
-        if (deporte.valor==""){
-            deporte.valor=0
-        }
-        if (deporte.nombre==""){
-            deporte.nombre=null
-        }
-        if (deporte.descripcion==""){
-            deporte.descripcion=null
-        }
-        if (deporte.profesor==""){
-            deporte.profesor=null
-        }
-        // Validación sencilla para campos vacíos
+        const datosFormulario = new FormData(datForm.current);
+        const deporte = Object.fromEntries(datosFormulario);
+
+        // Formatear la fecha seleccionada
+        deporte.fecha = format(selectedDate, 'dd-MM-yyyy');
+
+        if (deporte.valor == "") deporte.valor = 0;
+        if (deporte.nombre == "") deporte.nombre = null;
+        if (deporte.descripcion == "") deporte.descripcion = null;
+        if (deporte.profesor == "") deporte.profesor = null;
 
         var url = `${process.env.REACT_APP_DOMINIO_BACK}/admin/actividades/${id}`;
         const response = await fetch(url, {
@@ -86,43 +89,48 @@ export const DeportesPut = () => {
         
     };
 
-    return (
+     return (
         <div className="put-container">
             {!mensaje ? (
                 <div className="put-card">
                     <h2 className="put-title">Actualizar deporte</h2>
-                    <h3 className="">Lo que no complete, no se actualizara. No se permiten campos vacíos.</h3>
-                    {/* Dropdown para seleccionar el deporte */}
+                    <h3 className="">Lo que no complete, no se actualizará. No se permiten campos vacíos.</h3>
+                    <form onSubmit={consultarForm} ref={datForm} className="put-form">
+                        <input
+                            type="text"
+                            className="put-input"
+                            placeholder="Nombre"
+                            name="nombre"
+                        />
+                        <textarea
+                            className="put-textarea"
+                            placeholder="Descripción"
+                            name="descripcion"
+                        />
+                        <input
+                            type="number"
+                            className="put-input"
+                            placeholder="Valor mensual"
+                            name="valor"
+                        />
+                        <input
+                            type="text"
+                            className="put-input"
+                            placeholder="Profesor a cargo"
+                            name="profesor"
+                        />
 
-                    {/* Formulario para actualizar deporte */}
-                        <form onSubmit={consultarForm} ref={datForm} className="put-form">
+                        {/* Calendario para seleccionar la fecha */}
+                        <DatePicker
+                            selected={selectedDate}
+                            onChange={handleDateChange}
+                            dateFormat="yyyy-MM-dd"
+                            className="put-input"
+                            placeholderText="Seleccionar fecha"
+                        />
 
-                            <input
-                                type="text"
-                                className="put-input"
-                                placeholder="Nombre"
-                                name="nombre"
-                            />
-                            <textarea
-                                className="put-textarea"
-                                placeholder="Descripción"
-                                name="descripcion"
-                            />
-                            <input
-                                type="number"
-                                className="put-input"
-                                placeholder="Valor mensual"
-                                name="valor"
-                            />
-                            <input
-                                type="text"
-                                className="put-input"
-                                placeholder="Profesor a cargo"
-                                name="profesor"
-                            />
-                            <button type="submit" className="put-button">Actualizar deporte</button>
-                        </form>
-
+                    </form>
+                    <button type="submit" className="put-button">Actualizar deporte</button>
                 </div>
             ) : (!error ? (
                 <div>

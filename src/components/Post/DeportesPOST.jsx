@@ -5,19 +5,32 @@ import ImagenPost from "../Imagen/ImagenPOST";
 import './Post.css'; 
 import { getToken, isTokenExpired } from "../../utils/auth-utils";
 
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import { format } from 'date-fns';
+
 export const DeportesPost = () => {
     const [mensaje, setMensaje] = useState(null);
     const [error, setError] = useState(null);
     const [idDeporte, setIdDeporte] = useState(null);
+    const [selectedDate, setSelectedDate] = useState(new Date()); // Estado para la fecha seleccionada
 
     const datForm = useRef(); // Referencia al formulario
     const navigate = useNavigate();
+
+     // Manejar el cambio de la fecha seleccionada
+     const handleDateChange = (date) => {
+        setSelectedDate(date);
+    };
 
     const consultarForm = async (e) => {
         e.preventDefault();
 
         const datosFormulario = new FormData(datForm.current); 
         const deporte = Object.fromEntries(datosFormulario); 
+
+        // Formatear la fecha seleccionada antes de enviar al backend
+        deporte.fecha = format(selectedDate, 'dd-MM-yyyy');
         
         // Validación sencilla para campos vacíos
         if (!deporte.nombre && !deporte.descripcion) {
@@ -54,8 +67,8 @@ export const DeportesPost = () => {
     return (
         <div className="post-container"> 
             {!mensaje ? (
-                <div className="post-card"> {/* Reutilizando clase de tarjeta */}
-                    <h2 className="post-title">Crear nuevo deporte</h2> {/* Reutilizando clase de título */}
+                <div className="post-card">
+                    <h2 className="post-title">Crear nuevo deporte</h2>
                     <form onSubmit={consultarForm} ref={datForm} className="post-form">
                         <input
                             type="text"
@@ -80,8 +93,18 @@ export const DeportesPost = () => {
                             placeholder="Profesor a cargo"
                             name="profesor"
                         />
-                        <button type="submit" className="post-button">Crear deporte</button>
+
+                        {/* Componente para seleccionar la fecha */}
+                        <DatePicker
+                            selected={selectedDate}
+                            onChange={handleDateChange}
+                            dateFormat="yyyy-MM-dd"
+                            className="post-input"
+                            placeholderText="Seleccionar fecha"
+                        />
+
                     </form>
+                    <button type="submit" className="post-button">Crear deporte</button>
                 </div>
             ) : (!error ? (
                 <div>

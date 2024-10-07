@@ -77,6 +77,8 @@ export const Deportes = () => {
     const [listaDeportes,setListaDeportes]= useState([]);
     const [mensaje,setMensaje]= useState(null);
 
+    const [paddingLeft, setPaddingLeft] = useState(20); // Valor inicial del padding
+
     const navigate= useNavigate()
     const navigateTo=(url)=>{
         navigate(url)
@@ -118,30 +120,43 @@ export const Deportes = () => {
       ejecutarFetch()
       .catch(error => console.error(error))
 
-    },[])
+      const totalDeportes = listaDeportes.length;
+        if (totalDeportes <= 5) {
+            setPaddingLeft(50);  // Padding para 1-5 deportes
+        } else if (totalDeportes <= 10) {
+            setPaddingLeft(100 * totalDeportes);  // Padding para 6-10 deportes
+        } else if (totalDeportes <= 15) {
+            setPaddingLeft(150 * totalDeportes);  // Padding para 11-15 deportes
+        } else if (totalDeportes <= 20) {
+            setPaddingLeft(200 * totalDeportes);  // Padding para 16-20 deportes
+        } else {
+            setPaddingLeft(250 * totalDeportes);  // Padding por defecto si hay más de 20 deportes
+        }
+
+
+    },[listaDeportes])
 
 
     const handleWheel = (event) => {
         const container = containerRef.current;
-        container.scrollLeft += event.deltaY;
+        container.scrollLeft += event.deltaY * 2;
     };
 
     return (
         <>
-            {/* Footer con botón Agregar Deporte */}
-            
-            {admin&&
+            {admin &&
                 <div className="agregarDeporte">
-                <Link to="/deportes/add" className="btn-agregar-deporte">
-                    Agregar Deporte
-                </Link>
-            </div>
+                    <Link to="/deportes/add" className="btn-agregar-deporte">
+                        Agregar Deporte
+                    </Link>
+                </div>
             }
-            
+
             <div
                 className="deportes-container"
                 ref={containerRef}
                 onWheel={handleWheel}
+                style={{ paddingLeft: `${paddingLeft}px` }}  // Aplica padding dinámico
             >
                 {listaDeportes.map((deporte, index) => (
                     <div key={index} className="deporte-card">
@@ -150,11 +165,12 @@ export const Deportes = () => {
                         <p className="deporte-descripcion">{deporte.descripcion}</p>
                         <p className="deporte-descripcion">Profesor a cargo: {deporte.profesor}</p>
                         <p className="deporte-descripcion">Valor mensual: {deporte.valor}</p>
-                        <div >
-                        <h2 className="deporte-descripcion">Dias</h2>
-                        {deporte.dias.map((dia) => (<p className="deporte-descripcion">{dia}</p>))}
+                        <div>
+                            <h2 className="deporte-descripcion">Días</h2>
+                            {deporte.dias.map((dia, diaIndex) => (
+                                <p key={diaIndex} className="deporte-descripcion">{dia}</p>
+                            ))}
                         </div>
-                       
                         <Link to={`/deportes/${deporte.id}`} className="btn-agregar-deporte">
                             Ir a Deporte
                         </Link>
