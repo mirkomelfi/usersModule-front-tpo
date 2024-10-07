@@ -88,6 +88,7 @@ const Navbar = () => {
 
 // Not user
         <ul className="navbar-menu">
+          <li><Link to="/historia">Historia</Link></li>
           <li><Link to="/deportes">Deportes</Link></li>
           <li><Link to="/noticias">Noticias</Link></li>
           <li><Link to="/productos">Productos</Link></li>

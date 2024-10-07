@@ -32,6 +32,7 @@ import { Campaña } from './components/Campaña/Campaña';
 import { CampañaPost } from './components/Post/CampañaPost';
 import { ForoFeedback } from './components/ForoFeedback/ForoFeedback';
 import { Usuarios } from './components/Usuarios/Usuarios';
+import { Historia } from './components/Historia/Historia';
 
 import { NoticiasPut } from './components/Put/NoticiasPUT';
 import { DeportesPut } from './components/Put/DeportesPUT'; 
@@ -57,7 +58,6 @@ export const App = () => {
 
           <Route path='/perfilUsuario' element={<PerfilUsuario />} />
           <Route path='/usuarios/:dni' element={<PerfilUsuario />} />
-
 
           <Route path='/usuarios' element={<Usuarios />} />
 
@@ -86,6 +86,8 @@ export const App = () => {
           <Route path='/productos' element={<Productos />} />
           <Route path='/producto' element={<Producto />} />
           <Route path='/listaCarrito' element={<ListaCarrito />} />
+
+          <Route path='/historia' element={<Historia />} />
           
           <Route path='/deportes/add' element={<DeportesPost />} />
           <Route path='/noticias/add' element={<NoticiasPost />} />
