@@ -1,0 +1,118 @@
+/* Contenedor principal de la página */
+.directivo-page-container {
+    max-width: 95%;  /* Aumentar el ancho para aprovechar más espacio horizontal */
+    margin: 10px auto;  /* Reducir el margen superior/inferior */
+    padding: 20px;  /* Reducir el padding */
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* Reducir la sombra */
+  }
+  
+  /* Sección de encabezado */
+  .header-container {
+    text-align: center;
+    margin-bottom: 30px;  /* Reducir el margen inferior */
+  }
+  
+  .breadcrumb {
+    font-size: 14px;  /* Reducir el tamaño de la fuente */
+    color: #dc3545;  /* Color rojo */
+  }
+  
+  .page-title {
+    font-size: 24px;  /* Reducir el tamaño del título */
+    margin-top: 5px;  /* Reducir el margen superior */
+    font-weight: bold;
+    color: #343a40;  /* Color negro oscuro */
+  }
+  
+  .star-line {
+    margin-top: 15px;  /* Reducir el margen superior */
+  }
+  
+  .star {
+    font-size: 16px;  /* Reducir el tamaño de las estrellas */
+    margin-right: 3px;
+    color: #007bff;  /* Color azul para las estrellas */
+  }
+  
+  .red-star {
+    color: #dc3545;  /* Color rojo para estrellas alternas */
+  }
+  
+  .blue-star {
+    color: #007bff;  /* Color azul para estrellas alternas */
+  }
+  
+  /* Sección de directivos */
+  .directivos-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 15px;  /* Reducir el espacio entre las tarjetas */
+    margin-bottom: 30px;  /* Reducir el margen inferior */
+  }
+  
+  .directivo-card {
+    flex: 1;
+    min-width: 200px;  /* Reducir el tamaño mínimo de las tarjetas */
+    max-width: 250px;  /* Reducir el tamaño máximo de las tarjetas */
+    text-align: center;
+    padding: 15px;  /* Reducir el padding */
+    border: 1px solid #ddd;
+    border-radius: 6px;  /* Reducir los bordes redondeados */
+    background-color: #f9f9f9;
+  }
+  
+  .directivo-imagen {
+    width: 80%;  /* Reducir el tamaño de la imagen */
+    height: auto;
+    border-radius: 6px;  /* Reducir los bordes redondeados de la imagen */
+    margin-bottom: 8px;  /* Reducir el margen inferior */
+  }
+  
+  .nombre {
+    font-size: 16px;  /* Reducir el tamaño de la fuente */
+    font-weight: bold;
+    color: #343a40;  /* Color negro oscuro */
+    margin-bottom: 4px;
+  }
+  
+  .posicion {
+    font-size: 14px;  /* Reducir el tamaño de la fuente */
+    color: #6c757d;  /* Color gris */
+  }
+  
+  .presidente-card {
+    background-color: #ffebcd;  /* Color claro para el fondo del presidente */
+  }
+  
+  /* Sección de vocales */
+  .vocales-section {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;  /* Reducir el espacio entre columnas */
+  }
+  
+  .vocales-column {
+    flex: 1;
+    min-width: 200px;  /* Reducir el tamaño mínimo de las columnas */
+  }
+  
+  .vocales-column ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .vocales-column li {
+    font-size: 14px;  /* Reducir el tamaño de la fuente */
+    margin-bottom: 8px;  /* Reducir el margen entre ítems */
+    color: #343a40;  /* Color negro oscuro */
+  }
+  
+  h3 {
+    font-size: 18px;  /* Reducir el tamaño de los títulos de las columnas */
+    margin-bottom: 15px;  /* Reducir el margen inferior de los títulos */
+    color: #007bff;  /* Color azul para los títulos de secciones */
+  }
+  
