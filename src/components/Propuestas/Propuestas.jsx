@@ -127,12 +127,15 @@ export const Propuestas = () => {
         }
       </div>
 
+        {/*
         <select id="user-filter" value={selectedUser} onChange={handleUserFilterChange}>
           <option value="Todos">Todos</option>
           <option value="Usuario1">Usuario1</option>
           <option value="Usuario2">Usuario2</option>
           <option value="Usuario3">Usuario3</option>
         </select>
+        */
+        }
 
       <div className="propuestas-grid">
         {listaPropuestas.length > 0 ? (

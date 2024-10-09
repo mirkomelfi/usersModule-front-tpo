@@ -115,14 +115,17 @@ export const PerfilUsuario = () => {
         <p><strong>Email:</strong> usuario@clubdefutbol.com</p>
         {usuario.telefono!=0?<p><strong>Teléfono: </strong>{usuario.telefono}</p>:<p><strong>Teléfono: </strong>No asociado</p>}
         <p><strong>Fecha de Membresía:</strong> 01/01/2022</p>
-        {usuario.direccion&&<p><strong>Dirección: </strong>{usuario.direccion.calle} {usuario.direccion.numero}</p>}
-        {usuario.direccion&&<p><strong>Ciudad: </strong>{usuario.direccion.ciudad} - <strong>CP: </strong> {usuario.direccion.codPostal}</p>}
+        {(usuario.direccion.calle!=null&&usuario.direccion.numero!=0)?<p><strong>Dirección: </strong>{usuario.direccion.calle} {usuario.direccion.numero}</p>:<p><strong>Dirección: </strong>No asociada</p>}
+        {(usuario.direccion.ciudad!=null&&usuario.direccion.codPostal!=0)&&<p><strong>Ciudad: </strong>{usuario.direccion.ciudad} - <strong>CP: </strong> {usuario.direccion.codPostal}</p>}
       </div>
 
 
         <div className="perfil-acciones">
-        <button className="perfil-btn" onClick={() => navigateTo(`/updateUsuario/${dni}`)}>Editar Perfil</button>
-        <button className="perfil-btn perfil-btn-danger"  onClick={() => eliminar()}>Eliminar Cuenta</button>
+{        admin&&<button className="perfil-btn" onClick={() => navigateTo(`/updateUsuario/${dni}`)}>Editar Perfil</button>}
+        {!admin&&<button className="perfil-btn" onClick={() => navigateTo(`/updateUsuario/${dniLogged}`)}>Editar Perfil</button>}
+        
+        {//<button className="perfil-btn perfil-btn-danger"  onClick={() => eliminar()}>Eliminar Cuenta</button>
+        }
       </div>
 
     </div>

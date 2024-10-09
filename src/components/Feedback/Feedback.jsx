@@ -65,6 +65,8 @@ export const Feedback = () => {
     const data = await response.json()
     console.log(data)
     if (data.msj){
+            
+      alert(`${data.msj}`)
       setMensaje(data.msj)
     }else{
       setListaRubros(data)
