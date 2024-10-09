@@ -23,11 +23,10 @@ export const Producto = () => {
 
       {/* Detalles del producto */}
       <div className="producto-detalles">
-        <h1 className="producto-titulo">Ojotas infernales</h1>
+        <h1 className="producto-titulo">Camiseta</h1>
         <p className="producto-precio">$29.500</p>
         <p className="producto-descripcion">
-          Este ojota relata es de uno de los
-          héroes de la independencia argentina.
+          Camiseta del Club
         </p>
 
         {/* Cantidad y botón de comprar */}

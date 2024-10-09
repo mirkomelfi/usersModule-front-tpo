@@ -7,20 +7,20 @@ import foto from './Ojotas.jpg';
 import { useSelector } from 'react-redux';
 
 const productos = [
-  { id: 1, name: 'Crocs Azul Unisex', price: '$44.990', image: foto, tipo: 'Calzado',  url: '/producto'},
-  { id: 2, name: 'Crocs Azul Unisex', price: '$44.990', image: foto, tipo: 'Calzado', url: '/producto' },
-  { id: 3, name: 'Crocs Azul Unisex', price: '$44.990', image: foto, tipo: 'Calzado', url: '/producto' },
-  { id: 4, name: 'Crocs Azul Unisex', price: '$44.990', image: foto, tipo: 'Calzado', url: '/producto' },
-  { id: 5, name: 'Probnado1 Crocs Azul Unisex', price: '$3.990', image: foto, tipo: 'Calzado', url: '/producto' },
-  { id: 6, name: 'Probnado Crocs Azul Unisex', price: '$2.990', image: foto, tipo: 'Calzado', url: '/producto' },
-  { id: 7, name: 'Probnado2 Crocs Azul Unisex', price: '$1.990', image: foto, tipo: 'Calzado', url: '/producto' },
-  { id: 8, name: 'Probnado3', price: '$4.990', image: foto, tipo: 'Calzado', url: '/producto' },
-  { id: 9, name: 'Crocs Azul Unisex', price: '$44.990', image: foto, tipo: 'Botines', url: '/producto' },
-  { id: 10, name: 'Crocs Azul Unisex', price: '$44.990', image: foto, tipo: 'Ojotas', url: '/producto' },
-  { id: 11, name: 'Crocs Azul Unisex', price: '$44.990', image: foto, tipo: 'Dados', url: '/producto' },
-  { id: 12, name: 'Crocs Azul Unisex', price: '$44.990', image: foto, tipo: 'Otro', url: '/producto' },
-  { id: 13, name: 'Crocs Azul Unisex', price: '$44.990', image: foto, tipo: 'Otro1', url: '/producto' },
-  { id: 14, name: 'Crocs Azul Unisex', price: '$44.990', image: foto, tipo: 'Otro2', url: '/producto' },
+  { id: 1, name: 'Camiseta Azul ', price: '$44.990', image: foto, tipo: 'Calzado',  url: '/producto'},
+  { id: 2, name: 'Camiseta Azul ', price: '$44.990', image: foto, tipo: 'Calzado', url: '/producto' },
+  { id: 3, name: 'Camiseta Azul ', price: '$44.990', image: foto, tipo: 'Calzado', url: '/producto' },
+  { id: 4, name: 'Camiseta Azul ', price: '$44.990', image: foto, tipo: 'Calzado', url: '/producto' },
+  { id: 5, name: 'Camiseta  Azul ', price: '$3.990', image: foto, tipo: 'Calzado', url: '/producto' },
+  { id: 6, name: 'Camiseta  Azul ', price: '$2.990', image: foto, tipo: 'Calzado', url: '/producto' },
+  { id: 7, name: 'Camiseta  Azul ', price: '$1.990', image: foto, tipo: 'Calzado', url: '/producto' },
+  { id: 8, name: 'Camiseta', price: '$4.990', image: foto, tipo: 'Calzado', url: '/producto' },
+  { id: 9, name: 'Camiseta  ', price: '$44.990', image: foto, tipo: 'Botines', url: '/producto' },
+  { id: 10, name: 'Camiseta  ', price: '$44.990', image: foto, tipo: 'Ojotas', url: '/producto' },
+  { id: 11, name: 'Camiseta  ', price: '$44.990', image: foto, tipo: 'Dados', url: '/producto' },
+  { id: 12, name: 'Camiseta  ', price: '$44.990', image: foto, tipo: 'Otro', url: '/producto' },
+  { id: 13, name: 'Camiseta  ', price: '$44.990', image: foto, tipo: 'Otro1', url: '/producto' },
+  { id: 14, name: 'Camiseta  ', price: '$44.990', image: foto, tipo: 'Otro2', url: '/producto' },
   // Agrega más productos según necesites
 ];
 
