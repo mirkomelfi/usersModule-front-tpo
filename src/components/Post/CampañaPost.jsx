@@ -51,6 +51,7 @@ if (response.status==200){
 }
       const data = await response.json()
       console.log(data.msj)
+      alert(`${data.msj}`)
       setMensaje(data.msj)
 
 }
