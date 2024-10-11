@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './ListaCarrito.css';
 
-const carritoProductos = [
+const initialCarritoProductos = [
   { id: 1, name: 'Crocs Azul Unisex', price: '$44.990', quantity: 2 },
   { id: 2, name: 'Probnado1 Crocs Azul Unisex', price: '$3.990', quantity: 1 },
   { id: 3, name: 'Probnado Crocs Azul Unisex', price: '$2.990', quantity: 3 },
@@ -9,11 +9,27 @@ const carritoProductos = [
 ];
 
 export const ListaCarrito = () => {
+  const [carritoProductos, setCarritoProductos] = useState(initialCarritoProductos);
+
   const calcularTotal = () => {
     return carritoProductos.reduce((acc, producto) => {
       const precio = parseFloat(producto.price.replace('$', '').replace('.', ''));
       return acc + precio * producto.quantity;
     }, 0);
+  };
+
+  const eliminarProducto = (id) => {
+    setCarritoProductos(carritoProductos.filter(producto => producto.id !== id));
+  };
+
+  const manejarPago = () => {
+    if (carritoProductos.length === 0) {
+      alert('No has agregado nada al carrito.');
+      return; // Salimos de la función si el carrito está vacío
+    }
+
+    const total = calcularTotal();
+    alert(`Realizaste el pago con un monto total de $${total}`);
   };
 
   return (
@@ -37,8 +53,7 @@ export const ListaCarrito = () => {
               <td>{producto.quantity}</td>
               <td>{producto.price}</td>
               <td>
-                {/* Aquí puedes agregar botones de acciones como "Eliminar" o "Editar" */}
-                <button className="accion-btn">Eliminar</button>
+                <button className="accion-btn" onClick={() => eliminarProducto(producto.id)}>Eliminar</button>
               </td>
             </tr>
           ))}
@@ -47,7 +62,7 @@ export const ListaCarrito = () => {
       <div className="carrito-total">
         <h3>Total: ${calcularTotal()}</h3>
       </div>
-      <button className="checkout-btn">Pagar</button>
+      <button className="checkout-btn" onClick={manejarPago}>Pagar</button>
     </div>
   );
 };

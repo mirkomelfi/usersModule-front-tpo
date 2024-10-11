@@ -9,22 +9,27 @@ import foto4 from "./socio4.png"
 export const Asociarse = () => {
   const planSubscripcion = [
     {
-      type: 'Socio/a Simple',
-      price: '$20.500',
-      cadetPrice: '$17.000',
-      description: 'En este momento tan especial, San Lorenzo nos necesita a todos; y la mejor forma de mostrar tu sentimiento es asociándote.',
+      tipo: 'Socio/a Simple',
+      precio: '$20.500',
+      precioInfantil: '$17.000',
+      descripcion: 'En este momento tan especial, San Lorenzo nos necesita a todos; y la mejor forma de mostrar tu sentimiento es asociándote.',
       extra: '(*) Valor para mayor de 18 años',
       imagen: foto,
     },
     {
-      type: 'Socio/a Patrimonial',
-      price: '$30.000',
-      cadetPrice: '$20.000',
-      description: 'Para aquellos que han apoyado al club incondicionalmente, el carnet de socio honorario ofrece los máximos beneficios.',
+      tipo: 'Socio/a Patrimonial',
+      precio: '$30.000',
+      precioInfantil: '$20.000',
+      descripcion: 'Para aquellos que han apoyado al club incondicionalmente, el carnet de socio honorario ofrece los máximos beneficios.',
       extra: '(*) Valor para mayor de 18 años',
       imagen: foto4,
     },
   ];
+
+  // Función para manejar la suscripción
+  const handleSubscribe = (tipo) => {
+    alert(`Te asociaste como ${tipo}`);
+  };
 
   return (
     <div className="asociarse-container">
@@ -33,12 +38,17 @@ export const Asociarse = () => {
       <div className="plans-container">
         {planSubscripcion.map((plan, index) => (
           <div key={index} className="plan-card">
-            <img src={plan.imagen} alt={plan.type} />
-            <h3>{plan.type}</h3>
-            <p className="plan-price">{plan.price} /MES</p>
-            <p className="plan-cadet-price">Cadete e infantil: {plan.cadetPrice} /mes</p>
-            <p className="plan-description">{plan.description}</p>
-            <button className="subscribe-button">ASOCIATE →</button>
+            <img src={plan.imagen} alt={plan.tipo} />
+            <h3>{plan.tipo}</h3>
+            <p className="plan-price">{plan.precio} /MES</p>
+            <p className="plan-cadet-price">Cadete e infantil: {plan.precioInfantil} /mes</p>
+            <p className="plan-description">{plan.descripcion}</p>
+            <button 
+              className="subscribe-button" 
+              onClick={() => handleSubscribe(plan.tipo)} // Llama a la función al hacer clic
+            >
+              ASOCIATE →
+            </button>
             <p className="plan-extra">{plan.extra}</p>
           </div>
         ))}
