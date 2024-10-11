@@ -61,8 +61,12 @@
     padding: 15px;  /* Reducir el padding */
     border: 1px solid #ddd;
     border-radius: 6px;  /* Reducir los bordes redondeados */
-    background-color: #f9f9f9;
+    background-color: #f3f2f2;
   }
+
+  .directivo-card:hover {
+    transform: scale(1.05); /* Agranda la tarjeta al pasar el mouse */
+}
   
   .directivo-imagen {
     width: 80%;  /* Reducir el tamaño de la imagen */
@@ -84,31 +88,43 @@
   }
   
   .presidente-card {
-    background-color: #ffebcd;  /* Color claro para el fondo del presidente */
+    background-color: #ffffff;  /* Color claro para el fondo del presidente */
   }
   
-  /* Sección de vocales */
   .vocales-section {
-    display: flex;
-    justify-content: space-between;
-    gap: 15px;  /* Reducir el espacio entre columnas */
+    background-color: #f4f4f4; /* Fondo gris para toda la sección */
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 20px;
   }
   
-  .vocales-column {
-    flex: 1;
-    min-width: 200px;  /* Reducir el tamaño mínimo de las columnas */
+  .vocales-columns {
+    display: inline-flex;
+    grid-template-columns: repeat(3, 1fr); /* Mantén las columnas alineadas */
+    gap: 95px; /* Reduce el espacio entre las columnas */
   }
   
-  .vocales-column ul {
+  .vocales-group {
+    padding: 10px;
+  }
+  
+  .vocales-group h3 {
+    color: #003399; /* Color del título */
+    margin-bottom: 10px;
+    font-size: 18px; /* Aumentar tamaño del título */
+  }
+  
+  .vocales-group ul {
     list-style: none;
     padding: 0;
   }
   
-  .vocales-column li {
-    font-size: 14px;  /* Reducir el tamaño de la fuente */
-    margin-bottom: 8px;  /* Reducir el margen entre ítems */
-    color: #343a40;  /* Color negro oscuro */
+  .vocales-group li {
+    margin-bottom: 5px;
+    font-size: 16px; /* Aumentar el tamaño de la lista */
+    color: #333;
   }
+  
   
   h3 {
     font-size: 18px;  /* Reducir el tamaño de los títulos de las columnas */

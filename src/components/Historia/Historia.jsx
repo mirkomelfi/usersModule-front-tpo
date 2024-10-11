@@ -3,24 +3,42 @@ import './Historia.css';
 
 import foto from './historia.jpg'; // Asegúrate de tener las imágenes en tu carpeta
 
-// Datos de eventos con una lista de ítems en la descripción
-const eventos = [
+//const añosDesde1908 = Array.from({ length: new Date().getFullYear() - 1908 + 1 }, (_, i) => (1908 + i).toString());
+
+// Predefined events
+const eventosPredefinidos = [
   { año: '1940', descripcion: ['Primer campeonato nacional', 'Inauguración del nuevo estadio'], imagen: foto, ganados: 18, empatados: 3, perdidos: 2, posicion: 1 },
   { año: '1950', descripcion: ['Renovación de la plantilla', 'Nuevo patrocinador'], imagen: foto, ganados: 12, empatados: 5, perdidos: 6, posicion: 3 },
   { año: '1970', descripcion: ['Tercer título internacional', 'Estrella del equipo ganó premio MVP'], imagen: foto, ganados: 20, empatados: 2, perdidos: 1, posicion: 1 },
   { año: '1980', descripcion: ['Cuartos de final en Copa Libertadores'], imagen: foto, ganados: 10, empatados: 8, perdidos: 5, posicion: 5 },
   { año: '1990', descripcion: ['Nuevo director técnico'], imagen: foto, ganados: 15, empatados: 4, perdidos: 7, posicion: 2 },
   { año: '2000', descripcion: ['Nuevas instalaciones de entrenamiento'], imagen: foto, ganados: 17, empatados: 6, perdidos: 3, posicion: 1 },
-  { año: '2001', descripcion: ['Nuevas instalaciones de entrenamiento'], imagen: foto, ganados: 16, empatados: 4, perdidos: 4, posicion: 2 },
-  { año: '2002', descripcion: ['Nuevas instalaciones de entrenamiento'], imagen: foto, ganados: 14, empatados: 7, perdidos: 3, posicion: 3 },
-  { año: '2003', descripcion: ['Nuevas instalaciones de entrenamiento'], imagen: foto, ganados: 18, empatados: 3, perdidos: 2, posicion: 1 },
+  { año: '2005', descripcion: ['Nuevas instalaciones de entrenamiento'], imagen: foto, ganados: 17, empatados: 6, perdidos: 3, posicion: 1 },
+  { año: '2010', descripcion: ['Nuevas instalaciones de entrenamiento'], imagen: foto, ganados: 17, empatados: 6, perdidos: 3, posicion: 1 },
+  { año: '2020', descripcion: ['Nuevas instalaciones de entrenamiento'], imagen: foto, ganados: 17, empatados: 6, perdidos: 3, posicion: 1 },
 ];
+
+// Add missing years with default description
+const eventos = [
+  ...eventosPredefinidos,
+  //...añosDesde1908
+  //  .filter(año => !eventosPredefinidos.some(evento => evento.año === año))
+   // .map(año => ({ año, descripcion: ['Sin eventos importantes'] })),
+];
+
+// Sort events by year in ascending order
+eventos.sort((a, b) => parseInt(añoToInt(a.año)) - parseInt(añoToInt(b.año)));
+
+// Function to convert 'año' strings to integers
+function añoToInt(año) {
+  return parseInt(año, 10);
+}
 
 // Lista de colores para los ítems
 const coloresItems = ['#FF5733', '#33FF57', '#3357FF', '#F5B041', '#9B59B6', '#5DADE2'];
 
 // Número máximo de eventos visibles en la línea de tiempo
-const maxEventosVisibles = 7;
+const maxEventosVisibles = 10; // Actualizado a 10 para mostrar por bloques
 
 export const Historia = () => {
   const [indiceEvento, setIndiceEvento] = useState(0);
@@ -28,23 +46,19 @@ export const Historia = () => {
 
   const eventoSeleccionado = eventos[indiceEvento];
 
-  // Función para avanzar de un evento a otro
+  // Función para avanzar de un bloque de eventos (10 en 10)
   const avanzarEvento = () => {
-    if (indiceEvento < eventos.length - 1) {
-      setIndiceEvento(indiceEvento + 1);
-      if (indiceEvento + 1 >= rangoInicio + maxEventosVisibles) {
-        setRangoInicio(rangoInicio + 1); // Mover el rango hacia adelante
-      }
+    if (rangoInicio + maxEventosVisibles < eventos.length) {
+      setRangoInicio(rangoInicio + maxEventosVisibles); // Mover el rango hacia adelante en bloques de 10
+      setIndiceEvento(rangoInicio + maxEventosVisibles); // Ajustar índice del evento seleccionado
     }
   };
 
-  // Función para retroceder de un evento a otro
+  // Función para retroceder de un bloque de eventos (10 en 10)
   const retrocederEvento = () => {
-    if (indiceEvento > 0) {
-      setIndiceEvento(indiceEvento - 1);
-      if (indiceEvento - 1 < rangoInicio) {
-        setRangoInicio(rangoInicio - 1); // Mover el rango hacia atrás
-      }
+    if (rangoInicio - maxEventosVisibles >= 0) {
+      setRangoInicio(rangoInicio - maxEventosVisibles); // Mover el rango hacia atrás en bloques de 10
+      setIndiceEvento(rangoInicio - maxEventosVisibles); // Ajustar índice del evento seleccionado
     }
   };
 
@@ -119,5 +133,3 @@ export const Historia = () => {
     </div>
   );
 };
-
-

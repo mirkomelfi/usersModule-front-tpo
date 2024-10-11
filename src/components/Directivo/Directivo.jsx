@@ -13,6 +13,54 @@ export const Directivo = () => {
     </span>
   ));
 
+  // Constantes para los directivos y vocales
+  const directivos = [
+    { nombre: 'Carlos Méndez', posicion: 'Director de Finanzas', imagen: foto },
+    { nombre: 'Laura Navarro', posicion: 'Directora de Deportes', imagen: foto },
+    { nombre: 'Ana Muñoz', posicion: 'Directora de Marketing', imagen: foto },
+    { nombre: 'Tomás Martínez', posicion: 'Director de Relaciones Públicas', imagen: foto }
+  ];
+
+  const presidente = {
+    nombre: 'Roberto Fernández',
+    posicion: 'Presidente',
+    imagen: foto
+  };
+
+  const vocalesTitulares = [
+    'Javier González', 'Sandra López', 'Eduardo Torres', 
+    'Patricia Flores', 'Rodrigo Ortiz', 'Marta Serrano', 'Federico Álvarez'
+  ];
+
+  const vocalesSuplentes = [
+    'Claudia Rivas', 'Ignacio Díaz', 'Sara Vega',
+    'Esteban Marín', 'Emilio Cabrera', 'Cristina Pérez'
+  ];
+
+  const secretario = [
+    'Marcos Alarcón', 'Sofía Blanco', 'Jorge Herrera'
+  ];
+
+  const tesorero = [
+    'Elena Ruiz', 'Raúl Sánchez', 'Luz Gutiérrez'
+  ];
+
+  const asesorLegal = [
+    'Ricardo López', 'Andrés Cabrera', 'María Jiménez'
+  ];
+
+  const infraestructura = [
+    'Joaquín Silva', 'Daniel García', 'Lucía Márquez'
+  ];
+
+  const comunicacion = [
+    'Alberto Reyes', 'Carmen Salinas', 'Sergio Delgado'
+  ];
+
+  const eventos = [
+    'Verónica Gómez', 'Felipe Ortega', 'Natalia Castro'
+  ];
+
   return (
     <div className="directivo-page-container">
       {/* Sección de encabezado */}
@@ -26,110 +74,107 @@ export const Directivo = () => {
 
       {/* Directivos */}
       <div className="directivos-section">
+        {/* Primer grupo de directivos */}
         <div className="directivo-card">
-          <img src={foto} alt="Directivo 3" className="directivo-imagen" />
-          <p className="nombre">Directivo 3</p>
-          <p className="posicion">Posición</p>
+          <img src={directivos[0].imagen} alt={directivos[0].posicion} className="directivo-imagen" />
+          <p className="nombre">{directivos[0].nombre}</p>
+          <p className="posicion">{directivos[0].posicion}</p>
         </div>
         <div className="directivo-card">
-          <img src={foto} alt="Directivo 2" className="directivo-imagen" />
-          <p className="nombre">Directivo 2</p>
-          <p className="posicion">Posición</p>
+          <img src={directivos[1].imagen} alt={directivos[1].posicion} className="directivo-imagen" />
+          <p className="nombre">{directivos[1].nombre}</p>
+          <p className="posicion">{directivos[1].posicion}</p>
         </div>
 
-        {/* Presidente */}
+        {/* Presidente al centro */}
         <div className="directivo-card presidente-card">
-          <img src={foto} alt="Presidente" className="directivo-imagen" />
-          <p className="nombre">Presidente</p>
-          <p className="posicion">Posición Principal</p>
+          <img src={presidente.imagen} alt="Presidente" className="directivo-imagen" />
+          <p className="nombre">{presidente.nombre}</p>
+          <p className="posicion">{presidente.posicion}</p>
         </div>
 
-        {/* Otros Directivos */}
+        {/* Segundo grupo de directivos */}
         <div className="directivo-card">
-          <img src={foto} alt="Directivo 2" className="directivo-imagen" />
-          <p className="nombre">Directivo 2</p>
-          <p className="posicion">Posición</p>
+          <img src={directivos[2].imagen} alt={directivos[2].posicion} className="directivo-imagen" />
+          <p className="nombre">{directivos[2].nombre}</p>
+          <p className="posicion">{directivos[2].posicion}</p>
         </div>
         <div className="directivo-card">
-          <img src={foto} alt="Directivo 3" className="directivo-imagen" />
-          <p className="nombre">Directivo 3</p>
-          <p className="posicion">Posición</p>
+          <img src={directivos[3].imagen} alt={directivos[3].posicion} className="directivo-imagen" />
+          <p className="nombre">{directivos[3].nombre}</p>
+          <p className="posicion">{directivos[3].posicion}</p>
         </div>
       </div>
 
-      {/* Vocales */}
-    <div className="vocales-section">
-        <div className="vocales-column">
+      <div className="vocales-section">
+        <div className="vocales-columns">
+
+          <div className="vocales-group">
             <h3>Vocales Titulares</h3>
             <ul>
-            <li>María López</li>
-            <li>Juan Pérez</li>
-            <li>Sofía Rodríguez</li>
-            <li>Martín García</li>
-            <li>Laura Fernández</li>
-            <li>Carlos Ramírez</li>
-            <li>Ana González</li>
-            <li>Lucas Martínez</li>
-            <li>Jorge Torres</li>
-            <li>Paula Vázquez</li>
-            <li>Tomás Núñez</li>
+              {vocalesTitulares.map((vocal, index) => (
+                <li key={index}>{vocal}</li>
+              ))}
             </ul>
-        </div>
+          </div>
 
-        <div className="vocales-column">
+          <div className="vocales-group">
             <h3>Vocales Suplentes</h3>
             <ul>
-            <li>Gabriela Díaz</li>
-            <li>Pedro Suárez</li>
-            <li>Valeria Silva</li>
-            <li>Diego Ruiz</li>
-            <li>Raúl Castro</li>
-            <li>Elena Figueroa</li>
-            <li>Manuel Ortega</li>
-            <li>Marta Rivas</li>
-            <li>Javier Paredes</li>
-            <li>Patricia Herrera</li>
-            <li>Andrés Sosa</li>
-            <li>Julieta Maldonado</li>
+              {vocalesSuplentes.map((vocal, index) => (
+                <li key={index}>{vocal}</li>
+              ))}
             </ul>
-        </div>
+          </div>
 
-        <div className="vocales-column">
-            <h3>Vocales Suplentes</h3>
+          <div className="vocales-group">
+            <h3>Secretario</h3>
             <ul>
-            <li>Clara Álvarez</li>
-            <li>Ricardo Domínguez</li>
-            <li>Sandra Morales</li>
-            <li>Francisco Varela</li>
-            <li>Esteban Cabrera</li>
-            <li>Daniela Miranda</li>
-            <li>Gonzalo Gil</li>
-            <li>Isabel Flores</li>
-            <li>Nicolás Méndez</li>
-            <li>Lucía Sánchez</li>
-            <li>Fabián Bustos</li>
-            <li>Emilia Aguirre</li>
+              {secretario.map((persona, index) => (
+                <li key={index}>{persona}</li>
+              ))}
             </ul>
-        </div>
+            <h3>Tesorero</h3>
+            <ul>
+              {tesorero.map((persona, index) => (
+                <li key={index}>{persona}</li>
+              ))}
+            </ul>
+          </div>
 
-        <div className="vocales-column">
-            <h3>Vocales Suplentes</h3>
+          <div className="vocales-group">
+            <h3>Asesor Legal</h3>
             <ul>
-            <li>Inés Romero</li>
-            <li>Santiago Vargas</li>
-            <li>Miguel Rojas</li>
-            <li>Florencia Peña</li>
-            <li>Cristian Navarro</li>
-            <li>Liliana Ponce</li>
-            <li>Rodrigo Salinas</li>
-            <li>Verónica Cortés</li>
-            <li>Germán Aguayo</li>
-            <li>Camila Ojeda</li>
-            <li>Federico Benítez</li>
-            <li>Silvana Arias</li>
+              {asesorLegal.map((persona, index) => (
+                <li key={index}>{persona}</li>
+              ))}
             </ul>
+            <h3>Infraestructura</h3>
+            <ul>
+              {infraestructura.map((persona, index) => (
+                <li key={index}>{persona}</li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="vocales-group">
+            <h3>Comunicación</h3>
+            <ul>
+              {comunicacion.map((persona, index) => (
+                <li key={index}>{persona}</li>
+              ))}
+            </ul>
+            <h3>Eventos</h3>
+            <ul>
+              {eventos.map((persona, index) => (
+                <li key={index}>{persona}</li>
+              ))}
+            </ul>
+          </div>
+
         </div>
-    </div>
+      </div>
     </div>
   );
 };
+

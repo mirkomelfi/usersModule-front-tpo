@@ -3,25 +3,37 @@ body, html {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
+    background-color: #fafafa; /* Color de fondo claro */
 }
 
+/* Mantén el título y la línea de tiempo en una posición fija */
 .historia-container {
     text-align: center;
     padding: 20px;
+    position: relative;
 }
 
 .historia-h1 {
-    font-size: 32px;
-    color: #003366;
+    font-size: 36px;
+    color: #2c3e50; /* Azul oscuro elegante */
+    position: sticky; /* El título se queda pegado en la parte superior */
+    top: 0;
+    background-color: #fafafa; /* Asegúrate de que el fondo se mantenga consistente */
+    z-index: 10; /* Por si necesitas que esté por encima de otros elementos */
+    padding: 10px 0;
 }
 
-/* Contenedor de la línea de tiempo y flechas de navegación */
+/* Ajustes para la línea de tiempo */
 .historia-timeline-nav {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
+    position: sticky; /* La barra de años se mantiene en la parte superior */
+    top: 60px; /* Debajo del título */
+    background-color: #fafafa;
+    z-index: 9; /* Para estar por encima de las tarjetas de evento */
+    padding: 10px 0;
 }
 
 .historia-timeline-container {
@@ -37,7 +49,7 @@ body, html {
     align-items: center;
 }
 
-/* Estilo de cada botón de la línea de tiempo */
+/* Elimina la necesidad de mover el contenido hacia arriba */
 .historia-timeline-item {
     display: flex;
     flex-direction: column;
@@ -45,31 +57,31 @@ body, html {
     background: none;
     border: none;
     cursor: pointer;
-    color: #003366;
-    margin: 0 10px;
+    color: #34495e; /* Azul grisáceo */
+    margin: 0 15px;
 }
 
 .historia-timeline-item.active .historia-circle {
-    background-color: #003366;
+    background-color: #2a1abc; /* Verde menta para el evento activo */
 }
 
 .historia-circle {
-    width: 12px;
-    height: 12px;
-    background-color: #cccccc;
+    width: 14px;
+    height: 14px;
+    background-color: #bdc3c7; /* Gris claro */
     border-radius: 50%;
     margin-bottom: 5px;
 }
 
 .historia-timeline-item span {
-    font-size: 14px;
+    font-size: 16px;
     margin-top: 5px;
 }
 
 .historia-timeline-line {
-    width: 50px;
-    height: 2px;
-    background-color: #cccccc;
+    width: 60px;
+    height: 3px;
+    background-color: #bdc3c7;
     position: relative;
     top: -4px;
 }
@@ -78,70 +90,84 @@ body, html {
 .historia-arrow {
     background-color: transparent;
     border: none;
-    color: #003366;
-    font-size: 24px;
+    color: #34495e;
+    font-size: 28px;
     cursor: pointer;
     margin: 0 20px;
 }
 
 .historia-arrow:disabled {
-    color: #cccccc;
+    color: #bdc3c7;
     cursor: not-allowed;
 }
 
 .historia-arrow:hover:not(:disabled) {
-    color: #d9534f;
+    color: #ff0000; /* Rojo suave al hacer hover */
 }
 
 /* Detalles del evento */
 .historia-evento-detalle {
     background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    max-width: 800px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 25px;
+    max-width: 850px;
     margin: 0 auto;
     text-align: left;
+    min-height: 300px; /* Altura mínima para evitar que el contenido variable altere la estructura */
 }
 
 .historia-evento-fecha {
-    font-size: 28px;
-    color: #d9534f;
+    font-size: 30px;
+    color: #474747;
+    position: relative;
+    text-align: center;
+    padding-bottom: 10px; /* Espacio para la línea */
+}
+
+.historia-evento-fecha::after {
+    content: '';
+    display: block;
+    width: 50%; /* Cubre la mitad del ancho de la tarjeta */
+    border-bottom: 3px solid #97989e; /* Línea negra de 3px de grosor */
+    position: absolute;
+    bottom: 0;
+    left: 25%; /* Centra la línea en la tarjeta */
 }
 
 .historia-evento-descripcion {
-    font-size: 18px; /* Mantener una fuente más pequeña para la descripción */
+    font-size: 18px;
     list-style-type: none;
     padding-left: 0;
-    margin-top: 20px;
+    margin-top: 25px;
 }
 
 .historia-evento-descripcion li {
-    margin-bottom: 5px;
+    margin-bottom: 8px;
 }
 
 .historia-evento-detalle img {
     margin-top: 20px;
     width: 100%;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
 }
 
 /* Sección de información sobre partidos en columnas */
 .historia-partidos-info {
     display: flex;
     justify-content: space-between;
-    margin: 20px 0;
-    padding: 10px;
-    background-color: #f5f5f5;
-    border-radius: 8px;
-    font-size: 24px; /* Aumentamos el tamaño de la fuente */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 25px 0;
+    padding: 12px;
+    background-color: #ecf0f1; /* Fondo gris suave */
+    border-radius: 10px;
+    font-size: 22px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .historia-partido-item {
     flex: 1;
-    text-align: center; /* Centramos el contenido */
+    text-align: center;
     font-weight: bold;
 }
 
@@ -149,7 +175,7 @@ body, html {
     margin: 0;
 }
 
-/* Estilo responsivo para dispositivos móviles */
+/* Ajustes responsivos */
 @media (max-width: 768px) {
     .historia-timeline-container {
         flex-direction: column;
@@ -160,10 +186,11 @@ body, html {
     }
 
     .historia-evento-detalle {
-        padding: 10px;
+        padding: 15px;
+        min-height: 250px; /* Reduce la altura mínima en pantallas pequeñas */
     }
 
     .historia-arrow {
-        font-size: 18px;
+        font-size: 22px;
     }
 }
