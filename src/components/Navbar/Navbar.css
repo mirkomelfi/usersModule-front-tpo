@@ -189,10 +189,10 @@ body {
   color: #ffffff; /* Keep the text color white */
 }
 
-.feedback-button {
+.ayuda-button {
   position: relative;
   display: inline-block;
-  padding: 10px 75px;
+  padding: 10px 85px;
   background-color: #ffffff15; /* Default background color */
   color: #ffffff; /* Text color */
   border: none; /* Remover el borde del botón principal */
@@ -208,7 +208,7 @@ body {
   z-index: 1; /* Keep button content above the hover effect */
 }
 
-.feedback-button::before {
+.ayuda-button::before {
   content: '';
   position: absolute;
   top: 0;
@@ -221,11 +221,11 @@ body {
   z-index: -1; /* Place the background behind the text */
 }
 
-.feedback-button:hover::before {
+.ayuda-button:hover::before {
   transform: translateX(-50%) scaleX(1); /* Expand from center on hover */
 }
 
-.feedback-button:hover {
+.ayuda-button:hover {
   color: #ffffff; /* Keep the text color white */
 }
 
