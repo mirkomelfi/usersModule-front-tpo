@@ -82,6 +82,8 @@ const Navbar = () => {
               <li><Link to="/superAdmin">Registrar Usuarios</Link></li>
             </ul>
           </li>
+          <li><Link to="/autoridades">Autoridades</Link></li>
+          <li><Link to="/historia">Historia</Link></li>
         </ul>
         
       :
