@@ -10,14 +10,18 @@ import { validateRol,isRolUser,deleteToken } from "../../utils/auth-utils";
 const ImagenPost = ({noticia,actividad,propuesta,id}) =>{ 
 
     var url=""
+    var volver=""
     if (noticia){
         url="admin/noticias"
+        volver="noticias"
     }
     if (actividad){
         url="admin/actividades"
+        volver="deportes"
     }
     if (propuesta){
         url="propuestas"
+        volver="propuestas"
     }
 
     const [mensaje,setMensaje]=useState(null)
@@ -96,8 +100,8 @@ const ImagenPost = ({noticia,actividad,propuesta,id}) =>{
                 ):    <Mensaje msj={mensaje} />
                     
         }
-        {rol?<button class="button btnPrimary" onClick={()=>navigateTo(`/usuario/reclamos/${id}`)}><span class="btnText">Volver</span></button>
-            :<button class="button btnPrimary" onClick={()=>navigateTo(`/reclamos`)}><span class="btnText">Volver</span></button>
+        {rol?<button class="button btnPrimary" onClick={()=>navigateTo(`/${volver}`)}><span class="btnText">Volver</span></button>
+            :<button class="button btnPrimary" onClick={()=>navigateTo(`/${volver}`)}><span class="btnText">Volver</span></button>
             }
         </div>
         

@@ -128,9 +128,9 @@ export const DeportesPut = () => {
                             className="put-input"
                             placeholderText="Seleccionar fecha"
                         />
-
+ <button type="submit" className="put-button">Actualizar deporte</button>
                     </form>
-                    <button type="submit" className="put-button">Actualizar deporte</button>
+                   
                 </div>
             ) : (!error ? (
                 <div>

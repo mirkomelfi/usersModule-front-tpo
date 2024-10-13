@@ -70,6 +70,7 @@ const Navbar = () => {
             <ul className={`dropdown-content ${openDropdown === 'Feedback' ? 'show' : ''}`}>
               <li><Link to="/foroFeedback">Listado</Link></li>
               {!admin&&<li><Link to="/feedback">Deja tu Comentario</Link></li>}
+              {admin&&<li><Link to="/feedback">Agregar rubro</Link></li>}
             </ul>
           </li>
 

@@ -30,7 +30,7 @@ export const DeportesPost = () => {
         const deporte = Object.fromEntries(datosFormulario); 
 
         // Formatear la fecha seleccionada antes de enviar al backend
-        deporte.fecha = format(selectedDate, 'dd-MM-yyyy');
+       // deporte.fecha = format(selectedDate, 'dd-MM-yyyy');
         
         // Validación sencilla para campos vacíos
         if (!deporte.nombre && !deporte.descripcion) {
@@ -102,9 +102,9 @@ export const DeportesPost = () => {
                             className="post-input"
                             placeholderText="Seleccionar fecha"
                         />
-
+<button type="submit" className="post-button">Crear deporte</button>
                     </form>
-                    <button type="submit" className="post-button">Crear deporte</button>
+                   
                 </div>
             ) : (!error ? (
                 <div>

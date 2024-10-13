@@ -85,10 +85,10 @@ export const Login = () => {
         <h3>Inicio de Sesión</h3>
         <form onSubmit={consultarForm} ref={datForm}>
           <div className="mb-3">
-            <label htmlFor="username" className="form-label">
-              Nombre de Usuario
+            <label htmlFor="dni" className="form-label">
+              DNI
             </label>
-            <input type="username" className="form-control" name="username" />
+            <input type="number" className="form-control" name="dni" />
           </div>
 
           <div className="mb-3">
