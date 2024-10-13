@@ -280,7 +280,7 @@ const EventsCalendar = () => {
               <div>
                 <select value={selectedOption} onChange={handleSelectedRol}>
                   <option value="">Selecciona el Rol de la persona con la que desea reunirse</option>
-                  <option value="Inversor">Inversor</option>
+                  <option value="Inversionista">Inversor</option>
                   <option value="Directivo">Directivo</option>
                 </select>
                 <p>Opción seleccionada: {selectedOption}</p>
