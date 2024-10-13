@@ -1,6 +1,7 @@
 .home {
   text-align: center;
   padding: 50px 20px;
+  margin-top: 50px; /* Añade espacio para evitar que el contenido se vaya demasiado hacia arriba */
 }
 
 .content-container {
@@ -8,8 +9,9 @@
   align-items: center;
   justify-content: space-between;
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 0 auto; /* Centra el contenedor horizontalmente */
   text-align: left;
+  padding: 20px; /* Añade padding para evitar que el contenido se acerque demasiado a los bordes */
 }
 
 .text-section {
@@ -52,46 +54,186 @@
   border-radius: 0%;
 }
 
-/* Media queries para pantallas medianas */
-@media (max-width: 768px) {
+/* Estilos para el navbar (hamburguesa) */
+.navbar {
+  position: fixed; /* Fija la posición del navbar para que no se mueva con el contenido */
+  right: 20px;
+  z-index: 1000; /* Asegura que el navbar esté siempre por encima del contenido */
+}
+
+.hamburger-icon {
+  font-size: 2em;
+  cursor: pointer;
+}
+
+/* Para pantallas muy grandes (mayores de 1920px) */
+@media (min-width: 1920px) {
   .content-container {
-    flex-direction: column; /* Coloca los elementos en columna en lugar de fila */
-    text-align: center; /* Centra el texto para pantallas pequeñas */
+    max-width: 1400px; /* Mayor ancho para pantallas grandes */
   }
 
   .text-section {
-    padding-right: 0; /* Elimina el padding derecho para pantallas pequeñas */
+    padding-top: 50px;
+    padding-right: 0;
   }
 
   .text-section h1 {
-    font-size: 2.5em; /* Ajusta el tamaño de la fuente en pantallas más pequeñas */
+    font-size: 4em; /* Aumenta el tamaño de la fuente */
   }
 
   .text-section p {
-    font-size: 1.2em; /* Ajusta el tamaño de la fuente */
+    font-size: 2em; /* Aumenta el tamaño del párrafo */
+  }
+
+  .profile-pic {
+    max-width: 450px; /* Aumenta el tamaño de la imagen */
+  }
+}
+
+/* Para pantallas grandes (entre 1440px y 1920px) */
+@media (min-width: 1440px) and (max-width: 1919px) {
+  .content-container {
+    max-width: 1200px;
+  }
+
+  .text-section {
+    padding-top: 150px;
+    padding-right: 0;
+  }
+
+  .text-section h1 {
+    font-size: 3.5em;
+  }
+
+  .text-section p {
+    font-size: 1.7em;
+  }
+
+  .profile-pic {
+    max-width: 450px;
+  }
+}
+
+/* Para pantallas medianas-grandes (entre 1024px y 1440px) */
+@media (min-width: 1024px) and (max-width: 1439px) {
+  .content-container {
+    max-width: 1000px;
+  }
+
+  .text-section {
+    padding-top: 150px;
+    padding-right: 0;
+  }
+
+  .text-section h1 {
+    font-size: 3em;
+  }
+
+  .text-section p {
+    font-size: 1.5em;
+  }
+
+  .profile-pic {
+    max-width: 400px;
+  }
+}
+
+/* Media queries para pantallas medianas (entre 768px y 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .content-container {
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+  }
+
+  .text-section {
+    padding-top: 350px;
+    padding-right: 0;
+  }
+
+  .text-section h1 {
+    font-size: 2.5em;
+  }
+
+  .text-section p {
+    font-size: 1.2em;
   }
 
   .social-links a {
-    font-size: 1em; /* Disminuye el tamaño de los enlaces */
+    font-size: 1em;
     margin-right: 10px;
   }
 
   .profile-pic {
-    max-width: 300px; /* Reduce el tamaño máximo de la imagen */
+    max-width: 300px;
+  }
+
+  .navbar {
+    right: 10px;
   }
 }
 
-/* Media queries para pantallas muy pequeñas */
-@media (max-width: 480px) {
+/* Media queries para pantallas pequeñas (entre 480px y 767px) */
+@media (min-width: 480px) and (max-width: 767px) {
+  .text-section {
+    padding-top: 450px;
+    padding-right: 0;
+  }
+
   .text-section h1 {
-    font-size: 2em; /* Disminuye más el tamaño de la fuente */
+    font-size: 2em;
   }
 
   .text-section p {
-    font-size: 1em; /* Ajusta el tamaño del párrafo */
+    font-size: 1em;
+  }
+
+  .image-section {
+    padding-top: 150px;
+    padding-left: 100px;
+    flex: 1;
+    display: flex;
+    justify-content: center;
   }
 
   .profile-pic {
-    max-width: 200px; /* Reduce aún más el tamaño máximo de la imagen */
+    max-width: 200px;
+  }
+
+  .navbar {
+    right: 5px;
+  }
+
+  .content-container {
+    padding: 10px;
   }
 }
+
+/* Media queries para pantallas muy pequeñas (menores de 480px) */
+@media (max-width: 479px) {
+  .text-section {
+    padding-top: 550px;
+    padding-right: 0;
+  }
+
+  .text-section h1 {
+    font-size: 1.8em;
+  }
+
+  .text-section p {
+    font-size: 0.9em;
+  }
+
+  .profile-pic {
+    max-width: 180px;
+  }
+
+  .navbar {
+    right: 5px;
+  }
+
+  .content-container {
+    padding: 5px;
+  }
+}
+
