@@ -8,7 +8,7 @@ import './Register.css'; // Asegúrate de importar el archivo de estilos
 
 export const Register = () => {
     const [mensaje, setMensaje] = useState(null);
-    const [rol, setRol] = useState(undefined);    
+    const [rol, setRol] = useState("Cliente");    
     const navigate = useNavigate();
     const navigateTo = (url) => navigate(url);
 
@@ -18,18 +18,23 @@ export const Register = () => {
         e.preventDefault();
         const datosFormulario = new FormData(datForm.current);
         const cliente = Object.fromEntries(datosFormulario);
+        const username=cliente.nombre.substr(0,1)+cliente.apellido.substr(0,1)+cliente.dni
+        const newObj={...cliente,username,rol}
+
         console.log(cliente)
+        console.log(newObj)
+
         if (!cliente.dni || !cliente.password|| !cliente.nombre|| !cliente.apellido) {
             setMensaje("Faltan datos");
         } else {
-            console.log(cliente)
+
             const response = await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/register`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                     //"Authorization": `Bearer ${getToken()}`
                 },
-                body: JSON.stringify(cliente)
+                body: JSON.stringify(newObj)
             });
 
            
@@ -47,7 +52,7 @@ export const Register = () => {
         <div className="register-container">
             {!mensaje ? (
                 <div className="register-form">
-                    <h3>Formulario de registro</h3>
+                    <h3>Formulario de registro - Cuenta con rol "Cliente"</h3>
                     <form onSubmit={consultarForm} ref={datForm}>
                         <div className="mb-3">
                             <label htmlFor="nombre" className="form-label">Nombre</label>
