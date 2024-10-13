@@ -143,13 +143,9 @@ export const Propuestas = () => {
             <div key={propuesta.id} className="propuesta-card">
               <h3>{propuesta.titulo}</h3>
               <p>{propuesta.descripcion}</p>
- {             <p>{propuesta.fechaPublicacion}</p>
-              /*<button
-                className={`vote-button ${votes[propuesta.id] ? 'voted' : ''}`}
-                onClick={() => handleVote(propuesta.id)}
-              >
-                {votes[propuesta.id] ? 'No votar' : 'Votar'}
-              </button>*/}
+            <p>{propuesta.fechaPublicacion}</p>
+            
+
             </div>
           ))
         ) : (

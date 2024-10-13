@@ -10,7 +10,7 @@ import './Post.css';
 
 export const PropuestasPost = () => {
 
-    const dni=111;// obtener del usr loggeado
+    const dni = useSelector((state) => state.usuarios.dni);
 
     const [mensaje,setMensaje]=useState(null)
     const [idPropuesta,setIdPropuesta]=useState(null)
