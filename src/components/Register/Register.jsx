@@ -52,7 +52,8 @@ export const Register = () => {
         <div className="register-container">
             {!mensaje ? (
                 <div className="register-form">
-                    <h3>Formulario de registro - Cuenta con rol "Cliente"</h3>
+                    <h3>Formulario de registro</h3>
+
                     <form onSubmit={consultarForm} ref={datForm}>
                         <div className="mb-3">
                             <label htmlFor="nombre" className="form-label">Nombre</label>
@@ -75,6 +76,16 @@ export const Register = () => {
                             <label htmlFor="password" className="form-label">Contraseña</label>
                             <input type="password" className="form-control" name="password" />
                         </div>
+                        <div className="form-group">
+                        <label htmlFor="rol">Rol</label>
+                        <select
+                        name="rol"
+                        value="Cliente"
+                        required
+                        >
+                        <option value="Cliente">E-Commerce</option>
+                        </select>
+                    </div>
                         <button type="submit" className="button btnPrimary">Crear Usuario</button>
                     </form>
                 </div>

@@ -7,6 +7,7 @@ import { validateRol,isRolUser,deleteToken,getToken, isTokenExpired } from "../.
 import ImagenPost from "../Imagen/ImagenPOST"
 
 import './Post.css'; 
+import { useSelector } from "react-redux"
 
 export const PropuestasPost = () => {
 

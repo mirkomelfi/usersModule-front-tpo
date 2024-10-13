@@ -144,7 +144,7 @@ export const Propuestas = () => {
               <h3>{propuesta.titulo}</h3>
               <p>{propuesta.descripcion}</p>
             <p>{propuesta.fechaPublicacion}</p>
-            
+            <p>Creada por: {propuesta.dni}</p>
 
             </div>
           ))
