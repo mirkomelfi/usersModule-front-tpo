@@ -14,8 +14,7 @@
     padding: 25px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 600px;
-    width: 100%;
+    width: 750px;
   }
   
   /* Título del post */
@@ -27,7 +26,7 @@
   
   /* Input del formulario */
   .post-input, .post-textarea, .post-select {
-    width: 100%;
+    width: 95%;
     padding: 10px;
     margin-bottom: 10px;
     border-radius: 5px;
@@ -49,6 +48,7 @@
     border-radius: 5px;
     cursor: pointer;
     font-size: 1rem;
+    align-items: center;
     margin-top: 5px;
   }
 

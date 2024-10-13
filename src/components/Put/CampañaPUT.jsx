@@ -131,7 +131,7 @@ if (response.status==200){
               onChange={(e) => setTitulo(e.target.value)}
             />
             <textarea
-              className="put-textarea"
+              className="put-input"
               placeholder="Descripción"
               value={descripcion}
               onChange={(e) => setDescripcion(e.target.value)}

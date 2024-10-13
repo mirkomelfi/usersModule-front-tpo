@@ -87,7 +87,7 @@ export const PropuestasPut = () => {
                         placeholder="Titulo"
                         name="titulo"
                     />
-                    <input
+                    <textarea
                         type="text"
                         className="put-input"
                         placeholder="Descripcion"
