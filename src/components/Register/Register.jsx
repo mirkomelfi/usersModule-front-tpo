@@ -18,8 +18,8 @@ export const Register = () => {
         e.preventDefault();
         const datosFormulario = new FormData(datForm.current);
         const cliente = Object.fromEntries(datosFormulario);
-
-        if (!cliente.username || !cliente.password) {
+        console.log(cliente)
+        if (!cliente.dni || !cliente.password|| !cliente.nombre|| !cliente.apellido) {
             setMensaje("Faltan datos");
         } else {
             console.log(cliente)
