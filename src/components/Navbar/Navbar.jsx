@@ -100,7 +100,7 @@ const Navbar = () => {
       }
 
         <a href="/asociarse" className="navbar-button">Asociate</a>
-        <a href="/contactos" className="feedback-button">Ayuda</a>
+        <a href="/contactos" className="ayuda-button">Ayuda</a>
       </nav>
     </header>
   );
