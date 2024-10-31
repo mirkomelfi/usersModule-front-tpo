@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import './Productos.css';
@@ -40,6 +40,9 @@ export const Productos = () => {
   const isUser = useSelector((state) => state.usuarios.dni);
 
   const navigate = useNavigate();
+  
+  const [listaProductos, setListaProductos] = useState([]);
+  const [mensaje, setMensaje] = useState(null);
   const [cartCount, setCartCount] = useState(3);
   const [searchTerm, setSearchTerm] = useState('');
   const [currentIndex, setCurrentIndex] = useState({});
@@ -81,6 +84,51 @@ export const Productos = () => {
     navigate(url);
   };
 
+  const getProductos = async() =>{
+
+    let url=`productos`
+  
+    const response= await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/${url}`, { 
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      }
+      
+    })
+    
+    const data = await response.json()
+    console.log(data)
+    if (data.msj){
+      setListaProductos([])
+      setMensaje(data.msj)
+    }else{
+      setListaProductos(data)
+    }
+  }
+
+  const actualizarProductos = async() =>{
+
+    let url=`productosUpdate`
+  
+    const response= await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/${url}`, { 
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      }
+      
+    })
+    
+
+    setTimeout(function(){
+        getProductos()
+    }, 5000);
+
+  }
+
+    useEffect(() => { 
+      actualizarProductos()
+    },[])
+
   return (
     <div className="productos-container">
       <div className="search-container">
@@ -101,16 +149,6 @@ export const Productos = () => {
        {!isUser&& <Link to="/register" className="btn-agregar-producto">
         Para poder comprar debe tener iniciar sesión. Si no tiene cuenta presione aquí para registrarse.
         </Link>}
-
-{// Me parece que pertenece a grupo Ecommerce
-}
-      {/*
-        <div className="agregarProducto">
-        <Link to="/productos/add" className="btn-agregar-producto">
-          Agregar Producto
-        </Link>
-      </div>*/
-      }
 
       {Object.keys(productosFiltradosPorTipo).map((tipo) => {
         const current = currentIndex[tipo] || 0;

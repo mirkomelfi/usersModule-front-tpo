@@ -41,6 +41,7 @@ import { ProductoPut } from './components/Put/ProductoPUT';
 import { PropuestasPut } from './components/Put/PropuestasPUT';
 import { CampañaPut } from './components/Put/CampañaPUT';
 import { UsuariosPut } from './components/Put/UsuarioPUT';
+import { Pedidos } from './components/Pedidos/Pedidos';
 
 
 export const App = () => {
@@ -87,6 +88,8 @@ export const App = () => {
           <Route path='/productos' element={<Productos />} />
           <Route path='/producto' element={<Producto />} />
           <Route path='/listaCarrito' element={<ListaCarrito />} />
+          
+          <Route path='/pedidos' element={<Pedidos />} />
 
           <Route path='/autoridades' element={<Directivo />} />
 

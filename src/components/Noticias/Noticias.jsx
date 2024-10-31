@@ -93,17 +93,7 @@ export const Noticias = () => {
         }
         
       })
-      /*
-      const rol=validateRol(response)
-      if (!rol){
-        if (isRolUser(getToken())){
-         
-            setMensaje("No posee los permisos necesarios")
-        }else{
-          deleteToken()
-          navigate("/login")
-        }
-      }else{*/
+
       const data = await response.json()
       if (data.msj){
         setMensaje(data.msj)
@@ -112,13 +102,12 @@ export const Noticias = () => {
         setListaNoticias(data)
       }
       }
-   // }
   
+      useEffect(() => { 
+        ejecutarFetch()
+      },[])
   
     useEffect(() => { 
-      ejecutarFetch()
-      .catch(error => console.error(error))
-
       const totalNoticias = listaNoticias.length;
         if (totalNoticias <= 5) {
             setPaddingLeft(50);  // Padding para 1-5 noticias

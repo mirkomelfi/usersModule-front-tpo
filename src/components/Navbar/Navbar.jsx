@@ -39,6 +39,8 @@ const Navbar = () => {
           {!admin&&<li><Link to="/perfilUsuario">Perfil Usuario</Link></li>}
           <li><Link to="/deportes">Deportes</Link></li>
           <li><Link to="/noticias">Noticias</Link></li>
+          
+          {!admin&&isUser&&<li><Link to="/pedidos">Mis Pedidos</Link></li>}
           {!admin&&<li><Link to="/productos">Productos</Link></li>}
           {!admin&&<li><Link to="/agenda">Mi agenda</Link></li>}
 

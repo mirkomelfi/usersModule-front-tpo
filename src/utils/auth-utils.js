@@ -30,6 +30,11 @@ export const extractDni=(token)=>{
     return decoded.dni
 }
 
+export const extractUsername=(token)=>{
+    const decoded= jwtDecode(token)
+    return decoded.sub
+}
+
 
 export const isTokenExpired=(token)=>{
     const decoded= jwtDecode(token)

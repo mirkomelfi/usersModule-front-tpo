@@ -94,17 +94,7 @@ export const Deportes = () => {
         }
         
       })
-      /*
-      const rol=validateRol(response)
-      if (!rol){
-        if (isRolUser(getToken())){
-         
-            setMensaje("No posee los permisos necesarios")
-        }else{
-          deleteToken()
-          navigate("/login")
-        }
-      }else{*/
+
       const data = await response.json()
       if (data.msj){
         setMensaje(data.msj)
@@ -113,12 +103,15 @@ export const Deportes = () => {
         setListaDeportes(data)
       }
       }
-   // }
+
   
+   useEffect(() => { 
+    ejecutarFetch()
+    .catch(error => console.error(error))
+
+  },[])
   
     useEffect(() => { 
-      ejecutarFetch()
-      .catch(error => console.error(error))
 
       const totalDeportes = listaDeportes.length;
         if (totalDeportes <= 5) {
