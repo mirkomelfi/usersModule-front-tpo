@@ -40,6 +40,7 @@ const Navbar = () => {
           <li><Link to="/deportes">Deportes</Link></li>
           <li><Link to="/noticias">Noticias</Link></li>
           {!admin&&<li><Link to="/productos">Productos</Link></li>}
+          {!admin&&<li><Link to="/pedidos">Mis Pedidos</Link></li>}
           {!admin&&<li><Link to="/agenda">Mi agenda</Link></li>}
 
 
@@ -60,6 +61,18 @@ const Navbar = () => {
             <ul className={`dropdown-content ${openDropdown === 'Camapaña' ? 'show' : ''}`}>
               <li><Link to="/campañas">Listado</Link></li>
               {admin&&<li><Link to="/campañas/add">Lanzar campaña</Link></li>}
+            </ul>
+          </li>
+
+          <li className="dropdown">
+            <button className="dropdown-btn" onClick={() => handleDropdownClick('Finanzas')}>
+            Finanzas 
+            </button>
+            <ul className={`dropdown-content ${openDropdown === 'Finanzas' ? 'show' : ''}`}>
+              <li><Link to="/balance">Balance</Link></li>
+            </ul>
+            <ul className={`dropdown-content ${openDropdown === 'Finanzas' ? 'show' : ''}`}>
+              <li><Link to="/inversiones">Invertir</Link></li>
             </ul>
           </li>
      
@@ -91,11 +104,23 @@ const Navbar = () => {
 
 // Not user
         <ul className="navbar-menu">
-          <li><Link to="/autoridades">Autoridades</Link></li>
-          <li><Link to="/historia">Historia</Link></li>
           <li><Link to="/deportes">Deportes</Link></li>
           <li><Link to="/noticias">Noticias</Link></li>
           <li><Link to="/productos">Productos</Link></li>
+          <li><Link to="/pedidos">Mis Pedidos</Link></li>
+          <li><Link to="/autoridades">Autoridades</Link></li>
+          <li><Link to="/historia">Historia</Link></li>
+          <li className="dropdown">
+            <button className="dropdown-btn" onClick={() => handleDropdownClick('Finanzas')}>
+            Finanzas 
+            </button>
+            <ul className={`dropdown-content ${openDropdown === 'Finanzas' ? 'show' : ''}`}>
+              <li><Link to="/balance">Balance</Link></li>
+            </ul>
+            <ul className={`dropdown-content ${openDropdown === 'Finanzas' ? 'show' : ''}`}>
+              <li><Link to="/inversiones">Invertir</Link></li>
+            </ul>
+          </li>
           <li><Link to="/login">Login</Link></li>
           <li><Link to="/register">Registrarse</Link></li>
         </ul>
