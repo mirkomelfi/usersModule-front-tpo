@@ -34,6 +34,7 @@ import { ForoFeedback } from './components/ForoFeedback/ForoFeedback';
 import { Usuarios } from './components/Usuarios/Usuarios';
 import { Historia } from './components/Historia/Historia';
 import { Directivo } from './components/Directivo/Directivo';
+import { Pedidos } from './components/Pedidos/Pedidos';
 
 import { NoticiasPut } from './components/Put/NoticiasPUT';
 import { DeportesPut } from './components/Put/DeportesPUT'; 
@@ -87,6 +88,8 @@ export const App = () => {
           <Route path='/productos' element={<Productos />} />
           <Route path='/producto' element={<Producto />} />
           <Route path='/listaCarrito' element={<ListaCarrito />} />
+
+          <Route path='/pedidos' element={<Pedidos/>} />
 
           <Route path='/autoridades' element={<Directivo />} />
 
