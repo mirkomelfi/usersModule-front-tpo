@@ -1,0 +1,111 @@
+/* Contenedor Principal */
+.balance-container {
+    width: 1000px;
+    height: 600px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    color: #ffffff;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Estilo del encabezado */
+.balance-header h2 {
+    color: #2c3e50;
+    font-size: 3em; /* Aumentado */
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Sección de Ganancia */
+.balance-gain-section {
+    font-size: 2.2em; /* Aumentado */
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Contenedor para Ingresos y Gastos */
+.balance-content {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #bbbaba;
+    border-radius: 8px;
+}
+
+/* Panel izquierdo para ingresos/gastos */
+.balance-left-panel {
+    width: 40%;
+}
+
+/* Ingresos y Gastos */
+.balance-income-section,
+.balance-expenses-section {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.8em; /* Aumentado */
+    margin-bottom: 15px;
+}
+
+.balance-income-amount {
+    color: #2bff01;
+    font-weight: bold;
+}
+
+.balance-expenses-amount {
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+/* Panel derecho para gráfica */
+.balance-right-panel {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Gráfica circular */
+.balance-chart {
+    width: 250px; /* Aumentado */
+    height: 250px; /* Aumentado */
+    border-radius: 50%;
+    background: conic-gradient(#2ecc71 60%, #e74c3c 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+/* Círculo interno */
+.balance-chart-circle {
+    width: 150px; /* Aumentado */
+    height: 150px; /* Aumentado */
+    border-radius: 50%;
+    background-color: #bbbaba;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.balance-chart-center-text {
+    font-size: 1.8em; /* Aumentado */
+    font-weight: bold;
+    color: #ffffff;
+}
+
+/* Footer para detalles adicionales */
+.balance-footer {
+    display: flex;
+    justify-content: space-around;
+    color: #bbbaba;
+    font-size: 1.5em; /* Aumentado */
+    margin-top: 20px;
+    padding: 10px 0;
+    background-color: #bbbaba;
+    border-radius: 8px;
+}

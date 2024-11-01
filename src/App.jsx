@@ -35,6 +35,9 @@ import { Usuarios } from './components/Usuarios/Usuarios';
 import { Historia } from './components/Historia/Historia';
 import { Directivo } from './components/Directivo/Directivo';
 import { Pedidos } from './components/Pedidos/Pedidos';
+import { Balance } from './components/Balance/Balance';
+import { Inversiones } from './components/Inversiones/Inversiones';
+
 
 import { NoticiasPut } from './components/Put/NoticiasPUT';
 import { DeportesPut } from './components/Put/DeportesPUT'; 
@@ -94,6 +97,9 @@ export const App = () => {
           <Route path='/autoridades' element={<Directivo />} />
 
           <Route path='/historia' element={<Historia />} />
+
+          <Route path='/balance' element={<Balance />} />
+          <Route path='/inversiones' element={<Inversiones />} />
           
           <Route path='/deportes/add' element={<DeportesPost />} />
           <Route path='/noticias/add' element={<NoticiasPost />} />

@@ -4,6 +4,7 @@ import './Pedidos.css';
 const pedidos = [
   {
     id: 1,
+    nombreUsuario:"Manuel Jimenez",
     fecha: "22/01/2021",
     monto: "$160.00",
     cantidadProd: 3,
@@ -12,6 +13,7 @@ const pedidos = [
   },
   {
     id: 2,
+    nombreUsuario:"Manuel Jimenez",
     fecha: "23/01/2021",
     monto: "$250.00",
     cantidadProd: 2,
@@ -20,6 +22,7 @@ const pedidos = [
   },
   {
     id: 3,
+    nombreUsuario:"Manuel Jimenez",
     fecha: "24/01/2021",
     monto: "$120.00",
     cantidadProd: 1,
