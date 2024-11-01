@@ -4,7 +4,6 @@ import './Pedidos.css';
 const pedidos = [
   {
     id: 1,
-    nombreUsuario: "Juan Perez",
     fecha: "22/01/2021",
     monto: "$160.00",
     cantidadProd: 3,
@@ -13,7 +12,6 @@ const pedidos = [
   },
   {
     id: 2,
-    nombreUsuario: "Maria Lopez",
     fecha: "23/01/2021",
     monto: "$250.00",
     cantidadProd: 2,
@@ -22,7 +20,6 @@ const pedidos = [
   },
   {
     id: 3,
-    nombreUsuario: "Carlos Garcia",
     fecha: "24/01/2021",
     monto: "$120.00",
     cantidadProd: 1,
@@ -40,7 +37,6 @@ export const Pedidos = () => {
             <thead>
               <tr>
                 <th>ID</th>
-                <th>Usuario</th>
                 <th>Fecha</th>
                 <th>Monto</th>
                 <th>Cantidad</th>
@@ -52,7 +48,6 @@ export const Pedidos = () => {
               {pedidos.map((pedido) => (
                 <tr key={pedido.id}>
                   <td>{pedido.id}</td>
-                  <td>{pedido.nombreUsuario}</td>
                   <td>{pedido.fecha}</td>
                   <td>{pedido.monto}</td>
                   <td>{pedido.cantidadProd}</td>
