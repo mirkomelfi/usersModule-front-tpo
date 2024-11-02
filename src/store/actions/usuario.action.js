@@ -9,11 +9,12 @@ export const LOAD_USUARIOS = "LOAD_USUARIOS";
 
 const URL_API=1
 
-export const loginUsuario = (dni,rol) => {
+export const loginUsuario = (dni,rol,username) => {
   return async (dispatch) => {
   dispatch({
     type:LOGIN_USUARIO,
     dni,
+    username,
     rol 
   });
 }

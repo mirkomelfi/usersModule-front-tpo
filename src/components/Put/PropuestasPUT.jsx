@@ -7,10 +7,11 @@ import { validateRol,isRolUser,deleteToken,getToken, isTokenExpired } from "../.
 import ImagenPost from "../Imagen/ImagenPOST"
 
 import './PUT.css'; 
+import { useSelector } from "react-redux"
 
 export const PropuestasPut = () => {
-
-    const dni=111;// obtener del usr loggeado
+    var dniLogged = useSelector((state) => state.usuarios.dni);
+    const dni=dniLogged;// obtener del usr loggeado
 
     const [mensaje,setMensaje]=useState(null)
     const [idPropuesta,setIdPropuesta]=useState(null)
@@ -87,7 +88,7 @@ export const PropuestasPut = () => {
                         placeholder="Titulo"
                         name="titulo"
                     />
-                    <input
+                    <textarea
                         type="text"
                         className="put-input"
                         placeholder="Descripcion"

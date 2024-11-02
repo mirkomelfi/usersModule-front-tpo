@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Mensaje } from "../Mensaje/Mensaje";
-import { deleteToken, extractDni, getToken, setToken,extractRol } from "../../utils/auth-utils";
+import { deleteToken, extractDni, getToken, setToken,extractRol, extractUsername } from "../../utils/auth-utils";
 import "./Login.css";
 import { loginUsuario } from "../../store/actions/usuario.action";
 import { useDispatch } from "react-redux";
@@ -53,6 +53,7 @@ export const Login = () => {
     );
 
     var dni = null
+    var username = null
     var rol = null
 
     if (response.status==200){
@@ -61,6 +62,7 @@ export const Login = () => {
       setToken(data.token)
       dni = extractDni(getToken())
       rol = extractRol(getToken())
+      username = extractUsername(getToken())
       alert(`Fuiste loggeado`)
       navigate("/")
    
@@ -71,7 +73,7 @@ export const Login = () => {
       setMensaje(data.msj)
     }
 
-    dispatch(loginUsuario(dni,rol))
+    dispatch(loginUsuario(dni,rol,username))
   
     // Navegar a /superAdmin sin importar el resultado de la autenticación
     //navigate("/superAdmin");

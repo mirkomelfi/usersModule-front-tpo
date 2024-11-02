@@ -4,40 +4,43 @@ import { Link } from 'react-router-dom';
 import './Productos.css';
 import { FaShoppingCart } from 'react-icons/fa'; // Importa el icono del carrito
 import foto from './Ojotas.jpg';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateProductos } from '../../store/actions/commerce.action';
 
 const productos = [
-  { id: 1, name: 'Camiseta Azul ', price: '$44.990', image: foto, tipo: 'Calzado',  url: '/producto'},
-  { id: 2, name: 'Camiseta Azul ', price: '$44.990', image: foto, tipo: 'Calzado', url: '/producto' },
-  { id: 3, name: 'Camiseta Azul ', price: '$44.990', image: foto, tipo: 'Calzado', url: '/producto' },
-  { id: 4, name: 'Camiseta Azul ', price: '$44.990', image: foto, tipo: 'Calzado', url: '/producto' },
-  { id: 5, name: 'Camiseta  Azul ', price: '$3.990', image: foto, tipo: 'Calzado', url: '/producto' },
-  { id: 6, name: 'Camiseta  Azul ', price: '$2.990', image: foto, tipo: 'Calzado', url: '/producto' },
-  { id: 7, name: 'Camiseta  Azul ', price: '$1.990', image: foto, tipo: 'Calzado', url: '/producto' },
-  { id: 8, name: 'Camiseta', price: '$4.990', image: foto, tipo: 'Calzado', url: '/producto' },
-  { id: 9, name: 'Camiseta  ', price: '$44.990', image: foto, tipo: 'Botines', url: '/producto' },
-  { id: 10, name: 'Camiseta  ', price: '$44.990', image: foto, tipo: 'Ojotas', url: '/producto' },
-  { id: 11, name: 'Camiseta  ', price: '$44.990', image: foto, tipo: 'Dados', url: '/producto' },
-  { id: 12, name: 'Camiseta  ', price: '$44.990', image: foto, tipo: 'Otro', url: '/producto' },
-  { id: 13, name: 'Camiseta  ', price: '$44.990', image: foto, tipo: 'Otro1', url: '/producto' },
-  { id: 14, name: 'Camiseta  ', price: '$44.990', image: foto, tipo: 'Otro2', url: '/producto' },
+  { id: 1, name: 'Camiseta Azul ', price: '$44.990', image: foto, categoria: 'Calzado',  url: '/producto'},
+  { id: 2, name: 'Camiseta Azul ', price: '$44.990', image: foto, categoria: 'Calzado', url: '/producto' },
+  { id: 3, name: 'Camiseta Azul ', price: '$44.990', image: foto, categoria: 'Calzado', url: '/producto' },
+  { id: 4, name: 'Camiseta Azul ', price: '$44.990', image: foto, categoria: 'Calzado', url: '/producto' },
+  { id: 5, name: 'Camiseta  Azul ', price: '$3.990', image: foto, categoria: 'Calzado', url: '/producto' },
+  { id: 6, name: 'Camiseta  Azul ', price: '$2.990', image: foto, categoria: 'Calzado', url: '/producto' },
+  { id: 7, name: 'Camiseta  Azul ', price: '$1.990', image: foto, categoria: 'Calzado', url: '/producto' },
+  { id: 8, name: 'Camiseta', price: '$4.990', image: foto, categoria: 'Calzado', url: '/producto' },
+  { id: 9, name: 'Camiseta  ', price: '$44.990', image: foto, categoria: 'Botines', url: '/producto' },
+  { id: 10, name: 'Camiseta  ', price: '$44.990', image: foto, categoria: 'Ojotas', url: '/producto' },
+  { id: 11, name: 'Camiseta  ', price: '$44.990', image: foto, categoria: 'Dados', url: '/producto' },
+  { id: 12, name: 'Camiseta  ', price: '$44.990', image: foto, categoria: 'Otro', url: '/producto' },
+  { id: 13, name: 'Camiseta  ', price: '$44.990', image: foto, categoria: 'Otro1', url: '/producto' },
+  { id: 14, name: 'Camiseta  ', price: '$44.990', image: foto, categoria: 'Otro2', url: '/producto' },
   // Agrega más productos según necesites
 ];
 
 const groupByType = (products) => {
   return products.reduce((group, product) => {
-    const { tipo } = product;
-    if (!group[tipo]) {
-      group[tipo] = [];
+    const { categoria } = product;
+    if (!group[categoria]) {
+      group[categoria] = [];
     }
-    group[tipo].push(product);
+    group[categoria].push(product);
     return group;
   }, {});
 };
 
 export const Productos = () => {
-
+  const dispatch=useDispatch()
   const isUser = useSelector((state) => state.usuarios.dni);
+  //const prods = useSelector((state) => state.commerce.productos);
+  //console.log("dispatch cargado:",prods)
 
   const navigate = useNavigate();
   
@@ -47,24 +50,24 @@ export const Productos = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [currentIndex, setCurrentIndex] = useState({});
 
-  const productosPorTipo = groupByType(productos);
+  const productosPorcategoria = groupByType(listaProductos);
 
-  const handleNext = (tipo) => {
-    const current = currentIndex[tipo] || 0;
-    if (current + 5 < productosPorTipo[tipo].length) {
+  const handleNext = (categoria) => {
+    const current = currentIndex[categoria] || 0;
+    if (current + 5 < productosPorcategoria[categoria].length) {
       setCurrentIndex((prevState) => ({
         ...prevState,
-        [tipo]: current + 1,
+        [categoria]: current + 1,
       }));
     }
   };
 
-  const handlePrev = (tipo) => {
-    const current = currentIndex[tipo] || 0;
+  const handlePrev = (categoria) => {
+    const current = currentIndex[categoria] || 0;
     if (current > 0) {
       setCurrentIndex((prevState) => ({
         ...prevState,
-        [tipo]: current - 1,
+        [categoria]: current - 1,
       }));
     }
   };
@@ -73,15 +76,16 @@ export const Productos = () => {
     navigate('/listaCarrito');
   };
 
-  const filteredProducts = productos.filter(product =>
-    product.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
-    product.tipo.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredProducts = listaProductos.filter(product =>
+    product.nombre.toLowerCase().includes(searchTerm.toLowerCase()) || 
+    product.categoria.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const productosFiltradosPorTipo = groupByType(filteredProducts);
+  const productosFiltradosPorcategoria = groupByType(filteredProducts);
 
-  const handleProductClick = (url) => {
-    navigate(url);
+  const handleProductClick = (url,id) => {
+    const url1=url+id
+    navigate(url1);
   };
 
   const getProductos = async() =>{
@@ -102,7 +106,11 @@ export const Productos = () => {
       setListaProductos([])
       setMensaje(data.msj)
     }else{
+      data.forEach(producto=>{
+        producto.image=foto
+      })
       setListaProductos(data)
+      //dispatch(updateProductos(data))
     }
   }
 
@@ -121,10 +129,14 @@ export const Productos = () => {
 
     setTimeout(function(){
         getProductos()
-    }, 5000);
+    }, 500);
 
   }
-
+  
+  /*useEffect(() => { 
+    console.log("Reload products")
+  },[listaProductos])
+*/
     useEffect(() => { 
       actualizarProductos()
     },[])
@@ -150,31 +162,31 @@ export const Productos = () => {
         Para poder comprar debe tener iniciar sesión. Si no tiene cuenta presione aquí para registrarse.
         </Link>}
 
-      {Object.keys(productosFiltradosPorTipo).map((tipo) => {
-        const current = currentIndex[tipo] || 0;
-        const productosVisibles = productosFiltradosPorTipo[tipo].slice(current, current + 5);
+      {Object.keys(productosFiltradosPorcategoria).map((categoria) => {
+        const current = currentIndex[categoria] || 0;
+        const productosVisibles = productosFiltradosPorcategoria[categoria].slice(current, current + 5);
 
         return (
-          <div key={tipo} className="tipo-seccion">
-            <h2 className="tipo-titulo">{tipo}</h2>
+          <div key={categoria} className="categoria-seccion">
+            <h2 className="categoria-titulo">{categoria}</h2>
             <div className="productos-grid">
-              <button className="prev-button" onClick={() => handlePrev(tipo)}>
+              <button className="prev-button" onClick={() => handlePrev(categoria)}>
                 &lt;
               </button>
               {productosVisibles.map((producto) => (
                 <div 
-                  key={producto.id} 
+                  key={producto.idProducto} 
                   className="producto-card"
-                  onClick={() => handleProductClick(producto.url)} // Redirige a la URL del producto
+                  onClick={() => navigate(`${producto.idProducto}`)} // Redirige a la URL del producto
                 >
-                  <img src={producto.image} alt={producto.name} className="producto-image" />
+                  <img src={producto.image} alt={producto.nombre} className="producto-image" />
                   <div className="producto-info">
-                    <p className="producto-name">{producto.name}</p>
-                    <p className="producto-price">{producto.price}</p>
+                    <p className="producto-name">{producto.nombre}</p>
+                    <p className="producto-price">{producto.precioVenta}</p>
                   </div>
                 </div>
               ))}
-              <button className="next-button" onClick={() => handleNext(tipo)}>
+              <button className="next-button" onClick={() => handleNext(categoria)}>
                 &gt;
               </button>
             </div>

@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './ListaCarrito.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteFromCart } from '../../store/actions/cart.action';
 
 const initialCarritoProductos = [
   { id: 1, name: 'Crocs Azul Unisex', price: '$44.990', quantity: 2 },
@@ -9,17 +11,20 @@ const initialCarritoProductos = [
 ];
 
 export const ListaCarrito = () => {
-  const [carritoProductos, setCarritoProductos] = useState(initialCarritoProductos);
+  const dispatch=useDispatch()
+  var carrito = useSelector((state) => state.cart.items);
+  const [carritoProductos, setCarritoProductos] = useState(null);
+  console.log("carrio: ",carrito)
 
   const calcularTotal = () => {
-    return carritoProductos.reduce((acc, producto) => {
-      const precio = parseFloat(producto.price.replace('$', '').replace('.', ''));
-      return acc + precio * producto.quantity;
+    return carrito.reduce((acc, producto) => {
+      const precio = parseFloat(producto.precioVenta).toFixed(2);
+      return acc + precio * 1;
     }, 0);
   };
 
   const eliminarProducto = (id) => {
-    setCarritoProductos(carritoProductos.filter(producto => producto.id !== id));
+    dispatch(deleteFromCart(carritoProductos.filter(producto => producto.idProducto !== id)));
   };
 
   const manejarPago = () => {
@@ -31,6 +36,8 @@ export const ListaCarrito = () => {
     const total = calcularTotal();
     alert(`Realizaste el pago con un monto total de $${total}`);
   };
+
+
 
   return (
     <div className="carrito-container">
@@ -47,13 +54,13 @@ export const ListaCarrito = () => {
         </thead>
         <tbody>
           {carritoProductos.map((producto) => (
-            <tr key={producto.id}>
-              <td>{producto.id}</td>
-              <td>{producto.name}</td>
-              <td>{producto.quantity}</td>
-              <td>{producto.price}</td>
+            <tr key={producto.idProducto}>
+              <td>{producto.idProducto}</td>
+              <td>{producto.nombre}</td>
+              <td>1</td>
+              <td>$ {producto.precioVenta}</td>
               <td>
-                <button className="accion-btn" onClick={() => eliminarProducto(producto.id)}>Eliminar</button>
+                <button className="accion-btn" onClick={eliminarProducto(producto.idProducto)}>Eliminar</button>
               </td>
             </tr>
           ))}

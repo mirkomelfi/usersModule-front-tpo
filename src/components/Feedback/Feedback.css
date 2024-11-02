@@ -1,6 +1,5 @@
 .feedback-container {
-    width: 80%; /* Establece el ancho en porcentaje para que sea más grande pero centrado */
-    max-width: 800px; /* Limita el ancho máximo para que no crezca demasiado */
+    width: 1000px; /* Establece el ancho en porcentaje para que sea más grande pero centrado */
     margin: 0 auto; /* Asegura que esté centrado horizontalmente */
     padding: 50px;
     background-color: #f9f9f9;

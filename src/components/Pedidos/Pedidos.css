@@ -1,186 +1,85 @@
+/* Contenedor principal de la página de pedidos */
 .pedidos-container {
-  min-height: 80vh; /* Asegura que siempre ocupe al menos el 80% de la altura de la ventana */
-  max-height: 100vh; /* Limita el contenedor a la altura de la ventana */
-  padding-top: 50px;
-  max-width: 100%;
-  margin: 0 auto;
-  box-sizing: border-box;
-  margin-top: 80px; /* Espacio para el header (barra de búsqueda) */
+    max-width: 1400px;
+    margin: 20px auto;
+    padding: 30px;
+    background-color: #ffffff; /* Color de fondo suave azul */
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
 }
 
-.search-container {
-  display: flex;
-  justify-content: center;
-  position: fixed; /* Fija la barra de búsqueda en la parte superior */
-  top: 0;
-  left: 0;
-  right: 0;
-  background-color: white; /* Fondo blanco para que contraste con el contenido */
-  z-index: 999; /* Asegura que esté encima del resto de contenido */
-  padding: 10px 0;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para darle efecto de header */
+/* Título de la página */
+.pedidos-titulo {
+    margin-bottom: 25px;
+    color: #2c3e50; /* Color azul oscuro */
+    font-size: 2em; /* Tamaño de fuente mayor */
+    font-weight: bold;
 }
 
-.search-bar {
-  width: 50%;
-  padding: 10px;
-  font-size: 16px;
-  box-sizing: border-box;
+/* Tabla de pedidos */
+.pedidos-tabla {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
 }
 
-/* Estilos para el footer */
-.agregarPedido {
-  display: flex;
-  justify-content: center; /* Centra el contenido horizontalmente */
-  padding: 20px;
-  margin-top: 20px;
-  background-color: #f0f0f0;
-  box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
-  width: 100%; /* Asegúrate de que el footer ocupe el 100% del ancho */
+/* Estilo para celdas de encabezado de la tabla */
+.pedidos-tabla th {
+    background-color: #adacac; /* Color de fondo azul claro */
+    color: #2c3e50; /* Color azul oscuro para el texto */
+    padding: 15px;
+    border: 1px solid #ccc;
+    text-align: center;
+    font-size: 1.2em; /* Tamaño de fuente más grande */
+    font-weight: bold;
 }
 
-/* Estilos para el botón */
-.btn-agregar-Pedido {
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
-  text-decoration: none;
-  font-size: 1.2rem;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-  display: block; /* Asegura que el botón se comporte como un bloque */
-  margin: 0 auto; /* Centra el botón dentro del footer */
+/* Estilo para celdas de datos de la tabla */
+.pedidos-tabla td {
+    padding: 15px 20px; /* Más espacio entre columnas */
+    border: 1px solid #ccc;
+    text-align: center;
+    font-size: 1.1em; /* Aumenta el tamaño de la fuente */
 }
 
-.btn-agregar-Pedido:hover {
-  background-color: #0056b3;
+
+/* Botones de acción */
+.pedidos-accion-btn {
+    background-color: #007bff; /* Color azul para botones */
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em; /* Aumenta el tamaño de la fuente */
+    margin: 0 8px;
+    transition: background-color 0.3s ease;
 }
 
-/* Ajuste para pantallas pequeñas */
-@media (max-width: 768px) {
-  .search-bar {
-    width: 80%;
-  }
+
+
+/* Botón para la acción de pago o checkout */
+.pedidos-checkout-btn {
+    padding: 12px 25px;
+    font-size: 1.2em; /* Tamaño de fuente más grande */
+    color: white;
+    background-color: #dc3545; /* Rojo para el botón de pagar */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: background-color 0.3s ease;
 }
 
-.tipo-seccion {
-  margin-bottom: 40px;
+.pedidos-checkout-btn:hover {
+    background-color: #c82333; /* Rojo más oscuro al pasar el mouse */
 }
 
-.tipo-titulo {
-  text-align: center;
-  font-size: 24px;
-  margin-bottom: 20px;
-}
-
-.Pedidos-grid {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-  flex-wrap: wrap; /* Ajuste para múltiples filas en pantallas pequeñas */
-}
-
-.Pedido-card {
-  flex-shrink: 0;
-  width: 150px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  overflow: hidden;
-  text-align: center;
-  transition: transform 0.3s ease, background-color 0.3s ease;
-}
-
-.Pedido-card:hover {
-  transform: scale(1.1); /* Agranda el Pedido un 10% */
-  background-color: #f0f0f0; /* Le da un toque gris */
-}
-
-/* Estilos para el ícono del carrito */
-.cart-icon-container {
-  position: relative;
-  display: flex;
-  align-items: center;
-  margin-left: 100px; /* Separación entre el buscador y el carrito */
-  cursor: pointer;
-}
-
-.cart-icon {
-  font-size: 34px; /* Tamaño del icono */
-  color: black;
-}
-
-.cart-count {
-  position: absolute;
-  bottom: -5px;
-  right: -10px;
-  background-color: red;
-  color: white;
-  border-radius: 50%;
-  padding: 4px 8px;
-  font-size: 12px;
-  font-weight: bold;
-}
-
-.search-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  background-color: white;
-  z-index: 999;
-  padding: 10px 20px; /* Ajusta el padding para darle más espacio */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-/* Cambiar el tamaño de la tarjeta en pantallas más pequeñas */
-@media (max-width: 768px) {
-  .Pedido-card {
-    width: 120px;
-  }
-}
-
-@media (max-width: 480px) {
-  .Pedido-card {
-    width: 100px;
-  }
-}
-
-.Pedido-image {
-  width: 100px;
-  height: auto;
-}
-
-.Pedido-info {
-  padding: 10px;
-}
-
-.Pedido-name {
-  font-size: 16px;
-  color: red;
-}
-
-.Pedido-price {
-  font-size: 14px;
-  color: blue;
-}
-
-.prev-button, .next-button {
-  background-color: transparent;
-  border: none;
-  font-size: 24px;
-  cursor: pointer;
-}
-
-/* Ajustes para pantallas más pequeñas */
-@media (max-width: 768px) {
-  .Pedido-card {
-    width: 100px;
-  }
-  .Pedido-image {
-    width: 80px;
-  }
+/* Total de la compra */
+.pedidos-total {
+    font-size: 1.6em; /* Aumenta el tamaño de la fuente */
+    font-weight: bold;
+    color: #2c3e50; /* Azul oscuro */
+    margin-top: 25px;
 }

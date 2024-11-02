@@ -87,12 +87,12 @@ export const PropuestasPost = () => {
                         placeholder="Titulo"
                         name="titulo"
                     />
-                    <input
+                     <textarea
                         type="text"
                         className="post-input"
-                        placeholder="Descripcion"
+                        placeholder="Escribe tu comentario aquí"
                         name="descripcion"
-                    />
+                    ></textarea>
                     <button type="submit" className="post-button">Crear Propuesta</button>
                 </form>
             </div>

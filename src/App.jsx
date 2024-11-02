@@ -34,6 +34,10 @@ import { ForoFeedback } from './components/ForoFeedback/ForoFeedback';
 import { Usuarios } from './components/Usuarios/Usuarios';
 import { Historia } from './components/Historia/Historia';
 import { Directivo } from './components/Directivo/Directivo';
+import { Pedidos } from './components/Pedidos/Pedidos';
+import { Balance } from './components/Balance/Balance';
+import { Inversiones } from './components/Inversiones/Inversiones';
+
 
 import { NoticiasPut } from './components/Put/NoticiasPUT';
 import { DeportesPut } from './components/Put/DeportesPUT'; 
@@ -41,7 +45,8 @@ import { ProductoPut } from './components/Put/ProductoPUT';
 import { PropuestasPut } from './components/Put/PropuestasPUT';
 import { CampañaPut } from './components/Put/CampañaPUT';
 import { UsuariosPut } from './components/Put/UsuarioPUT';
-import { Pedidos } from './components/Pedidos/Pedidos';
+import { useDispatch } from 'react-redux';
+import { actualizarProductos } from './store/actions/commerce.action';
 
 
 export const App = () => {
@@ -86,14 +91,18 @@ export const App = () => {
           <Route path='/contactos' element={<Contactos />} />
 
           <Route path='/productos' element={<Productos />} />
-          <Route path='/producto' element={<Producto />} />
+          <Route path='/productos/:id' element={<Producto />} />
           <Route path='/listaCarrito' element={<ListaCarrito />} />
           
           <Route path='/pedidos' element={<Pedidos />} />
 
+
           <Route path='/autoridades' element={<Directivo />} />
 
           <Route path='/historia' element={<Historia />} />
+
+          <Route path='/balance' element={<Balance />} />
+          <Route path='/inversiones' element={<Inversiones />} />
           
           <Route path='/deportes/add' element={<DeportesPost />} />
           <Route path='/noticias/add' element={<NoticiasPost />} />
