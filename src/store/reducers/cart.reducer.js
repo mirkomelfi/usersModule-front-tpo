@@ -1,5 +1,5 @@
 import { extractRol, getToken } from "../../utils/auth-utils";
-import { REMOVE_ITEM,ADD_ITEM,CONFIRM_CART } from "../actions/cart.action";
+import { REMOVE_ITEM,ADD_ITEM,CONFIRM_CART,LOAD_CART } from "../actions/cart.action";
 const initialState = {
   items:[]
 };
@@ -13,14 +13,10 @@ const CartReducer = (state = initialState, action) => {
 
     switch (action.type) {
       case REMOVE_ITEM:
-        console.log(action.itemID)
-        const cleanCart = [...state.items].filter(
-          (item) => item.idProducto !== action.itemID
-        );
-        console.log(cleanCart)
-        return { ...state, items: cleanCart};
+        return { ...state, items: action.items};
 
       case ADD_ITEM:
+        console.log(action.item)
         const item = { ...action.item};
         var descuento;
         if (rol!="Cliente"){
@@ -34,7 +30,19 @@ const CartReducer = (state = initialState, action) => {
 
       case CONFIRM_CART:
         return { ...state, items: []};
-
+      case LOAD_CART:
+        /*const arrayItemsWithQ=[]
+        action.items.forEach(item => {
+          if (!arrayItemsWithQ.find(item)){
+            item={...item,cantidad:1}
+            arrayItemsWithQ.push(item)
+          }else{
+            arrayItemsWithQ.
+            item.quantity++
+          }
+        });
+  */
+        return { ...state, items: action.items};
       default:
         return state;
     }

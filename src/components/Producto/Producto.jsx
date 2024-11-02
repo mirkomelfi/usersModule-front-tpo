@@ -3,7 +3,7 @@ import './Producto.css';
 
 import producto from "./Ojotas.jpg";
 import { addToCart } from '../../store/actions/cart.action';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 export const Producto = () => {
@@ -12,6 +12,7 @@ export const Producto = () => {
   var { id } = useParams();
   const [mensaje, setMensaje] = useState(null);
   const [cantidad, setCantidad] = useState(1);
+  var username= useSelector((state) => state.usuarios.username)
   const dispatch=useDispatch()
 
   const handleCantidadChange = (e) => {
@@ -19,7 +20,7 @@ export const Producto = () => {
   };
 
   const handleComprar = () => {
-    dispatch(addToCart(productoInfo))
+    dispatch(addToCart(username,productoInfo))
     alert(`Has comprado ${cantidad} unidades del producto.`);
   };
 
@@ -119,7 +120,8 @@ export const Producto = () => {
             id="cantidad"
             type="number"
             min="1"
-            max={productoInfo.stockActual}
+            //max={productoInfo.stockActual}
+            max="1"
             value={cantidad}
             onChange={handleCantidadChange}
           />
