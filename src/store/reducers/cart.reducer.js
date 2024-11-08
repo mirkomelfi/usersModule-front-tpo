@@ -31,6 +31,7 @@ const CartReducer = (state = initialState, action) => {
       case CONFIRM_CART:
         return { ...state, items: []};
       case LOAD_CART:
+        
         /*const arrayItemsWithQ=[]
         action.items.forEach(item => {
           if (!arrayItemsWithQ.find(item)){

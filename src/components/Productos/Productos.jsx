@@ -141,6 +141,60 @@ export const Productos = () => {
       actualizarProductos()
     },[])
 
+
+
+
+
+/*
+
+
+
+    const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        // Conectar al WebSocket en el endpoint /ws
+        const socket = new WebSocket('ws://localhost:8080/ws');
+
+        socket.onopen = () => {
+            console.log("Conexión WebSocket establecida.");
+            // Enviar un mensaje al servidor si es necesario, por ejemplo, para pedir productos
+            socket.send("Solicitar productos");
+        };
+
+        socket.onmessage = (event) => {
+            console.log("Mensaje recibido: ", event.data);
+            setProducts(JSON.parse(event.data));  // Aquí puedes procesar los productos recibidos
+            setLoading(false);  // Cambiar el estado cuando los productos llegan
+        };
+
+        socket.onerror = (error) => {
+            console.error("Error en WebSocket: ", error);
+        };
+
+        socket.onclose = () => {
+            console.log("Conexión WebSocket cerrada.");
+        };
+
+        // Limpiar al desmontar el componente
+        return () => {
+            socket.close();
+        };
+    }, []);
+
+    */
+
+
+
+
+
+
+
+
+
+
+
+
   return (
     <div className="productos-container">
       <div className="search-container">
