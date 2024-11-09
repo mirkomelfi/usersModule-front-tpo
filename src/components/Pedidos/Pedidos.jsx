@@ -90,6 +90,55 @@ export const Pedidos = () => {
     useEffect(() => { 
         actualizarVentas()
     },[])
+
+
+
+
+
+    const [sales, setSales] = useState([]);  
+    const [loading, setLoading] = useState(true);
+    
+    // Conectar al WebSocket
+    useEffect(() => {
+        const socket = new WebSocket('ws://localhost:8080/ws');
+    
+        socket.onopen = () => {
+            console.log("Conexión WebSocket establecida.");
+            // Enviar el ID de usuario para identificarlo en el backend
+            socket.send(`USER:${username}`);  // Por ejemplo, 123 es el userId del usuario
+        };
+    
+        socket.onmessage = (event) => {
+            console.log("Mensaje recibido: ", event.data);
+            var arraySales=JSON.parse(event.data)
+            arraySales.forEach((sale)=>{
+              console.log(new Date(sale.fecha))
+              sale.fecha=new Date(sale.fecha)
+            })
+            setSales(arraySales);
+            setLoading(false);  // Cuando lleguen las ventas, cambiamos el estado de carga
+        };
+    
+        socket.onerror = (error) => {
+            console.error("Error en WebSocket: ", error);
+        };
+    
+        socket.onclose = () => {
+            console.log("Conexión WebSocket cerrada.");
+        };
+    
+        // Limpiar la conexión al desmontar el componente
+        return () => {
+            socket.close();
+        };
+    }, []);
+
+
+
+
+
+
+
     
 
 
@@ -108,7 +157,7 @@ export const Pedidos = () => {
               </tr>
             </thead>
             <tbody>
-              {listaPedidos.map((pedido) => (
+              {sales.map((pedido) => (
                 <tr key={pedido.id}>
                   <td>{pedido.idVenta}</td>
                   <td>{pedido.fecha}</td>

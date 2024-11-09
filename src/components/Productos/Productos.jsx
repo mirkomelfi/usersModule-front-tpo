@@ -44,13 +44,14 @@ export const Productos = () => {
 
   const navigate = useNavigate();
   
+  const [products, setProducts] = useState([]);
   const [listaProductos, setListaProductos] = useState([]);
   const [mensaje, setMensaje] = useState(null);
   const [cartCount, setCartCount] = useState(3);
   const [searchTerm, setSearchTerm] = useState('');
   const [currentIndex, setCurrentIndex] = useState({});
 
-  const productosPorcategoria = groupByType(listaProductos);
+  const productosPorcategoria = groupByType(products);
 
   const handleNext = (categoria) => {
     const current = currentIndex[categoria] || 0;
@@ -76,7 +77,7 @@ export const Productos = () => {
     navigate('/listaCarrito');
   };
 
-  const filteredProducts = listaProductos.filter(product =>
+  const filteredProducts = products.filter(product =>
     product.nombre.toLowerCase().includes(searchTerm.toLowerCase()) || 
     product.categoria.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -143,35 +144,53 @@ export const Productos = () => {
 
 
 
-
-
-/*
-
-
-
-    const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);  // Estado para manejar errores
 
     useEffect(() => {
         // Conectar al WebSocket en el endpoint /ws
         const socket = new WebSocket('ws://localhost:8080/ws');
-
+        console.log(socket)
+        // Al abrir la conexión WebSocket
         socket.onopen = () => {
             console.log("Conexión WebSocket establecida.");
-            // Enviar un mensaje al servidor si es necesario, por ejemplo, para pedir productos
+            // Enviar un mensaje al servidor si es necesario (por ejemplo, para pedir productos)
             socket.send("Solicitar productos");
         };
-
+       console.log(socket)
+        // Manejar el mensaje recibido del servidor
         socket.onmessage = (event) => {
             console.log("Mensaje recibido: ", event.data);
-            setProducts(JSON.parse(event.data));  // Aquí puedes procesar los productos recibidos
-            setLoading(false);  // Cambiar el estado cuando los productos llegan
+            try {
+                // Deserializar el JSON de productos
+                const receivedProducts = JSON.parse(event.data);
+                
+                // Verificar que la respuesta sea un array de productos
+                if (Array.isArray(receivedProducts)) {
+                  receivedProducts.forEach(producto=>{
+                    producto.image=foto
+                  })
+                    setProducts(receivedProducts);  // Actualizar el estado de productos
+                } else {
+                    throw new Error("Los productos no están en el formato esperado.");
+                }
+
+                setLoading(false);  // Marcar como "cargado" una vez que los productos llegan
+            } catch (e) {
+                console.error("Error al procesar los productos: ", e);
+                setError("Error al recibir los productos.");  // Mostrar un mensaje de error
+                setLoading(false);  // Cambiar el estado de carga
+            }
         };
 
+        // Manejar errores en la conexión WebSocket
         socket.onerror = (error) => {
             console.error("Error en WebSocket: ", error);
+            setError("Error en la conexión WebSocket.");
+            setLoading(false);  // Cambiar el estado de carga en caso de error
         };
 
+        // Manejar el cierre de la conexión WebSocket
         socket.onclose = () => {
             console.log("Conexión WebSocket cerrada.");
         };
@@ -180,17 +199,7 @@ export const Productos = () => {
         return () => {
             socket.close();
         };
-    }, []);
-
-    */
-
-
-
-
-
-
-
-
+    }, []);  // Este efecto se ejecuta una sola vez cuando el componente se monta
 
 
 
