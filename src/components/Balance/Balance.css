@@ -33,7 +33,7 @@
     display: flex;
     justify-content: space-between;
     padding: 20px;
-    background-color: #bbbaba;
+    background-color: #f3f2f2;
     border-radius: 8px;
 }
 
@@ -102,10 +102,10 @@
 .balance-footer {
     display: flex;
     justify-content: space-around;
-    color: #bbbaba;
+    color: #f3f2f2;
     font-size: 1.5em; /* Aumentado */
     margin-top: 20px;
     padding: 10px 0;
-    background-color: #bbbaba;
+    background-color: #f3f2f2;
     border-radius: 8px;
 }

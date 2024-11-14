@@ -1,0 +1,129 @@
+.reclamo-container {
+    width: 1000px;
+    margin: 0 auto;
+    background-color: #f4f4f4;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .reclamo-scroll {
+    max-height: 700px;
+    overflow-y: scroll;
+    padding-right: 15px;
+  }
+  
+  .reclamo-title {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 25px;
+  }
+  
+  .reclamo-filter {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .reclamo-filter label {
+    margin-right: 15px;
+    font-weight: bold;
+    font-size: 16px;
+  }
+  
+  #subject-filter {
+    padding: 8px;
+    font-size: 16px;
+  }
+  
+  .reclamo-item {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .reclamo-user {
+    font-weight: bold;
+    font-size: 18px;
+    color: #007bff;
+  }
+  
+  .reclamo-date {
+    font-size: 14px;
+    color: gray;
+  }
+  
+  .reclamo-premisa {
+    margin-top: 12px;
+    font-size: 16px;
+    color: #333;
+  }
+
+  .reclamo-comentario {
+    margin-top: 12px;
+    font-size: 16px;
+    color: #333;
+  }
+
+  .reclamos-tipo{
+    font-weight: bold;
+    font-size: 18px; /* Texto del usuario más grande */
+    color: #007bff;
+  }
+  
+  .reclamo-subject {
+    margin-top: 5px;
+    font-size: 16px;
+    color: #333;
+  }
+  
+  .reclamo-add-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: block;
+    margin: 20px auto;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .reclamo-add-button:hover {
+    background-color: #0056b3;
+  }
+
+  /* Estilos para reclamo-imagen */
+.reclamo-imagen {
+    width: 100%;
+    max-width: 250px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    object-fit: cover;
+    margin: 10px 0;
+  }
+  
+  @media (max-width: 768px) {
+    .reclamo-container {
+      width: 100%;
+    }
+  
+    .reclamo-item {
+      font-size: 14px;
+    }
+  
+    .reclamo-title {
+      font-size: 24px;
+    }
+  
+    #subject-filter {
+      font-size: 14px;
+      padding: 6px;
+    }
+  }
+  

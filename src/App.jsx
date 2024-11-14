@@ -37,6 +37,8 @@ import { Directivo } from './components/Directivo/Directivo';
 import { Pedidos } from './components/Pedidos/Pedidos';
 import { Balance } from './components/Balance/Balance';
 import { Inversiones } from './components/Inversiones/Inversiones';
+import { MisInversiones } from './components/Mis Inversiones/MisInversiones';
+import { Reclamos } from './components/Reclamos/Reclamos';
 
 
 import { NoticiasPut } from './components/Put/NoticiasPUT';
@@ -74,7 +76,6 @@ export const App = () => {
           <Route path='/feedback' element={<Feedback />} />
           <Route path='/foroFeedback' element={<ForoFeedback />} />
  
-          
           <Route path='/noticias' element={<Noticias />} />
           <Route path='/noticias/:id' element={<Noticia />} />
 
@@ -96,6 +97,7 @@ export const App = () => {
           
           <Route path='/pedidos' element={<Pedidos />} />
 
+          <Route path='/reclamos' element={<Reclamos />} />
 
           <Route path='/autoridades' element={<Directivo />} />
 
@@ -103,6 +105,7 @@ export const App = () => {
 
           <Route path='/balance' element={<Balance />} />
           <Route path='/inversiones' element={<Inversiones />} />
+          <Route path='/misInversiones' element={<MisInversiones />} />
           
           <Route path='/deportes/add' element={<DeportesPost />} />
           <Route path='/noticias/add' element={<NoticiasPost />} />
