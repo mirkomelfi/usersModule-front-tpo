@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import './Inversiones.css';
+import { getToken } from '../../utils/auth-utils';
 
 const proyectosData = [
   { id: 1, nombre: 'Proyecto A', descripcion: 'Inversión en energías renovables', rentabilidad: '7% anual' },
@@ -11,6 +13,9 @@ export const Inversiones = () => {
   const [proyectoSeleccionado, setProyectoSeleccionado] = useState(null);
   const [montoInversion, setMontoInversion] = useState('');
 
+  const username = useSelector((state) => state.usuarios.username);
+
+
   const handleProyectoChange = (event) => {
     const selectedId = parseInt(event.target.value, 10);
     setProyectoSeleccionado(proyectosData.find(proyecto => proyecto.id === selectedId));
@@ -20,13 +25,38 @@ export const Inversiones = () => {
     setMontoInversion(event.target.value);
   };
 
-  const handleInvertir = () => {
+  const handleInvertir =async () => {
+      const inversion={
+        monto:montoInversion,
+        username
+      }
+      let url=`finalizarInversion`
+    
+      const response= await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/${url}`, { 
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+         // "Authorization": `Bearer ${getToken()}`,
+        },
+        body:JSON.stringify(inversion)
+        
+      })
+      
+      const data = await response.json()
+      console.log(data)
+      if (data.msj){
+        //setMensaje(data.msj)
+        console.log(data.msj)
+      }
+  
     if (proyectoSeleccionado && montoInversion) {
       alert(`Has invertido €${montoInversion} en ${proyectoSeleccionado.nombre}`);
     } else {
       alert('Por favor, selecciona un proyecto y un monto de inversión');
     }
   };
+
+ 
 
   return (
     <div className="inversiones-container">

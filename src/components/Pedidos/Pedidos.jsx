@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import './Pedidos.css';
 import { FaShoppingCart } from 'react-icons/fa'; // Importa el icono del carrito
 import foto from './Ojotas.jpg';
-import { useSelector } from 'react-redux';
+
 
 const pedidos = [
   {

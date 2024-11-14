@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import './Balance.css';
+import { getToken } from '../../utils/auth-utils';
 
 const balanceData = {
   gain: '€2.70M',
@@ -10,13 +12,71 @@ const balanceData = {
 };
 
 export const Balance = () => {
+  const username = useSelector((state) => state.usuarios.username);
+
   const income = balanceData.income;
   const expenses = balanceData.expenses;
   const total = income + expenses;
-
+  const [balance,setBalance]=useState(null)
+  const [loading,setLoading]=useState(null)
   // Calculamos el porcentaje de ingresos y gastos
   const incomePercentage = (income / total) * 100;
   const expensesPercentage = (expenses / total) * 100;
+
+
+  const getBalance = async() =>{
+    
+    let url=`balance`
+  
+    const response= await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/${url}`, { 
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+       // "Authorization": `Bearer ${getToken()}`,
+      }
+      
+    })
+
+    const data= await response.json()
+    console.log(data.msj)
+
+  }
+
+  useEffect(() => { 
+      getBalance()
+  },[])
+
+
+  useEffect(() => {
+    const socket = new WebSocket('ws://localhost:8080/ws');
+
+    socket.onopen = () => {
+        console.log("Conexión WebSocket establecida.");
+        // Enviar el ID de usuario para identificarlo en el backend
+        //socket.send(`USER:${username}`);  // Por ejemplo, 123 es el userId del usuario
+    };
+
+    socket.onmessage = (event) => {
+        console.log("Mensaje recibido: ", event.data);
+        var balance=JSON.parse(event.data)
+        setBalance(balance);
+        setLoading(false);  // Cuando lleguen las ventas, cambiamos el estado de carga
+    };
+
+    socket.onerror = (error) => {
+        console.error("Error en WebSocket: ", error);
+    };
+
+    socket.onclose = () => {
+        console.log("Conexión WebSocket cerrada.");
+    };
+
+    // Limpiar la conexión al desmontar el componente
+    return () => {
+        socket.close();
+    };
+}, []);
+
 
   return (
     <div className="balance-container">
