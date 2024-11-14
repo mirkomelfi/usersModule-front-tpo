@@ -76,6 +76,18 @@ const Navbar = () => {
               <li><Link to="/inversiones">Invertir</Link></li>
             </ul>
           </li>
+          
+          <li className="dropdown">
+            <button className="dropdown-btn" onClick={() => handleDropdownClick('Reclamos')}>
+            Reclamos 
+            </button>
+            <ul className={`dropdown-content ${openDropdown === 'Reclamos' ? 'show' : ''}`}>
+              {admin&&<li><Link to="/reclamos">Listado</Link></li>}
+              {!admin&&<li><Link to="/reclamos">Mis Reclamos</Link></li>}
+              {<li><Link to="/reclamosPost">Crear Reclamo</Link></li>}
+            </ul>
+          </li>
+      
      
           <li className="dropdown">
             <button className="dropdown-btn" onClick={() => handleDropdownClick('Feedback')}>
@@ -116,20 +128,41 @@ const Navbar = () => {
             Finanzas 
             </button>
             <ul className={`dropdown-content ${openDropdown === 'Finanzas' ? 'show' : ''}`}>
-              <li><Link to="/balance">Balance</Link></li>
+              <li><Link to="/misInversiones">Mis Inversiones</Link></li>
+            </ul>
+            <ul className={`dropdown-content ${openDropdown === 'Finanzas' ? 'show' : ''}`}>
+              <li><Link to="/balance">Balance del Club</Link></li>
             </ul>
             <ul className={`dropdown-content ${openDropdown === 'Finanzas' ? 'show' : ''}`}>
               <li><Link to="/inversiones">Invertir</Link></li>
             </ul>
           </li>
-          <li><Link to="/login">Login</Link></li>
-          <li><Link to="/register">Registrarse</Link></li>
-        </ul>
+
+          <li className="dropdown">
+            <button className="dropdown-btn" onClick={() => handleDropdownClick('Reclamos')}>
+            Reclamos 
+            </button>
+            <ul className={`dropdown-content ${openDropdown === 'Reclamos' ? 'show' : ''}`}>
+              {admin&&<li><Link to="/reclamos">Listado</Link></li>}
+              {!admin&&<li><Link to="/reclamos">Mis Reclamos</Link></li>}
+              {<li><Link to="/reclamosPost">Crear Reclamo</Link></li>}
+            </ul>
+          </li>
+
+          </ul>
+          //<li><Link to="/login">Login</Link></li>
+          //<li><Link to="/register">Registrarse</Link></li>
+        
+
+        
 
       }
-
+        <div className="navbar-bottom-links">
         <a href="/asociarse" className="navbar-button">Asociate</a>
         <a href="/contactos" className="ayuda-button">Ayuda</a>
+          <Link to="/register" className="create-account">Registrate</Link>
+          <Link to="/login" className="login-link">¿Tenés una cuenta? Inicia sesión</Link>
+        </div>
       </nav>
     </header>
   );

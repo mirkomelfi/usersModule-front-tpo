@@ -27,6 +27,8 @@
   transition: left 0.3s ease;
 }
 
+
+
 .navbar.open {
   left: 0; /* Muestra el navbar cuando está abierto */
 }
@@ -229,6 +231,37 @@ body {
   color: #ffffff; /* Keep the text color white */
 }
 
+.navbar-bottom-links {
+  display: flex;
+  flex-direction: column; /* Establece una disposición en columna */
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 10px 0;
+}
+
+.navbar-bottom-links a {
+  text-decoration: none;
+  color: #ffffff;
+  margin: 5px 0; /* Espacio entre los enlaces */
+  text-align: center; /* Centra los textos */
+}
+
+.navbar-bottom-links .create-account {
+  color: #ffffff;
+  margin-top: 30px;
+  font-size: 18px; /* Tamaño grande para el enlace 'Crear Cuenta' */
+  font-weight: bold; /* Resalta el texto */
+}
+
+.navbar-bottom-links .login-link {
+  color: #ffffff;
+  font-size: 14px; /* Tamaño más pequeño para '¿Tenés una cuenta?' */
+}
+
+.navbar-bottom-links a:hover {
+  color: #bbbbbb; /* Color al pasar el ratón sobre los enlaces */
+}
 
 
 
