@@ -8,7 +8,7 @@ import { getToken, isTokenExpired } from "../../utils/auth-utils";
 export const UsuariosPut = () => {
     const [mensaje, setMensaje] = useState(null);
     const [error, setError] = useState(null);
-    const [dniUsuario, setDni] = useState(null);
+    //const [dniUsuario, setDni] = useState(null);
 
     const {dni}=useParams()
 
@@ -63,6 +63,7 @@ export const UsuariosPut = () => {
                 ciudad:usuario.ciudad,
             },
             telefono:usuario.telefono,
+            rol:null
         }
         console.log(newUser)
 

@@ -18,7 +18,7 @@ export const Usuarios= () => {
   const [selectedRol, setSelectedRol] = useState("");
 
   const [listaRoles,setListaRoles]= useState([
-    "Inversor","Activo","Patrimonial","Directivo","Cliente"
+    "Inversionista","Activo","Patrimonial","Directivo","Cliente"
   ]);
 
   //falta desarrollar filtros en el back

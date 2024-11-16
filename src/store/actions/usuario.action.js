@@ -1,5 +1,6 @@
 
 export const LOGIN_USUARIO = "LOGIN_USUARIO";
+export const LOGOUT_USUARIO = "LOGOUT_USUARIO";
 export const LOGIN_INSPECTOR = "LOGIN_INSPECTOR";
 export const LOGOUT = "LOGOUT";
 export const CLEAN_ERROR = "CLEAN_ERROR";
@@ -18,7 +19,15 @@ export const loginUsuario = (dni,rol,username) => {
     rol 
   });
 }
- 
+}
+
+export const logout = () => {
+  return async (dispatch) => {
+  dispatch({
+    type:LOGOUT_USUARIO,
+  });
+}
+}
 
   /*return async (dispatch) => {
     const response=await fetch(
@@ -74,9 +83,9 @@ export const loginUsuario = (dni,rol,username) => {
      
     } catch (err) {
       console.log(err);
-    }*/
+    }
 
-};
+};*/
 
 
 

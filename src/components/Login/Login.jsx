@@ -5,13 +5,13 @@ import { Mensaje } from "../Mensaje/Mensaje";
 import { deleteToken, extractDni, getToken, setToken,extractRol, extractUsername } from "../../utils/auth-utils";
 import "./Login.css";
 import { loginUsuario } from "../../store/actions/usuario.action";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 export const Login = () => {
   const [loggeado, setLoggeado] = useState(false);
   const [mensaje, setMensaje] = useState(null);
   const navigate = useNavigate();
-
+  const userLogged = useSelector((state) => state.usuarios.logged);
   const dispatch=useDispatch()
 
   const navigateTo = (url) => {
@@ -20,27 +20,12 @@ export const Login = () => {
 
   const datForm = useRef();
 
-  const consultarLoggeo = async () => {
-    const token = getToken();
-    if (token) {
-      setLoggeado(true);
-    }
-  };
-
-  useEffect(() => {
-    consultarLoggeo();
-  }, []);
-
-  const desloggear = async () => {
-    deleteToken();
-    setLoggeado(false);
-  };
 
   const consultarForm = async (e) => {
     e.preventDefault();
     const datosFormulario = new FormData(datForm.current);
     const cliente = Object.fromEntries(datosFormulario);
-  
+    console.log(cliente)
     const response=await fetch(
       `${process.env.REACT_APP_DOMINIO_BACK}/login`,
       {
@@ -58,11 +43,11 @@ export const Login = () => {
 
     if (response.status==200){
       const data = await response.json()
-      console.log(data)
       setToken(data.token)
       dni = extractDni(getToken())
       rol = extractRol(getToken())
       username = extractUsername(getToken())
+      dispatch(loginUsuario(dni,rol,username))
       alert(`Fuiste loggeado`)
       navigate("/")
    
@@ -73,7 +58,6 @@ export const Login = () => {
       setMensaje(data.msj)
     }
 
-    dispatch(loginUsuario(dni,rol,username))
   
     // Navegar a /superAdmin sin importar el resultado de la autenticación
     //navigate("/superAdmin");

@@ -5,7 +5,7 @@ import { Mensaje } from "../Mensaje/Mensaje"
 import { Link } from "react-router-dom"
 import { deleteToken, getToken, setToken } from "../../utils/auth-utils"
 import { useDispatch } from "react-redux"
-import { loginUsuario } from "../../store/actions/usuario.action"
+import { loginUsuario,logout } from "../../store/actions/usuario.action"
 export const Logout = () => {
     
 
@@ -18,7 +18,7 @@ export const Logout = () => {
         const token= getToken()
         if (token!=null){
             deleteToken()
-            dispatch((loginUsuario(null,null)))
+            dispatch((logout()))
             setMensaje("Sesion cerrada con exito")
         }
     }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import './Reclamos.css';
@@ -60,7 +60,7 @@ const reclamos = [
 
 export const Reclamos = () => {
   const [selectedRubro, setSelectedRubro] = useState('Todos');
-  const [mostrarMisReclamos, setMostrarMisReclamos] = useState(false);
+  const [reclamos, setReclamos] = useState(false);
   
   //const usuarioActual = useSelector((state) => state.usuarios.usuarioActual); // Usuario actual
   const isAdmin = useSelector((state) => state.usuarios.admin);
@@ -77,7 +77,7 @@ export const Reclamos = () => {
   };
 
   // Filtrar reclamos por usuario actual y por rubro
-  const filteredReclamos = reclamos.filter(reclamo => {
+ /*const filteredReclamos = reclamos.filter(reclamo => {
     if (admin) {
       // Si es admin, muestra todos los reclamos filtrados por el rubro seleccionado
       const esRubroValido = selectedRubro === 'Todos' || reclamo.tipoReclamo === selectedRubro;
@@ -88,7 +88,61 @@ export const Reclamos = () => {
       const esRubroValido = selectedRubro === 'Todos' || reclamo.tipoReclamo === selectedRubro;
       return esMiReclamo && esRubroValido;
     }
-  });
+  });*/
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);  // Estado para manejar errores
+
+  useEffect(() => {
+      // Conectar al WebSocket en el endpoint /ws
+      const socket = new WebSocket('ws://localhost:8080/ws');
+      // Al abrir la conexión WebSocket
+      socket.onopen = () => {
+          console.log("Conexión WebSocket establecida.");
+          // Enviar un mensaje al servidor si es necesario (por ejemplo, para pedir productos)
+          socket.send("Solicitar mis Reclamos");
+      };
+      // Manejar el mensaje recibido del servidor
+      socket.onmessage = (event) => {
+          console.log("Mensaje recibido: ", event.data);
+          try {
+              // Deserializar el JSON de productos
+              const misReclamos = JSON.parse(event.data);
+              
+              // Verificar que la respuesta sea un array de productos
+              if (Array.isArray(misReclamos)) {
+                misReclamos.forEach(producto=>{
+                  producto.image=foto
+                })
+                  setReclamos(misReclamos);  // Actualizar el estado de productos
+              } else {
+                  throw new Error("Las Reclamos no están en el formato esperado.");
+              }
+
+              setLoading(false);  // Marcar como "cargado" una vez que los productos llegan
+          } catch (e) {
+              console.error("Error al procesar las Reclamos: ", e);
+              setError("Error al recibir las Reclamos .");  // Mostrar un mensaje de error
+              setLoading(false);  // Cambiar el estado de carga
+          }
+      };
+
+      // Manejar errores en la conexión WebSocket
+      socket.onerror = (error) => {
+          console.error("Error en WebSocket: ", error);
+          setError("Error en la conexión WebSocket.");
+          setLoading(false);  // Cambiar el estado de carga en caso de error
+      };
+
+      // Manejar el cierre de la conexión WebSocket
+      socket.onclose = () => {
+          console.log("Conexión WebSocket cerrada.");
+      };
+
+      // Limpiar al desmontar el componente
+      return () => {
+          socket.close();
+      };
+  }, []);  // Este efecto se ejecuta una sola vez cuando el componente se monta
 
 
   return (
@@ -120,8 +174,9 @@ export const Reclamos = () => {
       </div>
 
       <div className="reclamo-scroll">
-        {filteredReclamos.length !== 0 ? (
-          filteredReclamos.map(reclamo => (
+        {//filteredReclamos.length !== 0 ? (
+          //filteredReclamos.map(reclamo => (
+            reclamos&&reclamos.map(reclamo => (
             <div key={reclamo.id} className="reclamo-item">
               <p className="reclamo-user">Usuario: {reclamo.usuario}</p>
               <div className="reclamo-tipo">Tipo: {reclamo.tipoReclamo}</div>
@@ -132,12 +187,14 @@ export const Reclamos = () => {
               <img src={reclamo.imagen} alt="Reclamo" className="reclamo-imagen" />
             </div>
           ))
-        ) : (
+        //) 
+        /*: (
           <div className="reclamo-item">
             <div className="reclamo-user">No hay reclamos para el filtro seleccionado</div>
             <p className="reclamo-comment">¡Prueba con otro filtro!</p>
           </div>
-        )}
+        )*/
+          }
       </div>
     </div>
   );

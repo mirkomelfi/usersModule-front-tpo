@@ -91,9 +91,16 @@ const EventsCalendar = () => {
         }
         const data = await response.json();
         console.log(data)
+        data.forEach((event)=>{
+          if (dni!=event.usuarioReservado.dni){
+            event.dato=event.usuarioReservado.nombre + " "+event.usuarioReservado.apellido + " ("+event.usuarioReservado.rol+")"
+          }else{
+            event.dato=event.usuarioSolicitante.nombre + " "+ event.usuarioSolicitante.apellido+ " ("+event.usuarioSolicitante.rol+")"
+          }
+        })
         const formattedEvents = data.map(event => ({
             // deberia agregar el rol
-          title: `Reunión con ${event.usuarioReservado.nombre} ${event.usuarioReservado.apellido}`,
+          title: `Reunión con ${event.dato}`,
           start: new Date(event.fechaHora),
           end: new Date(new Date(event.fechaHora).getTime() + 60 * 60 * 1000)
         }));

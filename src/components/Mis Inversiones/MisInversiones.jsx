@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './MisInversiones.css';
-
+import foto from './Ojotas.jpg';
 // Datos de ejemplo para las inversiones realizadas
 const inversionesData = [
   { id: 1, nombre: 'Inversión A', descripcion: 'Agrandar el Estadio', montoInvertido: 1000, rentabilidad: '8% anual', retornoActual: 1080, estado: 'positivo' },
@@ -20,8 +20,65 @@ export const MisInversiones = () => {
 
   useEffect(() => {
     // Simulamos una llamada a una API para obtener las inversiones
-    setInversiones(inversionesData);
+    //setInversiones(inversionesData);
   }, []);
+
+
+  const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);  // Estado para manejar errores
+
+    useEffect(() => {
+        // Conectar al WebSocket en el endpoint /ws
+        const socket = new WebSocket('ws://localhost:8080/ws');
+        // Al abrir la conexión WebSocket
+        socket.onopen = () => {
+            console.log("Conexión WebSocket establecida.");
+            // Enviar un mensaje al servidor si es necesario (por ejemplo, para pedir productos)
+            socket.send("Solicitar mis inversiones");
+        };
+        // Manejar el mensaje recibido del servidor
+        socket.onmessage = (event) => {
+            console.log("Mensaje recibido: ", event.data);
+            try {
+                // Deserializar el JSON de productos
+                const misInversiones = JSON.parse(event.data);
+                
+                // Verificar que la respuesta sea un array de productos
+                if (Array.isArray(misInversiones)) {
+                  misInversiones.forEach(producto=>{
+                    producto.image=foto
+                  })
+                    setInversiones(misInversiones);  // Actualizar el estado de productos
+                } else {
+                    throw new Error("Las inversiones no están en el formato esperado.");
+                }
+
+                setLoading(false);  // Marcar como "cargado" una vez que los productos llegan
+            } catch (e) {
+                console.error("Error al procesar las inversiones: ", e);
+                setError("Error al recibir las inversiones .");  // Mostrar un mensaje de error
+                setLoading(false);  // Cambiar el estado de carga
+            }
+        };
+
+        // Manejar errores en la conexión WebSocket
+        socket.onerror = (error) => {
+            console.error("Error en WebSocket: ", error);
+            setError("Error en la conexión WebSocket.");
+            setLoading(false);  // Cambiar el estado de carga en caso de error
+        };
+
+        // Manejar el cierre de la conexión WebSocket
+        socket.onclose = () => {
+            console.log("Conexión WebSocket cerrada.");
+        };
+
+        // Limpiar al desmontar el componente
+        return () => {
+            socket.close();
+        };
+    }, []);  // Este efecto se ejecuta una sola vez cuando el componente se monta
+
 
   return (
     <div className="misInversiones-container">
