@@ -49,6 +49,7 @@ import { CampañaPut } from './components/Put/CampañaPUT';
 import { UsuariosPut } from './components/Put/UsuarioPUT';
 import { useDispatch } from 'react-redux';
 import { actualizarProductos } from './store/actions/commerce.action';
+import { ReclamosPost } from './components/Post/ReclamoPost';
 
 
 export const App = () => {
@@ -112,6 +113,7 @@ export const App = () => {
           <Route path='/campañas/add' element={<CampañaPost />} />
           <Route path='/propuestas/add' element={<PropuestasPost />} />
           <Route path='/productos/add' element={<ProductoPost />} />
+          <Route path='/reclamos/add' element={<ReclamosPost />} />
 
           <Route path='/deportes/update/:id' element={<DeportesPut />} />
           <Route path='/noticias/update/:id' element={<NoticiasPut />} />

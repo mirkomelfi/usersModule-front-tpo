@@ -107,7 +107,7 @@ const Navbar = () => {
             <ul className={`dropdown-content ${openDropdown === 'Reclamos' ? 'show' : ''}`}>
               {admin&&<li><Link to="/reclamos">Listado</Link></li>}
               {!admin&&<li><Link to="/reclamos">Mis Reclamos</Link></li>}
-              {<li><Link to="/reclamosPost">Crear Reclamo</Link></li>}
+              {<li><Link to="/reclamos/add">Crear Reclamo</Link></li>}
             </ul>
           </li>
       

@@ -53,7 +53,7 @@ export const Register = () => {
             {!mensaje ? (
                 <div className="register-form">
                     <h3>Formulario de registro</h3>
-
+                    <h4>Para poder asociarse, primero debe tener una cuenta de Cliente, la cual le permite realizar compras en el Ecommerce</h4>
                     <form onSubmit={consultarForm} ref={datForm}>
                         <div className="mb-3">
                             <label htmlFor="nombre" className="form-label">Nombre</label>
