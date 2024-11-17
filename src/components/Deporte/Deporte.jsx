@@ -44,54 +44,77 @@ export const Deporte = () => {
   
   const [mensaje,setMensaje]=useState(null)
 
-  const eliminar = async () => {
-    const response = await fetch(
-      `${process.env.REACT_APP_DOMINIO_BACK}/admin/actividades/${id}`,
-      {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-         // Authorization: `Bearer ${getToken()}`,
-        },
-      }
-    );
+  const [loading, setLoading] = useState(true);
 
-    const data = await response.json();
-      if (data.msj) {
-        setMensaje(data.msj);
-      }
-    return;
+  const eliminar = async () => {
+    try{
+      const response = await fetch(
+        `${process.env.REACT_APP_DOMINIO_BACK}/admin/actividades/${id}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          // Authorization: `Bearer ${getToken()}`,
+          },
+        }
+      );
+
+      const data = await response.json();
+        if (data.msj) {
+          setMensaje(data.msj);
+        }
+      return;
+    } catch (error) {
+      console.error('Error al cargar deporte:', error);
+    } finally {
+      setLoading(false);
+    }
   };
 
 
 
   const ejecutarFetch = async () => {
-    var url = ``;
+    try{
+        var url = ``;
+        
+        url = `${process.env.REACT_APP_DOMINIO_BACK}/actividades/${id}`;
     
-    url = `${process.env.REACT_APP_DOMINIO_BACK}/actividades/${id}`;
-    
+        const response = await fetch(url, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            //Authorization: `Bearer ${getToken()}`,
+          },
+        }
+    );
 
-    const response = await fetch(url, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        //Authorization: `Bearer ${getToken()}`,
-      },
-    });
+      const data = await response.json();
+      console.log(data)
+      if (data.msj) {
+        setMensaje(data.msj);
+      } else {
+        setDeporte(data);
+      }
 
-    const data = await response.json();
-    console.log(data)
-    if (data.msj) {
-      setMensaje(data.msj);
-    } else {
-      setDeporte(data);
-    }
+  } catch (error) {
+    console.error('Error al cargar noticias:', error);
+  } finally {
+    setLoading(false);
+  }
   }
 
   useEffect(() => {
     ejecutarFetch().catch((error) => console.error(error));
   }, []);
 
+  if (loading) {
+    return (
+        <div className="loading-overlay">
+            <div className="spinner"></div>
+            <p>Cargando...</p>
+        </div>
+    );
+}
 
   return (
     <div className="deporte-container">

@@ -16,28 +16,36 @@ export const Feedback = () => {
   const [listaRubros,setListaRubros]= useState([]);
   const [mensaje,setMensaje]= useState(null);
 
-  const ejecutarFetch = async() =>{
+  const [loading, setLoading] = useState(true);
 
-    const response= await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/rubros`, {
-      method: "GET",
-      headers: {
-          "Content-Type": "application/json",
-           "Authorization": `Bearer ${getToken()}`
-      }
-      
-    })
-    if (response.status==403){
-      if (isTokenExpired(getToken())) {
-        alert("Venció su sesión. Vuelva a logguearse")
-        navigate("/logout")
-      }
-    }
-    const data = await response.json()
-    console.log(data)
-    if (data.msj){
-      setMensaje(data.msj)
-    }else{
-      setListaRubros(data)
+  const ejecutarFetch = async() =>{
+    try {
+
+        const response= await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/rubros`, {
+          method: "GET",
+          headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${getToken()}`
+          }
+          
+        })
+        if (response.status==403){
+          if (isTokenExpired(getToken())) {
+            alert("Venció su sesión. Vuelva a logguearse")
+            navigate("/logout")
+          }
+        }
+        const data = await response.json()
+        console.log(data)
+        if (data.msj){
+          setMensaje(data.msj)
+        }else{
+          setListaRubros(data)
+        }
+    } catch (error) {
+        console.error('Error al cargar feedback:', error);
+    } finally {
+        setLoading(false);
     }
   }
 
@@ -130,6 +138,15 @@ export const Feedback = () => {
 
 
   };
+
+  if (loading) {
+    return (
+        <div className="loading-overlay">
+            <div className="spinner"></div>
+            <p>Cargando...</p>
+        </div>
+    );
+}
 
   return (
     <div className="feedback-container">

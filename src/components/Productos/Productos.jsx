@@ -51,6 +51,8 @@ export const Productos = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [currentIndex, setCurrentIndex] = useState({});
 
+  const [loading, setLoading] = useState(false);
+
   const productosPorcategoria = groupByType(products);
 
   const handleNext = (categoria) => {
@@ -144,7 +146,6 @@ export const Productos = () => {
 
 
 
-    const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);  // Estado para manejar errores
 
     useEffect(() => {

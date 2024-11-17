@@ -47,8 +47,11 @@ export const Pedidos = () => {
     const [listaPedidos, setlistaPedidos] = useState([]);
     const [mensaje, setMensaje] = useState(null);
 
+    const [loading, setLoading] = useState(true);
+
     const getPedidos = async() =>{
 
+      try {
         let url=`ventas?username=${username}`
       
         const response= await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/${url}`, { 
@@ -67,6 +70,12 @@ export const Pedidos = () => {
         }else{
           setlistaPedidos(data)
         }
+
+      } catch (error) {
+        console.error('Error al cargar pedidos:', error);
+    } finally {
+        setLoading(false);
+    }
       }
     
       const actualizarVentas = async() =>{
@@ -94,10 +103,7 @@ export const Pedidos = () => {
 
 
 
-
-
     const [sales, setSales] = useState([]);  
-    const [loading, setLoading] = useState(true);
     
     // Conectar al WebSocket
     useEffect(() => {
@@ -135,13 +141,14 @@ export const Pedidos = () => {
     }, []);
 
 
-
-
-
-
-
-    
-
+    if (loading) {
+      return (
+          <div className="loading-overlay">
+              <div className="spinner"></div>
+              <p>Cargando...</p>
+          </div>
+      );
+  }
 
     return (
         <div className="pedidos-container">

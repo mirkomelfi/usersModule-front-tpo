@@ -1,9 +1,11 @@
-import React from 'react';
-import './Directivo.css';
+import React, { useEffect, useState } from "react";
 
+import './Directivo.css';
 import foto from "./persona.jpg";
 
 export const Directivo = () => {
+  const [loading, setLoading] = useState(false);  // Estado de carga
+
   const starLine = Array.from({ length: 50 }, (_, index) => (
     <span
       key={index}
@@ -60,6 +62,24 @@ export const Directivo = () => {
   const eventos = [
     'Verónica Gómez', 'Felipe Ortega', 'Natalia Castro'
   ];
+
+   // Simulación de fetch con setTimeout
+   useEffect(() => {
+    setTimeout(() => {
+
+      // Finaliza el "loading" después de cargar los datos
+      setLoading(false);
+    }, 2000);  // Simula un fetch que tarda 2 segundos
+  }, []);  // El array vacío significa que esto se ejecuta solo una vez al montar el componente
+
+  if (loading) {
+    return (
+      <div className="loading-overlay">
+        <div className="spinner"></div>
+        <p>Cargando...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="directivo-page-container">

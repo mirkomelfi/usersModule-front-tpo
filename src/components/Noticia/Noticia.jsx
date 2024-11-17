@@ -12,6 +12,8 @@ export const Noticia = () => {
   const [mensaje,setMensaje]=useState(null)
   const [noticia,setNoticia]=useState(null)
 
+  const [loading, setLoading] = useState(true);
+
   const eliminar = async () => {
     const response = await fetch(
       `${process.env.REACT_APP_DOMINIO_BACK}/admin/noticias/${id}`,
@@ -33,26 +35,32 @@ export const Noticia = () => {
 
 
   const ejecutarFetch = async () => {
-    var url = ``;
-    
-    url = `${process.env.REACT_APP_DOMINIO_BACK}/noticias/${id}`;
-    
+    try {
+      var url = ``;
+      
+      url = `${process.env.REACT_APP_DOMINIO_BACK}/noticias/${id}`;
+      
 
-    const response = await fetch(url, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        //Authorization: `Bearer ${getToken()}`,
-      },
-    });
+      const response = await fetch(url, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          //Authorization: `Bearer ${getToken()}`,
+        },
+      });
 
-    const data = await response.json();
-    console.log(data)
-    if (data.msj) {
-      setMensaje(data.msj);
-    } else {
-      setNoticia(data);
-    }
+      const data = await response.json();
+      console.log(data)
+      if (data.msj) {
+        setMensaje(data.msj);
+      } else {
+        setNoticia(data);
+      }
+    } catch (error) {
+      console.error('Error al cargar noticias:', error);
+  } finally {
+      setLoading(false);
+  }
   }
 
     useEffect(() => {
@@ -60,6 +68,14 @@ export const Noticia = () => {
     }, []);
 
 
+  if (loading) {
+      return (
+          <div className="loading-overlay">
+              <div className="spinner"></div>
+              <p>Cargando...</p>
+          </div>
+      );
+  }
 
   return (
     

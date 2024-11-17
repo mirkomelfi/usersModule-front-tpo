@@ -136,6 +136,42 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo gris translúcido */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Asegura que se muestre por encima de todo */
+  color: white;  
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #f3f3f3; /* Borde transparente */
+  border-top-color: #007bff; /* Color del spinner */
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 10px; /* Espacio entre el spinner y el texto */
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-overlay p {
+  font-size: 18px;
+  font-weight: bold;
+}
+
 /* Cambiar el tamaño de la tarjeta en pantallas más pequeñas */
 @media (max-width: 768px) {
   .producto-card {

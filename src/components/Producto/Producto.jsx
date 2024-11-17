@@ -13,6 +13,9 @@ export const Producto = () => {
   const [mensaje, setMensaje] = useState(null);
   const [cantidad, setCantidad] = useState(1);
   var username= useSelector((state) => state.usuarios.username)
+
+  const [loading, setLoading] = useState(true);
+
   const dispatch=useDispatch()
 
   const handleCantidadChange = (e) => {
@@ -27,25 +30,32 @@ export const Producto = () => {
 
 
   const getProducto = async() =>{
+    try {
 
-    let url=`productos/${id}`
-  
-    const response= await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/${url}`, { 
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      }
+        let url=`productos/${id}`
       
-    })
-    
-    const data = await response.json()
-    console.log(data)
+        const response= await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/${url}`, { 
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          }
+          
+        })
+        
+        const data = await response.json()
+        console.log(data)
 
-    if (data.msj){
-      setMensaje(data.msj)
-    }else{
-      setProducto(data)
-    }
+        if (data.msj){
+          setMensaje(data.msj)
+        }else{
+          setProducto(data)
+        }
+
+  } catch (error) {
+      console.error('Error al cargar noticias:', error);
+  } finally {
+      setLoading(false);
+  }
   }
 
   useEffect(() => { 
@@ -65,6 +75,15 @@ export const Producto = () => {
     caracteristicas: ["Tela transpirable", "Diseño original del club"],
     talles: ["S", "M", "L", "XL"]
   };
+
+  if (loading) {
+    return (
+        <div className="loading-overlay">
+            <div className="spinner"></div>
+            <p>Cargando...</p>
+        </div>
+    );
+}
 
   return (
     <div className="producto-container">

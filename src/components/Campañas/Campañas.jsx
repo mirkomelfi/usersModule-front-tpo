@@ -28,41 +28,44 @@ export const Campañas = () => {
   const [url, setUrl] = useState("");
   const navigate = useNavigate(); // Hook para navegar
 
-
-
   const [listaCampañas,setListaCampañas]= useState([]);
   const [mensaje,setMensaje]= useState(null);
- 
 
-
+  const [loading, setLoading] = useState(true);
 
   const ejecutarFetch = async() =>{
-    const response= await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/campanas${url}`, { 
-      method: "GET",
-      headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${getToken()}`
+    try {
+        const response= await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/campanas${url}`, { 
+          method: "GET",
+          headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${getToken()}`
+          }
+          
+        })
+
+        if (response.status==403){
+          if (isTokenExpired(getToken())) {
+            alert("Venció su sesión. Vuelva a logguearse")
+            navigate("/logout")
+          }
+        }
+
+        const data = await response.json()
+
+        if (data.msj){
+          console.log(data.msj)
+          setListaCampañas([])
+          setMensaje(data.msj)
+        }else{
+          console.log(data)
+          setListaCampañas(data)
+        }
+      } catch (error) {
+          console.error('Error al cargar camapañas:', error);
+      } finally {
+          setLoading(false);
       }
-      
-    })
-
-    if (response.status==403){
-      if (isTokenExpired(getToken())) {
-        alert("Venció su sesión. Vuelva a logguearse")
-        navigate("/logout")
-      }
-    }
-
-    const data = await response.json()
-
-    if (data.msj){
-      console.log(data.msj)
-      setListaCampañas([])
-      setMensaje(data.msj)
-    }else{
-      console.log(data)
-      setListaCampañas(data)
-    }
     }
 
   
@@ -82,6 +85,16 @@ export const Campañas = () => {
   const handleAdd = () => {
     navigate("/campañas/add")
   };
+
+if (loading) {
+    return (
+        <div className="loading-overlay">
+            <div className="spinner"></div>
+            <p>Cargando...</p>
+        </div>
+    );
+}
+
 
   return (
     <div className="campañas-container">

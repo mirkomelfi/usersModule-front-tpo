@@ -16,6 +16,8 @@ export const ListaCarrito = () => {
   var carrito = useSelector((state) => state.cart.items);
   var username = useSelector((state) => state.usuarios.username);
   
+  const [loading, setLoading] = useState(false);
+
   console.log("carrio: ",carrito)
 
   const finalizarCarrito= async(total) => {
@@ -74,7 +76,14 @@ export const ListaCarrito = () => {
     dispatch(fetchCart(username))
   },[])
 
-
+  if (loading) {
+    return (
+        <div className="loading-overlay">
+            <div className="spinner"></div>
+            <p>Cargando...</p>
+        </div>
+    );
+}
 
   return (
     <div className="carrito-container">

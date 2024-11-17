@@ -79,29 +79,36 @@ export const Deportes = () => {
 
     const [paddingLeft, setPaddingLeft] = useState(20); // Valor inicial del padding
 
+    const [loading, setLoading] = useState(true);
+
     const navigate= useNavigate()
     const navigateTo=(url)=>{
         navigate(url)
     }
 
     const ejecutarFetch = async() =>{
+        try {
+            const response= await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/actividades`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                // "Authorization": `Bearer ${getToken()}`
+                }
+                
+            })
 
-      const response= await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/actividades`, {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-           // "Authorization": `Bearer ${getToken()}`
+            const data = await response.json()
+            if (data.msj){
+                setMensaje(data.msj)
+            }else{
+                console.log(data)
+                setListaDeportes(data)
+            }
+        } catch (error) {
+            console.error('Error al cargar deportes:', error);
+        } finally {
+            setLoading(false);
         }
-        
-      })
-
-      const data = await response.json()
-      if (data.msj){
-        setMensaje(data.msj)
-      }else{
-        console.log(data)
-        setListaDeportes(data)
-      }
       }
 
   
@@ -134,6 +141,15 @@ export const Deportes = () => {
         const container = containerRef.current;
         container.scrollLeft += event.deltaY * 2;
     };
+
+    if (loading) {
+        return (
+            <div className="loading-overlay">
+                <div className="spinner"></div>
+                <p>Cargando...</p>
+            </div>
+        );
+    }
 
     return (
         <>

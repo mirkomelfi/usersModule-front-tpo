@@ -28,54 +28,68 @@ export const Campaña = () => {
   
   const [mensaje,setMensaje]=useState(null)
 
+  const [loading, setLoading] = useState(true); // Estado para mostrar el overlay de carga
+
   const getGanador = async() =>{
-    const response= await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/campanas/${id}/ganador`, { 
-      method: "GET",
-      headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${getToken()}`
-      }
-      
-    })
-    if (response.status==403){
-      if (isTokenExpired(getToken())) {
-        alert("Venció su sesión. Vuelva a logguearse")
-        navigate("/logout")
-      }
-    }
-    const data = await response.json()
+    try {
+        const response= await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/campanas/${id}/ganador`, { 
+          method: "GET",
+          headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${getToken()}`
+          }
+          
+        })
+        if (response.status==403){
+          if (isTokenExpired(getToken())) {
+            alert("Venció su sesión. Vuelva a logguearse")
+            navigate("/logout")
+          }
+        }
+        const data = await response.json()
 
-    if (response.status==200){
-      if (data.length==1){
-        setGanador(data[0].titulo)
-      }else{//+1 ganador
-        //setGanador(data)
-      }
+        if (response.status==200){
+          if (data.length==1){
+            setGanador(data[0].titulo)
+          }else{//+1 ganador
+            //setGanador(data)
+          }
 
-    }else{
-      setMensaje(data.msj)
+        }else{
+          setMensaje(data.msj)
+        }
+    } catch (error) {
+        console.error('Error al cargar campaña:', error);
+    } finally {
+        setLoading(false);
     }
   }
 
   const cerrarCampaña = async() =>{
-    const response= await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/campanas/${id}/cerrar`, { 
-      method: "GET",
-      headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${getToken()}`
-      }
-      
-    })
-    if (response.status==403){
-      if (isTokenExpired(getToken())) {
-        alert("Venció su sesión. Vuelva a logguearse")
-        navigate("/logout")
-      }
+    try {
+        const response= await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/campanas/${id}/cerrar`, { 
+          method: "GET",
+          headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${getToken()}`
+          }
+          
+        })
+        if (response.status==403){
+          if (isTokenExpired(getToken())) {
+            alert("Venció su sesión. Vuelva a logguearse")
+            navigate("/logout")
+          }
+        }
+        const data = await response.json()
+        alert(`${data.msj} : "${campaña.titulo}"`);
+        navigate('/campañas')
+        setMensaje(data.msj)
+    } catch (error) {
+        console.error('Error al cargar campaña:', error);
+    } finally {
+        setLoading(false);
     }
-    const data = await response.json()
-    alert(`${data.msj} : "${campaña.titulo}"`);
-    navigate('/campañas')
-    setMensaje(data.msj)
   }
 
 const handlerVoto = async () => {
@@ -113,30 +127,36 @@ const handlerVoto = async () => {
 }
 
   const ejecutarFetch = async () => {
-    var url = ``;
-    
-    url = `${process.env.REACT_APP_DOMINIO_BACK}/campanas/${id}`;
-    
+    try {
+        var url = ``;
+        
+        url = `${process.env.REACT_APP_DOMINIO_BACK}/campanas/${id}`;
+        
 
-    const response = await fetch(url, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${getToken()}`,
-      },
-    });
-    if (response.status==403){
-      if (isTokenExpired(getToken())) {
-        alert("Venció su sesión. Vuelva a logguearse")
-        navigate("/logout")
-      }
-    }
-    const data = await response.json();
-    console.log(data)
-    if (data.msj) {
-      setMensaje(data.msj);
-    } else {
-      setCampaña(data);
+        const response = await fetch(url, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${getToken()}`,
+          },
+        });
+        if (response.status==403){
+          if (isTokenExpired(getToken())) {
+            alert("Venció su sesión. Vuelva a logguearse")
+            navigate("/logout")
+          }
+        }
+        const data = await response.json();
+        console.log(data)
+        if (data.msj) {
+          setMensaje(data.msj);
+        } else {
+          setCampaña(data);
+        }
+    } catch (error) {
+        console.error('Error al cargar campaña:', error);
+    } finally {
+        setLoading(false); 
     }
   }
 
@@ -164,6 +184,15 @@ const handlerVoto = async () => {
       setOpcionId(null);
     }
   };
+
+  if (loading) {
+    return (
+        <div className="loading-overlay">
+            <div className="spinner"></div>
+            <p>Cargando...</p>
+        </div>
+    );
+}
 
   return (
     <div className={`campaña-detalle ${mostrarConfirmacion ? 'blur' : ''}`}>

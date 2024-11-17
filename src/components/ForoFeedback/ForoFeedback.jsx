@@ -26,64 +26,76 @@ export const ForoFeedback = () => {
 
   const [listaRubros,setListaRubros]= useState([]);
 
+  const [loading, setLoading] = useState(true);
+
   //falta desarrollar filtros en el back
   const getRubros = async() =>{
-
-    const response= await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/rubros`, {
-      method: "GET",
-      headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${getToken()}`
+    try {
+      const response= await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/rubros`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${getToken()}`
+        }
+        
+      })
+      if (response.status==403){
+        if (isTokenExpired(getToken())) {
+          alert("Venció su sesión. Vuelva a logguearse")
+          navigate("/logout")
+        }
       }
-      
-    })
-    if (response.status==403){
-      if (isTokenExpired(getToken())) {
-        alert("Venció su sesión. Vuelva a logguearse")
-        navigate("/logout")
+      const data = await response.json()
+      console.log(data)
+      if (data.msj){
+        setMensaje(data.msj)
+      }else{
+        setListaRubros(data)
       }
-    }
-    const data = await response.json()
-    console.log(data)
-    if (data.msj){
-      setMensaje(data.msj)
-    }else{
-      setListaRubros(data)
+    } catch (error) {
+      console.error('Error al cargar noticias:', error);
+    } finally {
+        setLoading(false);
     }
   }
 
   const ejecutarFetch = async() =>{
+    try {
+        let url;
+        if (!admin){
+          url=`misFeedbacks/${dni}?rubro=${selectedRubro}`
+        }else{
+          url=`admin/feedbacks?rubro=${selectedRubro}`
+        }
 
-    let url;
-    if (!admin){
-      url=`misFeedbacks/${dni}?rubro=${selectedRubro}`
-    }else{
-      url=`admin/feedbacks?rubro=${selectedRubro}`
-    }
-
-    const response= await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/${url}`, { 
-      method: "GET",
-      headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${getToken()}`
+        const response= await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/${url}`, { 
+          method: "GET",
+          headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${getToken()}`
+          }
+          
+        })
+        if (response.status==403){
+          if (isTokenExpired(getToken())) {
+            alert("Venció su sesión. Vuelva a logguearse")
+            navigate("/logout")
+          }
+        }
+        const data = await response.json()
+        if (data.msj){
+          
+          setListaFeedback([])
+          setMensaje(data.msj)
+        }else{
+          console.log(data)
+          setListaFeedback(data)
+        }
+      } catch (error) {
+        console.error('Error al cargar feedback:', error);
+      } finally {
+          setLoading(false);
       }
-      
-    })
-    if (response.status==403){
-      if (isTokenExpired(getToken())) {
-        alert("Venció su sesión. Vuelva a logguearse")
-        navigate("/logout")
-      }
-    }
-    const data = await response.json()
-    if (data.msj){
-      
-      setListaFeedback([])
-      setMensaje(data.msj)
-    }else{
-      console.log(data)
-      setListaFeedback(data)
-    }
     }
 
 
@@ -112,6 +124,24 @@ export const ForoFeedback = () => {
   const filteredFeedbacks = selectedSubject === 'Todos'
     ? feedbacks
     : feedbacks.filter(feedback => feedback.subject === selectedSubject);
+
+  if (loading) {
+      return (
+          <div className="loading-overlay">
+              <div className="spinner"></div>
+              <p>Cargando...</p>
+          </div>
+      );
+  }
+
+  if (loading) {
+    return (
+        <div className="loading-overlay">
+            <div className="spinner"></div>
+            <p>Cargando...</p>
+        </div>
+    );
+}
 
   return (
     <div className="foro-container">

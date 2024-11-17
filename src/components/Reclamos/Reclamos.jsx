@@ -68,6 +68,8 @@ export const Reclamos = () => {
   const admin = useSelector((state) => state.usuarios.isAdmin); // Verifica si es admin
   const navigate = useNavigate();
 
+  const [loading, setLoading] = useState(true);
+
   const handleAddReclamo = () => {
     navigate('/reclamo');
   };
@@ -89,7 +91,6 @@ export const Reclamos = () => {
       return esMiReclamo && esRubroValido;
     }
   });*/
-  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);  // Estado para manejar errores
 
   useEffect(() => {
@@ -144,6 +145,14 @@ export const Reclamos = () => {
       };
   }, []);  // Este efecto se ejecuta una sola vez cuando el componente se monta
 
+  if (loading) {
+    return (
+        <div className="loading-overlay">
+            <div className="spinner"></div>
+            <p>Cargando...</p>
+        </div>
+    );
+}
 
   return (
     <div className="reclamo-container">
