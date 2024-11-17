@@ -167,9 +167,9 @@ export const Noticias = () => {
                             }
                             <h2 className="noticia-titulo">{noticia.titulo}</h2>
                             <p className="noticia-descripcion">{noticia.descripcion}</p>
-                            <Link to={`/noticias/${noticia.id}`} className="btn-agregar-noticia">
+                            {/*<Link to={`/noticias/${noticia.id}`} className="btn-agregar-noticia">
                                 Ir a Noticia
-                            </Link>
+                            </Link>*/}
                         </div>
                     ))}
             </div>

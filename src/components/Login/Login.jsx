@@ -91,12 +91,12 @@ export const Login = () => {
 
         </form>
 
-        <div className="login-options">
+        {/*<div className="login-options">
           <Link to="/olvidoContraseña" className="link">
             ¿Olvidó su contraseña?
           </Link>
 
-        </div>
+        </div>*/}
       </div>
     </div>
   );

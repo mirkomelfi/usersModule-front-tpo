@@ -180,9 +180,9 @@ export const Deportes = () => {
                                 <p key={diaIndex} className="deporte-descripcion">{dia}</p>
                             ))}
                         </div>
-                        <Link to={`/deportes/${deporte.id}`} className="btn-agregar-deporte">
+                        {/*<Link to={`/deportes/${deporte.id}`} className="btn-agregar-deporte">
                             Ir a Deporte
-                        </Link>
+                        </Link>*/}
                     </div>
                 ))}
             </div>
