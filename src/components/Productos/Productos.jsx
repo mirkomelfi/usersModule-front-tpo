@@ -93,47 +93,59 @@ export const Productos = () => {
 
   const getProductos = async() =>{
 
-    let url=`productos`
-  
-    const response= await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/${url}`, { 
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      }
+    try {
+
+        let url=`productos`
       
-    })
-    
-    const data = await response.json()
-    console.log(data)
-    if (data.msj){
-      setListaProductos([])
-      setMensaje(data.msj)
-    }else{
-      data.forEach(producto=>{
-        producto.image=foto
-      })
-      setListaProductos(data)
-      //dispatch(updateProductos(data))
+        const response= await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/${url}`, { 
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          }
+          
+        })
+        
+        const data = await response.json()
+        console.log(data)
+        if (data.msj){
+          setListaProductos([])
+          setMensaje(data.msj)
+        }else{
+          data.forEach(producto=>{
+            producto.image=foto
+          })
+          setListaProductos(data)
+          //dispatch(updateProductos(data))
+        }
+    } catch (error) {
+        console.error('Error al cargar noticias:', error);
+    } finally {
+        setLoading(false);
     }
   }
 
   const actualizarProductos = async() =>{
+    try {
 
-    let url=`productosUpdate`
-  
-    const response= await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/${url}`, { 
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      }
+        let url=`productosUpdate`
       
-    })
-    
+        const response= await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/${url}`, { 
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          }
+          
+        })
+        
 
-    setTimeout(function(){
-        getProductos()
-    }, 500);
-
+        setTimeout(function(){
+            getProductos()
+        }, 500);
+     } catch (error) {
+        console.error('Error al cargar noticias:', error);
+    } finally {
+        setLoading(false);
+    }        
   }
   
   /*useEffect(() => { 
