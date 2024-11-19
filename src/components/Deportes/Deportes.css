@@ -98,6 +98,20 @@
     margin-bottom: 10px; /* Espacio entre el spinner y el texto */
  }
 
+.deportes-header {
+    text-align: center; /* Centrar el texto horizontalmente */
+    margin: 20px 0; /* Espacio superior e inferior */
+}
+
+.deportes-titulo-pagina {
+    color: #003366; /* Azul medio oscuro */
+    font-size: 3.5rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 1rem;
+    text-decoration: underline;
+}
+
 @keyframes spin {
     to {
       transform: rotate(360deg);

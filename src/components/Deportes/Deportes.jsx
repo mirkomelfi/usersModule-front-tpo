@@ -153,6 +153,12 @@ export const Deportes = () => {
 
     return (
         <>
+
+         {/* Título principal */}
+         <div className="deportes-header">
+            <h1 className="deportes-titulo-pagina">Deportes</h1>
+        </div>
+
             {admin &&
                 <div className="agregarDeporte">
                     <Link to="/deportes/add" className="btn-agregar-deporte">

@@ -147,6 +147,19 @@ export const Noticias = () => {
 
     return (
         <>
+         {/* Título principal */}
+         <div className="noticias-header">
+            <h1 className="noticias-titulo-pagina">Noticias</h1>
+        </div>
+
+        {/* Footer con botón Agregar Noticia */}
+        {admin && (
+            <div className="agregarNoticia">
+                <Link to="/noticias/add" className="btn-agregar-noticia">
+                    Agregar Noticia
+                </Link>
+            </div>
+        )}
             {/* Footer con botón Agregar Noticia */}
             {admin&&
                 <div className="agregarNoticia">
