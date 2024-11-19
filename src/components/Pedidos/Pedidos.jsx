@@ -41,14 +41,13 @@ const pedidos = [
 export const Pedidos = () => {
     const isUser = useSelector((state) => state.usuarios.dni);
     const username = useSelector((state) => state.usuarios.username);
-    console.log("username",username)
     const navigate = useNavigate();
     
     const [listaPedidos, setlistaPedidos] = useState([]);
     const [mensaje, setMensaje] = useState(null);
 
     const [loading, setLoading] = useState(true);
-
+/*
     const getPedidos = async() =>{
 
       try {
@@ -101,7 +100,7 @@ export const Pedidos = () => {
         actualizarVentas()
     },[])
 
-
+*/
 
     const [sales, setSales] = useState([]);  
     
@@ -119,8 +118,8 @@ export const Pedidos = () => {
             console.log("Mensaje recibido: ", event.data);
             var arraySales=JSON.parse(event.data)
             arraySales.forEach((sale)=>{
-              console.log(new Date(sale.fecha))
-              sale.fecha=new Date(sale.fecha)
+              const date=""+new Date(sale.fecha)
+              sale.fecha=date//.substr(date.indexOf("GMT"))
             })
             setSales(arraySales);
             setLoading(false);  // Cuando lleguen las ventas, cambiamos el estado de carga
@@ -165,7 +164,7 @@ export const Pedidos = () => {
               </tr>
             </thead>
             <tbody>
-              {sales.map((pedido) => (
+              {sales&&sales.length!=0&&sales.map((pedido) => (
                 <tr key={pedido.id}>
                   <td>{pedido.idVenta}</td>
                   <td>{pedido.fecha}</td>

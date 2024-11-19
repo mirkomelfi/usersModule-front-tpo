@@ -51,7 +51,7 @@ export const Productos = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [currentIndex, setCurrentIndex] = useState({});
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const productosPorcategoria = groupByType(products);
 
@@ -162,6 +162,7 @@ export const Productos = () => {
         // Manejar el mensaje recibido del servidor
         socket.onmessage = (event) => {
             console.log("Mensaje recibido: ", event.data);
+         
             try {
                 // Deserializar el JSON de productos
                 const receivedProducts = JSON.parse(event.data);
@@ -204,6 +205,14 @@ export const Productos = () => {
 
 
 
+    if (loading) {
+      return (
+          <div className="loading-overlay">
+              <div className="spinner"></div>
+              <p>Cargando...</p>
+          </div>
+      );
+  }
 
   return (
     <div className="productos-container">
