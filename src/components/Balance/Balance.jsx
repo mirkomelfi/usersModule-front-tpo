@@ -24,7 +24,7 @@ export const Balance = () => {
   const expensesPercentage = (expenses / total) * 100;
 
 
-  const getBalance = async() =>{
+  /*const getBalance = async() =>{
     
     let url=`balance`
   
@@ -40,14 +40,14 @@ export const Balance = () => {
     const data= await response.json()
     console.log(data.msj)
 
-  }
+  }*/
 
-  useEffect(() => { 
+  /*useEffect(() => { 
       getBalance()
-  },[])
+  },[])*/
 
 
-  useEffect(() => {
+  /*useEffect(() => {
     const socket = new WebSocket('ws://localhost:8080/ws');
 
     socket.onopen = () => {
@@ -75,7 +75,7 @@ export const Balance = () => {
     return () => {
         socket.close();
     };
-}, []);
+}, []);*/
 
 
   return (

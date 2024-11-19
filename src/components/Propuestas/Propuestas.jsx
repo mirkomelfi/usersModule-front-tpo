@@ -18,16 +18,14 @@ export const Propuestas = () => {
   const [votes, setVotes] = useState({}); // Stores user votes
   const navigate = useNavigate(); // Hook para navegar
 
-
   const admin = useSelector((state) => state.usuarios.isAdmin);
-
-
 
   const dni = useSelector((state) => state.usuarios.dni);
 
-
   const [listaPropuestas,setListaPropuestas]= useState([]);
   const [mensaje,setMensaje]= useState(null);
+
+  const [loading, setLoading] = useState(true);
  
 
   const ejecutarFetch = async() =>{
@@ -39,31 +37,38 @@ export const Propuestas = () => {
       url=`admin/propuestas`
     }
 
-    const response= await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/${url}`, {
-      method: "GET",
-      headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${getToken()}`
-      }
-      
-    })
-    if (response.status==403){
-      if (isTokenExpired(getToken())) {
-        alert("Venció su sesión. Vuelva a logguearse")
-        navigate("/logout")
-      }
-    }
-    const data = await response.json()
-    if (data.msj){
-      console.log(data.msj)
+    try {
+        const response= await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/${url}`, {
+          
+          method: "GET",
+          headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${getToken()}`
+          }
+          
+        })
+        if (response.status==403){
+          if (isTokenExpired(getToken())) {
+            alert("Venció su sesión. Vuelva a logguearse")
+            navigate("/logout")
+          }
+        }
+        const data = await response.json()
+        if (data.msj){
+          console.log(data.msj)
 
-      setListaPropuestas([])
-      setMensaje(data.msj)
-    //  alert("este usr no tiene campañas. msj temporal")
-    }else{
-      console.log(data)
-      setListaPropuestas(data)
-    }
+          setListaPropuestas([])
+          setMensaje(data.msj)
+        //  alert("este usr no tiene campañas. msj temporal")
+        }else{
+          console.log(data)
+          setListaPropuestas(data)
+        }
+      } catch (error) {
+          console.error('Error al cargar noticias:', error);
+      } finally {
+          setLoading(false);
+      }
     }
  // }
 
