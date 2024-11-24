@@ -48,7 +48,7 @@ const ImagenPost = ({noticia,actividad,propuesta,id}) =>{
         const response= await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/${url}/${id}/imagenes`, {
             method: "PUT",
             headers: {
-                //"Authorization": `Bearer ${getToken()}`
+                "Authorization": `Bearer ${getToken()}`
             },
             body: img
         })

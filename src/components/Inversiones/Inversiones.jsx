@@ -11,7 +11,8 @@ const proyectosData = [
 
 export const Inversiones = () => {
   const [proyectoSeleccionado, setProyectoSeleccionado] = useState(null);
-  const [montoInversion, setMontoInversion] = useState('');
+  const [montoInversion, setMontoInversion] = useState(0);
+  const [nota, setNota] = useState("");
 
   const username = useSelector((state) => state.usuarios.username);
 
@@ -24,19 +25,23 @@ export const Inversiones = () => {
   const handleMontoChange = (event) => {
     setMontoInversion(event.target.value);
   };
+  const handleNotaChange = (event) => {
+    setNota(event.target.value);
+  };
 
   const handleInvertir =async () => {
       const inversion={
-        monto:montoInversion,
-        username
+        amount:montoInversion,
+        usuario:username,
+        note:nota
       }
       let url=`finalizarInversion`
-    
+      console.log(inversion)
       const response= await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/${url}`, { 
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-         // "Authorization": `Bearer ${getToken()}`,
+          "Authorization": `Bearer ${getToken()}`,
         },
         body:JSON.stringify(inversion)
         
@@ -48,12 +53,12 @@ export const Inversiones = () => {
         //setMensaje(data.msj)
         console.log(data.msj)
       }
-  
-    if (proyectoSeleccionado && montoInversion) {
+      alert(`Has invertido €${montoInversion}`);
+   /* if (proyectoSeleccionado && montoInversion) {
       alert(`Has invertido €${montoInversion} en ${proyectoSeleccionado.nombre}`);
     } else {
       alert('Por favor, selecciona un proyecto y un monto de inversión');
-    }
+    }*/
   };
 
  
@@ -79,7 +84,15 @@ export const Inversiones = () => {
             <p><strong>Rentabilidad:</strong> {proyectoSeleccionado.rentabilidad}</p>
           </div>
         )}
-
+        <label htmlFor="monto" className="inversiones-label">Nota de la Inversión:</label>
+        <input
+          type="text"
+          id="nota"
+          className="inversiones-input"
+          value={nota}
+          onChange={handleNotaChange}
+          placeholder="Ingresa la nota"
+        />
         <label htmlFor="monto" className="inversiones-label">Monto de Inversión ($):</label>
         <input
           type="number"

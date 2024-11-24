@@ -44,8 +44,9 @@ export const MisInversiones = () => {
                 
                 // Verificar que la respuesta sea un array de productos
                 if (Array.isArray(misInversiones)) {
-                  misInversiones.forEach(producto=>{
-                    producto.image=foto
+                  misInversiones.forEach(inv=>{
+                    const date=inv.date.split('T')[0]
+                    inv.date=date
                   })
                     setInversiones(misInversiones);  // Actualizar el estado de productos
                 } else {
@@ -112,24 +113,22 @@ export const MisInversiones = () => {
         <table className="misInversiones-table">
           <thead>
             <tr>
-              <th>Proyecto</th>
+
               <th>Descripción</th>
               <th>Monto Invertido ($)</th>
-              <th>Rentabilidad</th>
-              <th>Retorno Actual ($)</th>
-              <th>Estado</th>
+              <th>Fecha</th>
+
             </tr>
           </thead>
           <tbody>
             {inversiones.map((inversion) => (
               <tr key={inversion.id} className={`misInversiones-row ${inversion.estado === 'positivo' ? 'misInversiones-positivo' : 'misInversiones-negativo'}`}>
-                <td>{inversion.nombre}</td>
-                <td>{inversion.descripcion}</td>
-                <td>{inversion.montoInvertido}</td>
-                <td>{inversion.rentabilidad}</td>
-                <td>{inversion.retornoActual}</td>
-                <td className={`misInversiones-estado ${inversion.estado}`}>{inversion.estado === 'positivo' ? 'Positivo' : 'Negativo'}</td>
-              </tr>
+
+                <td>{inversion.note}</td>
+                <td>{inversion.amount}</td>
+                <td>{inversion.date}</td>
+                
+                </tr>
             ))}
           </tbody>
         </table>
