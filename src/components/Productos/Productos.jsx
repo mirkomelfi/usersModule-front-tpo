@@ -90,7 +90,7 @@ export const Productos = () => {
     const url1=url+id
     navigate(url1);
   };
-
+/*
   const getProductos = async() =>{
 
     try {
@@ -123,7 +123,7 @@ export const Productos = () => {
         setLoading(false);
     }
   }
-
+*/
   const actualizarProductos = async() =>{
     try {
 
@@ -137,10 +137,6 @@ export const Productos = () => {
           
         })
         
-
-        setTimeout(function(){
-            getProductos()
-        }, 500);
      } catch (error) {
         console.error('Error al cargar noticias:', error);
     } finally {
@@ -262,7 +258,9 @@ export const Productos = () => {
                 <div 
                   key={producto.idProducto} 
                   className="producto-card"
-                  onClick={() => navigate(`${producto.idProducto}`)} // Redirige a la URL del producto
+                  onClick={() => navigate(`${producto.idProducto}`,{                                                  
+                    state: { productData: producto } 
+                    })} // Redirige a la URL del producto
                 >
                   <img src={producto.image} alt={producto.nombre} className="producto-image" />
                   <div className="producto-info">

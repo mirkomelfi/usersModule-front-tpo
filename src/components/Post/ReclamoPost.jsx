@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './Post.css';
 import { useNavigate } from 'react-router-dom';
+import { getToken } from '../../utils/auth-utils';
+import { useSelector } from 'react-redux';
 
 export const ReclamosPost = () => {
   const usuarioActual = "A"; // Usuario logueado, en este caso "A"
@@ -8,18 +10,20 @@ export const ReclamosPost = () => {
   const [tipoReclamo, setTipoReclamo] = useState('');
   const [premisa, setPremisa] = useState('');
   const [comentario, setComentario] = useState('');
-
+  const [idPedido, setIdPedido] = useState(0);
+  var username= useSelector((state) => state.usuarios.username)
   const [tiposReclamo, setTiposReclamo] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   // Lista de tipos de reclamo (puedes agregar más tipos)
-  const tiposDeReclamo = ['Problema Técnico', 'Consulta', 'Queja', 'Sugerencia'];
+  const tiposDeReclamo = ['Problema Técnico', 'Comercio', 'Queja', 'Sugerencia'];
 
   // Manejar cambios en los inputs
   const handleTipoReclamoChange = (e) => setTipoReclamo(e.target.value);
   const handlePremisaChange = (e) => setPremisa(e.target.value);
   const handleComentarioChange = (e) => setComentario(e.target.value);
+  const handlePedidoChange = (e) => setIdPedido(e.target.value);
 
   // Enviar el reclamo
   const handleSubmit = () => {
@@ -29,17 +33,42 @@ export const ReclamosPost = () => {
     }
 
     const nuevoReclamo = {
-      usuario: usuarioActual,
+      usuario: username,
       tipoReclamo,
       premisa,
-      comentario
+      comentario,
+      idPedido
     };
+
+    enviarReclamo(nuevoReclamo)
 
     console.log('Reclamo enviado:', nuevoReclamo);
     // Aquí podrías agregar la lógica para guardar el reclamo, como una llamada a la API.
   };
 
+  const enviarReclamo = async(reclamo) =>{
+    try {
 
+        let url=`finalizarReclamo`
+      
+        const response= await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/${url}`, { 
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${getToken()}`
+          },
+          body:JSON.stringify(reclamo)
+          
+        })
+        const data= await response.json()
+        console.log(data)
+        
+     } catch (error) {
+        console.error('Error al cargar noticias:', error);
+    } finally {
+        //setLoading(false);
+    }        
+  }
 
 
   useEffect(() => {
@@ -132,6 +161,14 @@ export const ReclamosPost = () => {
           placeholder="Comentario"
           value={comentario}
           onChange={handleComentarioChange}
+        />
+        {/* Campo Premisa */}
+        <input
+          type="number"
+          className="post-input"
+          placeholder="ID del Pedido (si lo hubiere)"
+          value={idPedido}
+          onChange={handlePedidoChange}
         />
 
         {/* Botón de Enviar Reclamo */}

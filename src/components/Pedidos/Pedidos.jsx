@@ -76,7 +76,7 @@ export const Pedidos = () => {
         setLoading(false);
     }
       }
-    
+    */
       const actualizarVentas = async() =>{
     
         let url=`misPedidos?username=${username}`
@@ -88,19 +88,19 @@ export const Pedidos = () => {
           }
           
         })
-        
-    
+      }
+    /*
         setTimeout(function(){
             getPedidos()
         }, 5000);
         
       }
-    
+    */
     useEffect(() => { 
         actualizarVentas()
     },[])
 
-*/
+
 
     const [sales, setSales] = useState([]);  
     
@@ -117,12 +117,13 @@ export const Pedidos = () => {
         socket.onmessage = (event) => {
             console.log("Mensaje recibido: ", event.data);
             var arraySales=JSON.parse(event.data)
+            console.log(arraySales)
             arraySales.forEach((sale)=>{
               const date=""+new Date(sale.fecha)
               sale.fecha=date//.substr(date.indexOf("GMT"))
             })
             setSales(arraySales);
-            setLoading(false);  // Cuando lleguen las ventas, cambiamos el estado de carga
+            setLoading(null);  // Cuando lleguen las ventas, cambiamos el estado de carga
         };
     
         socket.onerror = (error) => {

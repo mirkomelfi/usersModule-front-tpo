@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import './Producto.css';
-
+import { useLocation } from "react-router-dom";
 import producto from "./Ojotas.jpg";
 import { addToCart } from '../../store/actions/cart.action';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 export const Producto = () => {
-  
+
   const [productoInfo, setProducto] = useState(null);
   var { id } = useParams();
   const [mensaje, setMensaje] = useState(null);
   const [cantidad, setCantidad] = useState(1);
   var username= useSelector((state) => state.usuarios.username)
-
+  const { state } = useLocation();
   const [loading, setLoading] = useState(true);
 
   const dispatch=useDispatch()
@@ -27,7 +27,7 @@ export const Producto = () => {
     alert(`Has comprado ${cantidad} unidades del producto.`);
   };
 
-
+/*
 
   const getProducto = async() =>{
     try {
@@ -60,6 +60,13 @@ export const Producto = () => {
 
   useEffect(() => { 
     getProducto()
+  },[])*/
+
+  useEffect(() => { 
+    if (state.productData){
+      setProducto(state.productData)
+      setLoading(null)
+    }
   },[])
 
   // Datos del producto
@@ -88,7 +95,7 @@ export const Producto = () => {
   return (
     <div className="producto-container">
 
-      {productoInfo&&
+      {state.productData&&
 
       <>
 
@@ -99,17 +106,17 @@ export const Producto = () => {
 
       {/* Detalles del producto */}
       <div className="producto-detalles">
-        <h1 className="producto-titulo">{productoInfo.nombre}</h1>
-        <p className="producto-precio">${productoInfo.precioVenta.toLocaleString()}</p>
-        <p className="producto-descripcion">{productoInfo.descripcion}</p>
-        <p className="producto-stock">Stock actual: {productoInfo.stockActual} unidades</p>
-        <p className="producto-categoria">Categoría: {productoInfo.categoria}</p>
+        <h1 className="producto-titulo">{state.productData.nombre}</h1>
+        <p className="producto-precio">${state.productData.precioVenta.toLocaleString()}</p>
+        <p className="producto-descripcion">{state.productData.descripcion}</p>
+        <p className="producto-stock">Stock actual: {state.productData.stockActual} unidades</p>
+        <p className="producto-categoria">Categoría: {state.productData.categoria}</p>
 
         {/* Descuentos */}
         <div className="producto-descuentos">
-          <p>Descuento efectivo: {productoInfo.descuentoEfectivo*100+"%"}</p>
-          <p>Descuento para socios: {productoInfo.descuentoSocios*100+"%"}</p>
-          <p>Descuento para no socios: {productoInfo.descuentoNoSocios*100+"%"}</p>
+          <p>Descuento efectivo: {state.productData.descuentoEfectivo*100+"%"}</p>
+          <p>Descuento para socios: {state.productData.descuentoSocios*100+"%"}</p>
+          <p>Descuento para no socios: {state.productData.descuentoNoSocios*100+"%"}</p>
         </div>
 
         {/* Características */}

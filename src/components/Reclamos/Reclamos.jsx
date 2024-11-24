@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import './Reclamos.css';
 
 import foto from './CanchaSanLorenzo.jpg';
+import { getToken } from '../../utils/auth-utils';
 
 const reclamos = [
   { 
@@ -61,9 +62,9 @@ const reclamos = [
 export const Reclamos = () => {
   const [selectedRubro, setSelectedRubro] = useState('Todos');
   const [reclamos, setReclamos] = useState(false);
-  
   //const usuarioActual = useSelector((state) => state.usuarios.usuarioActual); // Usuario actual
   const isAdmin = useSelector((state) => state.usuarios.admin);
+  const username = useSelector((state) => state.usuarios.username);
   const usuarioActual = "A"; // Usuario actual
   const admin = useSelector((state) => state.usuarios.isAdmin); // Verifica si es admin
   const navigate = useNavigate();
@@ -93,6 +94,35 @@ export const Reclamos = () => {
   });*/
   const [error, setError] = useState(null);  // Estado para manejar errores
 
+
+
+  const actualizarReclamos = async() =>{
+    try {
+
+        let url=`misReclamos?username=${username}`
+      
+        const response= await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/${url}`, { 
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${getToken()}`
+          }
+          
+        })
+        const data= await response.json()
+        console.log(data)
+        
+     } catch (error) {
+        console.error('Error al cargar reclamos:', error);
+    } finally {
+        setLoading(false);
+    }        
+  }
+  
+    useEffect(() => { 
+      actualizarReclamos()
+    },[])
+
   useEffect(() => {
       // Conectar al WebSocket en el endpoint /ws
       const socket = new WebSocket('ws://localhost:8080/ws');
@@ -100,7 +130,7 @@ export const Reclamos = () => {
       socket.onopen = () => {
           console.log("Conexión WebSocket establecida.");
           // Enviar un mensaje al servidor si es necesario (por ejemplo, para pedir productos)
-          socket.send("Solicitar mis Reclamos");
+          socket.send(`USER:${username}`)
       };
       // Manejar el mensaje recibido del servidor
       socket.onmessage = (event) => {
@@ -108,7 +138,7 @@ export const Reclamos = () => {
           try {
               // Deserializar el JSON de productos
               const misReclamos = JSON.parse(event.data);
-              
+              console.log(misReclamos)
               // Verificar que la respuesta sea un array de productos
               if (Array.isArray(misReclamos)) {
                 misReclamos.forEach(producto=>{
@@ -193,7 +223,8 @@ export const Reclamos = () => {
               <p className="reclamo-premisa">{reclamo.fecha}</p>
               <p className="reclamo-premisa">Premisa: {reclamo.premisa}</p>
               <p className="reclamo-comentario">Comentario: {reclamo.comentario}</p>
-              <img src={reclamo.imagen} alt="Reclamo" className="reclamo-imagen" />
+              {//<img src={reclamo.imagen} alt="Reclamo" className="reclamo-imagen" />
+              }
             </div>
           ))
         //) 
