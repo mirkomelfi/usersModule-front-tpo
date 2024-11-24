@@ -58,28 +58,28 @@ const SuperAdmin = () => {
             <label htmlFor="nombre" className="form-label">
               Nombre
             </label>
-            <input type="text" className="form-control" name="nombre" />
+            <input type="text" className="form-control" name="nombre"  onChange={handleInputChange} required />
           </div>
 
           <div className="mb-3">
             <label htmlFor="apellido" className="form-label">
               Apellido
             </label>
-            <input type="text" className="form-control" name="apellido" />
+            <input type="text" className="form-control" name="apellido"  onChange={handleInputChange} required />
           </div>
 
           <div className="mb-3">
             <label htmlFor="dni" className="form-label">
               DNI
             </label>
-            <input type="number" className="form-control" name="dni" />
+            <input type="number" className="form-control" name="dni" onChange={handleInputChange} required/>
           </div>
 
           <div className="mb-3">
             <label htmlFor="password" className="form-label">
               Contraseña
             </label>
-            <input type="password" className="form-control" name="password" />
+            <input type="password" className="form-control" name="password" onChange={handleInputChange} required/>
           </div>
 
           <div className="mb-3">
