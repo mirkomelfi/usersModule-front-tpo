@@ -141,6 +141,12 @@ return (
       <div className="noticias-header">
           <h2 className="home-noticias-top">Últimas Noticias</h2> {/* Título centrado */}
       </div>
+      {listaNoticias.length === 0 ? (
+            <div className="deportes-vacio">
+                <h2>No hay noticias disponibles</h2>
+                <p>Pronto añadiremos nuevas noticias.</p>
+            </div>
+        ) : (
       <div
         className="home-noticias-container"
         ref={containerRef}
@@ -158,10 +164,19 @@ return (
             </div>
         ))}
     </div>
+        )}
 
     <div className="noticias-header">
           <h2 className="home-noticias-top">Deportes</h2> {/* Título centrado */}
       </div>
+
+      {listaDeportes.length === 0 ? (
+            <div className="deportes-vacio">
+                <h2>No hay deportes disponibles</h2>
+                <p>Pronto añadiremos nuevos deportes.</p>
+            </div>
+        ) : (
+            
       <div
         className="home-noticias-container"
         ref={containerRef}
@@ -186,8 +201,9 @@ return (
                         </Link>*/}
                     </div>
                 ))}
+                
     </div>
-    
+    )}
 
 
     </div>

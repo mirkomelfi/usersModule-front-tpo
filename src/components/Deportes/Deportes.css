@@ -168,3 +168,77 @@
         font-size: 1.4rem; /* Ajustar tamaño del título */
     }
 }
+
+.deportes-vacio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 100%;
+    margin: 50px auto;
+    padding: 35px 30px;
+    background: linear-gradient(145deg, #ffffff, #e6eaf0); /* Degradado elegante */
+    border-radius: 20px; /* Esquinas más redondeadas para suavizar el diseño */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05); /* Doble sombra para profundidad */
+    text-align: center;
+    transition: transform 0.4s ease, box-shadow 0.4s ease, background-color 0.4s ease;
+}
+
+.deportes-vacio:hover {
+    transform: translateY(-10px) scale(1.02); /* Efecto de elevación y zoom al pasar el ratón */
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15), 0 6px 10px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(145deg, #f9fafc, #e8edf3); /* Sutil cambio de color en hover */
+}
+
+.deportes-vacio h2 {
+    font-size: 2.4rem; /* Más grande para mayor impacto */
+    margin-bottom: 20px;
+    color: #001f4d; /* Azul oscuro profesional */
+    font-weight: 800; /* Negrita destacada */
+    text-transform: uppercase; /* Estilo impactante */
+    letter-spacing: 1.5px; /* Espaciado amplio para elegancia */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); /* Sombra prominente para profundidad */
+}
+
+.deportes-vacio p {
+    font-size: 1.2rem;
+    color: #4d4d4d; /* Color neutral equilibrado */
+    line-height: 1.7; /* Mayor espaciado para legibilidad */
+    margin: 10px 0 25px;
+    font-family: 'Roboto', sans-serif; /* Fuente moderna */
+}
+
+.deportes-vacio a {
+    display: inline-block;
+    padding: 12px 30px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #ffffff;
+    background: linear-gradient(90deg, #0074d9, #005bb5); /* Botón degradado */
+    border-radius: 10px; /* Botón redondeado */
+    text-decoration: none;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    transition: background 0.4s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.deportes-vacio a:hover {
+    background: linear-gradient(90deg, #005bb5, #003f8a); /* Degradado más oscuro en hover */
+    transform: translateY(-3px); /* Sutil elevación al pasar el ratón */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Animación mejorada para una entrada impresionante */
+.deportes-vacio {
+    animation: fadeSlideIn 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+@keyframes fadeSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

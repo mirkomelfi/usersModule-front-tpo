@@ -151,6 +151,7 @@ export const Propuestas = () => {
         </select>
         */
         }
+   
 
       <div className="propuestas-grid">
         {listaPropuestas.length > 0 ? (
