@@ -167,6 +167,8 @@ const Navbar = () => {
         
 
       }
+
+<div className="navbar-bottom">
         {userLogged&&
           <div className="navbar-bottom-links">
         {rol=="Cliente"&&<a href="/asociarse" className="navbar-button">Asociate</a>}
@@ -181,6 +183,7 @@ const Navbar = () => {
           <Link to="/login" className="login-link">¿Tenés una cuenta? Inicia sesión</Link>
         </div>
         }
+         </div>
       </nav>
     </header>
   );
