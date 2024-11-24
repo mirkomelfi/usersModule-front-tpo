@@ -16,7 +16,7 @@ export const Feedback = () => {
   const [listaRubros,setListaRubros]= useState([]);
   const [mensaje,setMensaje]= useState(null);
 
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const ejecutarFetch = async() =>{
     try {
@@ -141,7 +141,7 @@ export const Feedback = () => {
 
   if (loading) {
     return (
-        <div className="loading-overlay">
+        <div className="feedback-loading-overlay">
             <div className="spinner"></div>
             <p>Cargando...</p>
         </div>

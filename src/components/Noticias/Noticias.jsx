@@ -138,7 +138,7 @@ export const Noticias = () => {
 
     if (loading) {
         return (
-            <div className="loading-overlay">
+            <div className="noticias-loading-overlay">
                 <div className="spinner"></div>
                 <p>Cargando...</p>
             </div>
@@ -160,14 +160,7 @@ export const Noticias = () => {
                 </Link>
             </div>
         )}
-            {/* Footer con botón Agregar Noticia */}
-            {admin&&
-                <div className="agregarNoticia">
-                <Link to="/noticias/add" className="btn-agregar-noticia">
-                    Agregar Noticia
-                </Link>
-            </div>
-            }
+          
                 <div
                     className="noticias-container"
                     ref={containerRef}

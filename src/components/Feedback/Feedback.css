@@ -58,22 +58,24 @@
     background-color: #e30713;
   }
 
-  .loading-overlay {
+  .feedback-loading-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Fondo gris translúcido */
+    pointer-events: none; /* Permitir clics a través del overlay */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    z-index: 1000; /* Asegura que se muestre por encima de todo */
-    color: white;  
-}
-
-.spinner {
+    z-index: 0; /* Asegura que el spinner se vea */
+    color: white;
+    background-color: rgba(0, 0, 0, 0.2); /* Fondo más claro */
+    backdrop-filter: blur(2px); /* Efecto de desenfoque */
+  }
+  
+  .spinner {
     width: 50px;
     height: 50px;
     border: 5px solid #f3f3f3; /* Borde transparente */
@@ -81,7 +83,18 @@
     border-radius: 50%;
     animation: spin 1s linear infinite;
     margin-bottom: 10px; /* Espacio entre el spinner y el texto */
- }
+  }
+  
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  .feedback-loading-overlay p {
+    font-size: 18px;
+    font-weight: bold;
+  }
 
 @keyframes spin {
     to {

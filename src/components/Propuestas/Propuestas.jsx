@@ -115,6 +115,16 @@ export const Propuestas = () => {
     )
     .filter((propuesta) => selectedUser === 'Todos' || propuesta.createdBy === selectedUser);
 
+
+    if (loading) {
+      return (
+          <div className="propuestas-loading-overlay">
+              <div className="spinner"></div>
+              <p>Cargando...</p>
+          </div>
+      );
+  }
+
   return (
     <div className="propuestas-container">
       {admin?<h2>Propuestas</h2>:<h2>Mis Propuestas</h2>}

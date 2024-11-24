@@ -88,7 +88,7 @@ export const Campañas = () => {
 
 if (loading) {
     return (
-        <div className="loading-overlay">
+        <div className="campañas-loading-overlay">
             <div className="spinner"></div>
             <p>Cargando...</p>
         </div>

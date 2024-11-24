@@ -17,7 +17,10 @@ export const Usuarios= () => {
 
   const [selectedRol, setSelectedRol] = useState("");
 
+  const [loading, setLoading] = useState(true);
+
   const [listaRoles,setListaRoles]= useState([
+
     "Inversionista","Activo","Patrimonial","Directivo","Cliente"
   ]);
 
@@ -48,38 +51,46 @@ export const Usuarios= () => {
     url=`admin/usuarios?rol=${selectedRol}`
  
     console.log(url)
-    const response= await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/${url}`, { 
-      method: "GET",
-      headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${getToken()}`
-      }
-      
-    })
-    if (response.status==403){
-      if (isTokenExpired(getToken())) {
-        alert("Venció su sesión. Vuelva a logguearse")
-        navigate("/logout")
-      }
-    }
-    const data = await response.json()
-    if (data.msj){
-      setListaUsuarios([])
-      setMensaje(data.msj)
-    }else{
-      console.log(data)
-      if (admin){
-        const newArray=[]
-        data.forEach(user=>{
-          if (user.rol!="ADMIN"){
-            newArray.push(user)
+
+    try {
+        const response= await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/${url}`, { 
+          method: "GET",
+          headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${getToken()}`
           }
+          
         })
-        setListaUsuarios(newArray)
-      }else{
-        setListaUsuarios(data)
-      }
+        if (response.status==403){
+          if (isTokenExpired(getToken())) {
+            alert("Venció su sesión. Vuelva a logguearse")
+            navigate("/logout")
+          }
+        }
+        const data = await response.json()
+        if (data.msj){
+          setListaUsuarios([])
+          setMensaje(data.msj)
+        }else{
+          console.log(data)
+          if (admin){
+            const newArray=[]
+            data.forEach(user=>{
+              if (user.rol!="ADMIN"){
+                newArray.push(user)
+              }
+            })
+            setListaUsuarios(newArray)
+          }else{
+            setListaUsuarios(data)
+          }
+        }
+    } catch (error) {
+      console.error('Error al cargar noticias:', error);
+    } finally {
+        setLoading(false);
     }
+
     }
 
 
@@ -106,6 +117,15 @@ export const Usuarios= () => {
     navigate("/superAdmin")
   };
 
+
+  if (loading) {
+    return (
+        <div className="usuarios-loading-overlay">
+            <div className="spinner"></div>
+            <p>Cargando...</p>
+        </div>
+    );
+}
 
   return (
     <div className="usuario-container">

@@ -52,48 +52,37 @@ const SuperAdmin = () => {
   return (
     <div className="superadmin-container">
       <div className="superadmin-form">
-        <h3>Super Admin</h3>
-        {mensaje && <p>{mensaje}</p>}
+        <h3>Inicio de Sesión</h3>
         <form onSubmit={handleSubmit}>
-        <div className="form-group">
-            <label htmlFor="nombre">Nombre</label>
-            <input
-              type="text"
-              name="nombre"
-              onChange={handleInputChange}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="apellido">Apellido</label>
-            <input
-              type="text"
-              name="apellido"
-              onChange={handleInputChange}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="dni">DNI</label>
-            <input
-              type="number"
-              name="dni"
-              onChange={handleInputChange}
-              required
-            />
+          <div className="mb-3">
+            <label htmlFor="nombre" className="form-label">
+              Nombre
+            </label>
+            <input type="text" className="form-control" name="nombre" />
           </div>
 
-          <div className="form-group">
-            <label htmlFor="password">Contraseña</label>
-            <input
-              type="password"
-              name="password"
-              onChange={handleInputChange}
-              required
-            />
+          <div className="mb-3">
+            <label htmlFor="apellido" className="form-label">
+              Apellido
+            </label>
+            <input type="text" className="form-control" name="apellido" />
           </div>
 
-          <div className="form-group">
+          <div className="mb-3">
+            <label htmlFor="dni" className="form-label">
+              DNI
+            </label>
+            <input type="number" className="form-control" name="dni" />
+          </div>
+
+          <div className="mb-3">
+            <label htmlFor="password" className="form-label">
+              Contraseña
+            </label>
+            <input type="password" className="form-control" name="password" />
+          </div>
+
+          <div className="mb-3">
             <label htmlFor="rol">Rol</label>
             <select
               name="rol"
@@ -109,10 +98,19 @@ const SuperAdmin = () => {
             </select>
           </div>
 
-          <button type="submit" className="button btnPrimary">
-            Crear Usuario
-          </button>
+         
+            <button type="submit" className="button btnPrimary">
+              <span className="btnText">Iniciar Sesión</span>
+            </button>
+
         </form>
+
+        {/*<div className="login-options">
+          <Link to="/olvidoContraseña" className="link">
+            ¿Olvidó su contraseña?
+          </Link>
+
+        </div>*/}
       </div>
     </div>
   );

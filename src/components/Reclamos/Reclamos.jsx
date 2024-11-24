@@ -177,7 +177,7 @@ export const Reclamos = () => {
 
   if (loading) {
     return (
-        <div className="loading-overlay">
+        <div className="reclamos-loading-overlay">
             <div className="spinner"></div>
             <p>Cargando...</p>
         </div>

@@ -121,19 +121,21 @@
   box-shadow: 0 0 0 2px rgba(40, 167, 69, 0.5);
 }
 
-.loading-overlay {
+.campañas-loading-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Fondo gris translúcido */
+  pointer-events: none; /* Permitir clics a través del overlay */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  z-index: 1000; /* Asegura que se muestre por encima de todo */
-  color: white;  
+  z-index: 0; /* Asegura que el spinner se vea */
+  color: white;
+  background-color: rgba(0, 0, 0, 0.2); /* Fondo más claro */
+  backdrop-filter: blur(2px); /* Efecto de desenfoque */
 }
 
 .spinner {
@@ -152,10 +154,11 @@
   }
 }
 
-.loading-overlay p {
+.campañas-loading-overlay p {
   font-size: 18px;
   font-weight: bold;
 }
+
 
 /* Ajustes para pantallas más pequeñas */
 @media (max-width: 768px) {

@@ -144,7 +144,7 @@ export const Deportes = () => {
 
     if (loading) {
         return (
-            <div className="loading-overlay">
+            <div className="deportes-loading-overlay">
                 <div className="spinner"></div>
                 <p>Cargando...</p>
             </div>

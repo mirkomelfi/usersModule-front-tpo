@@ -125,18 +125,10 @@ export const ForoFeedback = () => {
     ? feedbacks
     : feedbacks.filter(feedback => feedback.subject === selectedSubject);
 
-  if (loading) {
-      return (
-          <div className="loading-overlay">
-              <div className="spinner"></div>
-              <p>Cargando...</p>
-          </div>
-      );
-  }
-
+  
   if (loading) {
     return (
-        <div className="loading-overlay">
+        <div className="foro-loading-overlay">
             <div className="spinner"></div>
             <p>Cargando...</p>
         </div>

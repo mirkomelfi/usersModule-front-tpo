@@ -101,7 +101,7 @@ const handleWheel = (event) => {
 
 if (loading) {
   return (
-      <div className="loading-overlay">
+      <div className="home-loading-overlay">
           <div className="spinner"></div>
           <p>Cargando...</p>
       </div>

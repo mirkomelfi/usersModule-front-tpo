@@ -78,7 +78,7 @@ export const ListaCarrito = () => {
 
   if (loading) {
     return (
-        <div className="loading-overlay">
+        <div className="carrito-loading-overlay">
             <div className="spinner"></div>
             <p>Cargando...</p>
         </div>
