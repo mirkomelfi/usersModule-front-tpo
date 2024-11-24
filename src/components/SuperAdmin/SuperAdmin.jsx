@@ -50,7 +50,6 @@ const SuperAdmin = () => {
   };
 
   return (
-    <div className="superadmin-container">
       <div className="superadmin-form">
         <h3>Inicio de Sesión</h3>
         <form onSubmit={handleSubmit}>
@@ -112,7 +111,6 @@ const SuperAdmin = () => {
 
         </div>*/}
       </div>
-    </div>
   );
 };
 export { SuperAdmin };
