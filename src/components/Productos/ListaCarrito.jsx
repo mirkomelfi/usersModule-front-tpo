@@ -32,7 +32,7 @@ export const ListaCarrito = () => {
       montoTotal:total,
       productos:arrayIdProducts
     }
-      
+      console.log(cart)
     const response= await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/finalizarCarrito`, { 
       method: "POST",
       headers: {

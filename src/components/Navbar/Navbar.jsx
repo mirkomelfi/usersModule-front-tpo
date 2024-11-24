@@ -52,13 +52,14 @@ const Navbar = () => {
         <div className="navbar-logo">
           <Link to="/">San Lorenzo</Link>
         </div>
+        
         {isUser?<ul className="navbar-menu">
           {<li><Link to="/logout">Logout</Link></li>}
           {admin&&<li><Link to="/usuarios">Listado Usuarios</Link></li>}
           {!admin&&<li><Link to="/perfilUsuario">Perfil Usuario</Link></li>}
           <li><Link to="/deportes">Deportes</Link></li>
           <li><Link to="/noticias">Noticias</Link></li>
-          
+          <li><Link to="/listaCarrito">Carrito</Link></li>
           {!admin&&isUser&&<li><Link to="/pedidos">Mis Pedidos</Link></li>}
           {!admin&&<li><Link to="/productos">Productos</Link></li>}
           {!admin&&rol!="Cliente"&&rol!="Activo"&&<li><Link to="/agenda">Mi agenda</Link></li>}
@@ -84,7 +85,7 @@ const Navbar = () => {
             </ul>
           </li>
 
-          {(rol=="Inversor"||rol=="Directivo")&&<li className="dropdown">
+          {(rol=="Inversionista"||rol=="Directivo")&&<li className="dropdown">
             <button className="dropdown-btn" onClick={() => handleDropdownClick('Finanzas')}>
             Finanzas 
             </button>

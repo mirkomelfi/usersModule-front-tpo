@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './MisInversiones.css';
 import foto from './Ojotas.jpg';
+import { useSelector } from 'react-redux';
+import { getToken } from '../../utils/auth-utils';
 // Datos de ejemplo para las inversiones realizadas
 const inversionesData = [
   { id: 1, nombre: 'Inversión A', descripcion: 'Agrandar el Estadio', montoInvertido: 1000, rentabilidad: '8% anual', retornoActual: 1080, estado: 'positivo' },
@@ -18,11 +20,8 @@ const inversionesData = [
 export const MisInversiones = () => {
   const [inversiones, setInversiones] = useState([]);
 
-  useEffect(() => {
-    // Simulamos una llamada a una API para obtener las inversiones
-    //setInversiones(inversionesData);
-  }, []);
 
+  const username = useSelector((state) => state.usuarios.username);
 
   const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);  // Estado para manejar errores
@@ -34,7 +33,7 @@ export const MisInversiones = () => {
         socket.onopen = () => {
             console.log("Conexión WebSocket establecida.");
             // Enviar un mensaje al servidor si es necesario (por ejemplo, para pedir productos)
-            socket.send("Solicitar mis inversiones");
+            socket.send(`USER:${username}`)
         };
         // Manejar el mensaje recibido del servidor
         socket.onmessage = (event) => {
@@ -79,7 +78,32 @@ export const MisInversiones = () => {
         };
     }, []);  // Este efecto se ejecuta una sola vez cuando el componente se monta
 
-
+    const actualizarInversiones = async() =>{
+      try {
+  
+          let url=`misInversiones?username=${username}`
+        
+          const response= await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/${url}`, { 
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${getToken()}`,
+            }
+            
+          })
+          console.log("sttatus:",response.status)
+          
+       } catch (error) {
+          console.error('Error al cargar noticias:', error);
+      } finally {
+          setLoading(false);
+      }        
+    }
+    
+      useEffect(() => { 
+        actualizarInversiones()
+      },[])
+  
   return (
     <div className="misInversiones-container">
       <h2 className="misInversiones-header">Mis Inversiones</h2>

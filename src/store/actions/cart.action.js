@@ -20,19 +20,19 @@ export const addToCart = (username,item) => {
       }
       
     })
-    console.log(response.status)
+    console.log("response 1: ",response.status)
     const data = await response.json()
     console.log(data)
     
 
     const products=data.productos
     const newArray=[...products,item]
+
     const newCart={username,productos:newArray}
-    console.log(newCart)
+  
 
-    let url2=`carrito?username=${username}`
 
-    const response2= await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/${url2}`, { 
+    const response2= await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/${url}`, { 
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -41,13 +41,12 @@ export const addToCart = (username,item) => {
       
     })
 
-    console.log(response2.status)
+    console.log("response 2: ",response2.status)
     const data2 = await response2.json()
     console.log(data2)
 
-    let url3=`carrito`
-
-    const response3= await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/carrito`, { 
+console.log("newCart: ",newCart)
+    const response3= await fetch(`${process.env.REACT_APP_DOMINIO_BACK}/${url}`, { 
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -56,7 +55,7 @@ export const addToCart = (username,item) => {
       body:JSON.stringify(newCart)
       
     })
-    console.log(response3.status)
+    console.log("response 3: ",response3.status)
     const data3 = await response3.json()
     console.log(data3)
     
@@ -104,7 +103,7 @@ export const fetchCart = (username) => {
       })
       
       const data = await response.json()
-      console.log(data)
+      console.log("cart action ",data)
       const products=data.productos
 
       products.forEach(item => {
