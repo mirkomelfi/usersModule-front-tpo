@@ -59,6 +59,11 @@ export const Inversiones = () => {
     } else {
       alert('Por favor, selecciona un proyecto y un monto de inversión');
     }*/
+
+      // Restablecer los valores del formulario
+    setProyectoSeleccionado(null);
+    setMontoInversion(0);
+    setNota("");
   };
 
  
