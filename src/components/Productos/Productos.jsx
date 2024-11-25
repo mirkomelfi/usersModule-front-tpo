@@ -182,13 +182,13 @@ export const Productos = () => {
                   })
                     setProducts(receivedProducts);  // Actualizar el estado de productos
                 } else {
-                    throw new Error("Los productos no están en el formato esperado.");
+                    //throw new Error("Los productos no están en el formato esperado.");
                 }
 
                 setLoading(false);  // Marcar como "cargado" una vez que los productos llegan
             } catch (e) {
                 console.error("Error al procesar los productos: ", e);
-                setError("Error al recibir los productos.");  // Mostrar un mensaje de error
+                alert(`${event.data}`)
                 setLoading(false);  // Cambiar el estado de carga
             }
         };

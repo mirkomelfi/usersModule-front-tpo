@@ -116,13 +116,16 @@ export const Pedidos = () => {
     
         socket.onmessage = (event) => {
             console.log("Mensaje recibido: ", event.data);
+            if (Array.isArray(event.data)){
             var arraySales=JSON.parse(event.data)
             console.log(arraySales)
             arraySales.forEach((sale)=>{
               const date=""+new Date(sale.fecha)
               sale.fecha=date//.substr(date.indexOf("GMT"))
             })
-            setSales(arraySales);
+            setSales(arraySales);}else{
+              alert(`${event.data}`)
+            }
             setLoading(null);  // Cuando lleguen las ventas, cambiamos el estado de carga
         };
     
