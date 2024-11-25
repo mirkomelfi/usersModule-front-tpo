@@ -148,15 +148,13 @@ export const Productos = () => {
     console.log("Reload products")
   },[listaProductos])
 */
-    useEffect(() => { 
-      actualizarProductos()
-    },[])
 
 
 
     const [error, setError] = useState(null);  // Estado para manejar errores
 
     useEffect(() => {
+      actualizarProductos()
         // Conectar al WebSocket en el endpoint /ws
         const socket = new WebSocket('ws://localhost:8080/ws');
         console.log(socket)
@@ -221,11 +219,12 @@ export const Productos = () => {
       );
   }
 
-  if(listaProductos.length === 0) {
+  if(products.length === 0) {
     return(
     <div className="deportes-vacio">
-        <h2>No hay productos disponibles</h2>
-        <p>Pronto añadiremos nuevos productos.</p>
+        <h2>Cargando productos...</h2>
+       {// <p>Pronto añadiremos nuevos productos.</p>
+       }
     </div>
   )
 }
