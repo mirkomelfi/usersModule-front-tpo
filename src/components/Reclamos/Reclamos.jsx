@@ -72,7 +72,7 @@ export const Reclamos = () => {
   const [loading, setLoading] = useState(true);
 
   const handleAddReclamo = () => {
-    navigate('/reclamo');
+    navigate('/reclamos/add');
   };
 
   const handleRubroChange = (e) => {
@@ -136,14 +136,16 @@ export const Reclamos = () => {
       socket.onmessage = (event) => {
           console.log("Mensaje recibido: ", event.data);
           try {
+
               // Deserializar el JSON de productos
               const misReclamos = JSON.parse(event.data);
               console.log(misReclamos)
               // Verificar que la respuesta sea un array de productos
               if (Array.isArray(misReclamos)) {
-                misReclamos.forEach(producto=>{
-                  producto.image=foto
-                })
+                misReclamos.forEach((rec)=>{
+                const date=""+new Date(rec.fecha)
+                rec.fecha=date//.substr(date.indexOf("GMT"))
+              })
                   setReclamos(misReclamos);  // Actualizar el estado de productos
               } 
 
