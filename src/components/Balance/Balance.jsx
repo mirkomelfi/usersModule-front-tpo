@@ -8,7 +8,7 @@ export const Balance = () => {
 
   const [total_ingresos, setTotalIngresos] = useState(0);
   const [total_egresos, setTotalEgresos] = useState(0);
-  const [balance_gnral, setBalanceGnral] = useState(null);
+  const [balance_gnral, setBalanceGnral] = useState(0); // Cambiado de null a 0 para evitar errores.
   const [loading, setLoading] = useState(true);
 
   const getBalance = async () => {
@@ -24,9 +24,10 @@ export const Balance = () => {
 
       if (response.ok) {
         const data = await response.json();
-        setTotalIngresos(data.total_ingresos || 0);
-        setTotalEgresos(data.total_egresos || 0);
-        setBalanceGnral(data.balance_gnral || 0);
+        // Validamos y asignamos valores seguros
+        setTotalIngresos(Number(data.total_ingresos) || 0);
+        setTotalEgresos(Number(data.total_egresos) || 0);
+        setBalanceGnral(Number(data.balance_gnral) || 0);
       } else {
         console.error("Error al obtener el balance:", response.statusText);
       }
@@ -52,9 +53,10 @@ export const Balance = () => {
     socket.onmessage = (event) => {
       console.log("Mensaje recibido: ", event.data);
       const balance = JSON.parse(event.data);
-      setTotalIngresos(balance.total_ingresos || 0);
-      setTotalEgresos(balance.total_egresos || 0);
-      setBalanceGnral(balance.balance_gnral || 0);
+      // Validamos y asignamos valores seguros
+      setTotalIngresos(Number(balance.total_ingresos) || 0);
+      setTotalEgresos(Number(balance.total_egresos) || 0);
+      setBalanceGnral(Number(balance.balance_gnral) || 0);
       setLoading(false);
     };
 
@@ -78,10 +80,10 @@ export const Balance = () => {
   if (loading) {
     return (
       <div className="noticias-loading-overlay">
-          <div className="spinner"></div>
-          <p>Cargando...</p>
+        <div className="spinner"></div>
+        <p>Cargando...</p>
       </div>
-  );
+    );
   }
 
   return (
@@ -93,15 +95,21 @@ export const Balance = () => {
         <div className="balance-left-panel">
           <div className="balance-income-section">
             <p>Ingresos</p>
-            <p className="balance-income-amount">+ ${(total_ingresos / 1000000).toFixed(2)}M</p>
+            <p className="balance-income-amount">
+              + ${total_ingresos.toFixed(2)}M
+            </p>
           </div>
           <div className="balance-expenses-section">
             <p>Gastos</p>
-            <p className="balance-expenses-amount">- ${(total_egresos / 1000000).toFixed(2)}M</p>
+            <p className="balance-expenses-amount">
+              - ${total_egresos.toFixed(2)}M
+            </p>
           </div>
           <div className="balance-general-section">
             <p>Balance General</p>
-            <p className="balance-general-amount">${(balance_gnral / 1000000).toFixed(2)}M</p>
+            <p className="balance-general-amount">
+              ${balance_gnral.toFixed(2)}M
+            </p>
           </div>
         </div>
         <div className="balance-right-panel">
@@ -112,15 +120,17 @@ export const Balance = () => {
             }}
           >
             <div className="balance-chart-circle">
-              <span className="balance-chart-center-text">${(balance_gnral / 1000000).toFixed(2)}M</span>
+              <span className="balance-chart-center-text">
+                ${balance_gnral.toFixed(2)}M
+              </span>
             </div>
           </div>
         </div>
       </div>
       <div className="balance-footer">
-        <p>Total Ingresos: ${(total_ingresos / 1000000).toFixed(2)}M</p>
-        <p>Total Egresos: ${(total_egresos / 1000000).toFixed(2)}M</p>
-        <p>Balance General: ${(balance_gnral / 1000000).toFixed(2)}M</p>
+        <p>Total Ingresos: ${total_ingresos.toFixed(2)}M</p>
+        <p>Total Egresos: ${total_egresos.toFixed(2)}M</p>
+        <p>Balance General: ${balance_gnral.toFixed(2)}M</p>
       </div>
     </div>
   );
