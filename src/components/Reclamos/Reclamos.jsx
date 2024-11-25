@@ -134,7 +134,7 @@ export const Reclamos = () => {
       socket.onmessage = (event) => {
           console.log("Mensaje recibido: ", event.data);
           try {
-
+              if (event.data.includes("Error.")){throw new Error()}
               // Deserializar el JSON de productos
               const misReclamos = JSON.parse(event.data);
               console.log(misReclamos)
@@ -146,12 +146,12 @@ export const Reclamos = () => {
               })
                   setReclamos(misReclamos);  // Actualizar el estado de productos
               } 
-
+              if (misReclamos.length==0)alert(`${event.data}`)
               setLoading(false);  // Marcar como "cargado" una vez que los productos llegan
           } catch (e) {
               console.error("Error al procesar las Reclamos: ", e);
           
-              alert(`${event.data}`)
+            //  alert(`${event.data}`)
             
               setLoading(false);  // Cambiar el estado de carga
           }

@@ -56,7 +56,7 @@ export const Balance = () => {
       // Validamos y asignamos valores seguros
       setTotalIngresos(Number(balance.total_ingresos) || 0);
       setTotalEgresos(Number(balance.total_egresos) || 0);
-      setBalanceGnral(Number(balance.balance_gnral) || 0);
+      setBalanceGnral(Number(balance.balance_general) || 0);
       setLoading(false);
     };
 
