@@ -96,19 +96,19 @@ export const Balance = () => {
           <div className="balance-income-section">
             <p>Ingresos</p>
             <p className="balance-income-amount">
-              + ${total_ingresos.toFixed(2)}M
+              + ${total_ingresos.toFixed(2)}
             </p>
           </div>
           <div className="balance-expenses-section">
             <p>Gastos</p>
             <p className="balance-expenses-amount">
-              - ${total_egresos.toFixed(2)}M
+              - ${total_egresos.toFixed(2)}
             </p>
           </div>
           <div className="balance-general-section">
             <p>Balance General</p>
             <p className="balance-general-amount">
-              ${balance_gnral.toFixed(2)}M
+              ${balance_gnral.toFixed(2)}
             </p>
           </div>
         </div>
@@ -121,16 +121,16 @@ export const Balance = () => {
           >
             <div className="balance-chart-circle">
               <span className="balance-chart-center-text">
-                ${balance_gnral.toFixed(2)}M
+                ${balance_gnral.toFixed(2)}
               </span>
             </div>
           </div>
         </div>
       </div>
       <div className="balance-footer">
-        <p>Total Ingresos: ${total_ingresos.toFixed(2)}M</p>
-        <p>Total Egresos: ${total_egresos.toFixed(2)}M</p>
-        <p>Balance General: ${balance_gnral.toFixed(2)}M</p>
+        <p>Total Ingresos: ${total_ingresos.toFixed(2)}</p>
+        <p>Total Egresos: ${total_egresos.toFixed(2)}</p>
+        <p>Balance General: ${balance_gnral.toFixed(2)}</p>
       </div>
     </div>
   );
