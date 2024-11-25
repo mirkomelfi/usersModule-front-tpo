@@ -120,7 +120,7 @@ export const Productos = () => {
     } catch (error) {
         console.error('Error al cargar noticias:', error);
     } finally {
-        setLoading(false);
+        setLoading(null); 
     }
   }
 */
@@ -140,7 +140,7 @@ export const Productos = () => {
      } catch (error) {
         console.error('Error al cargar noticias:', error);
     } finally {
-        setLoading(false);
+        setLoading(null); 
     }        
   }
   
@@ -169,6 +169,7 @@ export const Productos = () => {
        console.log(socket)
         // Manejar el mensaje recibido del servidor
         socket.onmessage = (event) => {
+          console.log(event)
             console.log("Mensaje recibido: ", event.data);
          
             try {
@@ -181,15 +182,13 @@ export const Productos = () => {
                     producto.image=foto
                   })
                     setProducts(receivedProducts);  // Actualizar el estado de productos
-                } else {
-                    throw new Error("Los productos no están en el formato esperado.");
                 }
 
-                setLoading(false);  // Marcar como "cargado" una vez que los productos llegan
+                setLoading(null);  // Marcar como "cargado" una vez que los productos llegan
             } catch (e) {
                 console.error("Error al procesar los productos: ", e);
-                setError("Error al recibir los productos.");  // Mostrar un mensaje de error
-                setLoading(false);  // Cambiar el estado de carga
+                alert(`${event.data}`)
+                setLoading(null);   // Cambiar el estado de carga
             }
         };
 
@@ -197,7 +196,7 @@ export const Productos = () => {
         socket.onerror = (error) => {
             console.error("Error en WebSocket: ", error);
             setError("Error en la conexión WebSocket.");
-            setLoading(false);  // Cambiar el estado de carga en caso de error
+            setLoading(null);  // Cambiar el estado de carga en caso de error
         };
 
         // Manejar el cierre de la conexión WebSocket

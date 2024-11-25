@@ -50,13 +50,13 @@ export const MisInversiones = () => {
                   })
                     setInversiones(misInversiones);  // Actualizar el estado de productos
                 } else {
-                    throw new Error("Las inversiones no están en el formato esperado.");
+                  //alert(`${misInversiones}`)
                 }
 
                 setLoading(false);  // Marcar como "cargado" una vez que los productos llegan
             } catch (e) {
                 console.error("Error al procesar las inversiones: ", e);
-                setError("Error al recibir las inversiones .");  // Mostrar un mensaje de error
+                alert(`${event.data}`)
                 setLoading(false);  // Cambiar el estado de carga
             }
         };
