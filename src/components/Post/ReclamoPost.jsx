@@ -18,11 +18,11 @@ export const ReclamosPost = () => {
 
   // Lista de tipos de reclamo (puedes agregar más tipos)
   const tiposDeReclamo = [
-    "Llegó menos mercadería de la comprada",
+    "Llego menos mercaderia de la comprada",
     "Llegaron productos rotos",
     "Producto agotado no repuesto a tiempo",
-    "Error en la actualización del stock tras la venta",
-    "Cargo erróneo en mi tarjeta",
+    "Error en la actualizacion del stock tras la venta",
+    "Cargo erroneo en mi tarjeta",
     "Compras no aparecen en mi listado",
   ];
 

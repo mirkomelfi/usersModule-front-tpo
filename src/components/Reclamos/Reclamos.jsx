@@ -202,10 +202,10 @@ export const Reclamos = () => {
           onChange={handleRubroChange}
         >
           <option value="Todos">Mostrar todos</option>
-          <option value="Mantenimiento">Llegó menos mercadería de la comprada</option>
+          <option value="Mantenimiento">Llego menos mercaderia de la comprada</option>
           <option value="Precios">Llegaron productos rotos </option>
           <option value="Entrenadores">Producto agotado no repuesto a tiempo</option>
-          <option value="Iluminación">Error en la actualización del stock tras la venta</option>
+          <option value="Iluminación">Error en la actualizacion del stock tras la venta</option>
           <option value="Estacionamiento">Cargo erroneo en mi tarjeta</option>
           <option value="Estacionamiento">Compras no aparecen en mi listado</option>
           
