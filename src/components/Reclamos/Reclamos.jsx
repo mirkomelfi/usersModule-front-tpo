@@ -94,8 +94,6 @@ export const Reclamos = () => {
   });*/
   const [error, setError] = useState(null);  // Estado para manejar errores
 
-
-
   const actualizarReclamos = async() =>{
     try {
 
