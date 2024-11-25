@@ -17,7 +17,14 @@ export const ReclamosPost = () => {
   const [error, setError] = useState(null);
 
   // Lista de tipos de reclamo (puedes agregar más tipos)
-  const tiposDeReclamo = ['Problema Técnico', 'Comercio', 'Queja', 'Sugerencia'];
+  const tiposDeReclamo = [
+    "Llegó menos mercadería de la comprada",
+    "Llegaron productos rotos",
+    "Producto agotado no repuesto a tiempo",
+    "Error en la actualización del stock tras la venta",
+    "Cargo erróneo en mi tarjeta",
+    "Compras no aparecen en mi listado",
+  ];
 
   // Manejar cambios en los inputs
   const handleTipoReclamoChange = (e) => setTipoReclamo(e.target.value);

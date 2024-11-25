@@ -160,6 +160,13 @@ export const Noticias = () => {
                 </Link>
             </div>
         )}
+
+        {listaNoticias.length === 0 ? (
+            <div className="deportes-vacio">
+                <h2>No hay noticas disponibles</h2>
+                <p>Pronto añadiremos nuevas noticias.</p>
+            </div>
+        ) : (
           
                 <div
                     className="noticias-container"
@@ -179,6 +186,7 @@ export const Noticias = () => {
                         </div>
                     ))}
             </div>
-        </>
+        )}       
+       </>
     );
 };

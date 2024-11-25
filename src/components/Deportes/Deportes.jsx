@@ -153,26 +153,35 @@ export const Deportes = () => {
 
     return (
         <>
-
+        
          {/* Título principal */}
          <div className="deportes-header">
             <h1 className="deportes-titulo-pagina">Deportes</h1>
         </div>
 
-            {admin &&
+            {admin &&(
                 <div className="agregarDeporte">
                     <Link to="/deportes/add" className="btn-agregar-deporte">
                         Agregar Deporte
                     </Link>
                 </div>
-            }
+            )}
 
+        {listaDeportes.length === 0 ? (
+            <div className="deportes-vacio">
+                <h2>No hay deportes disponibles</h2>
+                <p>Pronto añadiremos nuevos deportes.</p>
+            </div>
+        ) : (
+            
             <div
+            
                 className="deportes-container"
                 ref={containerRef}
                 onWheel={handleWheel}
                 style={{ paddingLeft: `${paddingLeft}px` }}  // Aplica padding dinámico
             >
+                
                 {listaDeportes.map((deporte, index) => (
                     <div key={index} className="deporte-card">
                         <img src={deporte.imagen} alt={deporte.titulo} className="deporte-imagen" />
@@ -192,6 +201,9 @@ export const Deportes = () => {
                     </div>
                 ))}
             </div>
+
+      
+        )}
         </>
     );
 };

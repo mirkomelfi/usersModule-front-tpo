@@ -195,18 +195,21 @@ export const Reclamos = () => {
       )}
       
       <div className="reclamo-filter">
-        <label htmlFor="rubro">Selecciona el rubro:</label>
+        <label htmlFor="rubro">Selecciona el reclamo:</label>
         <select
           id="rubro"
           value={selectedRubro}
           onChange={handleRubroChange}
         >
           <option value="Todos">Mostrar todos</option>
-          <option value="Mantenimiento">Mantenimiento</option>
-          <option value="Precios">Precios</option>
-          <option value="Entrenadores">Entrenadores</option>
-          <option value="Iluminación">Iluminación</option>
-          <option value="Estacionamiento">Estacionamiento</option>
+          <option value="Mantenimiento">Llegó menos mercadería de la comprada</option>
+          <option value="Precios">Llegaron productos rotos </option>
+          <option value="Entrenadores">Producto agotado no repuesto a tiempo</option>
+          <option value="Iluminación">Error en la actualización del stock tras la venta</option>
+          <option value="Estacionamiento">Cargo erroneo en mi tarjeta</option>
+          <option value="Estacionamiento">Compras no aparecen en mi listado</option>
+          
+
         </select>
         
         
