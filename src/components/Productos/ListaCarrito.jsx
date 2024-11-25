@@ -85,7 +85,7 @@ export const ListaCarrito = () => {
     );
 }
 
-if(ListaCarrito.length === 0) {
+if(carrito.length === 0) {
   return(
   <div className="deportes-vacio">
       <h2>Carrito Vacio</h2>

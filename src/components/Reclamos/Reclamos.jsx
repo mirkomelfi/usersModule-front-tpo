@@ -61,7 +61,7 @@ const reclamos = [
 
 export const Reclamos = () => {
   const [selectedRubro, setSelectedRubro] = useState('Todos');
-  const [reclamos, setReclamos] = useState(false);
+  const [reclamos, setReclamos] = useState([]);
   //const usuarioActual = useSelector((state) => state.usuarios.usuarioActual); // Usuario actual
   const isAdmin = useSelector((state) => state.usuarios.admin);
   const username = useSelector((state) => state.usuarios.username);
@@ -146,7 +146,7 @@ export const Reclamos = () => {
               })
                   setReclamos(misReclamos);  // Actualizar el estado de productos
               } 
-              if (misReclamos.length==0)alert(`${event.data}`)
+              //if (reclamos.length===0)alert(`${event.data}`)
               setLoading(false);  // Marcar como "cargado" una vez que los productos llegan
           } catch (e) {
               console.error("Error al procesar las Reclamos: ", e);
@@ -160,7 +160,7 @@ export const Reclamos = () => {
       // Manejar errores en la conexión WebSocket
       socket.onerror = (error) => {
           console.error("Error en WebSocket: ", error);
-          setError("Error en la conexión WebSocket.");
+         // alert(`No hay reclamos`)
           setLoading(false);  // Cambiar el estado de carga en caso de error
       };
 
@@ -175,7 +175,7 @@ export const Reclamos = () => {
       };
   }, []);  // Este efecto se ejecuta una sola vez cuando el componente se monta
 
-  if (loading) {
+  if (reclamos.length===0) {
     return (
         <div className="reclamos-loading-overlay">
             <div className="spinner"></div>

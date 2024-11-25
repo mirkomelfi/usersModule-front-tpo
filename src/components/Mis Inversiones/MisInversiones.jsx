@@ -109,8 +109,8 @@ export const MisInversiones = () => {
         <div>
         {inversiones.length === 0 ? (
           <div className="deportes-vacio">
-            <h2>No hay inversiones</h2>
-            <p>No tenes inversiones realizadas.</p>
+            <h2>Cargando...</h2>
+            <p>Aguarde un momento y verá sus inversiones.</p>
           </div>
         ) : (
         <div className="misInversiones-container">
