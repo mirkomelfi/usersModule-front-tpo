@@ -145,14 +145,14 @@ export const Reclamos = () => {
                   producto.image=foto
                 })
                   setReclamos(misReclamos);  // Actualizar el estado de productos
-              } else {
-                  throw new Error("Las Reclamos no están en el formato esperado.");
-              }
+              } 
 
               setLoading(false);  // Marcar como "cargado" una vez que los productos llegan
           } catch (e) {
               console.error("Error al procesar las Reclamos: ", e);
-              setError("Error al recibir las Reclamos .");  // Mostrar un mensaje de error
+          
+              alert(`${event.data}`)
+            
               setLoading(false);  // Cambiar el estado de carga
           }
       };
