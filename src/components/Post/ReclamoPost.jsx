@@ -32,6 +32,14 @@ export const ReclamosPost = () => {
   const handleComentarioChange = (e) => setComentario(e.target.value);
   const handlePedidoChange = (e) => setIdPedido(e.target.value);
 
+  // Función para reiniciar el formulario
+const resetFormulario = () => {
+  setTipoReclamo('');
+  setPremisa('');
+  setComentario('');
+  setIdPedido(0);
+};
+
   // Enviar el reclamo
   const handleSubmit = () => {
     if (!tipoReclamo || !premisa || !comentario) {
@@ -51,6 +59,9 @@ export const ReclamosPost = () => {
 
     console.log('Reclamo enviado:', nuevoReclamo);
     // Aquí podrías agregar la lógica para guardar el reclamo, como una llamada a la API.
+
+    // Vaciar el formulario
+    resetFormulario();
   };
 
   const enviarReclamo = async(reclamo) =>{

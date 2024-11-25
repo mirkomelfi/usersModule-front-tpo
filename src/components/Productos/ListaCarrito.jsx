@@ -85,6 +85,15 @@ export const ListaCarrito = () => {
     );
 }
 
+if(ListaCarrito.length === 0) {
+  return(
+  <div className="deportes-vacio">
+      <h2>Carrito Vacio</h2>
+      <p>No hay productos en el carrito.</p>
+  </div>
+)
+}
+
   return (
     <div className="carrito-container">
 

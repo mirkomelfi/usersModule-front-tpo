@@ -219,6 +219,15 @@ export const Productos = () => {
       );
   }
 
+  if(listaProductos.length === 0) {
+    return(
+    <div className="deportes-vacio">
+        <h2>No hay productos disponibles</h2>
+        <p>Pronto añadiremos nuevos productos.</p>
+    </div>
+  )
+}
+
   return (
     <div className="productos-container">
       <div className="search-container">
