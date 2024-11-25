@@ -8,7 +8,7 @@ export const Balance = () => {
 
   const [total_ingresos, setTotalIngresos] = useState(0);
   const [total_egresos, setTotalEgresos] = useState(0);
-  const [balance_gnral, setBalanceGnral] = useState(0); // Cambiado de null a 0 para evitar errores.
+  const [balance_general, setBalanceGnral] = useState(0); // Cambiado de null a 0 para evitar errores.
   const [loading, setLoading] = useState(true);
 
   const getBalance = async () => {
@@ -27,7 +27,7 @@ export const Balance = () => {
         // Validamos y asignamos valores seguros
         setTotalIngresos(Number(data.total_ingresos) || 0);
         setTotalEgresos(Number(data.total_egresos) || 0);
-        setBalanceGnral(Number(data.balance_gnral) || 0);
+        setBalanceGnral(Number(data.balance_general) || 0);
       } else {
         console.error("Error al obtener el balance:", response.statusText);
       }
@@ -56,7 +56,7 @@ export const Balance = () => {
       // Validamos y asignamos valores seguros
       setTotalIngresos(Number(balance.total_ingresos) || 0);
       setTotalEgresos(Number(balance.total_egresos) || 0);
-      setBalanceGnral(Number(balance.balance_gnral) || 0);
+      setBalanceGnral(Number(balance.balance_general) || 0);
       setLoading(false);
     };
 
@@ -108,7 +108,7 @@ export const Balance = () => {
           <div className="balance-general-section">
             <p>Balance General</p>
             <p className="balance-general-amount">
-              ${balance_gnral.toFixed(2)}
+              ${balance_general.toFixed(2)}
             </p>
           </div>
         </div>
@@ -121,7 +121,7 @@ export const Balance = () => {
           >
             <div className="balance-chart-circle">
               <span className="balance-chart-center-text">
-                ${balance_gnral.toFixed(2)}
+                ${balance_general.toFixed(2)}
               </span>
             </div>
           </div>
@@ -130,7 +130,7 @@ export const Balance = () => {
       <div className="balance-footer">
         <p>Total Ingresos: ${total_ingresos.toFixed(2)}</p>
         <p>Total Egresos: ${total_egresos.toFixed(2)}</p>
-        <p>Balance General: ${balance_gnral.toFixed(2)}</p>
+        <p>Balance General: ${balance_general.toFixed(2)}</p>
       </div>
     </div>
   );

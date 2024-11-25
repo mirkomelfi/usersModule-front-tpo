@@ -105,34 +105,50 @@ export const MisInversiones = () => {
         actualizarInversiones()
       },[])
   
-  return (
-    <div className="misInversiones-container">
-      <h2 className="misInversiones-header">Mis Inversiones</h2>
-
-      <div className="misInversiones-table-container">
-        <table className="misInversiones-table">
-          <thead>
-            <tr>
-
-              <th>Descripción</th>
-              <th>Monto Invertido ($)</th>
-              <th>Fecha</th>
-
-            </tr>
-          </thead>
-          <tbody>
-            {inversiones.map((inversion) => (
-              <tr key={inversion.id} className={`misInversiones-row ${inversion.estado === 'positivo' ? 'misInversiones-positivo' : 'misInversiones-negativo'}`}>
-
-                <td>{inversion.note}</td>
-                <td>{inversion.amount}</td>
-                <td>{inversion.date}</td>
-                
-                </tr>
-            ))}
-          </tbody>
-        </table>
+      return (
+        <div>
+        {inversiones.length === 0 ? (
+          <div className="deportes-vacio">
+            <h2>No hay inversiones</h2>
+            <p>No tenes inversiones realizadas.</p>
+          </div>
+        ) : (
+        <div className="misInversiones-container">
+      
+            <>
+              <h2 className="misInversiones-header">Mis Inversiones</h2>
+              <div className="misInversiones-table-container">
+                <table className="misInversiones-table">
+                  <thead>
+                    <tr>
+                      <th>Descripción</th>
+                      <th>Monto Invertido ($)</th>
+                      <th>Fecha</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {inversiones.map((inversion) => (
+                      <tr
+                        key={inversion.id}
+                        className={`misInversiones-row ${
+                          inversion.estado === 'positivo'
+                            ? 'misInversiones-positivo'
+                            : 'misInversiones-negativo'
+                        }`}
+                      >
+                        <td>{inversion.note}</td>
+                        <td>{inversion.amount}</td>
+                        <td>{inversion.date}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </>
+        
+        </div>
+      )}
       </div>
-    </div>
-  );
+      );
+  
 };
